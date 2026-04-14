@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CRS Consulting — Consultoría de Alto Rendimiento Empresarial. Construimos empresas que funcionan sin depender de ti.">
+<title>CRS Consulting — Consultoría de Alto Rendimiento Empresarial</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #070707;
+  --bg2:     #0D0D0D;
+  --bg3:     #131313;
+  --bg4:     #191919;
+  --gold:    #B8860B;
+  --gold2:   #D4A017;
+  --gold3:   #E8B84B;
+  --white:   #FFFFFF;
+  --off:     #F5F3EE;
+  --light:   #C0BDB6;
+  --mid:     #6E6C67;
+  --dim:     #3A3937;
+  --border:  rgba(255,255,255,0.07);
+  --borderg: rgba(184,134,11,0.2);
+  --serif:   "Cormorant Garamond", Georgia, serif;
+  --sans:    "Outfit", system-ui, sans-serif;
+  --ease:    cubic-bezier(0.16,1,0.3,1);
+  --max:     1160px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--sans); cursor: pointer; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* ─── LAYOUT ─────────────────────────────────────────── */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 7rem 0; }
+
+/* ─── REVEAL ANIMATIONS ──────────────────────────────── */
+.rv {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .75s var(--ease), transform .75s var(--ease);
+}
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+.d4 { transition-delay: .4s; }
+.d5 { transition-delay: .5s; }
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────── */
+.label {
+  display: inline-block;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold3); margin-bottom: 1rem;
+}
+.h-display {
+  font-family: var(--serif); font-weight: 700;
+  line-height: 1.05; letter-spacing: -.02em;
+}
+.section-title { font-size: clamp(2rem,3.5vw,3rem); }
+.t-gold { color: var(--gold3); }
+.t-italic { font-style: italic; }
+.t-mid { color: var(--mid); }
+.t-light { color: var(--light); }
+
+/* ─── BUTTONS ────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .9rem 2rem; border: none; border-radius: 100px;
+  font-family: var(--sans); font-size: .8rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: all .3s var(--ease);
+  white-space: nowrap;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--bg);
+  box-shadow: 0 4px 24px rgba(184,134,11,.3);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(184,134,11,.5);
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--light);
+}
+.btn-outline:hover {
+  border-color: var(--borderg);
+  color: var(--gold3);
+  transform: translateY(-2px);
+  background: rgba(184,134,11,.05);
+}
+.btn-wa {
+  background: linear-gradient(135deg,#25D366,#1da851);
+  color: var(--white);
+  box-shadow: 0 4px 20px rgba(37,211,102,.25);
+}
+.btn-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,211,102,.45);
+}
+.btn svg { flex-shrink: 0; }
+
+/* ─── NAV ────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  padding: 1.4rem 0;
+  transition: all .4s var(--ease);
+}
+.nav.scrolled {
+  padding: .8rem 0;
+  background: rgba(7,7,7,.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--borderg);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: var(--max); margin: 0 auto; padding: 0 1.5rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: .75rem;
+}
+.nav-logo img { width: 40px; height: 40px; object-fit: contain; }
+.nav-logo-text {
+  font-family: var(--sans); font-weight: 700; font-size: 1.05rem;
+  letter-spacing: .04em;
+}
+.nav-logo-text span { color: var(--gold3); }
+.nav-links {
+  display: flex; align-items: center; gap: 2rem;
+}
+.nav-links a {
+  font-size: .78rem; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--light); transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  padding: .6rem 1.4rem !important;
+  background: linear-gradient(135deg,var(--gold),var(--gold2)) !important;
+  color: var(--bg) !important; border-radius: 100px;
+  font-weight: 700 !important;
+}
+.nav-cta:hover { transform: scale(1.04); color: var(--bg) !important; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; padding: 4px; cursor: pointer;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--white); transition: all .3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 850;
+  background: rgba(7,7,7,.97); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--serif); font-size: 2rem; font-weight: 700;
+  color: var(--light); transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--gold3); }
+@media (max-width: 820px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+#hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 9rem 1.5rem 5rem;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 55%, rgba(184,134,11,.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 15% 25%, rgba(184,134,11,.04) 0%, transparent 55%),
+    var(--bg);
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .45rem 1rem; margin-bottom: 1.8rem;
+  border: 1px solid var(--borderg);
+  background: rgba(184,134,11,.06);
+  border-radius: 100px;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold3);
+  animation: fadeUp .8s var(--ease) .2s both;
+}
+.hero-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold3); box-shadow: 0 0 6px var(--gold3);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse { 0%,100%{opacity:1}50%{opacity:.3} }
+.hero-title {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(3.2rem,6vw,5.8rem);
+  line-height: 1.0; letter-spacing: -.025em;
+  margin-bottom: 1.6rem;
+  animation: fadeUp .9s var(--ease) .35s both;
+}
+.hero-title em {
+  font-style: italic;
+  -webkit-text-stroke: 1.5px var(--gold);
+  color: transparent; display: block;
+}
+.hero-title strong { color: var(--gold3); display: block; }
+.hero-sub {
+  font-size: 1.05rem; font-weight: 300; color: var(--light);
+  line-height: 1.8; max-width: 480px; margin-bottom: 2.5rem;
+  animation: fadeUp .9s var(--ease) .5s both;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+.hero-actions {
+  display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3rem;
+  animation: fadeUp .9s var(--ease) .65s both;
+}
+.hero-stats {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+  animation: fadeUp .9s var(--ease) .8s both;
+}
+.hero-stat-num {
+  font-family: var(--serif); font-size: 2.6rem; font-weight: 700;
+  color: var(--gold3); line-height: 1;
+}
+.hero-stat-lbl {
+  font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--mid); margin-top: .3rem;
+}
+
+/* Hero visual — orb */
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 1s var(--ease) .6s both;
+}
+.orb {
+  position: relative; width: 400px; height: 400px;
+  display: flex; align-items: center; justify-content: center;
+}
+.orb-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid rgba(184,134,11,.12);
+  animation: spin 20s linear infinite;
+}
+.orb-ring-2 {
+  inset: 55px;
+  border-color: rgba(184,134,11,.07);
+  animation: spin 13s linear infinite reverse;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.orb-core {
+  width: 230px; height: 230px; border-radius: 50%;
+  border: 1px solid rgba(184,134,11,.22);
+  background: radial-gradient(circle at 40% 40%, rgba(184,134,11,.1), rgba(184,134,11,.03) 60%, transparent);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 70px rgba(184,134,11,.08), inset 0 0 40px rgba(184,134,11,.04);
+  animation: breathe 6s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { box-shadow: 0 0 70px rgba(184,134,11,.08); }
+  50% { box-shadow: 0 0 100px rgba(184,134,11,.18); }
+}
+.orb-logo {
+  width: 155px; height: 155px; object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(184,134,11,.55)) drop-shadow(0 0 36px rgba(184,134,11,.2));
+}
+.orb-badge {
+  position: absolute;
+  padding: .65rem 1rem;
+  background: rgba(13,13,13,.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(184,134,11,.25);
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.orb-badge-val { font-size: 1rem; font-weight: 700; color: var(--gold3); display: block; }
+.orb-badge-lbl { font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); }
+.orb-b1 { top: 15%; right: 0; animation: floatA 5s ease-in-out infinite; }
+.orb-b2 { bottom: 18%; left: 0; animation: floatB 6s ease-in-out infinite; }
+@keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  z-index: 1; animation: fadeIn 1s 1.5s both;
+}
+.hero-scroll span {
+  font-size: .58rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--dim);
+}
+.hero-scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: lineAnim 2s ease-in-out infinite;
+}
+@keyframes lineAnim { 0%,100%{opacity:.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(.7)} }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+/* ─── TICKER ─────────────────────────────────────────── */
+.ticker {
+  overflow: hidden; padding: 1.1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.ticker-track {
+  display: flex; align-items: center; gap: 3rem;
+  width: max-content; animation: ticker 28s linear infinite;
+}
+.ticker-item {
+  display: flex; align-items: center; gap: 1.2rem;
+  font-size: .7rem; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--mid); white-space: nowrap;
+}
+.ticker-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ─── STATS STRIP ────────────────────────────────────── */
+.stats-strip {
+  padding: 3rem 0;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; text-align: center;
+}
+.stat-item {
+  padding: 1rem .5rem;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--serif); font-size: 3rem; font-weight: 700;
+  color: var(--gold3); line-height: 1; margin-bottom: .4rem;
+}
+.stat-lbl {
+  font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--mid);
+}
+
+/* ─── PROBLEM ────────────────────────────────────────── */
+#problema { background: var(--bg); }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.problem-card {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: background .3s;
+}
+.problem-card:last-child { border-right: none; }
+.problem-card::before {
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform: scaleX(0); transition: transform .4s var(--ease);
+}
+.problem-card:hover { background: var(--bg3); }
+.problem-card:hover::before { transform: scaleX(1); }
+.p-num {
+  font-size: .62rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem;
+}
+.p-title { font-weight: 700; font-size: .9rem; color: var(--white); line-height: 1.4; margin-bottom: .6rem; }
+.p-desc { font-size: .8rem; color: var(--mid); line-height: 1.65; }
+
+/* ─── ABOUT ──────────────────────────────────────────── */
+#sobre { background: var(--bg2); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.eyebrow {
+  display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+.eyebrow-text {
+  font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold3);
+}
+.about-title {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(2.2rem,3.5vw,3.4rem); line-height: 1.05;
+  letter-spacing: -.02em; margin-bottom: 1.4rem;
+}
+.about-title em { font-style: italic; color: var(--gold3); }
+.blockquote {
+  font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+  font-weight: 600; color: var(--off); line-height: 1.65;
+  padding-left: 1.5rem; border-left: 2px solid var(--gold);
+  margin-bottom: 1.6rem;
+}
+.about-body { font-size: .9rem; color: var(--mid); line-height: 1.85; margin-bottom: 2rem; }
+.pillars { display: flex; flex-direction: column; }
+.pillar {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.2rem 0; border-bottom: 1px solid var(--border);
+  transition: padding-left .3s var(--ease);
+}
+.pillar:last-child { border-bottom: none; }
+.pillar:hover { padding-left: .5rem; }
+.pillar-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border: 1px solid var(--borderg);
+  background: rgba(184,134,11,.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; transition: all .3s;
+}
+.pillar:hover .pillar-icon { background: rgba(184,134,11,.14); border-color: var(--gold3); }
+.pillar-name { font-weight: 700; font-size: .9rem; color: var(--white); margin-bottom: .25rem; }
+.pillar-desc { font-size: .8rem; color: var(--mid); line-height: 1.65; }
+
+/* ─── SERVICES ───────────────────────────────────────── */
+#servicios { background: var(--bg); }
+.svc-header { text-align: center; margin-bottom: 3.5rem; }
+.svc-header .section-title { margin-bottom: .8rem; }
+.svc-sub { font-size: .95rem; color: var(--mid); max-width: 480px; margin: 0 auto; line-height: 1.75; }
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--border); overflow: hidden;
+}
+.svc-card {
+  background: var(--bg2); padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: background .3s; display: flex; flex-direction: column;
+}
+.svc-card:nth-child(3n) { border-right: none; }
+.svc-card:nth-child(4), .svc-card:nth-child(5), .svc-card:nth-child(6) { border-bottom: none; }
+.svc-card::after {
+  content: ""; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--ease);
+}
+.svc-card:hover { background: var(--bg3); }
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-num {
+  font-family: var(--serif); font-size: 5rem; font-weight: 700;
+  color: rgba(184,134,11,.08); line-height: 1; margin-bottom: 1rem;
+  transition: color .3s;
+}
+.svc-card:hover .svc-num { color: rgba(184,134,11,.18); }
+.svc-name { font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: .75rem; line-height: 1.3; }
+.svc-desc { font-size: .83rem; color: var(--mid); line-height: 1.75; flex: 1; margin-bottom: 1.5rem; }
+.svc-tag {
+  display: inline-flex; align-items: center;
+  font-size: .64rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold3);
+  padding: .25rem .75rem; border: 1px solid rgba(184,134,11,.25); border-radius: 100px;
+}
+
+/* ─── HOW ────────────────────────────────────────────── */
+#como { background: var(--bg2); }
+.how-title-wrap { text-align: center; margin-bottom: 4.5rem; }
+.how-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 2rem; position: relative;
+}
+.how-grid::before {
+  content: ""; position: absolute;
+  top: 40px; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold2), var(--gold), transparent);
+  opacity: .3; z-index: 0;
+}
+.how-step { text-align: center; position: relative; z-index: 1; }
+.how-n {
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 1px solid rgba(184,134,11,.3);
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.8rem;
+  font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--gold3);
+  transition: all .35s var(--ease);
+}
+.how-step:hover .how-n {
+  background: rgba(184,134,11,.1); border-color: var(--gold3);
+  box-shadow: 0 0 28px rgba(184,134,11,.2); transform: scale(1.08);
+}
+.how-step-title { font-weight: 700; font-size: .95rem; color: var(--white); margin-bottom: .65rem; }
+.how-step-desc { font-size: .82rem; color: var(--mid); line-height: 1.7; margin-bottom: 1rem; }
+.how-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; }
+.how-tag {
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold); padding: .2rem .55rem;
+  border: 1px solid rgba(184,134,11,.2); border-radius: 100px;
+}
+
+/* ─── WHY ────────────────────────────────────────────── */
+#por-que { background: var(--bg); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.why-items { display: flex; flex-direction: column; }
+.why-item {
+  display: flex; gap: 1.2rem; padding: 1.3rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left .3s var(--ease);
+}
+.why-item:last-child { border-bottom: none; }
+.why-item:hover { padding-left: .5rem; }
+.why-check {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border: 1px solid var(--borderg); background: rgba(184,134,11,.07);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; color: var(--gold3); margin-top: 2px;
+  transition: all .3s;
+}
+.why-item:hover .why-check { background: rgba(184,134,11,.15); border-color: var(--gold3); }
+.why-item-title { font-weight: 700; font-size: .9rem; color: var(--white); margin-bottom: .3rem; }
+.why-item-desc { font-size: .82rem; color: var(--mid); line-height: 1.65; }
+.why-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 2.5rem; position: sticky; top: 7rem;
+}
+.why-card-label { font-size: .64rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold3); margin-bottom: 1rem; }
+.why-quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.5rem; font-weight: 600; line-height: 1.45;
+  color: var(--off); margin-bottom: 2rem;
+}
+.why-attr {
+  font-size: .72rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mid); padding-top: 1.2rem; border-top: 1px solid var(--border);
+}
+.why-metrics {
+  display: flex; gap: 2rem; margin-top: 2rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--border);
+}
+.why-metric-val {
+  font-family: var(--serif); font-size: 2.2rem; font-weight: 700;
+  color: var(--gold3); line-height: 1;
+}
+.why-metric-lbl {
+  font-size: .66rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mid); margin-top: .3rem;
+}
+
+/* ─── FAQ ────────────────────────────────────────────── */
+#faq { background: var(--bg2); }
+.faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+.faq-left { position: sticky; top: 7rem; }
+.faq-items { display: flex; flex-direction: column; }
+.faq-item { border-bottom: 1px solid var(--border); overflow: hidden; }
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding: 1.4rem 0;
+  font-family: var(--sans); font-weight: 600; font-size: .93rem;
+  color: var(--light); text-align: left; cursor: pointer; transition: color .2s;
+}
+.faq-q:hover, .faq-q.open { color: var(--white); }
+.faq-q.open { color: var(--gold3); }
+.faq-icon {
+  width: 26px; height: 26px; flex-shrink: 0;
+  border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; color: var(--mid); transition: all .3s var(--ease);
+}
+.faq-q.open .faq-icon {
+  background: rgba(184,134,11,.1); border-color: var(--gold3);
+  color: var(--gold3); transform: rotate(45deg);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .5s var(--ease), padding .4s;
+}
+.faq-a.open { max-height: 300px; padding-bottom: 1.4rem; }
+.faq-a p { font-size: .86rem; color: var(--mid); line-height: 1.8; }
+.faq-a strong { color: var(--light); }
+
+/* ─── FINAL CTA ──────────────────────────────────────── */
+#cta {
+  padding: 10rem 0; text-align: center; position: relative; overflow: hidden;
+  background: var(--bg);
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(184,134,11,.1) 0%, transparent 70%);
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-label { font-size: .68rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--gold3); margin-bottom: 1.4rem; display: block; }
+.cta-title {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(2.5rem,6vw,5rem);
+  line-height: 1.0; letter-spacing: -.02em; margin-bottom: 1.4rem;
+}
+.cta-title em { font-style: italic; color: var(--gold3); }
+.cta-sub { font-size: .98rem; color: var(--mid); max-width: 420px; margin: 0 auto 2.8rem; line-height: 1.8; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
+.cta-note { font-size: .72rem; color: var(--dim); letter-spacing: .05em; }
+
+/* ─── URGENCY BAR ────────────────────────────────────── */
+.urgency {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  padding: 1.1rem 1.5rem; text-align: center;
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+.urgency p {
+  font-size: .82rem; font-weight: 700; color: var(--bg);
+  letter-spacing: .04em;
+}
+.urgency-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1.3rem; background: var(--bg);
+  color: var(--gold3); border-radius: 100px;
+  font-size: .74rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; white-space: nowrap; transition: opacity .2s;
+}
+.urgency-btn:hover { opacity: .85; }
+
+/* ─── CONTACT ────────────────────────────────────────── */
+#contacto { background: var(--bg2); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+.contact-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; letter-spacing: -.02em; margin-bottom: .9rem; }
+.contact-sub { font-size: .9rem; color: var(--mid); line-height: 1.8; margin-bottom: 2rem; }
+.channels { display: flex; flex-direction: column; gap: .7rem; }
+.channel {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.3rem;
+  background: var(--bg3); border: 1px solid var(--border);
+  text-decoration: none; transition: all .25s;
+}
+.channel:hover { border-color: var(--borderg); background: var(--bg4); transform: translateX(4px); }
+.ch-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border: 1px solid var(--borderg); background: rgba(184,134,11,.07);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.ch-label { font-size: .63rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: .15rem; }
+.ch-val { font-weight: 600; color: var(--light); font-size: .88rem; }
+
+/* Form */
+.form-box {
+  background: var(--bg3); border: 1px solid var(--border); padding: 2.2rem;
+}
+.form-box h3 { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; margin-bottom: .35rem; }
+.form-box p { font-size: .83rem; color: var(--mid); margin-bottom: 1.6rem; }
+.fg { margin-bottom: 1rem; }
+.fg label { display: block; font-size: .67rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: .45rem; }
+.fg input, .fg textarea, .fg select {
+  width: 100%; padding: .8rem 1rem;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+  color: var(--white); font-family: var(--sans); font-size: .88rem;
+  outline: none; transition: border-color .25s; appearance: none;
+}
+.fg input:focus, .fg textarea:focus, .fg select:focus {
+  border-color: rgba(184,134,11,.5); background: rgba(184,134,11,.03);
+}
+.fg textarea { resize: vertical; min-height: 100px; }
+.fg select option { background: #111; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit {
+  width: 100%; padding: .95rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--bg); font-family: var(--sans);
+  font-weight: 700; font-size: .8rem; letter-spacing: .1em;
+  text-transform: uppercase; border: none; cursor: pointer; transition: all .3s;
+}
+.form-submit:hover { opacity: .9; transform: translateY(-2px); }
+.form-legal { font-size: .68rem; color: var(--dim); text-align: center; margin-top: .9rem; line-height: 1.5; }
+#formSuccess { display: none; text-align: center; padding: 2.5rem 1rem; }
+#formSuccess h4 { font-family: var(--serif); font-size: 1.5rem; color: var(--gold3); margin-bottom: .5rem; }
+#formSuccess p { font-size: .84rem; color: var(--mid); }
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 4.5rem 0 2rem;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand img { height: 46px; width: 46px; object-fit: contain; margin-bottom: 1rem; }
+.footer-brand p { font-size: .82rem; color: var(--mid); line-height: 1.75; max-width: 260px; margin-bottom: 1.4rem; }
+.social-links { display: flex; gap: .6rem; }
+.soc {
+  width: 32px; height: 32px; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .82rem; color: var(--mid); transition: all .2s;
+}
+.soc:hover { border-color: var(--gold3); color: var(--gold3); }
+.footer-col h4 { font-size: .63rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold3); margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.footer-col ul li a { font-size: .82rem; color: var(--mid); transition: color .2s; }
+.footer-col ul li a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 1.8rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom p { font-size: .74rem; color: var(--dim); }
+.footer-bottom-links { display: flex; gap: 1.5rem; }
+.footer-bottom-links a { font-size: .74rem; color: var(--dim); transition: color .2s; }
+.footer-bottom-links a:hover { color: var(--gold3); }
+
+/* ─── WA FLOAT ───────────────────────────────────────── */
+.wa-btn {
+  position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 800;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: linear-gradient(135deg,#25D366,#1da851);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4);
+  transition: transform .25s var(--ease);
+}
+.wa-btn:hover { transform: scale(1.1); }
+.wa-btn::before {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%;
+  border: 2px solid rgba(37,211,102,.28);
+  animation: waPulse 2.5s ease-out infinite;
+}
+@keyframes waPulse { 0%{transform:scale(1);opacity:.7} 100%{transform:scale(1.5);opacity:0} }
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-visual { display: none; }
+  .hero-sub { max-width: 100%; }
+  .hero-badge, .hero-actions, .hero-stats { justify-content: center; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  .how-grid::before { display: none; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-card { position: static; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-left { position: static; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .section { padding: 5rem 0; }
+  .hero-title { font-size: 2.9rem; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { border-right: none; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 1px solid var(--border); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .section { padding: 4rem 0; }
+  .hero-title { font-size: 2.4rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-badge { font-size: .6rem; text-align: center; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .cta-title { font-size: 2.2rem; }
+  #hero { padding: 7rem 1.5rem 4rem; }
+  .urgency { flex-direction: column; gap: 1rem; }
+  .form-box { padding: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20con%20CRS%20Consulting." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre" onclick="closeMobile()">La empresa</a>
+  <a href="#servicios" onclick="closeMobile()">Servicios</a>
+  <a href="#como" onclick="closeMobile()">Metodología</a>
+  <a href="#por-que" onclick="closeMobile()">Por qué CRS</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contacto" onclick="closeMobile()" style="color:var(--gold3)">Contactar</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img src="logo.png" alt="CRS Consulting" width="40" height="40">
+      <span class="nav-logo-text">CRS <span>Consulting</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre">La empresa</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#como">Cómo trabajamos</a>
+      <a href="#por-que">Por qué CRS</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico." class="nav-links nav-cta" target="_blank" style="font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1.4rem;border-radius:100px;font-weight:700">Diagnóstico gratis</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge rv">
+        <div class="hero-badge-dot"></div>
+        Diagnóstico gratuito · Sin compromiso · Respuesta en 24h
+      </div>
+      <h1 class="hero-title rv d1">
+        La empresa<br>
+        que siempre<br>
+        <em>quisiste tener</em>
+        <strong>— construida.</strong>
+      </h1>
+      <p class="hero-sub rv d2">
+        Diseñamos e implementamos el sistema operativo de tu negocio. <strong>Procesos que tu equipo ejecuta solo. Ventas con método. Control real sin depender de ti en todo.</strong>
+      </p>
+      <div class="hero-actions rv d3">
+        <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita%20con%20CRS%20Consulting." class="btn btn-wa" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Diagnóstico gratuito
+        </a>
+        <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+      </div>
+      <div class="hero-stats rv d4">
+        <div><div class="hero-stat-num ctr" data-t="6">0</div><div class="hero-stat-lbl">Servicios</div></div>
+        <div><div class="hero-stat-num ctr" data-t="4">0</div><div class="hero-stat-lbl">Fases</div></div>
+        <div><div class="hero-stat-num">30d</div><div class="hero-stat-lbl">Garantía</div></div>
+        <div><div class="hero-stat-num">24h</div><div class="hero-stat-lbl">Respuesta</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="orb">
+        <div class="orb-ring"></div>
+        <div class="orb-ring orb-ring-2"></div>
+        <div class="orb-core">
+          <img src="logo.png" alt="CRS Consulting" class="orb-logo">
+        </div>
+        <div class="orb-badge orb-b1">
+          <span class="orb-badge-val">100%</span>
+          <span class="orb-badge-lbl">A medida</span>
+        </div>
+        <div class="orb-badge orb-b2">
+          <span class="orb-badge-val">30 días</span>
+          <span class="orb-badge-lbl">Garantía incluida</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><div class="ticker-dot"></div>Closer de Ventas</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Protocolización</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Creación de Procesos</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Gestión Eficiente</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Hotelera Premium</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Estructura Global</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>crsgrowth.com</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Closer de Ventas</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Protocolización</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Creación de Procesos</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Gestión Eficiente</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Hotelera Premium</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Estructura Global</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>crsgrowth.com</div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item rv"><div class="stat-val ctr" data-t="6">0</div><div class="stat-lbl">Servicios especializados</div></div>
+      <div class="stat-item rv d1"><div class="stat-val ctr" data-t="4">0</div><div class="stat-lbl">Fases de implementación</div></div>
+      <div class="stat-item rv d2"><div class="stat-val">30d</div><div class="stat-lbl">Garantía post-entrega</div></div>
+      <div class="stat-item rv d3"><div class="stat-val">24h</div><div class="stat-lbl">Tiempo de respuesta</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section" id="problema">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="label rv">El diagnóstico</span>
+      <h2 class="h-display section-title rv d1">¿Te suena esto?</h2>
+      <p class="rv d2" style="font-size:.95rem;color:var(--mid);max-width:480px;margin:.8rem auto 0;line-height:1.75">Si reconoces alguno de estos síntomas, tu empresa tiene un problema de sistema — no de personas.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card rv"><span class="p-num">01</span><div class="p-title">Tu empresa depende de ti para todo</div><div class="p-desc">Si no estás, las cosas se paran o se hacen mal. Eres el cuello de botella de tu propio negocio.</div></div>
+      <div class="problem-card rv d1"><span class="p-num">02</span><div class="p-title">Tienes equipo pero no tienes sistema</div><div class="p-desc">Cada persona trabaja a su manera. Los resultados son inconsistentes cada semana.</div></div>
+      <div class="problem-card rv d2"><span class="p-num">03</span><div class="p-title">Vendes, pero sin estructura</div><div class="p-desc">Ingresos impredecibles. El equipo improvisa en cada cierre. Sin guión ni proceso.</div></div>
+      <div class="problem-card rv d3"><span class="p-num">04</span><div class="p-title">Trabajas más sin control real</div><div class="p-desc">No tienes datos reales. Las decisiones se toman por intuición, no por métricas.</div></div>
+      <div class="problem-card rv d4"><span class="p-num">05</span><div class="p-title">Creces y el caos crece contigo</div><div class="p-desc">Más clientes generan más problemas y más dependencia de ti.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="sobre">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rv">
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Quiénes somos</span></div>
+        <h2 class="about-title">Somos <em>arquitectos</em><br>de negocio.</h2>
+        <p class="blockquote">"No entregamos informes y nos vamos. Construimos el sistema contigo y nos quedamos hasta que funciona de verdad."</p>
+        <p class="about-body">CRS Consulting diseña e implementa los sistemas internos que hacen que una empresa funcione con orden, eficiencia y sin depender de una sola persona. No somos una agencia de marketing. No somos una consultoría genérica. Somos los que construyen el negocio que ya deberías tener.</p>
+        <a href="https://www.linkedin.com/company/crsgrowth" class="btn btn-outline" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Seguir en LinkedIn
+        </a>
+      </div>
+      <div class="rv d2">
+        <div class="pillars">
+          <div class="pillar"><div class="pillar-icon">▦</div><div><div class="pillar-name">Orden</div><div class="pillar-desc">Estructura clara para cada área. Roles definidos, procesos documentados, responsabilidades sin ambigüedad.</div></div></div>
+          <div class="pillar"><div class="pillar-icon">◈</div><div><div class="pillar-name">Método</div><div class="pillar-desc">Sistemas replicables que el equipo ejecuta sin consultarte. Lo que construimos se enseña, se delega y se repite.</div></div></div>
+          <div class="pillar"><div class="pillar-icon">↗</div><div><div class="pillar-name">Escala</div><div class="pillar-desc">Arquitectura preparada para crecer: nuevo personal, nuevas sedes, nuevos mercados. Sin que el caos escale contigo.</div></div></div>
+          <div class="pillar"><div class="pillar-icon">✓</div><div><div class="pillar-name">Garantía</div><div class="pillar-desc">30 días post-entrega incluidos. No nos vamos hasta que el sistema funciona solo.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="servicios">
+  <div class="container">
+    <div class="svc-header rv">
+      <span class="label">Lo que hacemos</span>
+      <h2 class="h-display section-title">6 servicios. <em style="font-family:var(--serif);font-style:italic;color:var(--gold3)">Una empresa</em> que funciona.</h2>
+      <p class="svc-sub">Cada servicio resuelve un problema concreto. Se contratan de forma individual o combinados.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv"><div class="svc-num">01</div><div class="svc-name">Closer de Ventas</div><div class="svc-desc">Sistema comercial completo: guión de ventas, proceso de cierre y equipo entrenado. Ventas predecibles, sin improvisación.</div><span class="svc-tag">Comercial</span></div>
+      <div class="svc-card rv d1"><div class="svc-num">02</div><div class="svc-name">Protocolización de Empresas</div><div class="svc-desc">Manual de Operaciones completo por área. Tu empresa funciona con el mismo estándar con o sin ti.</div><span class="svc-tag">Operaciones</span></div>
+      <div class="svc-card rv d2"><div class="svc-num">03</div><div class="svc-name">Creación de Procesos</div><div class="svc-desc">El sistema operativo de tu negocio: organigrama funcional, flujos de trabajo y responsabilidades claras.</div><span class="svc-tag">Estructura</span></div>
+      <div class="svc-card rv d1"><div class="svc-num">04</div><div class="svc-name">Gestión Eficiente</div><div class="svc-desc">KPIs reales, cuadro de mando y protocolo de decisiones. Del caos al control directivo con datos.</div><span class="svc-tag">Dirección</span></div>
+      <div class="svc-card rv d2"><div class="svc-num">05</div><div class="svc-name">Protocolización Hotelera Premium</div><div class="svc-desc">Estándares operativos para hoteles 4 y 5 estrellas. Experiencia del huésped consistente en cada turno.</div><span class="svc-tag">Hostelería</span></div>
+      <div class="svc-card rv d3"><div class="svc-num">06</div><div class="svc-name">Estructura Global de Negocio</div><div class="svc-desc">Arquitectura completa: modelo, ventas, operaciones, equipo y control. De la visión al sistema que funciona solo.</div><span class="svc-tag">Estrategia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="como">
+  <div class="container">
+    <div class="how-title-wrap rv">
+      <span class="label">Metodología</span>
+      <h2 class="h-display section-title">4 fases. Sin atajos.</h2>
+      <p style="font-size:.95rem;color:var(--mid);max-width:420px;margin:.8rem auto 0;line-height:1.75">Todo proyecto de CRS sigue este proceso. Sin excepción.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step rv"><div class="how-n">01</div><div class="how-step-title">Diagnóstico</div><div class="how-step-desc">Analizamos el negocio en profundidad. Identificamos el problema real, no los síntomas.</div><div class="how-tags"><span class="how-tag">Entrevistas</span><span class="how-tag">Auditoría</span></div></div>
+      <div class="how-step rv d1"><div class="how-n">02</div><div class="how-step-title">Diseño</div><div class="how-step-desc">Construimos el sistema a medida. Cada cliente tiene su arquitectura. Sin plantillas genéricas.</div><div class="how-tags"><span class="how-tag">Blueprint</span><span class="how-tag">A medida</span></div></div>
+      <div class="how-step rv d2"><div class="how-n">03</div><div class="how-step-title">Implementación</div><div class="how-step-desc">Trabajamos codo a codo. No entregamos documentos y nos vamos. Nos quedamos hasta que funciona.</div><div class="how-tags"><span class="how-tag">Entregables</span><span class="how-tag">Formación</span></div></div>
+      <div class="how-step rv d3"><div class="how-n">04</div><div class="how-step-title">Control</div><div class="how-step-desc">Supervisamos resultados. Ajustamos, medimos y garantizamos la calidad de todo lo entregado.</div><div class="how-tags"><span class="how-tag">KPIs</span><span class="how-tag">Garantía 30d</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CRS -->
+<section class="section" id="por-que">
+  <div class="container">
+    <div class="why-grid">
+      <div class="rv">
+        <span class="label">Por qué CRS</span>
+        <h2 class="h-display section-title" style="text-align:left;margin-bottom:2.5rem">No somos<br><em style="font-style:italic;color:var(--gold3)">otra consultoría.</em></h2>
+        <div class="why-items">
+          <div class="why-item"><div class="why-check">✓</div><div><div class="why-item-title">No entregamos informes — implementamos</div><div class="why-item-desc">Nos quedamos hasta que el sistema funciona, no hasta que se firma el contrato.</div></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><div class="why-item-title">Cada proyecto es completamente a medida</div><div class="why-item-desc">Dos empresas del mismo sector reciben soluciones distintas. Sin plantillas, sin genéricos.</div></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><div class="why-item-title">Pensamos en venta y operación simultáneamente</div><div class="why-item-desc">Los sistemas que construimos son eficientes para ejecutar y claros para vender.</div></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><div class="why-item-title">Tu equipo lo ejecuta sin depender de nadie</div><div class="why-item-desc">Todo se enseña, se delega y se replica. Sin dependencia de CRS ni tuya.</div></div></div>
+          <div class="why-item"><div class="why-check">✓</div><div><div class="why-item-title">Tú vuelves a liderar, no a ejecutar</div><div class="why-item-desc">Nuestro objetivo es que trabajes en lo que solo tú puedes hacer.</div></div></div>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="why-card">
+          <div class="why-card-label">La esencia de CRS</div>
+          <p class="why-quote">"Dos años más igual o un proyecto que lo cambie todo. Esa es la única decisión real que tienes que tomar."</p>
+          <div class="why-attr">CRS Consulting · crsgrowth.com</div>
+          <div class="why-metrics">
+            <div><div class="why-metric-val">6</div><div class="why-metric-lbl">Servicios</div></div>
+            <div><div class="why-metric-val">30d</div><div class="why-metric-lbl">Garantía</div></div>
+            <div><div class="why-metric-val">4</div><div class="why-metric-lbl">Fases</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-left rv">
+        <span class="label">FAQ</span>
+        <h2 class="h-display section-title" style="text-align:left;margin-bottom:1rem">Las dudas<br>reales.</h2>
+        <p style="font-size:.87rem;color:var(--mid);line-height:1.8;margin-bottom:2rem">Respondemos con honestidad. Sin rodeos.</p>
+        <a href="https://wa.me/34697293677?text=Tengo%20una%20pregunta%20sobre%20los%20servicios%20de%20CRS%20Consulting." class="btn btn-outline" target="_blank">Hacer una pregunta</a>
+      </div>
+      <div class="faq-items rv d2">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto cuesta trabajar con CRS?<div class="faq-icon">+</div></button><div class="faq-a"><p>Cada proyecto es a medida. Los rangos orientativos van de <strong>€1.500 hasta €18.000</strong> según el servicio y la complejidad. Trabajamos con pagos fraccionados ligados al avance. La primera reunión de diagnóstico es <strong>gratuita y sin compromiso</strong>.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tiempo dura un proyecto típico?<div class="faq-icon">+</div></button><div class="faq-a"><p>Depende del servicio. Los proyectos más acotados duran <strong>4 a 6 semanas</strong>. Los más complejos, como la Estructura Global, hasta 16 semanas. Al inicio establecemos el cronograma concreto con hitos claros.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si no estoy satisfecho con el resultado?<div class="faq-icon">+</div></button><div class="faq-a"><p>Todos los proyectos incluyen <strong>hasta 2 rondas de revisión sin coste</strong> por entregable. Además, hay <strong>30 días de garantía post-entrega</strong> incluidos. No nos vamos hasta que el sistema funciona.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Trabajáis solo en España o también fuera?<div class="faq-icon">+</div></button><div class="faq-a"><p>Trabajamos tanto <strong>presencial como 100% remoto</strong>, por lo que podemos trabajar con empresas en cualquier país hispanohablante. La mayoría de proyectos se ejecutan de forma mixta.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tiempo necesito dedicar yo?<div class="faq-icon">+</div></button><div class="faq-a"><p>Sesiones de trabajo de <strong>1-2 horas por semana</strong>. El objetivo es que el proyecto no sea una carga operativa para ti, sino una inversión de tiempo estratégico con retorno claro.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo sé qué servicio necesito?<div class="faq-icon">+</div></button><div class="faq-a"><p>Esa es exactamente la función de la <strong>reunión de diagnóstico gratuita</strong>. En 45-60 minutos analizamos tu situación y te decimos exactamente qué necesitas. Sin compromiso ni presión.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="container cta-inner">
+    <span class="cta-label rv">El siguiente paso</span>
+    <h2 class="cta-title rv d1">Cada semana sin sistema<br>es una semana <em>perdida.</em></h2>
+    <p class="cta-sub rv d2">La primera reunión es gratuita. 45 minutos. Te decimos exactamente qué necesita tu empresa. Sin rodeos.</p>
+    <div class="cta-actions rv d3">
+      <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20la%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita%20con%20CRS%20Consulting." class="btn btn-wa" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribir ahora por WhatsApp
+      </a>
+      <a href="#contacto" class="btn btn-outline">Usar el formulario</a>
+    </div>
+    <p class="cta-note rv d4">Respondemos en menos de 24 horas hábiles</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Contacto</span></div>
+        <h2 class="contact-title">Hablemos.</h2>
+        <p class="contact-sub">Una conversación de 45 minutos. Te decimos exactamente qué necesita tu empresa. Si no tiene sentido trabajar juntos, también te lo decimos — sin rodeos.</p>
+        <div class="channels">
+          <a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20CRS%20Consulting." class="channel" target="_blank">
+            <div class="ch-icon">📱</div>
+            <div><div class="ch-label">WhatsApp — respuesta rápida</div><div class="ch-val">+34 697 293 677</div></div>
+          </a>
+          <a href="mailto:info@crsgrowth.com" class="channel">
+            <div class="ch-icon">✉</div>
+            <div><div class="ch-label">Email</div><div class="ch-val">info@crsgrowth.com</div></div>
+          </a>
+          <a href="https://www.linkedin.com/company/crsgrowth" class="channel" target="_blank">
+            <div class="ch-icon" style="font-size:.9rem;font-weight:700">in</div>
+            <div><div class="ch-label">LinkedIn</div><div class="ch-val">linkedin.com/company/crsgrowth</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="form-box">
+          <h3>Cuéntanos tu caso</h3>
+          <p>Te contactamos antes de 24 horas hábiles.</p>
+          <form id="contactForm" onsubmit="handleForm(event)">
+            <div class="form-row">
+              <div class="fg"><label>Nombre</label><input type="text" id="fn" placeholder="Tu nombre" required></div>
+              <div class="fg"><label>Empresa</label><input type="text" id="fc" placeholder="Tu empresa" required></div>
+            </div>
+            <div class="fg"><label>Email</label><input type="email" id="fe" placeholder="tu@empresa.com" required></div>
+            <div class="fg">
+              <label>Servicio de interés</label>
+              <select id="fs">
+                <option value="">¿Qué necesitas?</option>
+                <option>Closer de Ventas</option>
+                <option>Protocolización de Empresas</option>
+                <option>Creación de Procesos</option>
+                <option>Gestión Eficiente</option>
+                <option>Protocolización Hotelera Premium</option>
+                <option>Estructura Global de Negocio</option>
+                <option>No lo sé — necesito orientación</option>
+              </select>
+            </div>
+            <div class="fg"><label>Tu situación actual</label><textarea id="fm" placeholder="Cuéntanos el principal reto de tu empresa ahora mismo..."></textarea></div>
+            <button type="submit" class="form-submit" id="fsub">Solicitar diagnóstico gratuito →</button>
+            <p class="form-legal">Al enviar aceptas nuestra política de privacidad. No compartimos datos con terceros.</p>
+          </form>
+          <div id="formSuccess">
+            <div style="font-size:2.5rem;color:var(--gold3);margin-bottom:1rem">✓</div>
+            <h4>Mensaje recibido</h4>
+            <p style="margin-top:.5rem">Te contactamos antes de 24 horas hábiles.</p>
+            <a href="https://wa.me/34697293677" class="btn btn-wa" style="margin-top:1.5rem;display:inline-flex" target="_blank">Continuar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<div class="urgency">
+  <p>La reunión de diagnóstico es gratuita y sin compromiso. Solo 45 minutos.</p>
+  <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20la%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita." class="urgency-btn" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Quiero mi diagnóstico
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="CRS Consulting">
+        <p>Consultoría de Alto Rendimiento Empresarial. Construimos empresas que funcionan con orden, método y resultados reales.</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/company/crsgrowth" class="soc" target="_blank" title="LinkedIn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://wa.me/34697293677" class="soc" target="_blank" title="WhatsApp"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="mailto:info@crsgrowth.com" class="soc" title="Email">✉</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Servicios</h4><ul><li><a href="#servicios">Closer de Ventas</a></li><li><a href="#servicios">Protocolización</a></li><li><a href="#servicios">Procesos de Empresa</a></li><li><a href="#servicios">Gestión Eficiente</a></li><li><a href="#servicios">Hotelera Premium</a></li><li><a href="#servicios">Estructura Global</a></li></ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="#sobre">Quiénes somos</a></li><li><a href="#como">Metodología</a></li><li><a href="#por-que">Por qué CRS</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div class="footer-col"><h4>Contacto</h4><ul><li><a href="https://wa.me/34697293677" target="_blank">WhatsApp</a></li><li><a href="mailto:info@crsgrowth.com">info@crsgrowth.com</a></li><li><a href="mailto:cristhiam@crsgrowth.com">cristhiam@crsgrowth.com</a></li><li><a href="https://www.linkedin.com/company/crsgrowth" target="_blank">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CRS Consulting · crsgrowth.com · Todos los derechos reservados</p>
+      <div class="footer-bottom-links"><a href="#">Privacidad</a><a href="#">Legal</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 80), {passive:true});
+
+// MOBILE MENU
+const burger = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+function toggleMobile() {
+  const o = mob.classList.toggle('open');
+  burger.classList.toggle('open', o);
+}
+function closeMobile() {
+  mob.classList.remove('open');
+  burger.classList.remove('open');
+}
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, {threshold: 0.12, rootMargin: '0px 0px -50px 0px'});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// COUNTER
+function animCount(el) {
+  const t = parseInt(el.dataset.t);
+  let c = 0;
+  const s = t / 30;
+  const i = setInterval(() => { c += s; if (c >= t) { c = t; clearInterval(i); } el.textContent = Math.floor(c); }, 50);
+}
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animCount(e.target); cObs.unobserve(e.target); } });
+}, {threshold: 0.5});
+document.querySelectorAll('.ctr').forEach(el => cObs.observe(el));
+
+// FAQ
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { btn.classList.add('open'); a.classList.add('open'); }
+}
+
+// FORM
+function handleForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('fsub');
+  btn.textContent = 'Enviando...'; btn.disabled = true;
+  const n = document.getElementById('fn').value;
+  const c = document.getElementById('fc').value;
+  const s = document.getElementById('fs').value;
+  const m = document.getElementById('fm').value;
+  const msg = encodeURIComponent('Hola, soy ' + n + ' de ' + c + '.' + (s ? ' Me interesa: ' + s + '.' : '') + (m ? ' ' + m : ''));
+  setTimeout(() => {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    window.open('https://wa.me/34697293677?text=' + msg, '_blank');
+  }, 700);
+}
+
+// CARD TILT
+document.querySelectorAll('.svc-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateX(${-y*3.5}deg) rotateY(${x*3.5}deg)`;
+  });
+  card.addEventListener('mouseleave', () => card.style.transform = '');
+});
+</script>
+</body>
+</html>
