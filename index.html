@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Construimos el sistema operativo de tu negocio. Procesos, ventas y control real para que tu empresa funcione sin depender de ti.">
+<meta property="og:title" content="CRS Consulting — Consultoría de Alto Rendimiento Empresarial">
+<meta property="og:description" content="Construimos el sistema operativo de tu negocio. Procesos, ventas y control real para que tu empresa funcione sin depender de ti.">
+<meta property="og:image" content="https://www.crsgrowth.com/logo.png">
+<meta property="og:url" content="https://www.crsgrowth.com/">
+<title>CRS Consulting — Consultoría de Alto Rendimiento Empresarial</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FAF8F4;--cream2:#F4F1EB;--cream3:#EDE9E0;
+  --white:#FFFFFF;--stone:#E8E4DA;--warm:#D6D0C4;
+  --ink:#1C1A17;--ink2:#2E2B26;--charcoal:#4A4640;
+  --mid:#7A7570;--muted:#A09890;
+  --gold:#B8860B;--gold2:#C9980E;
+  --gold-bg:rgba(184,134,11,.06);--gold-brd:rgba(184,134,11,.2);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"DM Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --max:1160px;
+  --sh:0 2px 24px rgba(28,26,23,.08);
+  --sh2:0 8px 48px rgba(28,26,23,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--sans);cursor:pointer}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+.section{padding:7rem 0}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.label{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.label::before{content:"";width:20px;height:1px;background:var(--gold);opacity:.7}
+.hs{font-family:var(--serif);font-weight:700;line-height:1.05;letter-spacing:-.015em}
+.sec-sub{font-size:.95rem;color:var(--mid);max-width:500px;margin:.8rem auto 0;line-height:1.8}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;border:none;border-radius:2px;font-family:var(--sans);font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease);white-space:nowrap;text-decoration:none}
+.btn-dk{background:var(--ink);color:#fff;box-shadow:0 4px 20px rgba(28,26,23,.2)}
+.btn-dk:hover{background:var(--ink2);transform:translateY(-2px)}
+.btn-gd{background:var(--gold);color:#fff;box-shadow:0 4px 16px rgba(184,134,11,.25)}
+.btn-gd:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ol{background:transparent;border:1.5px solid var(--stone);color:var(--charcoal)}
+.btn-ol:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1da851;transform:translateY(-2px)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.4rem 0;transition:all .4s var(--ease)}
+.nav.scrolled{padding:.9rem 0;background:rgba(250,248,244,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--stone);box-shadow:0 2px 20px rgba(28,26,23,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.nav-logo img{width:38px;height:38px;object-fit:contain}
+.nav-logo-t{font-family:var(--sans);font-weight:700;font-size:1rem;letter-spacing:.04em;color:var(--ink)}
+.nav-logo-t span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.06em;color:var(--charcoal);transition:color .2s;text-decoration:none}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{padding:.6rem 1.4rem!important;background:var(--ink)!important;color:#fff!important;border-radius:2px;font-weight:600!important}
+.nav-cta:hover{background:var(--gold)!important;color:#fff!important}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all .3s}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob{display:none;position:fixed;inset:0;z-index:850;background:rgba(250,248,244,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob.open{display:flex}
+.mob a{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--ink);transition:color .2s;text-decoration:none}
+.mob a:hover{color:var(--gold)}
+@media(max-width:820px){.nav-links{display:none}.burger{display:flex}}
+.ticker{overflow:hidden;padding:1rem 0;background:var(--ink)}
+.t-track{display:flex;align-items:center;gap:3rem;width:max-content;animation:ticker 30s linear infinite}
+.t-item{display:flex;align-items:center;gap:1.2rem;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap}
+.t-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.stats-s{padding:3.5rem 0;background:#fff;border-top:1px solid var(--stone);border-bottom:1px solid var(--stone)}
+.stats-g{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.stat-i{padding:1rem .5rem;border-right:1px solid var(--stone)}
+.stat-i:last-child{border-right:none}
+.stat-v{font-family:var(--serif);font-size:3rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.4rem}
+.stat-l{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.eyebrow-line{width:28px;height:1px;background:var(--gold)}
+.eyebrow-text{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.blockquote{font-family:var(--serif);font-style:italic;font-size:1.1rem;font-weight:500;color:var(--ink2);line-height:1.7;padding-left:1.5rem;border-left:2px solid var(--gold)}
+.pillars{display:flex;flex-direction:column}
+.pillar{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--stone);transition:padding-left .3s var(--ease)}
+.pillar:last-child{border-bottom:none}
+.pillar:hover{padding-left:.5rem}
+.p-icon{width:38px;height:38px;flex-shrink:0;border:1px solid var(--stone);background:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .3s}
+.pillar:hover .p-icon{border-color:var(--gold-brd);background:var(--gold-bg)}
+.p-name{font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.25rem}
+.p-desc{font-size:.8rem;color:var(--mid);line-height:1.65}
+.faq-items{display:flex;flex-direction:column}
+.faq-item{border-bottom:1px solid var(--stone);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.4rem 0;font-family:var(--sans);font-weight:500;font-size:.93rem;color:var(--charcoal);text-align:left;cursor:pointer;transition:color .2s}
+.faq-q:hover,.faq-q.open{color:var(--ink)}
+.faq-q.open{color:var(--gold)}
+.faq-ic{width:26px;height:26px;flex-shrink:0;border:1px solid var(--stone);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--muted);transition:all .3s var(--ease)}
+.faq-q.open .faq-ic{background:var(--gold);border-color:var(--gold);color:#fff;transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease),padding .4s}
+.faq-a.open{max-height:400px;padding-bottom:1.4rem}
+.faq-a p{font-size:.88rem;color:var(--mid);line-height:1.85}
+.faq-a strong{color:var(--ink)}
+.urgency{background:var(--gold);padding:1.1rem 1.5rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.urgency p{font-size:.82rem;font-weight:600;color:#fff;letter-spacing:.04em}
+.urg-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.3rem;background:#fff;color:var(--gold);border-radius:1px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:opacity .2s;text-decoration:none}
+.urg-btn:hover{opacity:.88}
+footer{background:var(--ink);padding:5rem 0 2.5rem}
+.foot-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.foot-brand img{height:44px;width:44px;object-fit:contain;margin-bottom:1rem}
+.foot-brand p{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.8;max-width:260px;margin-bottom:1.5rem}
+.soc-links{display:flex;gap:.6rem}
+.soc{width:32px;height:32px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.82rem;color:rgba(255,255,255,.35);transition:all .2s;text-decoration:none}
+.soc:hover{border-color:var(--gold);color:var(--gold)}
+.foot-col h4{font-size:.63rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.foot-col ul li a{font-size:.82rem;color:rgba(255,255,255,.35);transition:color .2s;text-decoration:none}
+.foot-col ul li a:hover{color:#fff}
+.foot-btm{border-top:1px solid rgba(255,255,255,.07);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-btm p{font-size:.74rem;color:rgba(255,255,255,.2)}
+.foot-btm-links{display:flex;gap:1.5rem}
+.foot-btm-links a{font-size:.74rem;color:rgba(255,255,255,.2);transition:color .2s;text-decoration:none}
+.foot-btm-links a:hover{color:var(--gold)}
+.wa-btn{position:fixed;bottom:1.8rem;right:1.8rem;z-index:800;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.35);transition:transform .25s var(--ease);text-decoration:none}
+.wa-btn:hover{transform:scale(1.1)}
+.wa-btn::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(37,211,102,.25);animation:wap 2.5s ease-out infinite}
+@keyframes wap{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes dotP{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes breathe{0%,100%{box-shadow:0 0 60px rgba(184,134,11,.06)}50%{box-shadow:0 0 90px rgba(184,134,11,.15)}}
+@media(max-width:1024px){.foot-g{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.section{padding:5rem 0}.stats-g{grid-template-columns:1fr 1fr}.stat-i:nth-child(2){border-right:none}.stat-i:nth-child(3){border-right:1px solid var(--stone);border-top:1px solid var(--stone)}.stat-i:nth-child(4){border-top:1px solid var(--stone)}}
+@media(max-width:540px){.section{padding:4rem 0}.foot-g{grid-template-columns:1fr}.urgency{flex-direction:column;gap:1rem}}
+</style>
+</head>
+<body>
+<style>
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:9rem 1.5rem 5rem;position:relative;overflow:hidden;background:var(--cream)}
+.h-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 78% 52%,rgba(184,134,11,.07) 0%,transparent 60%),radial-gradient(ellipse 45% 55% at 12% 78%,rgba(184,134,11,.04) 0%,transparent 55%),var(--cream)}
+.h-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(184,134,11,.02) 80px,rgba(184,134,11,.02) 81px);pointer-events:none}
+.h-in{position:relative;z-index:1;max-width:var(--max);margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.h-tag{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem 1rem;margin-bottom:2rem;border:1px solid var(--gold-brd);background:var(--gold-bg);border-radius:2px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);animation:fadeUp .8s var(--ease) .2s both}
+.h-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:dotP 2.5s ease-in-out infinite}
+.h-title{font-family:var(--serif);font-weight:700;font-size:clamp(3rem,5.5vw,5.5rem);line-height:1.0;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.8rem;animation:fadeUp .9s var(--ease) .35s both}
+.h-title em{font-style:italic;color:var(--gold);display:block}
+.h-title strong{color:var(--ink);font-style:normal;display:block}
+.h-sub{font-size:1.05rem;font-weight:300;color:var(--charcoal);line-height:1.85;max-width:460px;margin-bottom:2.5rem;animation:fadeUp .9s var(--ease) .5s both}
+.h-sub strong{color:var(--ink);font-weight:600}
+.h-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:3.2rem;animation:fadeUp .9s var(--ease) .65s both}
+.h-stats{display:flex;gap:3rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--stone);animation:fadeUp .9s var(--ease) .8s both}
+.h-sn{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--gold);line-height:1}
+.h-sl{font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.h-visual{display:flex;align-items:center;justify-content:center;animation:fadeIn 1.2s var(--ease) .5s both;position:relative}
+.h-card{width:360px;background:#fff;border:1px solid var(--stone);box-shadow:var(--sh2);padding:2.5rem;position:relative;overflow:hidden}
+.h-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.h-card-logo{width:70px;height:70px;object-fit:contain;margin:0 auto 1.5rem;filter:drop-shadow(0 2px 10px rgba(184,134,11,.3))}
+.h-card-t{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);text-align:center;margin-bottom:.4rem}
+.h-card-s{font-size:.8rem;color:var(--muted);text-align:center;margin-bottom:1.8rem;line-height:1.6}
+.h-card-items{display:flex;flex-direction:column;gap:.6rem}
+.hci{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;background:var(--cream2);border-left:2.5px solid var(--gold)}
+.hci-icon{font-size:.85rem;flex-shrink:0}
+.hci-text{font-size:.82rem;font-weight:500;color:var(--ink2)}
+.hf{position:absolute;background:#fff;border:1px solid var(--stone);box-shadow:var(--sh);padding:.6rem .9rem;white-space:nowrap;border-radius:2px}
+.hfv{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--gold);display:block}
+.hfl{font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hf1{top:-18px;right:-18px;animation:floatA 5s ease-in-out infinite}
+.hf2{bottom:-12px;left:-18px;animation:floatB 6s ease-in-out infinite}
+.h-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;animation:fadeIn 1s 1.5s both}
+.h-scroll span{font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.h-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),transparent);animation:lineA 2s ease-in-out infinite}
+@keyframes lineA{0%,100%{opacity:.4}50%{opacity:.9}}
+.prob-grid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--stone);overflow:hidden;background:#fff}
+.prob-card{padding:2.2rem 1.5rem;border-right:1px solid var(--stone);position:relative;overflow:hidden;transition:background .3s}
+.prob-card:last-child{border-right:none}
+.prob-card:hover{background:var(--cream2)}
+.prob-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s var(--ease)}
+.prob-card:hover::after{transform:scaleX(1)}
+.prob-num{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem}
+.prob-title{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink);line-height:1.3;margin-bottom:.6rem}
+.prob-desc{font-size:.8rem;color:var(--mid);line-height:1.7}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--stone)}
+.svc-card{background:#fff;padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.svc-card:hover{background:var(--cream);transform:translateY(-3px);box-shadow:var(--sh2)}
+.svc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-num{font-family:var(--serif);font-size:4rem;font-weight:700;color:var(--stone);line-height:1;margin-bottom:.9rem;transition:color .3s}
+.svc-card:hover .svc-num{color:rgba(184,134,11,.2)}
+.svc-name{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--ink);margin-bottom:.65rem;line-height:1.3}
+.svc-desc{font-size:.83rem;color:var(--mid);line-height:1.8;flex:1;margin-bottom:1.2rem}
+.svc-tag{display:inline-flex;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:.22rem .7rem;border:1px solid var(--gold-brd)}
+.svc-lnk{margin-top:1rem;font-size:.78rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:.4rem;transition:gap .2s;text-decoration:none}
+.svc-card:hover .svc-lnk{gap:.7rem}
+.how-g{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;position:relative}
+.how-g::before{content:"";position:absolute;top:30px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-brd),var(--gold),var(--gold-brd),transparent);opacity:.5;z-index:0}
+.how-step{text-align:center;position:relative;z-index:1}
+.how-n{width:60px;height:60px;border-radius:50%;border:1.5px solid var(--gold-brd);background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--gold);transition:all .35s var(--ease)}
+.how-step:hover .how-n{background:var(--gold);color:#fff;border-color:var(--gold)}
+.how-t{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--ink);margin-bottom:.5rem}
+.how-d{font-size:.8rem;color:var(--mid);line-height:1.7}
+.res-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+.res-card{padding:2.2rem 1.8rem;background:var(--cream);border:1px solid var(--stone);transition:all .3s;position:relative;overflow:hidden}
+.res-card:hover{background:#fff;box-shadow:var(--sh2);transform:translateY(-3px)}
+.res-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.res-card:hover::after{transform:scaleX(1)}
+.res-icon{font-size:1.8rem;margin-bottom:1rem;display:block}
+.res-title{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--ink);line-height:1.25;margin-bottom:.65rem}
+.res-desc{font-size:.82rem;color:var(--mid);line-height:1.8}
+#cta{padding:8rem 0;text-align:center;background:var(--ink);position:relative;overflow:hidden}
+#cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(184,134,11,.1) 0%,transparent 70%);pointer-events:none}
+.cta-in{position:relative;z-index:1}
+.cta-t{font-family:var(--serif);font-weight:700;font-size:clamp(2.5rem,5.5vw,4.5rem);line-height:1.0;letter-spacing:-.02em;color:#fff;margin-bottom:1.2rem}
+.cta-t em{font-style:italic;color:var(--gold)}
+.cta-s{font-size:.98rem;color:rgba(255,255,255,.5);max-width:400px;margin:0 auto 2.8rem;line-height:1.85}
+.cta-acts{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1.2rem}
+.cta-note{font-size:.72rem;color:rgba(255,255,255,.22);letter-spacing:.05em}
+@media(max-width:1024px){.h-in{grid-template-columns:1fr;text-align:center}.h-visual{display:none}.h-sub,.h-actions,.h-stats,.h-tag{margin-left:auto;margin-right:auto}.h-actions,.h-stats,.h-tag{justify-content:center}.how-g{grid-template-columns:1fr 1fr}.how-g::before{display:none}.res-g{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.prob-grid{grid-template-columns:1fr 1fr}.svc-grid{grid-template-columns:1fr}.h-title{font-size:2.8rem}}
+@media(max-width:540px){.h-title{font-size:2.4rem}.h-actions{flex-direction:column;align-items:center}.h-actions .btn{width:100%;justify-content:center}.prob-grid{grid-template-columns:1fr}.how-g{grid-template-columns:1fr}.res-g{grid-template-columns:1fr}#hero{padding:7rem 1.5rem 4rem}}
+</style>
+<a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico." class="wa-btn" target="_blank" aria-label="WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div class="mob" id="mob">
+  <a href="index.html" onclick="closeMob()">Inicio</a><a href="servicios.html" onclick="closeMob()">Servicios</a><a href="nosotros.html" onclick="closeMob()">Nosotros</a><a href="contacto.html" onclick="closeMob()">Contacto</a>
+</div>
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="CRS Consulting" width="38" height="38">
+      <span class="nav-logo-t">CRS <span>Consulting</span></span>
+    </a>
+    <div class="nav-links"><a href="index.html" class="active">Inicio</a><a href="servicios.html" class="">Servicios</a><a href="nosotros.html" class="">Nosotros</a><a href="contacto.html" class="">Contacto</a><a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico." class="nav-links nav-cta" target="_blank">Diagnóstico gratis</a></div>
+    <button class="burger" id="burger" onclick="toggleMob()" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<section id="hero">
+  <div class="h-bg"></div>
+  <div class="h-in">
+    <div>
+      <div class="h-tag"><div class="h-dot"></div>Diagnóstico gratuito · Sin compromiso · Respuesta en 24h</div>
+      <h1 class="h-title">Tu empresa debería<br>darte libertad,<br><em>no quitártela.</em><strong>La construimos.</strong></h1>
+      <p class="h-sub">Diseñamos el sistema operativo de tu negocio. <strong>Procesos que tu equipo ejecuta solo, ventas predecibles y control real</strong> — sin que todo dependa de ti.</p>
+      <div class="h-actions">
+        <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20una%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita." class="btn btn-dk" target="_blank">Diagnóstico gratuito</a>
+        <a href="servicios.html" class="btn btn-ol">Ver servicios</a>
+      </div>
+      <div class="h-stats">
+        <div><div class="h-sn ctr" data-t="6">0</div><div class="h-sl">Servicios</div></div>
+        <div><div class="h-sn ctr" data-t="4">0</div><div class="h-sl">Fases</div></div>
+        <div><div class="h-sn">30d</div><div class="h-sl">Garantía</div></div>
+        <div><div class="h-sn">24h</div><div class="h-sl">Respuesta</div></div>
+      </div>
+    </div>
+    <div class="h-visual"><div style="position:relative">
+      <div class="h-card">
+        <img src="logo.png" alt="CRS Consulting" class="h-card-logo">
+        <div class="h-card-t">CRS Consulting</div>
+        <div class="h-card-s">Consultoría de Alto Rendimiento Empresarial</div>
+        <div class="h-card-items">
+          <div class="hci"><div class="hci-icon">⚙️</div><div class="hci-text">Tu empresa funciona sin ti en lo operativo</div></div>
+          <div class="hci"><div class="hci-icon">📊</div><div class="hci-text">Ventas con método y resultados predecibles</div></div>
+          <div class="hci"><div class="hci-icon">🎯</div><div class="hci-text">Control real con datos, no con intuición</div></div>
+        </div>
+      </div>
+      <div class="hf hf1"><span class="hfv">100%</span><span class="hfl">A medida</span></div>
+      <div class="hf hf2"><span class="hfv">30 días</span><span class="hfl">Garantía incluida</span></div>
+    </div></div>
+  </div>
+  <div class="h-scroll"><span>Scroll</span><div class="h-scroll-line"></div></div>
+</section>
+<div class="ticker" aria-hidden="true"><div class="t-track">
+<div class="t-item"><div class="t-dot"></div>Closer de Ventas</div><div class="t-item"><div class="t-dot"></div>Protocolización</div><div class="t-item"><div class="t-dot"></div>Creación de Procesos</div><div class="t-item"><div class="t-dot"></div>Gestión Eficiente</div><div class="t-item"><div class="t-dot"></div>Hotelera Premium</div><div class="t-item"><div class="t-dot"></div>Estructura Global</div><div class="t-item"><div class="t-dot"></div>crsgrowth.com</div>
+<div class="t-item"><div class="t-dot"></div>Closer de Ventas</div><div class="t-item"><div class="t-dot"></div>Protocolización</div><div class="t-item"><div class="t-dot"></div>Creación de Procesos</div><div class="t-item"><div class="t-dot"></div>Gestión Eficiente</div><div class="t-item"><div class="t-dot"></div>Hotelera Premium</div><div class="t-item"><div class="t-dot"></div>Estructura Global</div><div class="t-item"><div class="t-dot"></div>crsgrowth.com</div>
+</div></div>
+<div class="stats-s"><div class="wrap"><div class="stats-g">
+  <div class="stat-i rv"><div class="stat-v ctr" data-t="6">0</div><div class="stat-l">Servicios especializados</div></div>
+  <div class="stat-i rv d1"><div class="stat-v ctr" data-t="4">0</div><div class="stat-l">Fases de implementación</div></div>
+  <div class="stat-i rv d2"><div class="stat-v">30d</div><div class="stat-l">Garantía post-entrega</div></div>
+  <div class="stat-i rv d3"><div class="stat-v">24h</div><div class="stat-l">Tiempo de respuesta</div></div>
+</div></div></div>
+<section class="section" style="background:var(--cream)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="label rv">¿Te suena esto?</span>
+      <h2 class="hs rv d1" style="font-size:clamp(2rem,3.5vw,3rem)">Sabemos cómo te sientes.</h2>
+      <p class="rv d2" style="font-size:.95rem;color:var(--mid);max-width:500px;margin:.6rem auto 0;line-height:1.8">No es falta de esfuerzo. Es falta de sistema. Y tiene solución.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card rv"><span class="prob-num">01</span><div class="prob-title">Todo pasa por ti</div><div class="prob-desc">Cada decisión, cada problema, cada duda del equipo termina en tu mesa. Estás agotado.</div></div>
+      <div class="prob-card rv d1"><span class="prob-num">02</span><div class="prob-title">Tu equipo no ejecuta solo</div><div class="prob-desc">Personas válidas que trabajan de maneras distintas. Sin sistema, los resultados son impredecibles.</div></div>
+      <div class="prob-card rv d2"><span class="prob-num">03</span><div class="prob-title">Las ventas no tienen método</div><div class="prob-desc">Algunos meses van bien, otros no. Sin proceso comercial definido, no hay control.</div></div>
+      <div class="prob-card rv d3"><span class="prob-num">04</span><div class="prob-title">Tomas decisiones a ciegas</div><div class="prob-desc">Sin datos reales, todo se gestiona por intuición. Y la intuición tiene un límite.</div></div>
+      <div class="prob-card rv d4"><span class="prob-num">05</span><div class="prob-title">Crecer te da más trabajo</div><div class="prob-desc">Cada nuevo cliente genera más presión. Escalar debería darte libertad, no quitártela.</div></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="background:#fff">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="label rv">Lo que hacemos</span>
+      <h2 class="hs rv d1" style="font-size:clamp(2rem,3.5vw,3rem)">6 servicios. <em style="font-style:italic;color:var(--gold)">Una empresa</em> que funciona.</h2>
+      <p class="rv d2 sec-sub">Cada servicio resuelve un problema concreto. Individuales o combinados.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv"><div class="svc-num">01</div><div class="svc-name">Closer de Ventas</div><div class="svc-desc">Sistema comercial con guión, proceso de cierre y equipo entrenado. De la improvisación a las ventas predecibles.</div><span class="svc-tag">Comercial</span><a href="servicios.html#closer" class="svc-lnk">Ver detalle →</a></div>
+      <div class="svc-card rv d1"><div class="svc-num">02</div><div class="svc-name">Protocolización de Empresas</div><div class="svc-desc">Manual de Operaciones completo. Tu empresa funciona con el mismo estándar con o sin ti.</div><span class="svc-tag">Operaciones</span><a href="servicios.html#protocolo" class="svc-lnk">Ver detalle →</a></div>
+      <div class="svc-card rv d2"><div class="svc-num">03</div><div class="svc-name">Creación de Procesos</div><div class="svc-desc">El sistema operativo de tu negocio: organigrama, flujos de trabajo y responsabilidades claras.</div><span class="svc-tag">Estructura</span><a href="servicios.html#procesos" class="svc-lnk">Ver detalle →</a></div>
+      <div class="svc-card rv d1"><div class="svc-num">04</div><div class="svc-name">Gestión Eficiente</div><div class="svc-desc">KPIs, cuadro de mando y protocolo de decisiones. Del caos al control directivo con datos.</div><span class="svc-tag">Dirección</span><a href="servicios.html#gestion" class="svc-lnk">Ver detalle →</a></div>
+      <div class="svc-card rv d2"><div class="svc-num">05</div><div class="svc-name">Protocolización Hotelera</div><div class="svc-desc">Estándares operativos para hoteles 4 y 5 estrellas. Experiencia del huésped consistente en cada turno.</div><span class="svc-tag">Hostelería</span><a href="servicios.html#hotelera" class="svc-lnk">Ver detalle →</a></div>
+      <div class="svc-card rv d3"><div class="svc-num">06</div><div class="svc-name">Estructura Global de Negocio</div><div class="svc-desc">Arquitectura completa: modelo, ventas, operaciones y control. De la visión al sistema que funciona solo.</div><span class="svc-tag">Estrategia</span><a href="servicios.html#estructura" class="svc-lnk">Ver detalle →</a></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem"><a href="servicios.html" class="btn btn-ol">Ver todos los servicios con detalle</a></div>
+  </div>
+</section>
+<section class="section" style="background:var(--cream2)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:4rem" class="rv">
+      <span class="label">Cómo trabajamos</span>
+      <h2 class="hs" style="font-size:clamp(2rem,3.5vw,3rem)">4 fases. Sin atajos.</h2>
+      <p class="sec-sub">Todo proyecto sigue este proceso. Sin excepciones.</p>
+    </div>
+    <div class="how-g">
+      <div class="how-step rv"><div class="how-n">01</div><div class="how-t">Diagnóstico</div><div class="how-d">Analizamos el negocio en profundidad. Identificamos el problema real, no los síntomas.</div></div>
+      <div class="how-step rv d1"><div class="how-n">02</div><div class="how-t">Diseño</div><div class="how-d">Construimos el sistema a medida. Tu empresa, tu arquitectura. Sin plantillas genéricas.</div></div>
+      <div class="how-step rv d2"><div class="how-n">03</div><div class="how-t">Implementación</div><div class="how-d">Trabajamos contigo. No entregamos documentos y nos vamos. Nos quedamos hasta que funciona.</div></div>
+      <div class="how-step rv d3"><div class="how-n">04</div><div class="how-t">Control</div><div class="how-d">Supervisamos resultados. 30 días de garantía post-entrega incluidos en todos los proyectos.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem"><a href="nosotros.html#metodologia" class="btn btn-ol">Ver metodología completa</a></div>
+  </div>
+</section>
+<section class="section" style="background:#fff">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="label rv">Qué consigues</span>
+      <h2 class="hs rv d1" style="font-size:clamp(2rem,3.5vw,3rem)">El antes y el después<br><em style="font-style:italic;color:var(--gold)">son muy distintos.</em></h2>
+      <p class="rv d2 sec-sub">No prometemos magia. Prometemos estructura real que genera resultados medibles y duraderos.</p>
+    </div>
+    <div class="res-g">
+      <div class="res-card rv"><span class="res-icon">⚙️</span><div class="res-title">Tu empresa funciona sin ti en el día a día</div><div class="res-desc">Procesos documentados que tu equipo ejecuta con el mismo estándar, estés o no estés.</div></div>
+      <div class="res-card rv d1"><span class="res-icon">📊</span><div class="res-title">Ventas predecibles con método</div><div class="res-desc">Sistema comercial con guión y KPIs. Sabes cuánto vas a facturar el mes que viene.</div></div>
+      <div class="res-card rv d2"><span class="res-icon">🎯</span><div class="res-title">Control real sin trabajar 60 horas</div><div class="res-desc">Cuadro de mando con lo que importa. Decisiones con datos, no con intuición.</div></div>
+      <div class="res-card rv d1"><span class="res-icon">👥</span><div class="res-title">Equipo que sabe qué hacer y cómo</div><div class="res-desc">Roles claros, procesos definidos. Tu equipo actúa con autonomía y estándar.</div></div>
+      <div class="res-card rv d2"><span class="res-icon">📈</span><div class="res-title">Estructura lista para escalar</div><div class="res-desc">Nuevo personal, nuevas sedes o nuevos mercados sin que el caos escale contigo.</div></div>
+      <div class="res-card rv d3"><span class="res-icon">🏆</span><div class="res-title">Tú, de vuelta en tu rol de líder</div><div class="res-desc">Dejas de apagar fuegos. Vuelves a la estrategia, la visión y las relaciones clave.</div></div>
+    </div>
+  </div>
+</section>
+<section id="cta"><div class="wrap cta-in">
+  <h2 class="hs cta-t rv">Cada semana sin sistema<br>es una semana <em>perdida.</em></h2>
+  <p class="cta-s rv d1">La primera reunión es gratuita. 45 minutos. Sin presión.</p>
+  <div class="cta-acts rv d2">
+    <a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20la%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita%20con%20CRS%20Consulting." class="btn btn-gd" target="_blank">Escribir por WhatsApp</a>
+    <a href="contacto.html" class="btn btn-ol" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)">Usar el formulario</a>
+  </div>
+  <p class="cta-note rv d3">Respondemos en menos de 24 horas hábiles</p>
+</div></section>
+<div class="urgency"><p>La reunión de diagnóstico es gratuita y sin compromiso. Solo 45 minutos.</p>
+<a href="https://wa.me/34697293677?text=Hola%2C%20quiero%20mi%20reuni%C3%B3n%20de%20diagn%C3%B3stico%20gratuita." class="urg-btn" target="_blank">Reservar ahora</a></div><footer>
+  <div class="wrap">
+    <div class="foot-g">
+      <div class="foot-brand"><img src="logo.png" alt="CRS Consulting">
+        <p>Consultoría de Alto Rendimiento Empresarial. Construimos empresas que funcionan con orden, método y resultados reales.</p>
+        <div class="soc-links">
+          <a href="https://www.linkedin.com/company/crsgrowth" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://wa.me/34697293677" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="mailto:info@crsgrowth.com" class="soc">✉</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Servicios</h4><ul>
+        <li><a href="servicios.html#closer">Closer de Ventas</a></li>
+        <li><a href="servicios.html#protocolo">Protocolización</a></li>
+        <li><a href="servicios.html#procesos">Creación de Procesos</a></li>
+        <li><a href="servicios.html#gestion">Gestión Eficiente</a></li>
+        <li><a href="servicios.html#hotelera">Hotelera Premium</a></li>
+        <li><a href="servicios.html#estructura">Estructura Global</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Empresa</h4><ul>
+        <li><a href="nosotros.html">Quiénes somos</a></li>
+        <li><a href="nosotros.html#metodologia">Metodología</a></li>
+        <li><a href="nosotros.html#porque">Por qué CRS</a></li>
+        <li><a href="nosotros.html#faq">FAQ</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Contacto</h4><ul>
+        <li><a href="https://wa.me/34697293677" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:info@crsgrowth.com">info@crsgrowth.com</a></li>
+        <li><a href="mailto:cristhiam@crsgrowth.com">cristhiam@crsgrowth.com</a></li>
+        <li><a href="https://www.linkedin.com/company/crsgrowth" target="_blank">LinkedIn</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-btm">
+      <p>© 2026 CRS Consulting · crsgrowth.com · Todos los derechos reservados</p>
+      <div class="foot-btm-links"><a href="#">Privacidad</a><a href="#">Aviso legal</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer><script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+const burger=document.getElementById('burger');
+const mob=document.getElementById('mob');
+function toggleMob(){const o=mob.classList.toggle('open');burger.classList.toggle('open',o)}
+function closeMob(){mob.classList.remove('open');burger.classList.remove('open')}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+function animCount(el){const t=parseInt(el.dataset.t);let c=0;const i=setInterval(()=>{c+=t/30;if(c>=t){c=t;clearInterval(i)}el.textContent=Math.floor(c)},50)}
+const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animCount(e.target);cObs.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('.ctr').forEach(el=>cObs.observe(el));
+function tFaq(btn){const a=btn.nextElementSibling,open=btn.classList.contains('open');
+document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open')});
+if(!open){btn.classList.add('open');a.classList.add('open')}}
+</script></body></html>
