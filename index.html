@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>if(location.pathname==='/index.html')history.replaceState(null,'','/');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Construimos el sistema operativo de tu negocio. Procesos, ventas y control real para que tu empresa funcione sin depender de ti.">
 <meta property="og:title" content="CRS Consulting — Consultoría de Alto Rendimiento Empresarial">
@@ -144,6 +145,43 @@ footer{background:var(--ink);padding:5rem 0 2.5rem}
 @media(max-width:1024px){.foot-g{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.section{padding:5rem 0}.stats-g{grid-template-columns:1fr 1fr}.stat-i:nth-child(2){border-right:none}.stat-i:nth-child(3){border-right:1px solid var(--stone);border-top:1px solid var(--stone)}.stat-i:nth-child(4){border-top:1px solid var(--stone)}}
 @media(max-width:540px){.section{padding:4rem 0}.foot-g{grid-template-columns:1fr}.urgency{flex-direction:column;gap:1rem}}
+
+/* SECCIÓN DIAGNÓSTICO */
+.diag-sec{padding:6rem 0;background:var(--cream2);border-top:1px solid var(--stone)}
+.diag-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.diag-kicker{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.diag-h{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.2rem}
+.diag-h em{font-style:italic;color:var(--gold)}
+.diag-p{font-size:.9rem;color:var(--mid);line-height:1.85;margin-bottom:2rem}
+.diag-stats{display:flex;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--stone);border-bottom:1px solid var(--stone);margin-bottom:2rem}
+.diag-stat-n{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.diag-stat-l{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.diag-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.diag-btn-main{display:inline-block;padding:.75rem 1.8rem;background:var(--ink);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-decoration:none;border-radius:2px;transition:background .2s}
+.diag-btn-main:hover{background:var(--gold);color:#fff}
+.diag-btn-sec{display:inline-block;padding:.75rem 1.4rem;border:1px solid var(--gold-brd);color:var(--gold);font-size:.75rem;font-weight:500;letter-spacing:.04em;text-decoration:none;border-radius:2px;transition:all .2s}
+.diag-btn-sec:hover{background:var(--gold-bg);text-decoration:none}
+/* Preview card */
+.diag-preview{background:var(--white);border:1px solid var(--stone);box-shadow:var(--sh2);overflow:hidden}
+.dp-head{padding:1.4rem 1.6rem;border-bottom:1px solid var(--stone);display:flex;justify-content:space-between;align-items:center}
+.dp-logo{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.dp-badge{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-brd)}
+.dp-score{padding:1.4rem 1.6rem;display:flex;align-items:flex-end;gap:1rem;border-bottom:1px solid var(--stone)}
+.dp-num{font-family:var(--serif);font-size:3.2rem;font-weight:700;line-height:1;color:var(--ink)}
+.dp-num span{font-size:1.2rem;color:var(--muted);font-weight:400}
+.dp-nivel-wrap{padding-bottom:.3rem}
+.dp-nivel{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C9980E;margin-bottom:.2rem}
+.dp-nivel-sub{font-size:.78rem;color:var(--mid)}
+.dp-bars{padding:1.2rem 1.6rem;display:flex;flex-direction:column;gap:.9rem}
+.dp-bar-item{}
+.dp-bar-top{display:flex;justify-content:space-between;margin-bottom:.35rem}
+.dp-bar-name{font-size:.76rem;color:var(--charcoal);font-weight:500}
+.dp-bar-score{font-size:.74rem;color:var(--muted)}
+.dp-bar-bg{height:4px;background:var(--stone);border-radius:2px;overflow:hidden}
+.dp-bar-fill{height:100%;border-radius:2px;background:var(--gold)}
+.dp-foot{padding:.9rem 1.6rem;background:var(--cream);border-top:1px solid var(--stone);font-size:.7rem;color:var(--muted);text-align:center;letter-spacing:.06em}
+@media(max-width:900px){.diag-inner{grid-template-columns:1fr;gap:3rem}.diag-preview{max-width:420px}}
+@media(max-width:540px){.diag-sec{padding:4rem 0}.diag-stats{gap:1.5rem}.diag-actions{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -240,7 +278,7 @@ footer{background:var(--ink);padding:5rem 0 2.5rem}
       <img src="logo.png" alt="CRS Consulting" width="38" height="38">
       <span class="nav-logo-t">CRS <span>Consulting</span></span>
     </a>
-    <div class="nav-links"><a href="index.html" class="active">Inicio</a><a href="servicios.html" class="">Servicios</a><a href="nosotros.html" class="">Nosotros</a><a href="contacto.html" class="">Contacto</a><a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-links nav-cta" target="_blank">Diagnóstico gratis</a></div>
+    <div class="nav-links"><a href="index.html" class="active">Inicio</a><a href="servicios.html" class="">Servicios</a><a href="nosotros.html" class="">Nosotros</a><a href="contacto.html" class="">Contacto</a><a href="diagnostico/" class="nav-links nav-cta" target="_blank">Diagnóstico gratis</a></div>
     <button class="burger" id="burger" onclick="toggleMob()" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -356,17 +394,75 @@ footer{background:var(--ink);padding:5rem 0 2.5rem}
     </div>
   </div>
 </section>
+<section class="diag-sec">
+  <div class="wrap">
+    <div class="diag-inner">
+
+      <div>
+        <p class="diag-kicker">Diagnóstico gratuito · Nuevo</p>
+        <h2 class="diag-h">¿Sabes cómo está<br>tu empresa <em>por dentro?</em></h2>
+        <p class="diag-p">12 preguntas, 10 minutos. Obtendrás un informe personalizado con el nivel de madurez real de tu negocio y las áreas prioritarias de intervención. Sin registro, sin trucos.</p>
+        <div class="diag-stats">
+          <div><div class="diag-stat-n">12</div><div class="diag-stat-l">Preguntas</div></div>
+          <div><div class="diag-stat-n">4</div><div class="diag-stat-l">Áreas</div></div>
+          <div><div class="diag-stat-n">10'</div><div class="diag-stat-l">Minutos</div></div>
+          <div><div class="diag-stat-n">100%</div><div class="diag-stat-l">Gratuito</div></div>
+        </div>
+        <div class="diag-actions">
+          <a href="diagnostico/" class="diag-btn-main">Hacer el diagnóstico →</a>
+          <a href="diagnostico/" class="diag-btn-sec">Ver cómo funciona</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="diag-preview">
+          <div class="dp-head">
+            <span class="dp-logo">CRS · Diagnóstico</span>
+            <span class="dp-badge">Ejemplo de informe</span>
+          </div>
+          <div class="dp-score">
+            <div class="dp-num">24<span>/36</span></div>
+            <div class="dp-nivel-wrap">
+              <div class="dp-nivel">En desarrollo</div>
+              <div class="dp-nivel-sub">Empresa: Ejemplo S.L.</div>
+            </div>
+          </div>
+          <div class="dp-bars">
+            <div class="dp-bar-item">
+              <div class="dp-bar-top"><span class="dp-bar-name">Estructura Comercial</span><span class="dp-bar-score">5/9</span></div>
+              <div class="dp-bar-bg"><div class="dp-bar-fill" style="width:55%;background:#d4883a"></div></div>
+            </div>
+            <div class="dp-bar-item">
+              <div class="dp-bar-top"><span class="dp-bar-name">Procesos Internos</span><span class="dp-bar-score">7/9</span></div>
+              <div class="dp-bar-bg"><div class="dp-bar-fill" style="width:77%"></div></div>
+            </div>
+            <div class="dp-bar-item">
+              <div class="dp-bar-top"><span class="dp-bar-name">Gestión y Control</span><span class="dp-bar-score">4/9</span></div>
+              <div class="dp-bar-bg"><div class="dp-bar-fill" style="width:44%;background:#c0392b"></div></div>
+            </div>
+            <div class="dp-bar-item">
+              <div class="dp-bar-top"><span class="dp-bar-name">Estructura Global</span><span class="dp-bar-score">8/9</span></div>
+              <div class="dp-bar-bg"><div class="dp-bar-fill" style="width:88%;background:#5a8a5a"></div></div>
+            </div>
+          </div>
+          <div class="dp-foot">Informe generado automáticamente · crsgrowth.com</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <section id="cta"><div class="wrap cta-in">
   <h2 class="hs cta-t rv">Cada semana sin sistema<br>es una semana <em>perdida.</em></h2>
   <p class="cta-s rv d1">La primera reunión es gratuita. 45 minutos. Sin presión.</p>
   <div class="cta-acts rv d2">
-    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="btn btn-gd" target="_blank">Escribir por WhatsApp</a>
+    <a href="diagnostico/" class="btn btn-gd">Hacer el diagnóstico</a>
     <a href="contacto.html" class="btn btn-ol" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)">Usar el formulario</a>
   </div>
   <p class="cta-note rv d3">Respondemos en menos de 24 horas hábiles</p>
 </div></section>
 <div class="urgency"><p>La reunión de diagnóstico es gratuita y sin compromiso. Solo 45 minutos.</p>
-<a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="urg-btn" target="_blank">Reservar ahora</a></div><footer>
+<a href="diagnostico/" class="urg-btn" target="_blank">Reservar ahora</a></div><footer>
   <div class="wrap">
     <div class="foot-g">
       <div class="foot-brand"><img src="logo.png" alt="CRS Consulting">
