@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<script>const APPS_SCRIPT_URL="TU_APPS_SCRIPT_URL_AQUI";</script>
+<script>const APPS_SCRIPT_URL="https://script.google.com/macros/s/AKfycbyz_tFfX1WQ95e0noCXYofC8ct9GtCxrbZ7Pj9q2pWVfKDSsp_Bv56hIl32g7hk3sHmkQ/exec";</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -155,8 +155,11 @@ a{color:var(--gold);text-decoration:none}
 .res-cta{text-align:center;padding:3rem 0}
 .res-cta .pg-rule{margin:1rem auto 1.4rem}
 .res-cta p{font-size:.88rem;color:var(--mid);line-height:1.85;margin-bottom:1.8rem}
+.res-cta-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
 .btn-cta{display:inline-block;padding:.85rem 2.2rem;background:var(--ink);color:#fff;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.04em;border-radius:2px;text-decoration:none;transition:background .2s}
 .btn-cta:hover{background:var(--gold);color:#fff}
+.btn-cta-sec{display:inline-block;padding:.85rem 2rem;border:1px solid var(--gold-brd);color:var(--gold);background:transparent;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.04em;border-radius:2px;text-decoration:none;transition:all .2s}
+.btn-cta-sec:hover{background:var(--gold-bg)}
 .cta-note{font-size:.72rem;color:var(--muted);margin-top:.8rem}
 
 /* FOOTER */
@@ -288,9 +291,12 @@ footer{background:var(--ink);padding:3rem 0 2rem}
       <div class="res-cta">
         <p class="pg-kicker">CRS Consulting</p>
         <div class="pg-rule"></div>
-        <p>Este diagnóstico es el primer paso.<br>El siguiente es una sesión estratégica donde construimos tu plan de intervención.</p>
-        <a class="btn-cta" href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank">Reservar sesión estratégica gratuita →</a>
-        <p class="cta-note">45 minutos · Sin compromiso · Respuesta en 24h</p>
+        <p>Este diagnóstico es el primer paso.<br>Ahora puedes reservar directamente tu sesión estratégica o, si lo prefieres, escribirnos antes por WhatsApp.</p>
+        <div class="res-cta-actions">
+          <a class="btn-cta" id="calendly-cta" href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank">Reservar sesión estratégica →</a>
+          <a class="btn-cta-sec" id="whatsapp-cta" href="https://wa.me/34697293677?text=Hola%2C%20he%20completado%20el%20diagn%C3%B3stico%20y%20quiero%20hablar%20antes%20de%20reservar." target="_blank">Prefiero hablar antes</a>
+        </div>
+        <p class="cta-note">45 minutos · Reserva online · Respondemos en menos de 24h</p>
       </div>
     </div>
 
@@ -418,6 +424,12 @@ function showRes(){
   setTimeout(()=>SECS.forEach(s=>{const el=document.getElementById(`ab-${s.id}`);if(el)el.style.width=Math.round(secSc(s)/(s.qs.length*3)*100)+'%'}),400);
   $('res-accion').textContent=r.accion;
   $('res-tags').innerHTML=r.svcs.map(sv=>`<span class="tag">${sv}</span>`).join('');
+  const calendlyUrl=`https://calendly.com/cristhiam-silva-crsgrowth/30min?name=${encodeURIComponent(client.nombre||'')}&email=${encodeURIComponent(client.email||'')}`;
+  const whatsappMsg=`Hola, he completado el diagnóstico de ${client.empresa||'mi empresa'} y mi resultado ha sido ${r.nivel}. Quiero hablar antes de reservar.`;
+  const calendlyBtn=$('calendly-cta');
+  const whatsappBtn=$('whatsapp-cta');
+  if(calendlyBtn)calendlyBtn.href=calendlyUrl;
+  if(whatsappBtn)whatsappBtn.href=`https://wa.me/34697293677?text=${encodeURIComponent(whatsappMsg)}`;
   show('sc-res');sendData(sc,pct,r);
 }
 
