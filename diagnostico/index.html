@@ -1,1 +1,204 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Diagnóstico CRS</title><meta http-equiv="refresh" content="0;url=https://calendly.com/cristhiam-silva-crsgrowth/30min"><link rel="canonical" href="https://calendly.com/cristhiam-silva-crsgrowth/30min"></head><body><p>Redirigiendo a Calendly… <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min">Reservar diagnóstico</a></p></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Diagnóstico empresarial interactivo de madurez y estructura."/>
+  <meta property="og:title" content="Diagnóstico Empresarial — CRS Growth"/>
+  <meta property="og:description" content="Diagnóstico empresarial interactivo de madurez y estructura."/>
+  <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
+  <link rel="canonical" href="https://www.crsgrowth.com/diagnostico/"/>
+  <title>Diagnóstico Empresarial — CRS Growth</title>
+  <link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<header id="site-nav" class="site-nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="CRS Growth - Inicio">
+      <img src="logo.png" alt="CRS Growth" class="nav-logo-img">
+      <span class="nav-logo-text">CRS <span>Growth</span></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Menú principal">
+      <a href="/">Inicio</a>
+      <a href="/servicios/">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+      <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/" class="active">Diagnóstico</a>
+      <a href="/contacto/">Contacto</a>
+    </nav>
+
+    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Reservar llamada</a>
+
+    <button id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div id="nav-drawer" class="nav-drawer" aria-label="Menú móvil">
+    <div class="nav-drawer-links">
+      <a href="/">Inicio</a>
+      <a href="/servicios/">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+      <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/" class="active">Diagnóstico</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+    </div>
+  </div>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="chip"><span class="chip-dot"></span>Diagnóstico empresarial</div>
+    <h1 class="font-display">Evalúa el nivel de madurez de tu empresa.<br><em>En 3 minutos.</em></h1>
+    <p>Una versión integrada del diagnóstico para detectar si el problema principal está en ventas, procesos, equipo, gestión o estructura.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container" style="max-width:860px;">
+    <div class="diag-shell">
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+      <div class="diag-step active" data-step="0">
+        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Qué situación describe mejor tu empresa?</h2>
+        <button class="diag-option" data-score="1">Todo depende demasiado de mí.</button>
+        <button class="diag-option" data-score="2">Hay equipo, pero cada uno trabaja a su manera.</button>
+        <button class="diag-option" data-score="3">Tenemos procesos, pero falta control y seguimiento.</button>
+        <button class="diag-option" data-score="4">La empresa funciona, pero queremos escalar.</button>
+      </div>
+
+      <div class="diag-step" data-step="1">
+        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Cómo está tu sistema comercial?</h2>
+        <button class="diag-option" data-score="1">Vendemos de forma irregular.</button>
+        <button class="diag-option" data-score="2">Tenemos ventas, pero dependen de personas concretas.</button>
+        <button class="diag-option" data-score="3">Medimos algunas cosas, pero falta método.</button>
+        <button class="diag-option" data-score="4">Tenemos proceso comercial claro y medible.</button>
+      </div>
+
+      <div class="diag-step" data-step="2">
+        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Qué nivel de control tienes?</h2>
+        <button class="diag-option" data-score="1">Decidimos por intuición.</button>
+        <button class="diag-option" data-score="2">Tenemos datos, pero no siempre son útiles.</button>
+        <button class="diag-option" data-score="3">Hay indicadores, pero falta seguimiento.</button>
+        <button class="diag-option" data-score="4">Tenemos cuadro de mando y reuniones de control.</button>
+      </div>
+
+      <div class="diag-step" data-step="3">
+        <h2 class="font-display section-title" style="font-size:2.2rem;">Resultado</h2>
+        <p id="diagResult" class="lead" style="margin-top:1rem;"></p>
+        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener" class="btn-gold" style="margin-top:2rem;">Reservar llamada para revisar resultado</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const steps = Array.from(document.querySelectorAll('.diag-step'));
+  const bar = document.getElementById('progressBar');
+  const result = document.getElementById('diagResult');
+  let current = 0, score = 0;
+  function show(i){
+    steps.forEach(s=>s.classList.remove('active'));
+    steps[i].classList.add('active');
+    bar.style.width = Math.round((i)/(steps.length-1)*100) + '%';
+  }
+  document.querySelectorAll('.diag-option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      score += Number(btn.dataset.score || 0);
+      current++;
+      if(current >= 3){
+        let msg = score <= 5
+          ? 'Tu empresa necesita estructura urgente: ahora mismo el negocio depende demasiado de personas, intuición o esfuerzo manual.'
+          : score <= 8
+          ? 'Tu empresa está en fase de orden: ya hay base, pero faltan procesos, responsabilidades y control para escalar.'
+          : 'Tu empresa tiene buena base para escalar: el siguiente paso es profesionalizar indicadores, ventas y sistema de dirección.';
+        result.textContent = msg;
+      }
+      show(current);
+    });
+  });
+  show(0);
+})();
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="CRS Growth" class="footer-logo">
+        <p>Consultoría de alto rendimiento empresarial. Diseñamos sistemas internos, procesos y estructuras para que la empresa funcione sin depender de ti.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="/">Inicio</a>
+        <a href="/servicios/">Servicios</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a href="/realestate/">Real Estate</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/contacto/">Contacto</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/aviso-legal/">Aviso legal</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/cookies/">Cookies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Acción</h4>
+        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© CRS Growth · CRS Strategies S.L.</p>
+      <p>crsgrowth.com</p>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  const header = document.getElementById('site-nav');
+  const btn = document.getElementById('nav-hamburger');
+  const drawer = document.getElementById('nav-drawer');
+
+  function onScroll(){
+    if(!header) return;
+    window.scrollY > 24 ? header.classList.add('nav-scrolled') : header.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  if(btn && drawer){
+    btn.addEventListener('click', function(){
+      const open = drawer.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        drawer.classList.remove('open');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  const obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -48px 0px'});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+</body>
+</html>
