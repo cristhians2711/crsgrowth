@@ -1,146 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="6 servicios de consultoría empresarial a medida: ventas, protocolización, procesos, gestión, hostelería y estructura global.">
-<meta property="og:title" content="Servicios — CRS Consulting">
-<meta property="og:description" content="6 servicios de consultoría empresarial a medida: ventas, protocolización, procesos, gestión, hostelería y estructura global.">
-<meta property="og:image" content="https://www.crsgrowth.com/logo.png">
-<meta property="og:url" content="https://www.crsgrowth.com/servicios/">
-<link rel="canonical" href="https://www.crsgrowth.com/servicios/">
-<title>Servicios — CRS Consulting</title>
-<link rel="icon" type="image/png" href="../logo.png">
-<link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Servicios de consultoría empresarial: ventas, procesos, gestión y estructura."/>
+  <meta property="og:title" content="Servicios — CRS Growth"/>
+  <meta property="og:description" content="Servicios de consultoría empresarial: ventas, procesos, gestión y estructura."/>
+  <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
+  <link rel="canonical" href="https://www.crsgrowth.com/servicios/"/>
+  <title>Servicios — CRS Growth</title>
+  <link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body>
-
-<a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20CRS%20Consulting." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26C2.167 6.443 6.602 2.009 12.054 2.009c2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.463 3.488A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<div class="mob" id="mob">
-  <a href="/" onclick="closeMob()">Inicio</a>
-  <a href="/servicios/" class="active" onclick="closeMob()">Servicios</a>
-  <a href="/nosotros/" onclick="closeMob()">Nosotros</a>
-  <a href="/realestate/" onclick="closeMob()">Real Estate</a>
-  <a href="/contacto/" onclick="closeMob()">Contacto</a>
-</div>
-<nav class="site-nav" id="nav">
-  <div class="nav-in">
-    <a href="/" class="nav-logo">
-      <img src="../logo.png" alt="CRS Consulting">
-      <span class="nav-logo-t">CRS <span>Consulting</span></span>
+<header id="site-nav" class="site-nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="CRS Growth - Inicio">
+      <img src="logo.png" alt="CRS Growth" class="nav-logo-img">
+      <span class="nav-logo-text">CRS <span>Growth</span></span>
     </a>
-    <div class="nav-links">
+
+    <nav class="nav-links" aria-label="Menú principal">
       <a href="/">Inicio</a>
       <a href="/servicios/" class="active">Servicios</a>
       <a href="/nosotros/">Nosotros</a>
       <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/">Diagnóstico</a>
       <a href="/contacto/">Contacto</a>
-      <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Diagnóstico gratis</a>
-    </div>
-    <button class="burger" id="burger" onclick="toggleMob()" aria-label="Menú"><span></span><span></span><span></span></button>
+    </nav>
+
+    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Reservar llamada</a>
+
+    <button id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú" type="button">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
 
-
+  <div id="nav-drawer" class="nav-drawer" aria-label="Menú móvil">
+    <div class="nav-drawer-links">
+      <a href="/">Inicio</a>
+      <a href="/servicios/" class="active">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+      <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/">Diagnóstico</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+    </div>
+  </div>
+</header>
 <main>
-<section class="page-hero"><div class="wrap"><span class="label rv">Nuestros servicios</span><h1 class="hs rv d1">6 servicios.<br><em>Una empresa</em> que funciona.</h1><p class="rv d2">Cada servicio resuelve un problema concreto. Se contratan de forma individual o combinados.</p></div></section>
-<div class="ticker" aria-hidden="true"><div class="t-track">
-<div class="t-item"><span class="t-dot"></span>Ventas</div><div class="t-item"><span class="t-dot"></span>Procesos</div><div class="t-item"><span class="t-dot"></span>Control</div><div class="t-item"><span class="t-dot"></span>Gestión</div><div class="t-item"><span class="t-dot"></span>Real Estate</div><div class="t-item"><span class="t-dot"></span>CRS Growth</div>
-<div class="t-item"><span class="t-dot"></span>Ventas</div><div class="t-item"><span class="t-dot"></span>Procesos</div><div class="t-item"><span class="t-dot"></span>Control</div><div class="t-item"><span class="t-dot"></span>Gestión</div><div class="t-item"><span class="t-dot"></span>Real Estate</div><div class="t-item"><span class="t-dot"></span>CRS Growth</div>
-</div></div>
 
-<section class="service-block" id="servicio-1">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Comercial</span>
-      <div class="service-num">01</div>
-      <h2>Closer <em>de Ventas</em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Tu equipo tiene potencial comercial. Lo que le falta es método, seguimiento y cierre medible.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
-    </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Guión de ventas personalizado</li><li>Proceso de cierre por fases</li><li>Roleplay y formación comercial</li><li>KPIs y cuadro de mando</li></ul></div>
+<section class="page-hero">
+  <div class="container">
+    <div class="chip"><span class="chip-dot"></span>Servicios CRS</div>
+    <h1 class="font-display">6 servicios.<br><em>Una empresa que funciona.</em></h1>
+    <p>Diseñamos e implantamos sistemas comerciales, operativos y de gestión para que el negocio deje de depender de la improvisación.</p>
   </div>
 </section>
-<section class="service-block" id="servicio-2">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Operaciones</span>
-      <div class="service-num">02</div>
-      <h2>Protocolización <em></em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Convertimos la forma de trabajar en protocolos claros para reducir errores y dependencia.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
+<section class="section">
+  <div class="container">
+    <div class="premium-grid">
+      <div class="premium-card reveal"><div class="card-number">01</div><h3>Closer de Ventas</h3><p>Sistema comercial, guiones, cierre, seguimiento y métricas.</p></div><div class="premium-card reveal"><div class="card-number">02</div><h3>Protocolización</h3><p>Documentamos cómo se trabaja para reducir errores y dependencia.</p></div><div class="premium-card reveal"><div class="card-number">03</div><h3>Creación de Procesos</h3><p>Flujos claros con responsables, entradas, salidas y control.</p></div><div class="premium-card reveal"><div class="card-number">04</div><h3>Gestión Eficiente</h3><p>Rutinas de dirección, KPIs y cuadro de mando de seguimiento.</p></div><div class="premium-card reveal"><div class="card-number">05</div><h3>Hotelería Premium</h3><p>Control operativo y rentabilidad para negocios de hostelería.</p></div><div class="premium-card reveal"><div class="card-number">06</div><h3>Estructura Global</h3><p>Organigrama, roles y sistema operativo para escalar.</p></div>
     </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Manual operativo</li><li>Procesos paso a paso</li><li>Responsables y controles</li><li>Sistema de mejora continua</li></ul></div>
   </div>
 </section>
-<section class="service-block" id="servicio-3">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Gestión</span>
-      <div class="service-num">03</div>
-      <h2>Creación <em>de Procesos</em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Diseñamos procesos para que cada tarea tenga dueño, plazo, entrada, salida y control.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
-    </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Mapa de procesos</li><li>Flujos de trabajo</li><li>Plantillas y checklists</li><li>Implantación con equipo</li></ul></div>
+<section class="dark-cta">
+  <div class="container">
+    <h2 class="font-display">Primero orden.<br>Después crecimiento.</h2>
+    <p>La primera reunión nos sirve para detectar el cuello de botella real y decirte qué sistema necesita tu empresa.</p>
+    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener" class="btn-gold" style="margin-top:2rem;">Reservar diagnóstico</a>
   </div>
 </section>
-<section class="service-block" id="servicio-4">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Dirección</span>
-      <div class="service-num">04</div>
-      <h2>Gestión <em>Eficiente</em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Creamos rutinas de control para que la empresa se gestione con datos y no con sensaciones.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
-    </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Reuniones de gestión</li><li>Indicadores clave</li><li>Cuadro de mando</li><li>Seguimiento mensual</li></ul></div>
-  </div>
-</section>
-<section class="service-block" id="servicio-5">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Sectorial</span>
-      <div class="service-num">05</div>
-      <h2>Hostelería <em>Premium</em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Ordenamos negocios de hostelería con enfoque en rentabilidad, experiencia y equipo.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
-    </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Control de costes</li><li>Procesos de sala/cocina</li><li>Experiencia cliente</li><li>Gestión de turnos</li></ul></div>
-  </div>
-</section>
-<section class="service-block" id="servicio-6">
-  <div class="wrap service-grid">
-    <div class="rv">
-      <span class="label">Escalabilidad</span>
-      <div class="service-num">06</div>
-      <h2>Estructura <em>Global</em></h2>
-      <p class="muted" style="font-size:1.02rem;max-width:560px">Reestructuramos la empresa para que pueda crecer sin depender de una sola persona.</p>
-      <a href="/contacto/" class="btn btn-dark" style="margin-top:1.6rem">Preguntar por este servicio</a>
-    </div>
-    <div class="includes rv d1"><h4>Lo que incluye</h4><ul><li>Organigrama funcional</li><li>Roles y responsabilidades</li><li>Sistema de dirección</li><li>Plan de implantación</li></ul></div>
-  </div>
-</section>
+
 </main>
-
-
-<footer>
-  <div class="wrap">
-    <div class="foot-g">
-      <div class="foot-brand">
-        <img src="../logo.png" alt="CRS Consulting">
-        <p>Construimos el sistema operativo de tu negocio: ventas, procesos, gestión y control real para que la empresa funcione sin depender de ti.</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="CRS Growth" class="footer-logo">
+        <p>Consultoría de alto rendimiento empresarial. Diseñamos sistemas internos, procesos y estructuras para que la empresa funcione sin depender de ti.</p>
       </div>
-      <div class="foot-col"><h4>Web</h4><a href="/">Inicio</a><a href="/servicios/">Servicios</a><a href="/nosotros/">Nosotros</a><a href="/realestate/">Real Estate</a><a href="/contacto/">Contacto</a></div>
-      <div class="foot-col"><h4>Legal</h4><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a></div>
-      <div class="foot-col"><h4>Contacto</h4><a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar diagnóstico</a><a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20CRS%20Consulting." target="_blank" rel="noopener">WhatsApp</a></div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="/">Inicio</a>
+        <a href="/servicios/">Servicios</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a href="/realestate/">Real Estate</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/contacto/">Contacto</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/aviso-legal/">Aviso legal</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/cookies/">Cookies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Acción</h4>
+        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+      </div>
     </div>
-    <div class="foot-b"><span>© CRS Consulting · CRS Strategies S.L.</span><span>crsgrowth.com</span></div>
+    <div class="footer-bottom">
+      <p>© CRS Growth · CRS Strategies S.L.</p>
+      <p>crsgrowth.com</p>
+    </div>
   </div>
 </footer>
+<script>
+(function(){
+  const header = document.getElementById('site-nav');
+  const btn = document.getElementById('nav-hamburger');
+  const drawer = document.getElementById('nav-drawer');
 
-<script src="../main.js"></script>
+  function onScroll(){
+    if(!header) return;
+    window.scrollY > 24 ? header.classList.add('nav-scrolled') : header.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  if(btn && drawer){
+    btn.addEventListener('click', function(){
+      const open = drawer.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        drawer.classList.remove('open');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  const obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -48px 0px'});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body>
 </html>
