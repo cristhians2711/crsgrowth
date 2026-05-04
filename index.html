@@ -5,15 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="CRS Growth — Consultoría de Alto Rendimiento Empresarial. Diseñamos e implementamos los sistemas internos que hacen que tu negocio funcione sin depender de ti."/>
   <title>CRS Growth — Consultoría de Alto Rendimiento Empresarial</title>
-  <link rel="stylesheet" href="/css/styles.css"/>
-<link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+<link rel="icon" type="image/png" href="logo.png"/>
 <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
 <link rel="canonical" href="https://www.crsgrowth.com/"/>
 </head>
 <body>
 
   <!-- NAV (inyectado por main.js) -->
-  <div id="nav-placeholder"></div>
+  
+<header id="site-nav" class="site-nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="CRS Growth - Inicio">
+      <img src="logo.png" alt="CRS Growth" class="nav-logo-img">
+      <span class="nav-logo-text">CRS <span>Growth</span></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Menú principal">
+      <a href="/" class="active">Inicio</a>
+      <a href="/servicios/">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+      <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/">Diagnóstico</a>
+      <a href="/contacto/">Contacto</a>
+    </nav>
+
+    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Reservar llamada</a>
+
+    <button id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div id="nav-drawer" class="nav-drawer" aria-label="Menú móvil">
+    <div class="nav-drawer-links">
+      <a href="/">Inicio</a>
+      <a href="/servicios/">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+      <a href="/realestate/">Real Estate</a>
+      <a href="/diagnostico/">Diagnóstico</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+    </div>
+  </div>
+</header>
+
 
   <main class="page-main">
 
@@ -443,10 +479,67 @@
       </div>
     </section>
 
-  </main>
+  
+<section class="section" style="background:var(--cream-2);border-top:1px solid var(--rule-light);border-bottom:1px solid var(--rule-light);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:3rem;align-items:center;">
+      <div class="reveal-left">
+        <span class="chip"><span class="chip-dot"></span>Visual estratégico</span>
+        <h2 class="font-display" style="font-size:clamp(2rem,4vw,3.4rem);font-weight:300;color:var(--ink);margin-top:1.2rem;margin-bottom:1rem;line-height:1.08;">
+          Una empresa con sistema se ve diferente.
+        </h2>
+        <p style="color:var(--ink-muted);font-size:1rem;line-height:1.8;">
+          Procesos, equipo, ventas y control conectados en un mismo tablero de decisión.
+        </p>
+      </div>
+      <div class="reveal-right card-lift" style="padding:0;overflow:hidden;background:#fff;">
+        <img src="assets/hero-dashboard.svg" alt="Dashboard estratégico CRS Growth" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
   <!-- FOOTER (inyectado por main.js) -->
-  <div id="footer-placeholder"></div>
+  
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="CRS Growth" class="footer-logo">
+        <p>Consultoría de alto rendimiento empresarial. Diseñamos sistemas internos, procesos y estructuras para que la empresa funcione sin depender de ti.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="/">Inicio</a>
+        <a href="/servicios/">Servicios</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a href="/realestate/">Real Estate</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/contacto/">Contacto</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/aviso-legal/">Aviso legal</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/cookies/">Cookies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Acción</h4>
+        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© CRS Growth · CRS Strategies S.L.</p>
+      <p>crsgrowth.com</p>
+    </div>
+  </div>
+</footer>
+
 
   <!-- Responsive grid -->
   <style>
@@ -463,6 +556,47 @@
     }
   </style>
 
-  <script src="/js/main.js"></script>
+  
+
+<script>
+(function(){
+  const header = document.getElementById('site-nav');
+  const btn = document.getElementById('nav-hamburger');
+  const drawer = document.getElementById('nav-drawer');
+
+  function onScroll(){
+    if(!header) return;
+    window.scrollY > 24 ? header.classList.add('nav-scrolled') : header.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  if(btn && drawer){
+    btn.addEventListener('click', function(){
+      const open = drawer.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        drawer.classList.remove('open');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  const obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -48px 0px'});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
 </body>
 </html>
