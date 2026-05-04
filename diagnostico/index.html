@@ -424,7 +424,7 @@ function showRes(){
   setTimeout(()=>SECS.forEach(s=>{const el=document.getElementById(`ab-${s.id}`);if(el)el.style.width=Math.round(secSc(s)/(s.qs.length*3)*100)+'%'}),400);
   $('res-accion').textContent=r.accion;
   $('res-tags').innerHTML=r.svcs.map(sv=>`<span class="tag">${sv}</span>`).join('');
-  const calendlyUrl=`https://calendly.com/cristhiam-silva-crsgrowth/30min?name=${encodeURIComponent(client.nombre||'')}&email=${encodeURIComponent(client.email||'')}`;
+  const calendlyUrl=`https://calendly.com/cristhiam-silva-crsgrowth/30min'')}&email=${encodeURIComponent(client.email||'')}`;
   const whatsappMsg=`Hola, he completado el diagnóstico de ${client.empresa||'mi empresa'} y mi resultado ha sido ${r.nivel}. Quiero hablar antes de reservar.`;
   const calendlyBtn=$('calendly-cta');
   const whatsappBtn=$('whatsapp-cta');
