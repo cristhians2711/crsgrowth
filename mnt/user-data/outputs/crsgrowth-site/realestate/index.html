@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CRS Real Estate — Consultoría inmobiliaria estratégica. Inversión, venta, alquiler y gestión de activos con criterio financiero."/>
+  <title>Real Estate Estratégico — CRS Growth</title>
+  <link rel="stylesheet" href="/css/styles.css"/>
+  <style>
+    /* Page-specific additions */
+    .re-hero { background:var(--cream); padding:80px 0; position:relative; overflow:hidden; }
+    .re-hero::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:0.35; }
+    .re-hero::after { content:''; position:absolute; top:-80px; right:-100px; width:540px; height:540px; border-radius:50%; background:radial-gradient(circle,rgba(184,134,11,0.06) 0%,transparent 65%); pointer-events:none; }
+    .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:rgba(250,248,244,0.04); }
+    .service-card { background:#201E1B; padding:2.25rem 2rem; position:relative; overflow:hidden; transition:background 0.25s; }
+    .service-card:hover { background:#272420; }
+    .service-card::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--gold); transition:width 0.35s ease; }
+    .service-card:hover::after { width:100%; }
+    .diff-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5px; }
+    .diff-col { padding:2.5rem 2.25rem; }
+    .diff-no { background:#181614; }
+    .diff-yes { background:rgba(184,134,11,0.07); border:1px solid rgba(184,134,11,0.18); }
+    .metric-card { background:rgba(237,233,224,0.03); border:1px solid rgba(237,233,224,0.07); padding:1.5rem 1.75rem; display:flex; align-items:center; gap:1.5rem; transition:background 0.2s; }
+    .metric-card:hover { background:rgba(237,233,224,0.055); }
+    @media (max-width:900px) {
+      .re-layout { grid-template-columns:1fr !important; }
+      .service-grid { grid-template-columns:1fr 1fr !important; }
+      .diff-grid { grid-template-columns:1fr !important; }
+      .cred-grid { grid-template-columns:1fr !important; }
+      .process-grid { grid-template-columns:1fr 1fr !important; }
+    }
+    @media (max-width:580px) {
+      .service-grid { grid-template-columns:1fr !important; }
+      .audience-grid { grid-template-columns:1fr !important; }
+      .metrics-row { grid-template-columns:1fr 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main class="page-main">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-strip">
+      <div class="container">
+        <a href="/">CRS Growth</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">Real Estate Estratégico</span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="re-hero">
+      <div class="container" style="position:relative;z-index:2;">
+        <div class="re-layout" style="display:grid;grid-template-columns:1fr 400px;gap:5rem;align-items:center;padding:2rem 0;">
+
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.65rem;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem;animation:fadeUp 0.6s both 0.05s;">
+              <span style="width:22px;height:1px;background:var(--gold);display:block;"></span>
+              Línea inmobiliaria de CRS Growth
+            </div>
+            <h1 class="font-display" style="font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:1.4rem;animation:fadeUp 0.6s both 0.15s;">
+              Su patrimonio inmobiliario,<br>
+              <span class="text-gold-gradient" style="font-style:italic;">gestionado con criterio financiero</span>
+            </h1>
+            <p style="font-size:1rem;color:var(--ink-soft);max-width:520px;line-height:1.8;margin-bottom:2.25rem;font-weight:300;animation:fadeUp 0.6s both 0.25s;">
+              En CRS no vendemos propiedades. Diseñamos decisiones. Combinamos análisis de mercado, estrategia de negocio y gestión operativa para que cada activo trabaje a su favor.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.85rem;animation:fadeUp 0.6s both 0.32s;">
+              <a href="https://calendly.com/cristhiam-silva/diagnostico" target="_blank" rel="noopener" class="btn-gold">Diagnóstico gratuito <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="#re-servicios" class="btn-outline">Ver servicios</a>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--rule-light);animation:fadeUp 0.6s both 0.42s;">
+              <div><div class="font-display" style="font-size:2rem;font-weight:300;color:var(--gold);">+12%</div><div style="font-size:0.71rem;color:var(--ink-muted);margin-top:0.3rem;max-width:110px;">ROI medio cartera gestionada</div></div>
+              <div><div class="font-display" style="font-size:2rem;font-weight:300;color:var(--gold);">0%</div><div style="font-size:0.71rem;color:var(--ink-muted);margin-top:0.3rem;max-width:110px;">Morosidad bajo protocolo CRS</div></div>
+              <div><div class="font-display" style="font-size:2rem;font-weight:300;color:var(--gold);">12d</div><div style="font-size:0.71rem;color:var(--ink-muted);margin-top:0.3rem;max-width:110px;">Tiempo medio hasta firma</div></div>
+              <div><div class="font-display" style="font-size:2rem;font-weight:300;color:var(--gold);">98%</div><div style="font-size:0.71rem;color:var(--ink-muted);margin-top:0.3rem;max-width:110px;">Tasa de cierre en ventas</div></div>
+            </div>
+          </div>
+
+          <div style="background:var(--ink);padding:2.5rem 2.25rem;position:relative;animation:fadeUp 0.6s both 0.2s;">
+            <div style="position:absolute;inset:0;border:1px solid rgba(184,134,11,0.25);pointer-events:none;"></div>
+            <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Posicionamiento CRS</div>
+            <div class="font-display" style="font-size:1.3rem;font-weight:300;font-style:italic;color:var(--on-dark-hi);line-height:1.55;margin-bottom:1.75rem;">"Un activo inmobiliario mal gestionado no es una inversión. Es un pasivo con fachada de ladrillo."</div>
+            <div style="width:32px;height:1px;background:var(--gold);margin-bottom:1.25rem;"></div>
+            <p style="font-size:0.83rem;color:var(--on-dark-md);line-height:1.78;">Cada operación pasa por protocolo de auditoría técnica, análisis de rentabilidad y planificación de salida.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="re-servicios" class="section" style="background:var(--ink);">
+      <div class="container">
+        <div style="max-width:560px;margin-bottom:3rem;" class="reveal">
+          <div class="chip" style="margin-bottom:1.25rem;"><span class="chip-dot"></span>Servicios inmobiliarios</div>
+          <h2 class="font-display" style="font-size:clamp(1.85rem,3vw,2.6rem);font-weight:300;color:var(--on-dark-hi);margin-bottom:0.75rem;">Servicios estructurados,<br><span style="font-style:italic;color:var(--gold);">resultados medibles</span></h2>
+          <p style="color:var(--on-dark-md);font-size:0.92rem;line-height:1.8;">Proceso definido, entregables claros y métricas de resultado en cada servicio.</p>
+        </div>
+        <div class="service-grid stagger">
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">01</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Inversión Inmobiliaria Guiada</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">Activos con potencial real: análisis de mercado, auditoría documental y proyección de rentabilidad antes de comprometer su capital.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Compra · Fix &amp; Flip · Lujo estacional</span></div>
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">02</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Gestión de Alquiler Garantizado</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">Ciclo completo: renta óptima, filtro de solvencia técnico, contrato de alta protección e inventario digital. Usted cobra, nosotros gestionamos.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Largo plazo · Cero estrés operativo</span></div>
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">03</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Venta Estratégica de Propiedades</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">Auditoría técnica, marketing de élite y filtro de compradores con capacidad financiera verificada. Honorarios solo al éxito.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Honorarios de éxito · 3%–5%</span></div>
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">04</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Análisis de Rentabilidad Patrimonial</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">ROI real, coste de oportunidad, fiscalidad, escenarios de salida y comparativa entre vehículos de inversión.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Informe técnico · Sesión estratégica</span></div>
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">05</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Gestión de Activos Inmobiliarios</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">Gestión centralizada, reporting periódico de rendimiento, control de incidencias y optimización continua de la cartera.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Cartera completa · Dashboard</span></div>
+          <div class="service-card reveal"><div style="font-family:'Fraunces',serif;font-size:2.4rem;font-weight:300;color:rgba(184,134,11,0.12);line-height:1;margin-bottom:1.25rem;">06</div><h3 class="font-display" style="font-size:1.2rem;font-weight:500;color:var(--on-dark-hi);margin-bottom:0.65rem;">Estructuración para Inversores</h3><p style="font-size:0.84rem;color:var(--on-dark-md);line-height:1.78;">Estrategia de inversión completa: vehículo óptimo, horizonte temporal, estructura jurídica y hoja de ruta a 12–36 meses.</p><span style="display:inline-block;margin-top:1.25rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,134,11,0.3);padding:0.25rem 0.65rem;">Perfil de inversión · Hoja de ruta</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAL -->
+    <section class="section" style="background:#232018;">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+          <div class="chip" style="margin-bottom:1.25rem;display:inline-flex;"><span class="chip-dot"></span>Por qué CRS es diferente</div>
+          <h2 class="font-display" style="font-size:clamp(1.85rem,3vw,2.6rem);font-weight:300;color:var(--on-dark-hi);margin-bottom:0.75rem;">No somos una inmobiliaria.<br><span style="font-style:italic;color:var(--gold);">Somos su advisor de patrimonio.</span></h2>
+        </div>
+        <div class="diff-grid">
+          <div class="diff-col diff-no">
+            <div style="font-size:0.67rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--on-dark-lo);margin-bottom:1.75rem;padding-bottom:1rem;border-bottom:1px solid rgba(237,233,224,0.07);">Intermediación tradicional</div>
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(237,233,224,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span style="font-size:0.86rem;color:var(--on-dark-lo);line-height:1.6;">Valoración por intuición o comparables básicos</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(237,233,224,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span style="font-size:0.86rem;color:var(--on-dark-lo);line-height:1.6;">Fotografías básicas, anuncio estándar en portales</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(237,233,224,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span style="font-size:0.86rem;color:var(--on-dark-lo);line-height:1.6;">Visitas sin filtro de solvencia previa</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(237,233,224,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span style="font-size:0.86rem;color:var(--on-dark-lo);line-height:1.6;">El servicio termina al cobrar la comisión</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(237,233,224,0.18)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span style="font-size:0.86rem;color:var(--on-dark-lo);line-height:1.6;">Sin análisis de rentabilidad ni estrategia de salida</span></div>
+            </div>
+          </div>
+          <div class="diff-col diff-yes">
+            <div style="font-size:0.67rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem;padding-bottom:1rem;border-bottom:1px solid rgba(237,233,224,0.07);">CRS Real Estate</div>
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:0.86rem;color:var(--on-dark-md);line-height:1.6;">Valoración técnica con análisis comparativo de mercado real</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:0.86rem;color:var(--on-dark-md);line-height:1.6;">Marketing de élite: fotografía profesional, 360°, home staging y difusión omnicanal</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:0.86rem;color:var(--on-dark-md);line-height:1.6;">Filtro de solvencia técnico: nóminas, morosidad y estabilidad laboral verificados</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:0.86rem;color:var(--on-dark-md);line-height:1.6;">Gestión post-firma: suministros, incidencias y mediación incluidos</span></div>
+              <div style="display:flex;gap:0.85rem;"><svg style="flex-shrink:0;margin-top:2px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:0.86rem;color:var(--on-dark-md);line-height:1.6;">Proyección de ROI, estrategia de cartera y reporting continuo</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background:var(--gold);text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(28,26,23,0.03) 40px,rgba(28,26,23,0.03) 41px);pointer-events:none;"></div>
+      <div class="container" style="position:relative;">
+        <div class="chip" style="margin-bottom:1.25rem;display:inline-flex;background:rgba(28,26,23,0.08);border-color:rgba(28,26,23,0.15);color:rgba(28,26,23,0.65);"><span style="width:5px;height:5px;border-radius:50%;background:var(--ink);opacity:0.4;flex-shrink:0;"></span>Sin compromiso</div>
+        <h2 class="font-display reveal" style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:1rem;">Hablemos de su patrimonio</h2>
+        <p class="reveal" style="color:rgba(28,26,23,0.65);font-size:0.97rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75;">Sesión diagnóstica gratuita de 45 minutos para analizar su situación, identificar oportunidades y definir el siguiente paso.</p>
+        <div class="reveal" style="display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;">
+          <a href="https://calendly.com/cristhiam-silva/diagnostico" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.45rem;padding:0.9rem 2rem;background:var(--ink);color:var(--cream);font-size:0.82rem;font-weight:600;letter-spacing:0.03em;border-radius:3px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#2a2722'" onmouseout="this.style.background='var(--ink)'">
+            Reservar diagnóstico gratuito
+          </a>
+          <a href="https://wa.me/34697293677?text=Hola%20Cristhiam%2C%20me%20interesa%20el%20servicio%20de%20Real%20Estate%20de%20CRS%20Growth." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:#25D366;color:#fff;font-size:0.82rem;font-weight:600;letter-spacing:0.03em;border-radius:3px;text-decoration:none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52zM12 22a9.93 9.93 0 0 1-5.06-1.38l-.36-.22-3.77.99 1-3.66-.23-.37A9.93 9.93 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm5.47-7.3c-.3-.15-1.77-.87-2.04-.97s-.47-.15-.67.15-.77.97-.95 1.17-.35.22-.65.07a8.14 8.14 0 0 1-2.38-1.47 8.94 8.94 0 0 1-1.65-2.06c-.17-.3-.02-.46.13-.61s.3-.35.45-.52a2 2 0 0 0 .3-.5.55.55 0 0 0-.02-.52c-.07-.15-.67-1.62-.92-2.22s-.49-.5-.67-.51h-.57a1.1 1.1 0 0 0-.8.37 3.36 3.36 0 0 0-1.05 2.5 5.83 5.83 0 0 0 1.22 3.1c.15.2 2.1 3.2 5.08 4.49a17.18 17.18 0 0 0 1.7.63 4.1 4.1 0 0 0 1.87.12c.57-.09 1.77-.72 2.02-1.42s.25-1.3.17-1.42-.27-.2-.57-.35z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/main.js"></script>
+</body>
+</html>
