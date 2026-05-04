@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.crsgrowth.com/</loc></url>
-  <url><loc>https://www.crsgrowth.com/servicios.html</loc></url>
-  <url><loc>https://www.crsgrowth.com/nosotros.html</loc></url>
+  <url><loc>https://www.crsgrowth.com/servicios/</loc></url>
+  <url><loc>https://www.crsgrowth.com/nosotros/</loc></url>
   <url><loc>https://www.crsgrowth.com/realestate/</loc></url>
-  <url><loc>https://www.crsgrowth.com/contacto.html</loc></url>
-  <url><loc>https://www.crsgrowth.com/diagnostico/</loc></url>
-  <url><loc>https://www.crsgrowth.com/aviso-legal.html</loc></url>
-  <url><loc>https://www.crsgrowth.com/privacidad.html</loc></url>
-  <url><loc>https://www.crsgrowth.com/cookies.html</loc></url>
+  <url><loc>https://www.crsgrowth.com/contacto/</loc></url>
+  <url><loc>https://www.crsgrowth.com/aviso-legal/</loc></url>
+  <url><loc>https://www.crsgrowth.com/privacidad/</loc></url>
+  <url><loc>https://www.crsgrowth.com/cookies/</loc></url>
 </urlset>
