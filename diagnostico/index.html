@@ -245,7 +245,7 @@ function showResult(){
 
   // Email send option
   html+='<div id="send-wrap" style="margin-top:1.5rem;text-align:center;">';
-  html+='<button class="btn-outline" style="font-size:.8rem;" onclick="sendResult('+total+','+max+','+pct+',''+lv.lv.replace(/'/g,"\'")+'')">';
+  html+='<button class="btn-outline" style="font-size:.8rem;" onclick="sendResult('+total+','+max+','+pct+',''+lv.lv.(/'/g,"\'")+'')">';
   html+='📧 Recibir mi resultado completo por email</button></div>';
   html+='</div>';
 
@@ -259,7 +259,7 @@ function showResult(){
 function sendBackend(total,max,pct,lv){
   var det=D.qs.map(function(q,i){return {area:q.area,pregunta:q.q,puntos:D.answers[i]||0};});
   var payload={nombre:D.nombre,empresa:D.empresa,email:D.email,puntuacion:total,maximo:max,porcentaje:pct,nivel:lv.lv,titulo:lv.title,accion:lv.action,servicios:lv.svcs.join(', '),detalle:JSON.stringify(det),timestamp:new Date().toISOString()};
-  fetch('https://script.google.com/macros/s/AKfycbzExample_REPLACE_WITH_REAL_URL/exec',{method:'POST',body:JSON.stringify(payload),headers:{'Content-Type':'application/json'},mode:'no-cors'}).catch(function(){});
+  fetch('https://script.google.com/macros/s/AKfycbyTmKWPmyt2TcVCywt5iu6deAcar1rGj_35CZcx0cgmGnqMYuRC0o0baaMpymYQ5tY/exec',{method:'POST',body:JSON.stringify(payload),headers:{'Content-Type':'application/json'},mode:'no-cors'}).catch(function(){});
 }
 
 function sendResult(total,max,pct,nivel){
