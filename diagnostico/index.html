@@ -802,6 +802,10 @@ window.sendEmail = function(total, max, pct){
   var btn = document.querySelector('.send-email-btn');
   if(btn){ btn.textContent = 'Enviando...'; btn.disabled = true; }
 
+  // ← LÍNEA AÑADIDA: ahora sí envía los datos al backend
+  var lv = getLevel(total);
+  sendToBackend(total, max, pct, lv);
+
   setTimeout(function(){
     var wrap = document.getElementById('send-wrap');
     if(wrap){
