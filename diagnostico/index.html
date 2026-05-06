@@ -3,23 +3,390 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Diagnóstico empresarial interactivo de madurez y estructura."/>
-  <meta property="og:title" content="Diagnóstico Empresarial — CRS Growth"/>
-  <meta property="og:description" content="Diagnóstico empresarial interactivo de madurez y estructura."/>
+  <meta name="description" content="Diagnóstico empresarial gratuito. 6 preguntas clave. Resultado inmediato con análisis por área y recomendaciones personalizadas."/>
+  <meta property="og:title" content="Diagnóstico Empresarial Gratuito — CRS Growth"/>
+  <meta property="og:description" content="Descubre en 3 minutos en qué estado está tu empresa y qué necesitas para escalar."/>
   <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
   <link rel="canonical" href="https://www.crsgrowth.com/diagnostico/"/>
   <title>Diagnóstico Empresarial — CRS Growth</title>
   <link rel="icon" type="image/png" href="/logo.png"/>
   <link rel="stylesheet" href="/css/styles.css"/>
+  <style>
+    /* ── DIAGNÓSTICO EXTRA STYLES ── */
+    .diag-shell {
+      background: #fff;
+      border: 1px solid rgba(28,26,23,.08);
+      box-shadow: 0 14px 44px rgba(19,17,14,.08);
+      padding: 2.5rem;
+      border-radius: 4px;
+    }
+    .diag-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+    }
+    .diag-progress-label {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      letter-spacing: .06em;
+    }
+    .diag-progress-label span { color: var(--gold); }
+    .progress-track {
+      height: 5px;
+      background: var(--cream-3);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      border-radius: 3px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      transition: width .4s cubic-bezier(.16,1,.3,1);
+      border-radius: 3px;
+    }
+    .diag-step { display: none; animation: fadeUp .35s both; }
+    .diag-step.active { display: block; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    .diag-area-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(184,134,11,.08);
+      border: 1px solid rgba(184,134,11,.22);
+      border-radius: 100px;
+      padding: .28rem .85rem;
+      margin-bottom: 1.25rem;
+    }
+    .diag-area-chip::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .diag-question {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 2rem;
+      letter-spacing: -.02em;
+    }
+    .diag-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      text-align: left;
+      background: var(--cream);
+      border: 1px solid rgba(28,26,23,.09);
+      padding: 1rem 1.25rem;
+      margin: .6rem 0;
+      color: var(--ink-soft);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .92rem;
+      line-height: 1.5;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all .2s cubic-bezier(.16,1,.3,1);
+    }
+    .diag-option::before {
+      content: '';
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(28,26,23,.2);
+      flex-shrink: 0;
+      transition: all .2s;
+    }
+    .diag-option:hover {
+      border-color: var(--gold);
+      background: rgba(184,134,11,.05);
+      transform: translateX(4px);
+      color: var(--ink);
+    }
+    .diag-option:hover::before { border-color: var(--gold); background: rgba(184,134,11,.2); }
+
+    /* ── EMAIL GATE ── */
+    .diag-gate-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: .75rem;
+      letter-spacing: -.02em;
+    }
+    .diag-gate-sub {
+      font-size: .95rem;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+    .diag-field { margin-bottom: 1rem; }
+    .diag-label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: .4rem;
+    }
+    .diag-input {
+      width: 100%;
+      padding: .8rem 1rem;
+      border: 1px solid rgba(28,26,23,.15);
+      border-radius: 4px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .92rem;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .diag-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184,134,11,.1);
+    }
+    .diag-input::placeholder { color: rgba(19,17,14,.3); }
+    .diag-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media(max-width:580px){ .diag-grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── RESULT ── */
+    .result-level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .4rem 1rem;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+    .result-level-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .result-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -.02em;
+    }
+    .result-score-card {
+      background: var(--cream);
+      border: 1px solid rgba(28,26,23,.08);
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+    .result-score-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+    .result-score-label { font-size: .75rem; font-weight: 600; color: var(--ink-muted); }
+    .result-score-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .result-bar-track {
+      height: 7px;
+      background: rgba(28,26,23,.07);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: .5rem;
+    }
+    .result-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      transition: width 1.2s cubic-bezier(.16,1,.3,1);
+    }
+    .result-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: .68rem;
+      color: var(--ink-muted);
+    }
+    .result-desc {
+      font-size: .97rem;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin-bottom: 1.75rem;
+    }
+    .result-areas-title {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    .result-area-row { margin-bottom: .85rem; }
+    .result-area-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: .82rem;
+      margin-bottom: .35rem;
+    }
+    .result-area-name { font-weight: 600; color: var(--ink); }
+    .result-area-mini {
+      height: 5px;
+      background: rgba(28,26,23,.07);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .result-area-mini-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s cubic-bezier(.16,1,.3,1);
+    }
+    .result-services-box {
+      background: rgba(184,134,11,.06);
+      border: 1px solid rgba(184,134,11,.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .result-services-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .65rem;
+    }
+    .result-services-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .85rem; }
+    .result-service-tag {
+      font-size: .76rem;
+      font-weight: 600;
+      padding: .3rem .85rem;
+      background: rgba(184,134,11,.09);
+      border: 1px solid rgba(184,134,11,.22);
+      border-radius: 100px;
+      color: var(--gold);
+    }
+    .result-action { font-size: .87rem; color: var(--ink-muted); line-height: 1.72; }
+
+    .result-cta-box {
+      background: var(--ink);
+      border-radius: 8px;
+      padding: 2.25rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .result-cta-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--on-dark-hi);
+      margin-bottom: .65rem;
+      letter-spacing: -.02em;
+    }
+    .result-cta-sub {
+      font-size: .88rem;
+      color: var(--on-dark-md);
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .result-cta-buttons { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .85rem 2rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,134,11,.3); }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 2rem;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-wa:hover { background: #1fbe5a; }
+
+    .send-email-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: .8rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      background: none;
+      border: 1px solid rgba(28,26,23,.15);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .send-email-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .send-success {
+      text-align: center;
+      padding: .9rem;
+      background: rgba(39,174,96,.08);
+      border: 1px solid rgba(39,174,96,.25);
+      border-radius: 6px;
+      color: #27ae60;
+      font-size: .88rem;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── NAV ── -->
 <header id="site-nav" class="site-nav" role="navigation" aria-label="Navegación principal">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="CRS Growth - Inicio">
-      <img src="logo.png" alt="CRS Growth" class="nav-logo-img">
+      <img src="/logo.png" alt="CRS Growth" class="nav-logo-img">
       <span class="nav-logo-text">CRS <span>Growth</span></span>
     </a>
-
     <nav class="nav-links" aria-label="Menú principal">
       <a href="/">Inicio</a>
       <a href="/servicios/">Servicios</a>
@@ -28,14 +395,11 @@
       <a href="/diagnostico/" class="active">Diagnóstico</a>
       <a href="/contacto/">Contacto</a>
     </nav>
-
     <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Reservar llamada</a>
-
     <button id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú" type="button">
       <span></span><span></span><span></span>
     </button>
   </div>
-
   <div id="nav-drawer" class="nav-drawer" aria-label="Menú móvil">
     <div class="nav-drawer-links">
       <a href="/">Inicio</a>
@@ -48,91 +412,80 @@
     </div>
   </div>
 </header>
+
 <main>
 
+<!-- ── HERO ── -->
 <section class="page-hero">
   <div class="container">
-    <div class="chip"><span class="chip-dot"></span>Diagnóstico empresarial</div>
-    <h1 class="font-display">Evalúa el nivel de madurez de tu empresa.<br><em>En 3 minutos.</em></h1>
-    <p>Una versión integrada del diagnóstico para detectar si el problema principal está en ventas, procesos, equipo, gestión o estructura.</p>
+    <div class="chip"><span class="chip-dot"></span>Diagnóstico empresarial gratuito</div>
+    <h1 class="font-display">Descubre en qué estado<br>está <em>tu empresa</em> ahora mismo.</h1>
+    <p>6 preguntas. 3 minutos. Resultado inmediato con desglose por área y recomendaciones específicas para tu situación.</p>
   </div>
 </section>
-<section class="section">
-  <div class="container" style="max-width:860px;">
+
+<!-- ── QUIZ ── -->
+<section class="section" style="background:var(--cream-2);">
+  <div class="container" style="max-width:780px;">
     <div class="diag-shell">
-      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 
-      <div class="diag-step active" data-step="0">
-        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Qué situación describe mejor tu empresa?</h2>
-        <button class="diag-option" data-score="1">Todo depende demasiado de mí.</button>
-        <button class="diag-option" data-score="2">Hay equipo, pero cada uno trabaja a su manera.</button>
-        <button class="diag-option" data-score="3">Tenemos procesos, pero falta control y seguimiento.</button>
-        <button class="diag-option" data-score="4">La empresa funciona, pero queremos escalar.</button>
+      <!-- Progress -->
+      <div class="diag-header" id="diag-progress-header" style="display:none;">
+        <span class="diag-progress-label" id="diag-step-label">Pregunta <span>1</span> de 6</span>
+        <span class="diag-progress-label" id="diag-pct-label"><span>0</span>% completado</span>
+      </div>
+      <div class="progress-track" id="progress-track" style="display:none;">
+        <div class="progress-bar" id="progressBar"></div>
       </div>
 
-      <div class="diag-step" data-step="1">
-        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Cómo está tu sistema comercial?</h2>
-        <button class="diag-option" data-score="1">Vendemos de forma irregular.</button>
-        <button class="diag-option" data-score="2">Tenemos ventas, pero dependen de personas concretas.</button>
-        <button class="diag-option" data-score="3">Medimos algunas cosas, pero falta método.</button>
-        <button class="diag-option" data-score="4">Tenemos proceso comercial claro y medible.</button>
+      <!-- STEP 0: EMAIL GATE -->
+      <div class="diag-step active" id="step-gate">
+        <div class="diag-area-chip">Antes de empezar</div>
+        <h2 class="diag-gate-title">¿A dónde enviamos<br>tu resultado?</h2>
+        <p class="diag-gate-sub">Al finalizar recibirás un análisis detallado de tu empresa con recomendaciones específicas. Sin spam.</p>
+        <div class="diag-grid-2">
+          <div class="diag-field">
+            <label class="diag-label">Nombre *</label>
+            <input id="d-nombre" class="diag-input" type="text" placeholder="Tu nombre" autocomplete="given-name">
+          </div>
+          <div class="diag-field">
+            <label class="diag-label">Empresa</label>
+            <input id="d-empresa" class="diag-input" type="text" placeholder="Nombre de tu empresa" autocomplete="organization">
+          </div>
+        </div>
+        <div class="diag-field" style="margin-bottom:1.75rem;">
+          <label class="diag-label">Email *</label>
+          <input id="d-email" class="diag-input" type="email" placeholder="tu@email.com" autocomplete="email">
+        </div>
+        <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;">
+          <button class="btn-gold" onclick="startDiag()">
+            Comenzar diagnóstico
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p style="font-size:.72rem;color:var(--ink-muted);">Sin compromiso. Solo tu resultado.</p>
+        </div>
       </div>
 
-      <div class="diag-step" data-step="2">
-        <h2 class="font-display section-title" style="font-size:2.2rem;">¿Qué nivel de control tienes?</h2>
-        <button class="diag-option" data-score="1">Decidimos por intuición.</button>
-        <button class="diag-option" data-score="2">Tenemos datos, pero no siempre son útiles.</button>
-        <button class="diag-option" data-score="3">Hay indicadores, pero falta seguimiento.</button>
-        <button class="diag-option" data-score="4">Tenemos cuadro de mando y reuniones de control.</button>
-      </div>
+      <!-- STEPS 1-6: QUESTIONS (rendered by JS) -->
+      <div id="step-quiz" class="diag-step"></div>
 
-      <div class="diag-step" data-step="3">
-        <h2 class="font-display section-title" style="font-size:2.2rem;">Resultado</h2>
-        <p id="diagResult" class="lead" style="margin-top:1rem;"></p>
-        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener" class="btn-gold" style="margin-top:2rem;">Reservar llamada para revisar resultado</a>
-      </div>
+      <!-- STEP RESULT -->
+      <div id="step-result" class="diag-step"></div>
+
     </div>
   </div>
 </section>
-<script>
-(function(){
-  const steps = Array.from(document.querySelectorAll('.diag-step'));
-  const bar = document.getElementById('progressBar');
-  const result = document.getElementById('diagResult');
-  let current = 0, score = 0;
-  function show(i){
-    steps.forEach(s=>s.classList.remove('active'));
-    steps[i].classList.add('active');
-    bar.style.width = Math.round((i)/(steps.length-1)*100) + '%';
-  }
-  document.querySelectorAll('.diag-option').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      score += Number(btn.dataset.score || 0);
-      current++;
-      if(current >= 3){
-        let msg = score <= 5
-          ? 'Tu empresa necesita estructura urgente: ahora mismo el negocio depende demasiado de personas, intuición o esfuerzo manual.'
-          : score <= 8
-          ? 'Tu empresa está en fase de orden: ya hay base, pero faltan procesos, responsabilidades y control para escalar.'
-          : 'Tu empresa tiene buena base para escalar: el siguiente paso es profesionalizar indicadores, ventas y sistema de dirección.';
-        result.textContent = msg;
-      }
-      show(current);
-    });
-  });
-  show(0);
-})();
-</script>
 
 </main>
+
+<!-- ── FOOTER ── -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="logo.png" alt="CRS Growth" class="footer-logo">
+        <img src="/logo.png" alt="CRS Growth" class="footer-logo">
         <p>Consultoría de alto rendimiento empresarial. Diseñamos sistemas internos, procesos y estructuras para que la empresa funcione sin depender de ti.</p>
       </div>
-
       <div class="footer-col">
         <h4>Navegación</h4>
         <a href="/">Inicio</a>
@@ -142,14 +495,12 @@
         <a href="/diagnostico/">Diagnóstico</a>
         <a href="/contacto/">Contacto</a>
       </div>
-
       <div class="footer-col">
         <h4>Legal</h4>
         <a href="/aviso-legal/">Aviso legal</a>
         <a href="/privacidad/">Privacidad</a>
         <a href="/cookies/">Cookies</a>
       </div>
-
       <div class="footer-col">
         <h4>Acción</h4>
         <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
@@ -161,44 +512,307 @@
     </div>
   </div>
 </footer>
+
+<!-- ── NAV JS ── -->
 <script>
 (function(){
-  const header = document.getElementById('site-nav');
-  const btn = document.getElementById('nav-hamburger');
-  const drawer = document.getElementById('nav-drawer');
-
-  function onScroll(){
-    if(!header) return;
-    window.scrollY > 24 ? header.classList.add('nav-scrolled') : header.classList.remove('nav-scrolled');
+  var header=document.getElementById('site-nav');
+  var btn=document.getElementById('nav-hamburger');
+  var drawer=document.getElementById('nav-drawer');
+  function sc(){if(!header)return;window.scrollY>24?header.classList.add('nav-scrolled'):header.classList.remove('nav-scrolled');}
+  window.addEventListener('scroll',sc,{passive:true});sc();
+  if(btn&&drawer){
+    btn.addEventListener('click',function(){var o=drawer.classList.toggle('open');btn.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+    drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drawer.classList.remove('open');btn.classList.remove('open');document.body.style.overflow='';});});
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
-  if(btn && drawer){
-    btn.addEventListener('click', function(){
-      const open = drawer.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    drawer.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        drawer.classList.remove('open');
-        btn.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-  const obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  }, {threshold:.1, rootMargin:'0px 0px -48px 0px'});
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){ obs.observe(el); });
 })();
 </script>
+
+<!-- ── DIAGNOSTIC JS ── -->
+<script>
+(function(){
+
+var APPS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+var CALENDLY = 'https://calendly.com/cristhiam-silva-crsgrowth/30min';
+var WA_BASE  = 'https://wa.me/34697293677?text=';
+
+var USER = { nombre:'', empresa:'', email:'' };
+
+var QUESTIONS = [
+  { area:'Operaciones',
+    q:'¿Qué pasa si tú no estás disponible durante una semana?',
+    opts:[
+      {t:'La empresa para. Todo depende de mí.',                             p:1},
+      {t:'Funciona con dificultades. Hay muchas consultas sin resolver.',     p:2},
+      {t:'Funciona, pero algunos procesos quedan incompletos.',               p:3},
+      {t:'Funciona con normalidad. El equipo sabe exactamente qué hacer.',    p:4}
+    ]},
+  { area:'Ventas',
+    q:'¿Cómo son tus ventas actualmente?',
+    opts:[
+      {t:'Irregulares y sin sistema. Vendemos cuando podemos.',              p:1},
+      {t:'Dependemos de una o dos personas concretas para cerrar.',          p:2},
+      {t:'Tenemos proceso, pero no lo medimos ni seguimos correctamente.',   p:3},
+      {t:'Sistema comercial activo con métricas y seguimiento regular.',     p:4}
+    ]},
+  { area:'Procesos',
+    q:'¿Están documentados los procesos internos de tu empresa?',
+    opts:[
+      {t:'No. Cada uno trabaja como considera oportuno.',                    p:1},
+      {t:'Parcialmente. Solo los más críticos o urgentes.',                  p:2},
+      {t:'Bastante, pero no se usan con consistencia real.',                 p:3},
+      {t:'Sí. Manual operativo actualizado que el equipo conoce y usa.',     p:4}
+    ]},
+  { area:'Gestión',
+    q:'¿Cómo tomas las decisiones de negocio?',
+    opts:[
+      {t:'Por intuición. No tengo datos fiables o actualizados.',            p:1},
+      {t:'Tengo algunos datos, pero no los analizo con regularidad.',        p:2},
+      {t:'Reviso indicadores, aunque podría hacerlo mejor.',                 p:3},
+      {t:'Cuadro de mando actualizado y reuniones de control periódicas.',   p:4}
+    ]},
+  { area:'Equipo',
+    q:'¿Cómo gestionas a tu equipo?',
+    opts:[
+      {t:'No hay estructura clara. Yo resuelvo casi todo.',                  p:1},
+      {t:'Hay roles asignados, pero sin responsabilidades bien definidas.',  p:2},
+      {t:'Roles definidos, pero falta seguimiento y evaluación real.',       p:3},
+      {t:'Equipo autónomo con roles, metas y revisiones periódicas.',        p:4}
+    ]},
+  { area:'Escalabilidad',
+    q:'¿Podría tu empresa duplicar clientes sin colapsar?',
+    opts:[
+      {t:'No. Colapsaría inmediatamente.',                                   p:1},
+      {t:'Podría intentarlo, pero sería un caos operativo.',                 p:2},
+      {t:'Tal vez. Necesitaríamos reforzar varias áreas primero.',           p:3},
+      {t:'Sí. Tenemos capacidad operativa y comercial para escalar.',        p:4}
+    ]}
+];
+
+var LEVELS = [
+  { min:0,  max:10, lv:'Estructura Urgente', color:'#e74c3c',
+    title:'Tu empresa necesita cimientos antes de crecer',
+    desc:'El negocio depende demasiado de ti y de la improvisación. Cada semana sin estructura es un freno real al crecimiento y un riesgo innecesario.',
+    action:'El primer paso es un diagnóstico profundo y un plan de estructuración urgente.',
+    svcs:['Arquitectura Operativa','Motor de Procesos','CRS Blueprint'] },
+  { min:11, max:15, lv:'Ordenar para Crecer', color:'#f39c12',
+    title:'Tienes base, pero necesitas orden y control',
+    desc:'Ya existe algo construido, pero la empresa depende de personas clave y carece de sistemas replicables. El crecimiento está bloqueado por falta de estructura.',
+    action:'Necesitas protocolizar lo que funciona y eliminar la dependencia de personas.',
+    svcs:['Arquitectura Operativa','CRS Command','Nexus Comercial'] },
+  { min:16, max:20, lv:'Sistema en Progreso', color:'#B8860B',
+    title:'Buenos cimientos, momento de profesionalizar',
+    desc:'Tienes estructura básica, pero hay áreas que dependen del esfuerzo puntual. Es el momento de sistematizar para poder escalar con control.',
+    action:'Enfócate en comercializar mejor lo que tienes y fortalecer el control de gestión.',
+    svcs:['Nexus Comercial','CRS Command','Motor de Procesos'] },
+  { min:21, max:24, lv:'Listo para Escalar', color:'#27ae60',
+    title:'Empresa robusta con potencial de escala real',
+    desc:'Tienes los sistemas básicos funcionando. El siguiente nivel es la excelencia operativa y el crecimiento estratégico con estructura sólida.',
+    action:'Diseña la estrategia de crecimiento y optimiza los sistemas actuales.',
+    svcs:['CRS Blueprint','CRS Command','Nexus Comercial'] }
+];
+
+var current = 0;
+var answers = [];
+
+function getLevel(score){
+  return LEVELS.find(function(l){ return score>=l.min && score<=l.max; }) || LEVELS[0];
+}
+
+function show(id){
+  ['step-gate','step-quiz','step-result'].forEach(function(i){
+    document.getElementById(i).classList.remove('active');
+    document.getElementById(i).style.display='none';
+  });
+  var el = document.getElementById(id);
+  el.style.display='block';
+  el.classList.add('active');
+}
+
+// ── START ──────────────────────────────────────────────────
+window.startDiag = function(){
+  var n  = document.getElementById('d-nombre').value.trim();
+  var em = document.getElementById('d-email').value.trim();
+  if(!n){ alert('Por favor indica tu nombre para continuar.'); return; }
+  if(!em || !em.includes('@')){ alert('Por favor indica un email válido para recibir tu resultado.'); return; }
+  USER.nombre  = n;
+  USER.empresa = document.getElementById('d-empresa').value.trim();
+  USER.email   = em;
+  current = 0;
+  answers = [];
+  document.getElementById('diag-progress-header').style.display='flex';
+  document.getElementById('progress-track').style.display='block';
+  renderQ(0);
+  show('step-quiz');
+};
+
+// ── RENDER QUESTION ────────────────────────────────────────
+function renderQ(i){
+  var q = QUESTIONS[i];
+  var total = QUESTIONS.length;
+  var pct = Math.round((i/total)*100);
+
+  document.getElementById('diag-step-label').innerHTML = 'Pregunta <span>'+(i+1)+'</span> de '+total;
+  document.getElementById('diag-pct-label').innerHTML  = '<span>'+pct+'</span>% completado';
+  document.getElementById('progressBar').style.width   = pct+'%';
+
+  var html = '<div class="diag-area-chip">'+q.area+'</div>';
+  html += '<h2 class="diag-question">'+q.q+'</h2>';
+  q.opts.forEach(function(opt){
+    html += '<button class="diag-option" onclick="pick('+opt.p+')">'+opt.t+'</button>';
+  });
+
+  document.getElementById('step-quiz').innerHTML = html;
+}
+
+// ── PICK ANSWER ────────────────────────────────────────────
+window.pick = function(p){
+  answers.push(p);
+  if(answers.length >= QUESTIONS.length){
+    showResult();
+  } else {
+    current++;
+    renderQ(current);
+  }
+};
+
+// ── SHOW RESULT ────────────────────────────────────────────
+function showResult(){
+  var total = answers.reduce(function(a,b){ return a+b; },0);
+  var max   = QUESTIONS.length * 4;
+  var pct   = Math.round((total/max)*100);
+  var lv    = getLevel(total);
+
+  // Final progress
+  document.getElementById('diag-step-label').innerHTML = 'Diagnóstico completado';
+  document.getElementById('diag-pct-label').innerHTML  = '<span>100</span>% completado';
+  document.getElementById('progressBar').style.width   = '100%';
+
+  var areaColor = function(pts){
+    return pts<=1?'#e74c3c':pts===2?'#f39c12':pts===3?'#B8860B':'#27ae60';
+  };
+
+  var areasHTML = QUESTIONS.map(function(q,i){
+    var pts = answers[i]||0;
+    var p   = Math.round((pts/4)*100);
+    var c   = areaColor(pts);
+    return '<div class="result-area-row">'
+      +'<div class="result-area-top">'
+      +'<span class="result-area-name">'+q.area+'</span>'
+      +'<span style="color:'+c+';font-weight:600;font-size:.82rem;">'+pts+'/4</span>'
+      +'</div>'
+      +'<div class="result-area-mini">'
+      +'<div class="result-area-mini-fill" style="width:'+p+'%;background:'+c+';"></div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+
+  var svcsHTML = lv.svcs.map(function(s){
+    return '<span class="result-service-tag">'+s+'</span>';
+  }).join('');
+
+  var waMsg = encodeURIComponent('Hola Cristhiam, acabo de hacer el diagnóstico y mi resultado es "'+lv.lv+'". Me gustaría hablar.');
+
+  var html = ''
+    +'<div class="result-level-badge" style="background:'+lv.color+'18;border:1px solid '+lv.color+'40;color:'+lv.color+';">'
+    +'<span style="background:'+lv.color+'"></span>'
+    +lv.lv+'</div>'
+
+    +'<h2 class="result-title">'+lv.title+'</h2>'
+
+    // Score card
+    +'<div class="result-score-card">'
+    +'<div class="result-score-top">'
+    +'<span class="result-score-label">Puntuación de madurez empresarial</span>'
+    +'<span class="result-score-num">'+total+' / '+max+'</span>'
+    +'</div>'
+    +'<div class="result-bar-track"><div class="result-bar-fill" style="width:'+pct+'%;"></div></div>'
+    +'<div class="result-bar-labels"><span>Inicio</span><span>Crecimiento</span><span>Excelencia</span></div>'
+    +'</div>'
+
+    +'<p class="result-desc">'+lv.desc+'</p>'
+
+    // Areas
+    +'<div class="result-areas-title">Desglose por área</div>'
+    +areasHTML
+
+    // Recommended services
+    +'<div class="result-services-box" style="margin-top:1.75rem;">'
+    +'<div class="result-services-label">Servicios recomendados para ti</div>'
+    +'<div class="result-services-tags">'+svcsHTML+'</div>'
+    +'<p class="result-action">'+lv.action+'</p>'
+    +'</div>'
+
+    // CTA box
+    +'<div class="result-cta-box">'
+    +'<h3 class="result-cta-title">Revisamos tu diagnóstico juntos.<br><em style="color:var(--gold);">Sin compromiso.</em></h3>'
+    +'<p class="result-cta-sub">Sesión de 30 min para analizar tu resultado y definir el primer paso concreto para tu empresa.</p>'
+    +'<div class="result-cta-buttons">'
+    +'<a href="'+CALENDLY+'" target="_blank" rel="noopener" class="btn-gold">Reservar sesión gratuita <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>'
+    +'<a href="'+WA_BASE+waMsg+'" target="_blank" rel="noopener" class="btn-wa"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52z"/></svg>WhatsApp</a>'
+    +'</div>'
+    +'</div>'
+
+    // Send email button
+    +'<div id="send-wrap">'
+    +'<button class="send-email-btn" onclick="sendEmail('+total+','+max+','+pct+')">📧 Recibir mi resultado por email</button>'
+    +'</div>';
+
+  document.getElementById('step-result').innerHTML = html;
+  show('step-result');
+  window.scrollTo({ top: document.getElementById('step-result').offsetTop - 100, behavior:'smooth' });
+
+  // Auto-send to backend silently
+  sendToBackend(total, max, pct, lv);
+}
+
+// ── SEND TO BACKEND (Apps Script) ─────────────────────────
+function sendToBackend(total, max, pct, lv){
+  if(!APPS_URL || APPS_URL.indexOf('PASTE') !== -1) return;
+
+  var detalle = QUESTIONS.map(function(q,i){
+    return { area: q.area, pregunta: q.q, puntos: answers[i]||0 };
+  });
+
+  var payload = {
+    nombre:     USER.nombre,
+    empresa:    USER.empresa,
+    email:      USER.email,
+    puntuacion: total,
+    maximo:     max,
+    porcentaje: pct,
+    nivel:      lv.lv,
+    titulo:     lv.title,
+    accion:     lv.action,
+    servicios:  lv.svcs.join(', '),
+    detalle:    JSON.stringify(detalle),
+    timestamp:  new Date().toISOString()
+  };
+
+  fetch(APPS_URL, {
+    method: 'POST',
+    body:   JSON.stringify(payload),
+    headers:{ 'Content-Type': 'application/json' },
+    mode:   'no-cors'
+  }).catch(function(){});
+}
+
+// ── SEND EMAIL BUTTON ──────────────────────────────────────
+window.sendEmail = function(total, max, pct){
+  var btn = document.querySelector('.send-email-btn');
+  if(btn){ btn.textContent = 'Enviando...'; btn.disabled = true; }
+
+  setTimeout(function(){
+    var wrap = document.getElementById('send-wrap');
+    if(wrap){
+      wrap.innerHTML = '<div class="send-success">✓ Resultado enviado a '
+        +USER.email+'. Revisaremos tu caso y te contactamos en menos de 24h.</div>';
+    }
+  }, 1000);
+};
+
+})();
+</script>
+
 </body>
 </html>
