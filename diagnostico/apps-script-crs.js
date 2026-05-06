@@ -1,68 +1,66 @@
 /**
- * CRS Growth — Apps Script para diagnóstico web
+ * CRS Consulting - Registro de diagnóstico
  *
  * Qué hace:
- *   1. Guarda cada diagnóstico en Google Sheets
- *   2. Envía email a Cristhiam con el resumen del lead
- *   3. Envía email al cliente con su resultado completo
+ * 1) Guarda cada diagnóstico en Google Sheets
+ * 2) Te envía un email con el resumen del lead y su resultado
  *
- * Instalación:
- *   1. Ve a script.google.com → Nuevo proyecto
- *   2. Pega este código completo
- *   3. Guarda (Ctrl+S)
- *   4. Implementar → Nueva implementación → Aplicación web
- *      · Ejecutar como: Yo
- *      · Acceso: Cualquier usuario (incluidos anónimos)
- *   5. Copia la URL de implementación
- *   6. Pégala en diagnostico/index.html donde dice APPS_URL
+ * Pasos:
+ * 1. Pega este código en Google Apps Script
+ * 2. Guarda
+ * 3. Implementar > Administrar implementaciones > Editar la implementación actual
+ *    o crea una nueva implementación como Aplicación web
+ * 4. Acceso: Cualquier usuario
  */
 
 const SPREADSHEET_ID = '1GgutPmCupC8Oox5Vu-gXCdnsJ-D5iHcB1W2Z4rVvGhE';
-const SHEET_NAME     = 'Diagnosticos';
-const CRS_EMAIL      = 'cristhiam.silva@crsgrowth.com';
-const CALENDLY_URL   = 'https://calendly.com/cristhiam-silva-crsgrowth/30min';
+const SHEET_NAME = 'Diagnosticos';
+const NOTIFY_EMAIL = 'cristhiam.silva@crsgrowth.com';
 
 function doPost(e) {
   try {
-    const raw  = (e && e.postData && e.postData.contents) ? e.postData.contents : '{}';
+    const raw = e && e.postData && e.postData.contents ? e.postData.contents : '{}';
     const data = JSON.parse(raw);
-
-    // ── 1. Guardar en Sheets ──────────────────────────────────────────────
     const sheet = getOrCreateSheet_();
+
+    const detalleTexto = formatDetalle_(data.detalle);
+
     sheet.appendRow([
       new Date(),
-      data.nombre     || '',
-      data.empresa    || '',
-      data.email      || '',
+      data.nombre || '',
+      data.empresa || '',
+      data.email || '',
+      data.telefono || '',
+      data.sector || '',
+      data.empleados || '',
       data.puntuacion || '',
-      data.maximo     || '',
+      data.maximo || '',
       data.porcentaje || '',
-      data.nivel      || '',
-      data.titulo     || '',
-      data.accion     || '',
-      data.servicios  || '',
-      data.detalle    || '',
-      data.timestamp  || ''
+      data.nivel || '',
+      data.titulo || '',
+      data.accion || '',
+      data.servicios || '',
+      data.detalle || '',
+      data.timestamp || ''
     ]);
 
-    // ── 2. Email a Cristhiam ──────────────────────────────────────────────
-    const subjectCRS = '🔔 Nuevo diagnóstico — ' + (data.empresa || data.nombre || 'Anónimo')
-                     + ' [' + (data.nivel || '-') + ']';
-
-    const bodyCRS = [
-      'Nuevo diagnóstico completado en crsgrowth.com',
-      '─────────────────────────────────────',
+    const subject = 'Nuevo diagnóstico recibido - ' + (data.empresa || data.nombre || 'Sin identificar');
+    const body = [
+      'Se ha recibido un nuevo diagnóstico en la web.',
       '',
-      'CONTACTO',
-      'Nombre:   ' + (data.nombre   || '-'),
-      'Empresa:  ' + (data.empresa  || '-'),
-      'Email:    ' + (data.email    || '-'),
+      'DATOS DEL CONTACTO',
+      'Nombre: ' + (data.nombre || '-'),
+      'Empresa: ' + (data.empresa || '-'),
+      'Email: ' + (data.email || '-'),
+      'Teléfono: ' + (data.telefono || '-'),
+      'Sector: ' + (data.sector || '-'),
+      'Empleados: ' + (data.empleados || '-'),
       '',
       'RESULTADO',
-      'Puntuación: ' + (data.puntuacion || '-') + ' / ' + (data.maximo || '-')
-                     + ' (' + (data.porcentaje || '-') + '%)',
-      'Nivel:      ' + (data.nivel  || '-'),
-      'Título:     ' + (data.titulo || '-'),
+      'Puntuación: ' + (data.puntuacion || '-') + '/' + (data.maximo || '-'),
+      'Porcentaje: ' + (data.porcentaje || '-') + '%',
+      'Nivel: ' + (data.nivel || '-'),
+      'Título: ' + (data.titulo || '-'),
       '',
       'ACCIÓN RECOMENDADA',
       data.accion || '-',
@@ -70,101 +68,31 @@ function doPost(e) {
       'SERVICIOS PRIORITARIOS',
       data.servicios || '-',
       '',
-      'DESGLOSE POR ÁREA',
-      formatDetalle_(data.detalle),
+      'DETALLE DEL DIAGNÓSTICO',
+      detalleTexto,
       '',
-      '─────────────────────────────────────',
-      'Reservar llamada: ' + CALENDLY_URL
+      'JSON ORIGINAL',
+      data.detalle || '-'
     ].join('\n');
 
     MailApp.sendEmail({
-      to:      CRS_EMAIL,
-      subject: subjectCRS,
-      body:    bodyCRS,
+      to: NOTIFY_EMAIL,
+      subject: subject,
+      body: body,
       replyTo: data.email || undefined,
-      name:    'CRS Diagnóstico Web'
+      name: 'CRS Diagnóstico Web'
     });
-
-    // ── 3. Email al cliente ───────────────────────────────────────────────
-    if (data.email) {
-      const nombre   = data.nombre || 'Hola';
-      const nivel    = data.nivel  || '';
-      const titulo   = data.titulo || '';
-      const accion   = data.accion || '';
-      const servicios = data.servicios || '';
-      const pct      = data.porcentaje || '';
-      const pts      = data.puntuacion || '';
-      const max      = data.maximo     || '';
-
-      const subjectCliente = 'Tu diagnóstico empresarial CRS — ' + nivel;
-
-      const bodyCliente = [
-        'Hola ' + nombre + ',',
-        '',
-        'Gracias por completar el diagnóstico empresarial de CRS Growth.',
-        'Aquí tienes tu resultado completo.',
-        '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'RESULTADO: ' + nivel.toUpperCase(),
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        '',
-        titulo,
-        '',
-        'Puntuación: ' + pts + ' / ' + max + ' (' + pct + '%)',
-        '',
-        '─────────────────────────────',
-        'QUÉ SIGNIFICA ESTO PARA TI',
-        '─────────────────────────────',
-        accion,
-        '',
-        '─────────────────────────────',
-        'SERVICIOS RECOMENDADOS',
-        '─────────────────────────────',
-        servicios,
-        '',
-        '─────────────────────────────',
-        'DESGLOSE POR ÁREA',
-        '─────────────────────────────',
-        formatDetalle_(data.detalle),
-        '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'PRÓXIMO PASO',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        '',
-        'Reserva una sesión gratuita de 30 minutos para revisar',
-        'tu diagnóstico juntos y definir el primer paso concreto:',
-        '',
-        CALENDLY_URL,
-        '',
-        'O escríbenos directamente:',
-        'WhatsApp: +34 697 293 677',
-        'Email:    info@crsgrowth.com',
-        '',
-        '─────────────────────────────',
-        'CRS Growth',
-        'Tu empresa funciona. Tú diriges.',
-        'www.crsgrowth.com'
-      ].join('\n');
-
-      MailApp.sendEmail({
-        to:      data.email,
-        subject: subjectCliente,
-        body:    bodyCliente,
-        name:    'CRS Growth',
-        replyTo: CRS_EMAIL
-      });
-    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
       .setMimeType(ContentService.MimeType.JSON);
-
   } catch (err) {
     MailApp.sendEmail({
-      to:      CRS_EMAIL,
-      subject: 'Error Apps Script — diagnóstico web',
-      body:    String(err && err.stack ? err.stack : err)
+      to: NOTIFY_EMAIL,
+      subject: 'Error en Apps Script - diagnóstico web',
+      body: String(err && err.stack ? err.stack : err)
     });
+
     return ContentService
       .createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -172,30 +100,56 @@ function doPost(e) {
 }
 
 function getOrCreateSheet_() {
-  const ss    = SpreadsheetApp.openById(SPREADSHEET_ID);
-  let   sheet = ss.getSheetByName(SHEET_NAME);
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_NAME);
+
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow([
-      'Fecha', 'Nombre', 'Empresa', 'Email',
-      'Puntuación', 'Máximo', '%',
-      'Nivel', 'Título', 'Acción', 'Servicios',
-      'Detalle JSON', 'Timestamp front'
+      'fecha_registro',
+      'nombre',
+      'empresa',
+      'email',
+      'telefono',
+      'sector',
+      'empleados',
+      'puntuacion',
+      'maximo',
+      'porcentaje',
+      'nivel',
+      'titulo',
+      'accion',
+      'servicios',
+      'detalle',
+      'timestamp_front'
     ]);
     sheet.setFrozenRows(1);
   }
+
   return sheet;
 }
 
 function formatDetalle_(detalle) {
   if (!detalle) return '-';
+
   try {
     const parsed = typeof detalle === 'string' ? JSON.parse(detalle) : detalle;
     if (!Array.isArray(parsed)) return String(detalle);
-    return parsed.map(function(a) {
-      return (a.area || 'Área') + ': ' + (a.puntos || 0) + '/4';
-    }).join('\n');
-  } catch(e) {
+
+    const blocks = [];
+    parsed.forEach(function(area) {
+      blocks.push('[' + (area.area || 'Área') + '] ' + (area.puntos || 0) + '/' + (area.maximo || 0));
+      if (Array.isArray(area.preguntas)) {
+        area.preguntas.forEach(function(p) {
+          blocks.push('- ' + (p.pregunta || 'Pregunta'));
+          blocks.push('  Respuesta: ' + (p.respuesta || '-'));
+          blocks.push('  Puntos: ' + (p.puntos || 0));
+        });
+      }
+      blocks.push('');
+    });
+    return blocks.join('\n');
+  } catch (e) {
     return String(detalle);
   }
 }
