@@ -380,42 +380,10 @@
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<header id="site-nav" class="site-nav" role="navigation" aria-label="Navegación principal">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="CRS Growth - Inicio">
-      <img src="/logo.png" alt="CRS Growth" class="nav-logo-img">
-      <span class="nav-logo-text">CRS <span>Growth</span></span>
-    </a>
-    <nav class="nav-links" aria-label="Menú principal">
-      <a href="/">Inicio</a>
-      <a href="/servicios/">Servicios</a>
-      <a href="/nosotros/">Nosotros</a>
-      <a href="/realestate/">Real Estate</a>
-      <a href="/diagnostico/" class="active">Diagnóstico</a>
-      <a href="/contacto/">Contacto</a>
-    </nav>
-    <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" class="nav-cta" target="_blank" rel="noopener">Reservar llamada</a>
-    <button id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú" type="button">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div id="nav-drawer" class="nav-drawer" aria-label="Menú móvil">
-    <div class="nav-drawer-links">
-      <a href="/">Inicio</a>
-      <a href="/servicios/">Servicios</a>
-      <a href="/nosotros/">Nosotros</a>
-      <a href="/realestate/">Real Estate</a>
-      <a href="/diagnostico/" class="active">Diagnóstico</a>
-      <a href="/contacto/">Contacto</a>
-      <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
-    </div>
-  </div>
-</header>
+<div id="nav-placeholder"></div>
 
 <main>
 
-<!-- ── HERO ── -->
 <section class="page-hero">
   <div class="container">
     <div class="chip"><span class="chip-dot"></span>Diagnóstico empresarial gratuito</div>
@@ -424,12 +392,10 @@
   </div>
 </section>
 
-<!-- ── QUIZ ── -->
 <section class="section" style="background:var(--cream-2);">
   <div class="container" style="max-width:780px;">
     <div class="diag-shell">
 
-      <!-- Progress -->
       <div class="diag-header" id="diag-progress-header" style="display:none;">
         <span class="diag-progress-label" id="diag-step-label">Pregunta <span>1</span> de 6</span>
         <span class="diag-progress-label" id="diag-pct-label"><span>0</span>% completado</span>
@@ -438,7 +404,6 @@
         <div class="progress-bar" id="progressBar"></div>
       </div>
 
-      <!-- STEP 0: EMAIL GATE -->
       <div class="diag-step active" id="step-gate">
         <div class="diag-area-chip">Antes de empezar</div>
         <h2 class="diag-gate-title">¿A dónde enviamos<br>tu resultado?</h2>
@@ -466,10 +431,7 @@
         </div>
       </div>
 
-      <!-- STEPS 1-6: QUESTIONS (rendered by JS) -->
       <div id="step-quiz" class="diag-step"></div>
-
-      <!-- STEP RESULT -->
       <div id="step-result" class="diag-step"></div>
 
     </div>
@@ -478,55 +440,9 @@
 
 </main>
 
-<!-- ── FOOTER ── -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="/logo.png" alt="CRS Growth" class="footer-logo">
-        <p>Consultoría de alto rendimiento empresarial. Diseñamos sistemas internos, procesos y estructuras para que la empresa funcione sin depender de ti.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navegación</h4>
-        <a href="/">Inicio</a>
-        <a href="/servicios/">Servicios</a>
-        <a href="/nosotros/">Nosotros</a>
-        <a href="/realestate/">Real Estate</a>
-        <a href="/diagnostico/">Diagnóstico</a>
-        <a href="/contacto/">Contacto</a>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/aviso-legal/">Aviso legal</a>
-        <a href="/privacidad/">Privacidad</a>
-        <a href="/cookies/">Cookies</a>
-      </div>
-      <div class="footer-col">
-        <h4>Acción</h4>
-        <a href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© CRS Growth · CRS Strategies S.L.</p>
-      <p>crsgrowth.com</p>
-    </div>
-  </div>
-</footer>
+<div id="footer-placeholder"></div>
 
-<!-- ── NAV JS ── -->
-<script>
-(function(){
-  var header=document.getElementById('site-nav');
-  var btn=document.getElementById('nav-hamburger');
-  var drawer=document.getElementById('nav-drawer');
-  function sc(){if(!header)return;window.scrollY>24?header.classList.add('nav-scrolled'):header.classList.remove('nav-scrolled');}
-  window.addEventListener('scroll',sc,{passive:true});sc();
-  if(btn&&drawer){
-    btn.addEventListener('click',function(){var o=drawer.classList.toggle('open');btn.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
-    drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drawer.classList.remove('open');btn.classList.remove('open');document.body.style.overflow='';});});
-  }
-})();
-</script>
+<script src="/js/main.js"></script>
 
 <!-- ── DIAGNOSTIC JS ── -->
 <script>
@@ -817,6 +733,7 @@ window.sendEmail = function(total, max, pct){
 
 })();
 </script>
+
 
 </body>
 </html>
