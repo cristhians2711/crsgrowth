@@ -172,7 +172,40 @@
       initSmoothScroll();
       initTicker();
       initCounters();
+      initCookieBanner();
     });
   });
 
 })();
+
+/* ── 8. COOKIE BANNER ── */
+function initCookieBanner() {
+  if (localStorage.getItem('crs_cookie_consent')) return;
+  
+  var banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.id = 'cookie-banner';
+  banner.innerHTML = '<div class="cookie-banner-text">'
+    + 'Usamos cookies propias y de terceros para mejorar tu experiencia y analizar el tráfico. '
+    + 'Puedes aceptarlas o rechazar las no esenciales. '
+    + '<a href="/cookies/">Más información</a>'
+    + '</div>'
+    + '<div class="cookie-banner-actions">'
+    + '<button class="cookie-btn-reject" onclick="cookieReject()">Solo esenciales</button>'
+    + '<button class="cookie-btn-accept" onclick="cookieAccept()">Aceptar todas</button>'
+    + '</div>';
+  document.body.appendChild(banner);
+
+  setTimeout(function() { banner.classList.add('visible'); }, 600);
+}
+
+window.cookieAccept = function() {
+  localStorage.setItem('crs_cookie_consent', 'accepted');
+  var b = document.getElementById('cookie-banner');
+  if (b) { b.style.transform = 'translateY(110%)'; setTimeout(function(){ b.remove(); }, 400); }
+};
+window.cookieReject = function() {
+  localStorage.setItem('crs_cookie_consent', 'essential');
+  var b = document.getElementById('cookie-banner');
+  if (b) { b.style.transform = 'translateY(110%)'; setTimeout(function(){ b.remove(); }, 400); }
+};
