@@ -369,3 +369,105 @@ body>main,.page-main { padding-top:var(--nav-h); }
   .result-grid { grid-template-columns:1fr 1fr; }
   .stats-row { gap:1.5rem; }
 }
+
+/* ══ COOKIE BANNER ══ */
+.cookie-banner {
+  position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:#13110E; border-top:1px solid rgba(184,134,11,0.28);
+  padding:1.25rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1.5rem; flex-wrap:wrap;
+  transform:translateY(100%);
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,0.35);
+}
+.cookie-banner.visible { transform:translateY(0); }
+.cookie-banner-text { font-family:'Plus Jakarta Sans',sans-serif; font-size:0.82rem; color:rgba(237,233,224,0.65); line-height:1.65; max-width:640px; font-weight:300; }
+.cookie-banner-text a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(184,134,11,0.3); }
+.cookie-banner-text a:hover { color:var(--gold-lt); }
+.cookie-banner-actions { display:flex; gap:0.75rem; flex-shrink:0; flex-wrap:wrap; }
+.cookie-btn-accept {
+  padding:9px 20px; background:var(--gold); color:var(--ink);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.75rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  border:none; cursor:pointer; transition:background 0.2s; white-space:nowrap;
+}
+.cookie-btn-accept:hover { background:var(--gold-lt); }
+.cookie-btn-reject {
+  padding:9px 20px; background:transparent; color:rgba(237,233,224,0.5);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+  border:1px solid rgba(237,233,224,0.15); cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.cookie-btn-reject:hover { border-color:rgba(237,233,224,0.35); color:rgba(237,233,224,0.75); }
+
+/* ══ MOBILE RESPONSIVE FIXES ══ */
+/* Grids inline overrides — mobile collapse */
+.grid-hero-const  { display:grid; grid-template-columns:1fr 420px; gap:4rem; align-items:center; }
+.grid-2col        { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end; }
+.grid-2col-lg     { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.grid-star        { display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:center; }
+.grid-brand       { display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:center; }
+
+@media(max-width:900px) {
+  .grid-hero-const { grid-template-columns:1fr; gap:2.5rem; }
+  .grid-2col       { grid-template-columns:1fr; gap:2rem; }
+  .grid-2col-lg    { grid-template-columns:1fr; gap:2.5rem; }
+  .grid-star       { grid-template-columns:1fr; gap:1.5rem; }
+  .grid-brand      { grid-template-columns:1fr; gap:2rem; text-align:left; }
+}
+
+/* Constitución hero — accomp-card full width on mobile */
+@media(max-width:900px) {
+  .accomp-card { width:100%; }
+  .accomp-card::after { display:none; }
+}
+
+/* Methodology section — stack on mobile */
+@media(max-width:900px) {
+  #metodologia .container > div { grid-template-columns:1fr !important; gap:2.5rem !important; }
+  .dashboard-widget { width:100%; }
+}
+
+/* Hero star section — stack CTA below text */
+@media(max-width:768px) {
+  .star-grid { grid-template-columns:1fr !important; }
+  .star-grid > div:last-child { align-items:flex-start !important; }
+}
+
+/* Tramites grid — 2col on tablet, 1col on mobile */
+@media(max-width:900px) {
+  div[style*="grid-template-columns:repeat(4,1fr)"] { 
+    grid-template-columns:repeat(2,1fr) !important; 
+  }
+}
+@media(max-width:500px) {
+  div[style*="grid-template-columns:repeat(4,1fr)"] { 
+    grid-template-columns:1fr !important; 
+  }
+}
+
+/* Services grid — 2 cols on tablet */
+@media(max-width:900px) {
+  div[style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+}
+@media(max-width:500px) {
+  div[style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Stats row — wrap on mobile */
+@media(max-width:600px) {
+  .stats-row { gap:1.25rem; }
+  .stat-num { font-size:1.8rem; }
+}
+
+/* Cookie banner — stack on mobile */
+@media(max-width:600px) {
+  .cookie-banner { flex-direction:column; align-items:flex-start; padding:1.25rem; }
+  .cookie-banner-actions { width:100%; }
+  .cookie-btn-accept,.cookie-btn-reject { flex:1; text-align:center; justify-content:center; }
+}
