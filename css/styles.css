@@ -400,3 +400,77 @@ body>main,.page-main { padding-top:var(--nav-h); }
   border:1px solid rgba(237,233,224,0.15); cursor:pointer; transition:all 0.2s; white-space:nowrap;
 }
 .cookie-btn-reject:hover { border-color:rgba(237,233,224,0.35); color:rgba(237,233,224,0.75); }
+<<<<<<< HEAD
+=======
+
+/* ══ MOBILE RESPONSIVE FIXES ══ */
+/* Grids inline overrides — mobile collapse */
+.grid-hero-const  { display:grid; grid-template-columns:1fr 420px; gap:4rem; align-items:center; }
+.grid-2col        { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end; }
+.grid-2col-lg     { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.grid-star        { display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:center; }
+.grid-brand       { display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:center; }
+
+@media(max-width:900px) {
+  .grid-hero-const { grid-template-columns:1fr; gap:2.5rem; }
+  .grid-2col       { grid-template-columns:1fr; gap:2rem; }
+  .grid-2col-lg    { grid-template-columns:1fr; gap:2.5rem; }
+  .grid-star       { grid-template-columns:1fr; gap:1.5rem; }
+  .grid-brand      { grid-template-columns:1fr; gap:2rem; text-align:left; }
+}
+
+/* Constitución hero — accomp-card full width on mobile */
+@media(max-width:900px) {
+  .accomp-card { width:100%; }
+  .accomp-card::after { display:none; }
+}
+
+/* Methodology section — stack on mobile */
+@media(max-width:900px) {
+  #metodologia .container > div { grid-template-columns:1fr !important; gap:2.5rem !important; }
+  .dashboard-widget { width:100%; }
+}
+
+/* Hero star section — stack CTA below text */
+@media(max-width:768px) {
+  .star-grid { grid-template-columns:1fr !important; }
+  .star-grid > div:last-child { align-items:flex-start !important; }
+}
+
+/* Tramites grid — 2col on tablet, 1col on mobile */
+@media(max-width:900px) {
+  div[style*="grid-template-columns:repeat(4,1fr)"] { 
+    grid-template-columns:repeat(2,1fr) !important; 
+  }
+}
+@media(max-width:500px) {
+  div[style*="grid-template-columns:repeat(4,1fr)"] { 
+    grid-template-columns:1fr !important; 
+  }
+}
+
+/* Services grid — 2 cols on tablet */
+@media(max-width:900px) {
+  div[style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+}
+@media(max-width:500px) {
+  div[style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Stats row — wrap on mobile */
+@media(max-width:600px) {
+  .stats-row { gap:1.25rem; }
+  .stat-num { font-size:1.8rem; }
+}
+
+/* Cookie banner — stack on mobile */
+@media(max-width:600px) {
+  .cookie-banner { flex-direction:column; align-items:flex-start; padding:1.25rem; }
+  .cookie-banner-actions { width:100%; }
+  .cookie-btn-accept,.cookie-btn-reject { flex:1; text-align:center; justify-content:center; }
+}
+>>>>>>> a08706a5c2c0735b8e6092bc3779bea0a5cbc1e0
