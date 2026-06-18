@@ -733,7 +733,7 @@ var state = {
 };
 
 var STEP_TITLES = ['Tu situación', 'Situación laboral', 'Tus preocupaciones', 'Tu proyecto', 'Tus datos'];
-var ENDPOINT = '/.netlify/functions/diagnostico-start';
+var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwyiUDTz_JKlrQJQCMmtDMJiLLhyn2yurjfvJmiIhQIDf_OGL5sLKqgkC_PC_8iX1WX/exec';
 
 // ── NAVIGATION ────────────────────────────────────────────────────
 function goTo(n) {
@@ -815,46 +815,76 @@ function checkStep5() {
 }
 
 // ── SUBMIT ────────────────────────────────────────────────────────
-async function submitDiag() {
-  // Hide steps, show loading
+// ── PROFILE LOGIC (mirrors Apps Script) ─────────────────────
+function calcProfile(s) {
+  if (s.laboral === 'paro') {
+    var urg = s.tiempo_paro === 'menos3' || s.tiempo_paro === '3a8';
+    return {
+      titulo: urg
+        ? 'Tienes que actuar ya — tu prestación tiene fecha de caducidad'
+        : 'Puedes usar el paro para financiar tu empresa',
+      cuerpo: urg
+        ? 'Puedes capitalizar tu prestación por desempleo para financiar la constitución de tu empresa. Es la mejor decisión económica que puedes tomar ahora mismo — y tiene fecha de caducidad. Cada semana que pasa es dinero que pierdes. Te explicamos cómo funciona y qué necesitas exactamente.'
+        : 'Tienes tiempo suficiente para hacerlo bien. La capitalización del paro puede financiar tu empresa y ahorrarte años de cuotas. Antes de decidir nada, necesitas entender qué opciones tienes sobre la mesa.',
+      tag: 'Capitalización del paro · Urgente'
+    };
+  }
+  if (s.socios === 'si' && s.preocupaciones && s.preocupaciones.indexOf('socio') >= 0) {
+    return {
+      titulo: 'Montar empresa con socios requiere hacerlo bien desde el principio',
+      cuerpo: 'Montar empresa con socios sin tenerlo todo por escrito es el error más caro que cometen los emprendedores. Los estatutos mal redactados y los pactos de socios inexistentes generan conflictos que destruyen empresas y relaciones. Antes de constituir nada, necesitas tener claras las reglas del juego.',
+      tag: 'Sociedad con socios · Pacto de socios'
+    };
+  }
+  if (s.clientes === 'si' || s.situacion === 'autonomo') {
+    return {
+      titulo: 'Estás listo para constituir — solo necesitas hacerlo bien',
+      cuerpo: 'Tu proyecto tiene base real. El error más común ahora es elegir mal la estructura jurídica o firmar estatutos que no te protegen — y eso condiciona los próximos cinco años. Antes de ir a la notaría, necesitas 30 minutos de orientación que te ahorren años de problemas.',
+      tag: 'Constitución · Estructura jurídica'
+    };
+  }
+  return {
+    titulo: 'Primero claridad, luego acción',
+    cuerpo: 'Todavía no tienes que constituir nada. Lo que necesitas ahora es claridad: qué forma jurídica te conviene, si el momento es el adecuado, cuánto te va a costar realmente y cuál es el primer paso concreto. Una sesión de 30 minutos te ahorra meses de errores.',
+    tag: 'Orientación inicial · Hoja de ruta'
+  };
+}
+
+function submitDiag() {
   document.querySelectorAll('.ds-step').forEach(function(s){ s.classList.remove('active'); });
   document.querySelector('.ds-progress-wrap').style.opacity = '0';
   document.querySelector('.progress-track').style.opacity = '0';
   document.getElementById('ds-loading').classList.add('active');
 
-  try {
-    var res = await fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(state),
-    });
-    var json = await res.json();
+  // Update state with latest form values
+  state.nombre   = document.getElementById('input-nombre').value.trim();
+  state.email    = document.getElementById('input-email').value.trim();
+  state.whatsapp = document.getElementById('input-whatsapp').value.trim();
 
+  // Calculate profile client-side immediately
+  var profile = calcProfile(state);
+
+  // Show result without waiting for server
+  setTimeout(function() {
     document.getElementById('ds-loading').classList.remove('active');
+    document.getElementById('result-titulo').textContent = profile.titulo;
+    document.getElementById('result-cuerpo').textContent = profile.cuerpo;
+    document.getElementById('result-tag').textContent    = profile.tag;
+    document.getElementById('email-confirm').textContent =
+      '✓ Hemos enviado el resultado a ' + state.email + '. Revisa también el spam si no lo ves.';
+    document.getElementById('ds-result').classList.add('active');
+  }, 1200);
 
-    if (json.ok && json.profile) {
-      document.getElementById('result-titulo').textContent = json.profile.titulo;
-      document.getElementById('result-cuerpo').textContent = json.profile.cuerpo;
-      document.getElementById('result-tag').textContent = json.profile.tag;
-      document.getElementById('email-confirm').textContent =
-        '✓ Hemos enviado el resultado a ' + state.email + '. Revisa también el spam si no lo ves.';
-      document.getElementById('ds-result').classList.add('active');
-    } else {
-      showError(json.error || 'Error desconocido');
-    }
-  } catch(e) {
-    document.getElementById('ds-loading').classList.remove('active');
-    showError('Error de conexión. Por favor inténtalo de nuevo.');
-  }
-}
-
-function showError(msg) {
-  var shell = document.querySelector('.ds-shell');
-  var err = document.createElement('div');
-  err.style.cssText = 'background:#fff0f0;border:1px solid #f00;padding:1rem 1.25rem;font-size:.9rem;color:#c00;margin-top:1rem;';
-  err.textContent = msg;
-  shell.appendChild(err);
-  goTo(5);
+  // Fire Apps Script silently in background (Notion + emails)
+  fetch(ENDPOINT, {
+    method:   'POST',
+    mode:     'no-cors',
+    redirect: 'follow',
+    headers:  { 'Content-Type': 'text/plain;charset=utf-8' },
+    body:     JSON.stringify(state),
+  }).catch(function() {
+    // Silent fail - result already shown to user
+  });
 }
 </script>
 </body>
