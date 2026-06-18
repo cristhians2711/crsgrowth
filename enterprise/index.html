@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CRS Growth Enterprise — Ingeniería de negocio para cadenas de retail. Centralizamos KPIs, estandarizamos procesos y escalamos rentabilidad."/>
+  <meta property="og:title" content="CRS Growth Enterprise — Arquitectura Operativa para Retail"/>
+  <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
+  <link rel="canonical" href="https://www.crsgrowth.com/enterprise/"/>
+  <title>Enterprise — CRS Growth</title>
+  <link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="stylesheet" href="/css/styles.css"/>
+  <style>
+    /* Enterprise overrides — dark, minimal */
+    body { background: #0D0D0D; }
+    .ent-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: #0D0D0D;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+    .ent-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(184,134,11,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,134,11,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .ent-section { padding: 88px 0; background: #0D0D0D; }
+    .ent-section-alt { padding: 88px 0; background: #111111; }
+    .ent-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      display: block;
+    }
+    .ent-h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      color: #EDE9E0;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .ent-h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: #EDE9E0;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .ent-lead {
+      font-size: 1rem;
+      color: rgba(237,233,224,0.65);
+      line-height: 1.85;
+      font-weight: 300;
+      max-width: 560px;
+    }
+    .ent-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+    .ent-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: rgba(184,134,11,0.12);
+      margin-bottom: 2rem;
+    }
+    .ent-kpi-item {
+      background: #111;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: background .2s;
+    }
+    .ent-kpi-item:hover { background: #161616; }
+    .ent-kpi-value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .ent-kpi-label {
+      font-size: .72rem;
+      font-weight: 700;
+      color: rgba(237,233,224,0.45);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      line-height: 1.4;
+    }
+    .ent-phase {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: flex-start;
+    }
+    .ent-phase:last-child { border-bottom: none; }
+    .ent-phase-num {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: 1px solid rgba(184,134,11,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(184,134,11,0.06);
+      letter-spacing: .04em;
+    }
+    .ent-phase-badge {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(184,134,11,0.1);
+      border: 1px solid rgba(184,134,11,0.2);
+      padding: 2px 8px;
+      margin-bottom: .4rem;
+      display: inline-block;
+    }
+    .ent-phase-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #EDE9E0;
+      margin-bottom: .35rem;
+    }
+    .ent-phase-desc {
+      font-size: .86rem;
+      color: rgba(237,233,224,0.55);
+      line-height: 1.65;
+    }
+    .ent-diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
+    }
+    .ent-diff-col { padding: 2.5rem; }
+    .ent-diff-line { background: rgba(184,134,11,0.15); }
+    .ent-diff-item {
+      display: flex;
+      gap: .85rem;
+      margin-bottom: 1rem;
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+    .ent-diff-icon { font-size: .9rem; flex-shrink: 0; margin-top: 2px; }
+    .ent-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(184,134,11,0.1);
+    }
+    .ent-proof-item {
+      background: #111;
+      padding: 2rem 1.75rem;
+    }
+    .ent-proof-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: .35rem;
+    }
+    .ent-proof-label {
+      font-size: .82rem;
+      color: rgba(237,233,224,0.55);
+      line-height: 1.5;
+    }
+    .ent-cta-section {
+      padding: 6rem 0;
+      background: #0D0D0D;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ent-cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: rgba(184,134,11,0.06);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .ent-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: #0D0D0D;
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .ent-btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .ent-commitment {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(184,134,11,0.1);
+    }
+    .ent-commitment-item {
+      background: #111;
+      padding: 1.75rem 1.5rem;
+    }
+    .ent-commitment-icon {
+      font-size: 1.2rem;
+      margin-bottom: .75rem;
+      display: block;
+    }
+    .ent-commitment-title {
+      font-size: .88rem;
+      font-weight: 600;
+      color: #EDE9E0;
+      margin-bottom: .35rem;
+    }
+    .ent-commitment-desc {
+      font-size: .78rem;
+      color: rgba(237,233,224,0.5);
+      line-height: 1.55;
+    }
+    @media (max-width: 1024px) {
+      .ent-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .ent-proof-grid { grid-template-columns: 1fr 1fr; }
+      .ent-commitment { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .ent-section, .ent-section-alt { padding: 56px 0; }
+      .ent-kpi-grid { grid-template-columns: 1fr 1fr; }
+      .ent-diff-grid { grid-template-columns: 1fr; }
+      .ent-diff-line { display: none; }
+      .ent-proof-grid { grid-template-columns: 1fr; }
+      .ent-commitment { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+
+<!-- ══ HERO ══ -->
+<section class="ent-hero">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(184,134,11,0.08);top:-100px;right:-100px;filter:blur(80px);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;padding:4rem 2rem;">
+    <div style="max-width:700px;">
+      <span class="ent-label" style="animation:fadeUp .5s both .05s;">CRS Growth · Enterprise</span>
+      <h1 class="ent-h1" style="animation:fadeUp .6s both .12s;">
+        Arquitectura operativa<br>para cadenas de retail.
+      </h1>
+      <div class="ent-divider" style="animation:fadeUp .5s both .18s;"></div>
+      <p class="ent-lead" style="animation:fadeUp .6s both .24s;margin-bottom:2rem;">
+        Centralizamos tus KPIs, estandarizamos tu éxito y escalamos tu rentabilidad sin añadir caos. Un modelo de transformación diseñado para directores de operaciones que necesitan resultados medibles, no informes que se archivan.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;animation:fadeUp .6s both .3s;">
+        <a href="#diagnostico" class="ent-btn-primary">
+          Solicitar diagnóstico estratégico
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#metodologia" style="display:inline-flex;align-items:center;gap:6px;padding:14px 22px;border:1.5px solid rgba(237,233,224,0.18);color:rgba(237,233,224,0.7);font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.04em;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='rgba(184,134,11,0.5)';this.style.color='#B8860B'" onmouseout="this.style.borderColor='rgba(237,233,224,0.18)';this.style.color='rgba(237,233,224,0.7)'">Ver metodología</a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);animation:fadeUp .6s both .36s;">
+        <div><span style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;color:var(--gold);display:block;line-height:1;">100%</span><span style="font-size:.7rem;color:rgba(237,233,224,0.4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;display:block;">Implantación real</span></div>
+        <div><span style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;color:var(--gold);display:block;line-height:1;">30d</span><span style="font-size:.7rem;color:rgba(237,233,224,0.4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;display:block;">Garantía post-entrega</span></div>
+        <div><span style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;color:var(--gold);display:block;line-height:1;">SOPs</span><span style="font-size:.7rem;color:rgba(237,233,224,0.4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;display:block;">Propios certificados</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KPIs ══ -->
+<section class="ent-section-alt">
+  <div class="container">
+    <div style="max-width:580px;margin:0 auto 3rem;text-align:center;" class="reveal">
+      <span class="ent-label">Lo que resolvemos</span>
+      <h2 class="ent-h2">Los indicadores que un Director<br>de Operaciones no puede perder de vista.</h2>
+    </div>
+    <div class="ent-kpi-grid reveal">
+      <div class="ent-kpi-item">
+        <div class="ent-kpi-value">UPT</div>
+        <div class="ent-kpi-label">Unidades por<br>Transacción</div>
+      </div>
+      <div class="ent-kpi-item">
+        <div class="ent-kpi-value">TC</div>
+        <div class="ent-kpi-label">Tasa de<br>Conversión</div>
+      </div>
+      <div class="ent-kpi-item">
+        <div class="ent-kpi-value">TM</div>
+        <div class="ent-kpi-label">Ticket<br>Medio</div>
+      </div>
+      <div class="ent-kpi-item">
+        <div class="ent-kpi-value">MO</div>
+        <div class="ent-kpi-label">Mermas<br>Operativas</div>
+      </div>
+      <div class="ent-kpi-item">
+        <div class="ent-kpi-value">EP</div>
+        <div class="ent-kpi-label">Estandarización<br>de Procesos</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem;" class="reveal">
+      <div style="padding:1.5rem;border:1px solid rgba(184,134,11,0.15);background:rgba(184,134,11,0.04);">
+        <p style="font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Problema habitual</p>
+        <p style="font-size:.88rem;color:rgba(237,233,224,0.6);line-height:1.6;">Cada tienda mide diferente. No hay estándar. Los datos no son comparables entre regiones.</p>
+      </div>
+      <div style="padding:1.5rem;border:1px solid rgba(184,134,11,0.15);background:rgba(184,134,11,0.04);">
+        <p style="font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">El síntoma</p>
+        <p style="font-size:.88rem;color:rgba(237,233,224,0.6);line-height:1.6;">El Director de Operaciones toma decisiones sin datos fiables. El equipo improvisa. La rentabilidad no escala.</p>
+      </div>
+      <div style="padding:1.5rem;border:1px solid rgba(184,134,11,0.3);background:rgba(184,134,11,0.08);">
+        <p style="font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Lo que implantamos</p>
+        <p style="font-size:.88rem;color:rgba(237,233,224,0.7);line-height:1.6;">Un sistema operativo único para toda la red. Mismos KPIs, mismos procesos, mismo estándar de ejecución.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METODOLOGÍA ══ -->
+<section class="ent-section" id="metodologia">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+      <div class="reveal-left">
+        <span class="ent-label">Modelo de transformación</span>
+        <h2 class="ent-h2">Cuatro fases.<br><em style="color:var(--gold-lt);">Un sistema que funciona.</em></h2>
+        <div class="ent-divider"></div>
+        <p style="font-size:.94rem;color:rgba(237,233,224,0.6);line-height:1.85;font-weight:300;">No improvisamos. Cada proyecto sigue una metodología probada con cuatro fases secuenciales. El sistema no se cierra hasta que funciona de forma autónoma. La garantía de 30 días post-entrega lo asegura.</p>
+      </div>
+      <div class="reveal-right">
+        <div class="ent-phase">
+          <div class="ent-phase-num">01</div>
+          <div>
+            <span class="ent-phase-badge">Diagnóstico</span>
+            <p class="ent-phase-title">Radiografía operativa de la red</p>
+            <p class="ent-phase-desc">Análisis presencial y remoto de la situación actual: KPIs por punto de venta, procesos existentes, brechas de ejecución y dependencias críticas. Sin suposiciones.</p>
+          </div>
+        </div>
+        <div class="ent-phase">
+          <div class="ent-phase-num">02</div>
+          <div>
+            <span class="ent-phase-badge">Diseño</span>
+            <p class="ent-phase-title">Arquitectura del sistema operativo</p>
+            <p class="ent-phase-desc">Diseño del modelo de gestión: cuadro de mando centralizado, estándares de ejecución por rol y proceso, y protocolo de escalado de incidencias.</p>
+          </div>
+        </div>
+        <div class="ent-phase">
+          <div class="ent-phase-num">03</div>
+          <div>
+            <span class="ent-phase-badge">Implantación</span>
+            <p class="ent-phase-title">Despliegue en la red comercial</p>
+            <p class="ent-phase-desc">Implantación progresiva por zonas o regiones. Formación de los equipos en los nuevos estándares. Seguimiento hasta que cada punto de venta opera de forma autónoma.</p>
+          </div>
+        </div>
+        <div class="ent-phase">
+          <div class="ent-phase-num">04</div>
+          <div>
+            <span class="ent-phase-badge">Control</span>
+            <p class="ent-phase-title">Sistema de control directivo continuo</p>
+            <p class="ent-phase-desc">KPIs consolidados, reporting mensual a dirección, protocolo de mejora continua y gestión de incidencias (SOP-CAL-01). El sistema no se deteriora.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VS CONSULTORÍA TRADICIONAL ══ -->
+<section class="ent-section-alt">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
+      <span class="ent-label">Por qué CRS Growth</span>
+      <h2 class="ent-h2">Implantadores, no consultores.</h2>
+    </div>
+    <div class="ent-diff-grid reveal">
+      <div class="ent-diff-col" style="background:rgba(255,255,255,0.02);">
+        <p style="font-size:.72rem;font-weight:700;color:rgba(237,233,224,0.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.25rem;">Consultoría tradicional</p>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:rgba(255,255,255,0.2);">×</span><span style="color:rgba(237,233,224,0.4);">Entrega un informe y desaparece</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:rgba(255,255,255,0.2);">×</span><span style="color:rgba(237,233,224,0.4);">Soluciones genéricas de catálogo</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:rgba(255,255,255,0.2);">×</span><span style="color:rgba(237,233,224,0.4);">El equipo improvisa tras el proyecto</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:rgba(255,255,255,0.2);">×</span><span style="color:rgba(237,233,224,0.4);">Sin métricas de impacto definidas</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:rgba(255,255,255,0.2);">×</span><span style="color:rgba(237,233,224,0.4);">El cliente depende del consultor</span></div>
+      </div>
+      <div class="ent-diff-line"></div>
+      <div class="ent-diff-col" style="background:rgba(184,134,11,0.04);">
+        <p style="font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.25rem;">CRS Growth</p>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:var(--gold);">✦</span><span style="color:#EDE9E0;">Se queda hasta que el sistema funciona</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:var(--gold);">✦</span><span style="color:#EDE9E0;">Diagnóstico real antes de proponer nada</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:var(--gold);">✦</span><span style="color:#EDE9E0;">El equipo opera el sistema sin apoyo externo</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:var(--gold);">✦</span><span style="color:#EDE9E0;">KPIs de impacto definidos antes de empezar</span></div>
+        <div class="ent-diff-item"><span class="ent-diff-icon" style="color:var(--gold);">✦</span><span style="color:#EDE9E0;">El cliente aprende a operar solo. Eso es el objetivo.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPROMISO DE CALIDAD ══ -->
+<section class="ent-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
+      <span class="ent-label">Compromiso de calidad</span>
+      <h2 class="ent-h2">Trabajamos bajo metodologías<br><em style="color:var(--gold-lt);">estructuradas y auditables.</em></h2>
+      <p style="font-size:.94rem;color:rgba(237,233,224,0.55);max-width:520px;margin:1rem auto 0;line-height:1.8;">Las empresas grandes temen más que nada la desorganización de los consultores externos. Nuestros procedimientos están documentados, versionados y son auditables.</p>
+    </div>
+    <div class="ent-commitment reveal">
+      <div class="ent-commitment-item">
+        <span class="ent-commitment-icon">📋</span>
+        <p class="ent-commitment-title">SOPs certificados</p>
+        <p class="ent-commitment-desc">Procedimientos operativos estándar documentados para cada fase del proyecto. Nada se improvisa.</p>
+      </div>
+      <div class="ent-commitment-item">
+        <span class="ent-commitment-icon">🔍</span>
+        <p class="ent-commitment-title">Control de calidad (SOP-CAL-01)</p>
+        <p class="ent-commitment-desc">Revisión formal post-entrega, ficha de aprendizaje por proyecto y revisión trimestral de estándares.</p>
+      </div>
+      <div class="ent-commitment-item">
+        <span class="ent-commitment-icon">⚡</span>
+        <p class="ent-commitment-title">Gestión de incidencias</p>
+        <p class="ent-commitment-desc">Protocolo estructurado con acuse de recibo en máx. 4h laborables y resolución documentada.</p>
+      </div>
+      <div class="ent-commitment-item">
+        <span class="ent-commitment-icon">📈</span>
+        <p class="ent-commitment-title">Mejora continua</p>
+        <p class="ent-commitment-desc">Sistema de revisión periódica que actualiza procesos según la evolución del negocio del cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRUEBA SOCIAL ══ -->
+<section class="ent-section-alt">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
+      <span class="ent-label">Experiencia real</span>
+      <h2 class="ent-h2">Proyectos de transformación<br>en sectores distintos. El mismo método.</h2>
+    </div>
+    <div class="ent-proof-grid reveal">
+      <div class="ent-proof-item">
+        <div class="ent-proof-num">Retail</div>
+        <p class="ent-proof-label">Reestructuración operativa multi-punto de venta. Estandarización de procesos, formación de equipos y sistema de control unificado.</p>
+      </div>
+      <div class="ent-proof-item">
+        <div class="ent-proof-num">B2B</div>
+        <p class="ent-proof-label">Implantación de sistema comercial completo. Tasa de cierre de 18% → 52% en 8 semanas sin cambiar el equipo.</p>
+      </div>
+      <div class="ent-proof-item">
+        <div class="ent-proof-num">Servicios</div>
+        <p class="ent-proof-label">Diseño e implantación del sistema operativo completo. Empresa que funciona sin dependencia del fundador.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INVERSIÓN ══ -->
+<section class="ent-section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="reveal">
+      <div>
+        <span class="ent-label">Inversión</span>
+        <h2 class="ent-h2">Un traje a medida,<br><em style="color:var(--gold-lt);">no un producto de catálogo.</em></h2>
+        <div class="ent-divider"></div>
+        <p style="font-size:.97rem;color:rgba(237,233,224,0.6);line-height:1.85;margin-bottom:1.25rem;">La inversión se adapta al alcance del proyecto y a las dimensiones de la red comercial. Se define en detalle tras la sesión de diagnóstico estratégico, una vez que entendemos la realidad concreta de la operación.</p>
+        <p style="font-size:.88rem;color:rgba(237,233,224,0.4);line-height:1.7;">No publicamos precios porque cada proyecto es diferente. Lo que sí garantizamos es que la propuesta que recibas reflejará exactamente lo que necesitas, ni más ni menos.</p>
+      </div>
+      <div style="border:1px solid rgba(184,134,11,0.25);padding:2.5rem;background:rgba(184,134,11,0.04);">
+        <p style="font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.25rem;">El diagnóstico estratégico incluye</p>
+        <div style="display:flex;flex-direction:column;gap:.85rem;">
+          <div style="display:flex;gap:.85rem;"><span style="color:var(--gold);flex-shrink:0;">—</span><span style="font-size:.88rem;color:rgba(237,233,224,0.7);">Análisis de la situación operativa actual</span></div>
+          <div style="display:flex;gap:.85rem;"><span style="color:var(--gold);flex-shrink:0;">—</span><span style="font-size:.88rem;color:rgba(237,233,224,0.7);">Identificación de los cuellos de botella principales</span></div>
+          <div style="display:flex;gap:.85rem;"><span style="color:var(--gold);flex-shrink:0;">—</span><span style="font-size:.88rem;color:rgba(237,233,224,0.7);">Propuesta de modelo de transformación a medida</span></div>
+          <div style="display:flex;gap:.85rem;"><span style="color:var(--gold);flex-shrink:0;">—</span><span style="font-size:.88rem;color:rgba(237,233,224,0.7);">Hoja de ruta con hitos y plazos estimados</span></div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(184,134,11,0.15);">
+          <p style="font-size:.78rem;font-weight:700;color:#EDE9E0;margin-bottom:.3rem;">Sin compromiso · Sin coste</p>
+          <p style="font-size:.78rem;color:rgba(237,233,224,0.45);">La sesión de diagnóstico es gratuita. La propuesta llega en 48h.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="ent-cta-section" id="diagnostico">
+  <div class="container" style="position:relative;z-index:2;">
+    <span class="ent-label" style="display:block;margin-bottom:.85rem;">El primer paso</span>
+    <h2 class="ent-h2" style="max-width:600px;margin:0 auto 1rem;">¿Tu red comercial está<br><em style="color:var(--gold-lt);">lista para escalar?</em></h2>
+    <p style="font-size:.97rem;color:rgba(237,233,224,0.55);max-width:480px;margin:0 auto 2.5rem;line-height:1.8;">Una sesión de diagnóstico estratégico de 45 minutos. Revisamos la situación real de tu operación y te decimos si podemos ayudarte y cómo.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20el%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20nuestra%20operaci%C3%B3n%20de%20retail." target="_blank" rel="noopener" class="ent-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52zM12 22a9.94 9.94 0 0 1-5.07-1.38l-.36-.22-3.76 1 1.01-3.65-.24-.38A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/></svg>
+        Solicitar diagnóstico por WhatsApp
+      </a>
+      <a href="mailto:cristhiam.silva@crsgrowth.com?subject=Diagnóstico%20estratégico%20Enterprise%20Retail" style="display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border:1.5px solid rgba(184,134,11,0.35);color:var(--gold);font-size:.82rem;font-weight:700;letter-spacing:.05em;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,134,11,0.35)'">
+        Enviar email
+      </a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.76rem;color:rgba(237,233,224,0.3);">Sin compromiso · Diagnóstico gratuito · Respuesta en menos de 24h</p>
+  </div>
+</section>
+
+</main>
+
+<!-- Dark footer for enterprise -->
+<footer style="background:#080808;padding:2rem 0;border-top:1px solid rgba(184,134,11,0.15);">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <span style="font-size:.82rem;color:rgba(237,233,224,0.35);">© 2026 CRS Growth · CRS Strategies S.L.</span>
+    <div style="display:flex;gap:1.5rem;">
+      <a href="/" style="font-size:.8rem;color:rgba(237,233,224,0.4);text-decoration:none;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(237,233,224,0.4)'">Inicio</a>
+      <a href="/servicios/" style="font-size:.8rem;color:rgba(237,233,224,0.4);text-decoration:none;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(237,233,224,0.4)'">Servicios</a>
+      <a href="/diagnostico/" style="font-size:.8rem;color:var(--gold);text-decoration:none;">Diagnóstico gratuito</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

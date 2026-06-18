@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Diagnóstico gratuito CRS Start — Descubre en 3 minutos qué necesitas para constituir tu empresa correctamente."/>
+  <meta property="og:title" content="Diagnóstico CRS Start — ¿Puedo montar mi empresa?"/>
+  <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
+  <link rel="canonical" href="https://www.crsgrowth.com/start/diagnostico/"/>
+  <title>Diagnóstico CRS Start — CRS Growth</title>
+  <link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="stylesheet" href="/css/styles.css"/>
+  <style>
+    .ds-shell {
+      background: #fff;
+      border: 1px solid rgba(28,26,23,.08);
+      box-shadow: 0 14px 44px rgba(19,17,14,.08);
+      padding: 2.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .ds-progress-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .ds-progress-label {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .ds-progress-label span { color: var(--gold); }
+    .progress-track {
+      height: 4px;
+      background: var(--cream-3);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border-radius: 2px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      transition: width .4s cubic-bezier(.16,1,.3,1);
+      border-radius: 2px;
+    }
+    .ds-step { display: none; animation: fadeUp .3s both; }
+    .ds-step.active { display: block; }
+    .ds-question {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+    .ds-sub {
+      font-size: .88rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+    .ds-options { display: flex; flex-direction: column; gap: .6rem; }
+    .ds-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: .85rem;
+      padding: 1rem 1.25rem;
+      border: 1.5px solid var(--cream-3);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      background: var(--cream);
+      position: relative;
+    }
+    .ds-opt:hover { border-color: var(--gold); background: #fff; }
+    .ds-opt.selected { border-color: var(--gold); background: var(--cream); }
+    .ds-opt.selected::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+    .ds-opt-icon {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--cream-3);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: border-color .15s, background .15s;
+      position: relative;
+    }
+    .ds-opt.selected .ds-opt-icon {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .ds-opt.selected .ds-opt-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .ds-opt-check {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--cream-3);
+      flex-shrink: 0;
+      margin-top: 3px;
+      transition: border-color .15s, background .15s;
+      cursor: pointer;
+      position: relative;
+    }
+    .ds-opt.selected .ds-opt-check {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .ds-opt.selected .ds-opt-check::after {
+      content: '✓';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-52%);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .ds-opt-text { flex: 1; }
+    .ds-opt-label {
+      font-size: .93rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .ds-opt-desc {
+      font-size: .8rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    .ds-opt-badge {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(184,134,11,.1);
+      border: 1px solid rgba(184,134,11,.2);
+      padding: 2px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 3px;
+    }
+
+    /* Sub-step condicional */
+    .ds-sub-step {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1.25rem;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      animation: fadeUp .3s both;
+    }
+    .ds-sub-step.visible { display: block; }
+    .ds-sub-label {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .75rem;
+    }
+    .ds-sub-opts { display: flex; flex-direction: column; gap: .5rem; }
+    .ds-sub-opt {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .7rem 1rem;
+      border: 1.5px solid var(--cream-3);
+      cursor: pointer;
+      background: #fff;
+      transition: border-color .15s;
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .ds-sub-opt:hover { border-color: var(--gold); }
+    .ds-sub-opt.selected { border-color: var(--gold); background: rgba(184,134,11,.04); }
+
+    /* Multi-select hint */
+    .ds-multi-hint {
+      font-size: .76rem;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      padding: .5rem .75rem;
+      background: var(--cream);
+      border-left: 2px solid var(--gold);
+    }
+
+    /* Form fields */
+    .ds-field { margin-bottom: 1rem; }
+    .ds-label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: .4rem;
+    }
+    .ds-input {
+      width: 100%;
+      padding: .8rem 1rem;
+      border: 1.5px solid var(--cream-3);
+      background: var(--cream);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .94rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .15s;
+      box-sizing: border-box;
+    }
+    .ds-input:focus { border-color: var(--gold); background: #fff; }
+    .ds-input-opt {
+      font-size: .76rem;
+      color: var(--ink-muted);
+      margin-top: .25rem;
+    }
+    .ds-privacy {
+      font-size: .76rem;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-top: .75rem;
+      line-height: 1.5;
+    }
+
+    /* Navigation */
+    .ds-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--cream-3);
+    }
+    .ds-btn-back {
+      font-size: .82rem;
+      color: var(--ink-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .ds-btn-back:hover { color: var(--ink); }
+    .ds-btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .9rem 1.75rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      border: none;
+      cursor: pointer;
+      transition: background .15s, transform .15s;
+    }
+    .ds-btn-next:hover:not(:disabled) { background: var(--gold-lt); transform: translateY(-1px); }
+    .ds-btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .ds-btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .9rem 2rem;
+      background: var(--ink);
+      color: var(--gold);
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      border: none;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .ds-btn-submit:hover:not(:disabled) { background: var(--ink-2); }
+    .ds-btn-submit:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* RESULT */
+    .ds-result { display: none; animation: fadeUp .4s both; }
+    .ds-result.active { display: block; }
+    .ds-result-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(184,134,11,.08);
+      border: 1px solid rgba(184,134,11,.22);
+      padding: 4px 12px;
+      margin-bottom: 1rem;
+    }
+    .ds-result-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+    .ds-result-rule {
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      margin-bottom: 1.25rem;
+    }
+    .ds-result-body {
+      font-size: .97rem;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .ds-result-area {
+      background: var(--cream);
+      border: 1px solid rgba(184,134,11,.2);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .ds-result-area-label {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: .2rem;
+    }
+    .ds-result-area-text {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .ds-result-ctas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .ds-result-cta-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: .9rem;
+      background: #25D366;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .ds-result-cta-wa:hover { background: #1fbe5a; }
+    .ds-result-cta-email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: .9rem;
+      background: var(--ink);
+      color: var(--gold);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .ds-result-cta-email:hover { background: var(--ink-2); }
+    .ds-email-confirm {
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: .75rem 1rem;
+      font-size: .8rem;
+      color: var(--ink-muted);
+    }
+    .ds-loading {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .ds-loading.active { display: block; }
+    .ds-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--cream-3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 520px) {
+      .ds-shell { padding: 1.5rem; }
+      .ds-result-ctas { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+
+<!-- HERO -->
+<section style="background:var(--ink);padding:calc(var(--nav-h) + 3rem) 0 3rem;position:relative;overflow:hidden;">
+  <div style="position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(184,134,11,0.09);top:-100px;right:-100px;filter:blur(60px);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;text-align:center;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(184,134,11,.14);border:1px solid rgba(184,134,11,.3);padding:4px 12px 4px 8px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      CRS Start · Diagnóstico gratuito
+    </div>
+    <h1 class="font-display" style="font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--on-dark-hi);margin-bottom:.85rem;line-height:1.1;">
+      ¿Quieres montar tu empresa<br><em style="color:var(--gold-lt);">pero no sabes por dónde empezar?</em>
+    </h1>
+    <p style="font-size:1rem;color:var(--on-dark-md);max-width:520px;margin:0 auto 1.5rem;line-height:1.8;font-weight:300;">En 3 minutos te decimos exactamente cuál es tu situación, qué pasos tienes que dar y si puedes hacerlo gratis con el paro.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;font-size:.8rem;color:var(--on-dark-lo);">
+      <span>✦ Sin compromiso</span>
+      <span>✦ Sin registro</span>
+      <span>✦ Resultado inmediato</span>
+    </div>
+  </div>
+</section>
+
+<!-- FORM SECTION -->
+<section style="background:var(--cream-2);padding:3.5rem 0 4rem;">
+  <div class="container">
+
+    <div class="ds-shell">
+
+      <!-- Progress -->
+      <div class="ds-progress-wrap">
+        <span class="ds-progress-label">Paso <span id="step-num">1</span> de 5</span>
+        <span class="ds-progress-label" id="step-title-label">Tu situación</span>
+      </div>
+      <div class="progress-track"><div class="progress-bar" id="prog-bar"></div></div>
+
+      <!-- ══ PASO 1 — Situación ══ -->
+      <div class="ds-step active" id="step-1">
+        <p class="ds-question">¿Qué describe mejor tu situación ahora mismo?</p>
+        <p class="ds-sub">Sin letra pequeña — esta respuesta nos ayuda a orientarte bien desde el principio.</p>
+        <div class="ds-options" id="opts-situacion">
+          <div class="ds-opt" data-val="idea" onclick="selectOpt(this,'situacion')">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Tengo una idea y quiero montar algo</span>
+              <span class="ds-opt-desc">Todavía estoy evaluando si es el momento adecuado</span>
+            </div>
+          </div>
+          <div class="ds-opt" data-val="autonomo" onclick="selectOpt(this,'situacion')">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Trabajo por mi cuenta y quiero protegerme con una sociedad</span>
+              <span class="ds-opt-desc">Ya facturo como autónomo y quiero cambiar de estructura</span>
+            </div>
+          </div>
+          <div class="ds-opt" data-val="socios_idea" onclick="selectOpt(this,'situacion')">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Quiero montar empresa con otra persona</span>
+              <span class="ds-opt-desc">Tengo un socio o lo estoy valorando</span>
+            </div>
+          </div>
+          <div class="ds-opt" data-val="paro_rapido" onclick="selectOpt(this,'situacion')">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Estoy en paro y quiero aprovechar la prestación</span>
+              <span class="ds-opt-desc">Quiero capitalizarla antes de que se acabe</span>
+            </div>
+            <span class="ds-opt-badge">Urgente</span>
+          </div>
+          <div class="ds-opt" data-val="listo" onclick="selectOpt(this,'situacion')">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Ya lo tengo claro, solo necesito que alguien lo gestione</span>
+              <span class="ds-opt-desc">Sé lo que quiero, busco quién lo ejecute bien</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-nav">
+          <span></span>
+          <button class="ds-btn-next" id="next-1" disabled onclick="goTo(2)">Siguiente <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ══ PASO 2 — Situación laboral ══ -->
+      <div class="ds-step" id="step-2">
+        <p class="ds-question">¿Cuál es tu situación laboral actual?</p>
+        <p class="ds-sub">Esto determina qué opciones tienes — incluyendo si puedes financiar tu empresa con el paro.</p>
+        <div class="ds-options" id="opts-laboral">
+          <div class="ds-opt" data-val="cuenta_ajena" onclick="selectOpt(this,'laboral');showSubStep(false)">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Trabajo por cuenta ajena</span></div>
+          </div>
+          <div class="ds-opt" data-val="paro" onclick="selectOpt(this,'laboral');showSubStep(true)">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text">
+              <span class="ds-opt-label">Estoy en paro con prestación activa (SEPE)</span>
+            </div>
+            <span class="ds-opt-badge">Capitalización posible</span>
+          </div>
+          <div class="ds-opt" data-val="autonomo_lab" onclick="selectOpt(this,'laboral');showSubStep(false)">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Soy autónomo y quiero cambiar de estructura</span></div>
+          </div>
+          <div class="ds-opt" data-val="sin_prestacion" onclick="selectOpt(this,'laboral');showSubStep(false)">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">No estoy trabajando y no tengo prestación</span></div>
+          </div>
+          <div class="ds-opt" data-val="otro_lab" onclick="selectOpt(this,'laboral');showSubStep(false)">
+            <div class="ds-opt-icon"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Otra situación</span></div>
+          </div>
+        </div>
+
+        <!-- Sub-step condicional: tiempo de prestación -->
+        <div class="ds-sub-step" id="sub-paro">
+          <p class="ds-sub-label">¿Cuánto tiempo te queda de prestación aproximadamente?</p>
+          <div class="ds-sub-opts" id="opts-tiempo">
+            <div class="ds-sub-opt" data-val="menos3" onclick="selectSubOpt(this,'tiempo_paro')">
+              <div class="ds-opt-icon" style="width:16px;height:16px;"></div>
+              <span>Menos de 3 meses <strong style="color:var(--gold);margin-left:8px;">— Hay que actuar ya</strong></span>
+            </div>
+            <div class="ds-sub-opt" data-val="3a8" onclick="selectSubOpt(this,'tiempo_paro')">
+              <div class="ds-opt-icon" style="width:16px;height:16px;"></div>
+              <span>Entre 3 y 8 meses</span>
+            </div>
+            <div class="ds-sub-opt" data-val="mas8" onclick="selectSubOpt(this,'tiempo_paro')">
+              <div class="ds-opt-icon" style="width:16px;height:16px;"></div>
+              <span>Más de 8 meses</span>
+            </div>
+            <div class="ds-sub-opt" data-val="nosabe" onclick="selectSubOpt(this,'tiempo_paro')">
+              <div class="ds-opt-icon" style="width:16px;height:16px;"></div>
+              <span>No lo sé exactamente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-nav">
+          <button class="ds-btn-back" onclick="goTo(1)">← Anterior</button>
+          <button class="ds-btn-next" id="next-2" disabled onclick="goTo(3)">Siguiente <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ══ PASO 3 — Preocupaciones ══ -->
+      <div class="ds-step" id="step-3">
+        <p class="ds-question">¿Qué es lo que más te preocupa o no tienes claro?</p>
+        <p class="ds-sub">Puedes marcar todas las que apliquen — esto nos ayuda a orientarte mejor.</p>
+        <div class="ds-multi-hint">Selección múltiple — marca todo lo que te genera dudas</div>
+        <div class="ds-options" id="opts-preocupaciones">
+          <div class="ds-opt" data-val="forma_juridica" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">No sé qué tipo de empresa me conviene</span><span class="ds-opt-desc">SL, autónomo, cooperativa…</span></div>
+          </div>
+          <div class="ds-opt" data-val="errores_legales" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Me da miedo cometer errores legales que luego sean caros</span></div>
+          </div>
+          <div class="ds-opt" data-val="fiscal" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">No entiendo la parte fiscal ni lo que tendré que pagar</span></div>
+          </div>
+          <div class="ds-opt" data-val="paro_como" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">No sé si puedo capitalizar el paro o cómo funciona</span></div>
+          </div>
+          <div class="ds-opt" data-val="socio" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Tengo dudas sobre cómo repartir la empresa con mi socio</span></div>
+          </div>
+          <div class="ds-opt" data-val="pasos" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">No sé qué pasos seguir ni en qué orden</span></div>
+          </div>
+          <div class="ds-opt" data-val="coste" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Me preocupa el coste total del proceso</span></div>
+          </div>
+          <div class="ds-opt" data-val="burocracia" onclick="toggleMulti(this,'preocupaciones')">
+            <div class="ds-opt-check"></div>
+            <div class="ds-opt-text"><span class="ds-opt-label">Quiero hacerlo rápido, no perder tiempo con burocracia</span></div>
+          </div>
+        </div>
+        <div class="ds-nav">
+          <button class="ds-btn-back" onclick="goTo(2)">← Anterior</button>
+          <button class="ds-btn-next" id="next-3" disabled onclick="goTo(4)">Siguiente <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ══ PASO 4 — Tu proyecto ══ -->
+      <div class="ds-step" id="step-4">
+        <p class="ds-question">Cuéntanos un poco más sobre tu proyecto</p>
+        <p class="ds-sub">Sin detalles técnicos — solo para entender dónde estás.</p>
+
+        <div class="ds-field">
+          <label class="ds-label">¿A qué se va a dedicar tu empresa? <span style="color:var(--gold)">*</span></label>
+          <input class="ds-input" type="text" id="input-sector" placeholder="Ej: tienda online de ropa, consultoría de marketing, clínica dental…" oninput="checkStep4()"/>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label class="ds-label" style="margin-bottom:.6rem;">¿Ya tienes clientes o ingresos, aunque sean informales?</label>
+          <div class="ds-options" id="opts-clientes" style="gap:.5rem;">
+            <div class="ds-opt" data-val="si" onclick="selectOpt(this,'clientes');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">Sí, ya tengo clientes o estoy facturando</span></div>
+            </div>
+            <div class="ds-opt" data-val="identificados" onclick="selectOpt(this,'clientes');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">Todavía no, pero los tengo identificados</span></div>
+            </div>
+            <div class="ds-opt" data-val="no" onclick="selectOpt(this,'clientes');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">No, estoy en fase de arranque</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="ds-label" style="margin-bottom:.6rem;">¿Tendrás socios en la empresa?</label>
+          <div class="ds-options" id="opts-socios" style="gap:.5rem;">
+            <div class="ds-opt" data-val="si" onclick="selectOpt(this,'socios');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">Sí, ya tengo socio/s</span></div>
+            </div>
+            <div class="ds-opt" data-val="no" onclick="selectOpt(this,'socios');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">No, lo monto yo solo</span></div>
+            </div>
+            <div class="ds-opt" data-val="quizas" onclick="selectOpt(this,'socios');checkStep4()">
+              <div class="ds-opt-icon"></div>
+              <div class="ds-opt-text"><span class="ds-opt-label">Todavía no lo tengo decidido</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-nav">
+          <button class="ds-btn-back" onclick="goTo(3)">← Anterior</button>
+          <button class="ds-btn-next" id="next-4" disabled onclick="goTo(5)">Siguiente <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ══ PASO 5 — Contacto ══ -->
+      <div class="ds-step" id="step-5">
+        <p class="ds-question">¿A dónde enviamos tu diagnóstico?</p>
+        <p class="ds-sub">Te enviamos el resultado ahora mismo. Sin spam, sin suscripciones.</p>
+
+        <div class="ds-field">
+          <label class="ds-label">Nombre <span style="color:var(--gold)">*</span></label>
+          <input class="ds-input" type="text" id="input-nombre" placeholder="¿Cómo te llamas?" oninput="checkStep5()"/>
+        </div>
+        <div class="ds-field">
+          <label class="ds-label">Email <span style="color:var(--gold)">*</span></label>
+          <input class="ds-input" type="email" id="input-email" placeholder="Tu email — aquí llega el resultado" oninput="checkStep5()"/>
+        </div>
+        <div class="ds-field">
+          <label class="ds-label">WhatsApp <span style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</span></label>
+          <input class="ds-input" type="tel" id="input-whatsapp" placeholder="+34 6XX XXX XXX — si quieres que te llamemos"/>
+          <p class="ds-input-opt">Si lo facilitas, te contactamos directamente.</p>
+        </div>
+
+        <div style="background:var(--cream);border-left:3px solid var(--gold);padding:.75rem 1rem;margin-bottom:1.5rem;font-size:.8rem;color:var(--ink-muted);line-height:1.6;">
+          Al enviar el diagnóstico recibirás el resultado en tu email de forma inmediata. Sin compromisos, sin suscripciones.
+        </div>
+
+        <div class="ds-nav">
+          <button class="ds-btn-back" onclick="goTo(4)">← Anterior</button>
+          <button class="ds-btn-submit" id="btn-submit" disabled onclick="submitDiag()">
+            Ver mi diagnóstico
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- LOADING -->
+      <div class="ds-loading" id="ds-loading">
+        <div class="ds-spinner"></div>
+        <p style="font-size:.9rem;color:var(--ink-muted);">Calculando tu diagnóstico…</p>
+      </div>
+
+      <!-- RESULT -->
+      <div class="ds-result" id="ds-result">
+        <div class="ds-result-tag"><span style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span> Diagnóstico completado</div>
+        <h2 class="ds-result-title" id="result-titulo"></h2>
+        <div class="ds-result-rule"></div>
+        <p class="ds-result-body" id="result-cuerpo"></p>
+        <div class="ds-result-area">
+          <p class="ds-result-area-label">Área de enfoque</p>
+          <p class="ds-result-area-text" id="result-tag"></p>
+        </div>
+        <p style="font-size:.9rem;color:var(--ink-soft);line-height:1.75;margin-bottom:1.5rem;">El siguiente paso es una sesión gratuita de 30 minutos donde revisamos tu situación concreta y te decimos exactamente qué tienes que hacer y en qué orden.</p>
+        <div class="ds-result-ctas">
+          <a href="https://wa.me/34697293677?text=Hola%2C%20acabo%20de%20hacer%20el%20diagn%C3%B3stico%20de%20CRS%20Start%20y%20me%20gustar%C3%ADa%20hablar%20con%20vosotros." target="_blank" rel="noopener" class="ds-result-cta-wa">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52zM12 22a9.94 9.94 0 0 1-5.07-1.38l-.36-.22-3.76 1 1.01-3.65-.24-.38A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/></svg>
+            Hablar por WhatsApp
+          </a>
+          <a href="mailto:cristhiam.silva@crsgrowth.com" class="ds-result-cta-email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Enviar email
+          </a>
+        </div>
+        <div class="ds-email-confirm" id="email-confirm"></div>
+      </div>
+
+    </div><!-- /.ds-shell -->
+  </div>
+</section>
+
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/main.js"></script>
+<script>
+// ── STATE ─────────────────────────────────────────────────────────
+var state = {
+  situacion: null, laboral: null, tiempo_paro: null,
+  preocupaciones: [], sector: null, clientes: null,
+  socios: null, nombre: null, email: null, whatsapp: null,
+};
+
+var STEP_TITLES = ['Tu situación', 'Situación laboral', 'Tus preocupaciones', 'Tu proyecto', 'Tus datos'];
+var ENDPOINT = '/.netlify/functions/diagnostico-start';
+
+// ── NAVIGATION ────────────────────────────────────────────────────
+function goTo(n) {
+  document.querySelectorAll('.ds-step').forEach(function(s){ s.classList.remove('active'); });
+  var target = document.getElementById('step-' + n);
+  if (target) target.classList.add('active');
+  document.getElementById('step-num').textContent = n;
+  document.getElementById('step-title-label').textContent = STEP_TITLES[n-1];
+  document.getElementById('prog-bar').style.width = (n * 20) + '%';
+  window.scrollTo({ top: document.querySelector('.ds-shell').offsetTop - 80, behavior: 'smooth' });
+}
+
+// ── SINGLE SELECT ─────────────────────────────────────────────────
+function selectOpt(el, field) {
+  var parent = el.closest('.ds-options');
+  parent.querySelectorAll('.ds-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  state[field] = el.dataset.val;
+
+  // Enable next buttons
+  if (field === 'situacion') {
+    document.getElementById('next-1').disabled = false;
+    // Auto-set laboral from situacion
+    if (el.dataset.val === 'paro_rapido') { state.laboral = 'paro'; }
+  }
+  if (field === 'laboral') {
+    var hasLaboral = !!state.laboral;
+    var needsTime = state.laboral === 'paro';
+    var hasTime = !!state.tiempo_paro;
+    document.getElementById('next-2').disabled = !(hasLaboral && (!needsTime || hasTime));
+  }
+}
+
+function selectSubOpt(el, field) {
+  el.closest('.ds-sub-opts').querySelectorAll('.ds-sub-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  state[field] = el.dataset.val;
+  // Re-check step 2
+  var hasLaboral = !!state.laboral;
+  var needsTime = state.laboral === 'paro';
+  var hasTime = !!state.tiempo_paro;
+  document.getElementById('next-2').disabled = !(hasLaboral && (!needsTime || hasTime));
+}
+
+function showSubStep(show) {
+  var sub = document.getElementById('sub-paro');
+  if (show) {
+    sub.classList.add('visible');
+  } else {
+    sub.classList.remove('visible');
+    state.tiempo_paro = null;
+    document.getElementById('next-2').disabled = false;
+  }
+}
+
+// ── MULTI SELECT ──────────────────────────────────────────────────
+function toggleMulti(el, field) {
+  el.classList.toggle('selected');
+  var val = el.dataset.val;
+  var idx = state[field].indexOf(val);
+  if (idx >= 0) { state[field].splice(idx, 1); } else { state[field].push(val); }
+  document.getElementById('next-3').disabled = state.preocupaciones.length === 0;
+}
+
+// ── STEP 4 VALIDATION ─────────────────────────────────────────────
+function checkStep4() {
+  state.sector = document.getElementById('input-sector').value.trim();
+  var ok = state.sector.length > 2 && state.clientes && state.socios;
+  document.getElementById('next-4').disabled = !ok;
+}
+
+// ── STEP 5 VALIDATION ─────────────────────────────────────────────
+function checkStep5() {
+  state.nombre = document.getElementById('input-nombre').value.trim();
+  state.email = document.getElementById('input-email').value.trim();
+  state.whatsapp = document.getElementById('input-whatsapp').value.trim();
+  var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);
+  document.getElementById('btn-submit').disabled = !(state.nombre && emailOk);
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────
+async function submitDiag() {
+  // Hide steps, show loading
+  document.querySelectorAll('.ds-step').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelector('.ds-progress-wrap').style.opacity = '0';
+  document.querySelector('.progress-track').style.opacity = '0';
+  document.getElementById('ds-loading').classList.add('active');
+
+  try {
+    var res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(state),
+    });
+    var json = await res.json();
+
+    document.getElementById('ds-loading').classList.remove('active');
+
+    if (json.ok && json.profile) {
+      document.getElementById('result-titulo').textContent = json.profile.titulo;
+      document.getElementById('result-cuerpo').textContent = json.profile.cuerpo;
+      document.getElementById('result-tag').textContent = json.profile.tag;
+      document.getElementById('email-confirm').textContent =
+        '✓ Hemos enviado el resultado a ' + state.email + '. Revisa también el spam si no lo ves.';
+      document.getElementById('ds-result').classList.add('active');
+    } else {
+      showError(json.error || 'Error desconocido');
+    }
+  } catch(e) {
+    document.getElementById('ds-loading').classList.remove('active');
+    showError('Error de conexión. Por favor inténtalo de nuevo.');
+  }
+}
+
+function showError(msg) {
+  var shell = document.querySelector('.ds-shell');
+  var err = document.createElement('div');
+  err.style.cssText = 'background:#fff0f0;border:1px solid #f00;padding:1rem 1.25rem;font-size:.9rem;color:#c00;margin-top:1rem;';
+  err.textContent = msg;
+  shell.appendChild(err);
+  goTo(5);
+}
+</script>
+</body>
+</html>

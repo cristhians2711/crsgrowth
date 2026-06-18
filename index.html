@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="CRS Growth — Diseñamos e implantamos los sistemas internos que hacen que tu empresa funcione sin depender de ti. Procesos, ventas y estructura para escalar."/>
+  <meta name="description" content="CRS Growth — Sistemas de gestión para PyMEs y arquitectura operativa para retail corporativo. Procesos, ventas y estructura para escalar."/>
   <meta property="og:title" content="CRS Growth — Tu empresa funciona. Tú diriges."/>
   <meta property="og:description" content="Diseñamos e implantamos sistemas internos, comerciales y operativos para que tu empresa deje de depender de ti."/>
   <meta property="og:image" content="https://www.crsgrowth.com/logo.png"/>
@@ -11,9 +11,6 @@
   <title>CRS Growth — Tu empresa funciona. Tú diriges.</title>
   <link rel="icon" type="image/png" href="/logo.png"/>
   <link rel="stylesheet" href="/css/styles.css"/>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"CRS Growth","url":"https://www.crsgrowth.com","logo":"https://www.crsgrowth.com/logo.png","description":"Consultoría de alto rendimiento empresarial. Sistemas internos, procesos y ventas para empresas que quieren escalar.","contactPoint":{"@type":"ContactPoint","contactType":"customer service","availableLanguage":"Spanish"}}
-  </script>
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -21,144 +18,179 @@
 
 <!-- ══ HERO ══ -->
 <section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;background:var(--cream);padding-top:var(--nav-h);">
-  <div class="mesh" style="width:520px;height:520px;background:rgba(184,134,11,0.07);top:-80px;right:-120px;"></div>
+  <div style="position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(184,134,11,0.07);top:-80px;right:-120px;filter:blur(80px);pointer-events:none;animation:glow 6s ease-in-out infinite;"></div>
   <div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(184,134,11,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,134,11,0.04) 1px,transparent 1px);background-size:60px 60px;"></div>
 
-  <div class="container" style="position:relative;z-index:2;padding:3rem 2rem 5rem;">
-    <div style="max-width:660px;margin:0 auto;text-align:center;">
-      <div class="chip" style="margin-bottom:1.25rem;animation:fadeUp 0.5s both 0.05s;display:inline-flex;"><span class="chip-dot"></span>Consultoría de Alto Rendimiento Empresarial</div>
-      <h1 class="font-display" style="font-size:clamp(3rem,6vw,5rem);font-weight:300;color:var(--ink);margin-bottom:1.1rem;line-height:1.02;animation:fadeUp 0.6s both 0.12s;">
-        Tu empresa funciona.<br>
-        <span style="font-style:italic;color:var(--gold);">Tú diriges.</span>
-      </h1>
-      <p style="font-size:1.05rem;color:var(--ink-soft);line-height:1.8;max-width:520px;margin:0 auto 2rem;font-weight:300;animation:fadeUp 0.6s both 0.22s;">
-        Diseñamos e implantamos los sistemas internos que hacen que tu negocio funcione sin depender de ti. Procesos, ventas y estructura listos para escalar.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;margin-bottom:2.5rem;animation:fadeUp 0.6s both 0.3s;">
-        <a href="/diagnostico/" class="btn-gold">Diagnóstico gratuito <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="/servicios/" class="btn-outline">Ver servicios</a>
+  <div class="container" style="position:relative;z-index:2;padding:3rem 2rem 6rem;">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+      <div class="chip" style="margin-bottom:1.25rem;animation:fadeUp .5s both .05s;display:inline-flex;">
+        <span class="chip-dot"></span>Consultoría de Alto Rendimiento Empresarial
       </div>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:3rem;padding-top:2rem;border-top:1px solid var(--rule-light);animation:fadeUp 0.6s both 0.38s;">
-        <div style="text-align:center;"><span class="font-display" style="font-size:2.6rem;font-weight:300;color:var(--gold);line-height:1;display:block;">100%</span><span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;display:block;">Implantación real</span></div>
-        <div style="text-align:center;"><span class="font-display" style="font-size:2.6rem;font-weight:300;color:var(--gold);line-height:1;display:block;">5</span><span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;display:block;">Servicios core</span></div>
-        <div style="text-align:center;"><span class="font-display" style="font-size:2.6rem;font-weight:300;color:var(--gold);line-height:1;display:block;">0h</span><span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;display:block;">Improvisación tras sistema</span></div>
+      <h1 class="font-display" style="font-size:clamp(2.8rem,6vw,4.8rem);font-weight:300;color:var(--ink);margin-bottom:1rem;line-height:1.02;animation:fadeUp .6s both .12s;">
+        Tu empresa funciona.<br><em style="color:var(--gold);font-style:italic;">Tú diriges.</em>
+      </h1>
+      <p style="font-size:1.05rem;color:var(--ink-soft);line-height:1.8;max-width:500px;margin:0 auto 2.5rem;font-weight:300;animation:fadeUp .6s both .22s;">
+        Diseñamos e implantamos sistemas operativos y comerciales para PyMEs que quieren escalar, y arquitectura operativa para cadenas de retail que necesitan estandarizar y crecer.
+      </p>
+
+      <!-- DOS RUTAS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-light);margin-bottom:2.5rem;animation:fadeUp .6s both .3s;" class="split-routes">
+        <!-- Ruta A: PyME -->
+        <div style="background:#fff;padding:2rem 1.75rem;text-align:left;border-top:3px solid var(--gold);transition:background .2s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='#fff'">
+          <div style="font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Para PyMEs y emprendedores</div>
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:var(--ink);margin-bottom:.5rem;line-height:1.2;">Sistemas de Gestión</h3>
+          <p style="font-size:.84rem;color:var(--ink-muted);line-height:1.65;margin-bottom:1.25rem;">Tu empresa deja de depender de ti. Procesos, ventas y control directivo estructurados para escalar.</p>
+          <a href="/diagnostico/" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--gold);color:var(--ink);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='var(--gold-lt)'" onmouseout="this.style.background='var(--gold)'">
+            Diagnóstico gratuito →
+          </a>
+        </div>
+        <!-- Ruta B: Enterprise -->
+        <div style="background:var(--ink);padding:2rem 1.75rem;text-align:left;border-top:3px solid var(--gold);transition:background .2s;cursor:pointer;" onclick="window.location='/enterprise/'" onmouseover="this.style.background='#1A1A1A'" onmouseout="this.style.background='var(--ink)'">
+          <div style="font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Para retail corporativo</div>
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:#EDE9E0;margin-bottom:.5rem;line-height:1.2;">Ingeniería de Negocio Retail</h3>
+          <p style="font-size:.84rem;color:rgba(237,233,224,0.6);line-height:1.65;margin-bottom:1.25rem;">Arquitectura operativa para cadenas. KPIs centralizados, procesos estandarizados, rentabilidad escalable.</p>
+          <a href="/enterprise/" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:transparent;border:1.5px solid rgba(184,134,11,0.4);color:var(--gold);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,134,11,0.4)'">
+            Ver modelo Enterprise →
+          </a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:3rem;padding-top:2rem;border-top:1px solid var(--rule-light);animation:fadeUp .6s both .38s;">
+        <div style="text-align:center;"><span class="font-display" style="font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;display:block;">100%</span><span style="font-size:.7rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;display:block;">Implantación real</span></div>
+        <div style="text-align:center;"><span class="font-display" style="font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;display:block;">30d</span><span style="font-size:.7rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;display:block;">Garantía post-entrega</span></div>
+        <div style="text-align:center;"><span class="font-display" style="font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;display:block;">0h</span><span style="font-size:.7rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;display:block;">Improvisación tras sistema</span></div>
       </div>
     </div>
   </div>
 
   <!-- Ticker -->
-  <div style="position:absolute;bottom:0;left:0;right:0;border-top:1px solid var(--rule-light);background:var(--cream-2);padding:0.75rem 0;">
-    <div class="ticker-wrap">
-      <div class="ticker-inner" style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS Start — Constituye tu empresa</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS NEXUS — Sistema comercial</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS OPS — Sistema operativo</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS BLUEPRINT — Transformación global</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS CONTROL — Mantenimiento mensual</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS RETAINER — Dirección externa</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS Start — Constituye tu empresa</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS NEXUS — Sistema comercial</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS OPS — Sistema operativo</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS BLUEPRINT — Transformación global</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS CONTROL — Mantenimiento mensual</span>
-        <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>CRS RETAINER — Dirección externa</span>
+  <div style="position:absolute;bottom:0;left:0;right:0;border-top:1px solid var(--rule-light);background:var(--cream-2);padding:.7rem 0;">
+    <div class="ticker-wrap"><div class="ticker-inner" style="font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);">
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS Start — Constituye tu empresa</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS NEXUS — Sistema comercial</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS OPS — Sistema operativo</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS BLUEPRINT — Transformación global</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>Enterprise Retail — Arquitectura operativa</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS CONTROL — Mantenimiento mensual</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS Start — Constituye tu empresa</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS NEXUS — Sistema comercial</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS OPS — Sistema operativo</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS BLUEPRINT — Transformación global</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>Enterprise Retail — Arquitectura operativa</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);"></span>CRS CONTROL — Mantenimiento mensual</span>
+    </div></div>
+  </div>
+</section>
+
+<!-- ══ DIAGNÓSTICOS ══ -->
+<section style="background:var(--cream-2);padding:3.5rem 0;border-top:1px solid var(--rule-light);border-bottom:1px solid var(--rule-light);">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
+      <div class="chip" style="display:inline-flex;margin-bottom:.85rem;"><span class="chip-dot"></span>Diagnósticos gratuitos</div>
+      <h2 class="font-display" style="font-size:clamp(1.6rem,3vw,2.3rem);font-weight:300;color:var(--ink);margin-bottom:.5rem;">¿Por dónde empiezas?<br><em style="color:var(--gold);">Primero el diagnóstico.</em></h2>
+      <p style="font-size:.94rem;color:var(--ink-muted);max-width:480px;margin:0 auto;line-height:1.75;font-weight:300;">Tres caminos distintos. Todos empiezan con un diagnóstico gratuito que te dice exactamente qué necesitas y en qué orden.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-light);" class="stagger">
+      <div class="reveal" style="background:#fff;padding:2rem 1.75rem;border-top:3px solid var(--gold);transition:background .2s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='#fff'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">CRS Start</span></div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:300;color:var(--ink);margin-bottom:.5rem;line-height:1.2;">¿Quieres crear tu empresa?</h3>
+        <p style="font-size:.84rem;color:var(--ink-muted);line-height:1.7;margin-bottom:1.25rem;">Descubre si puedes capitalizar el paro, qué estructura te conviene y qué pasos tienes que dar. 3 minutos, resultado inmediato.</p>
+        <a href="/start/diagnostico/" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:var(--gold);color:var(--ink);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-decoration:none;">Diagnóstico Start &rarr;</a>
+      </div>
+      <div class="reveal" style="background:#fff;padding:2rem 1.75rem;border-top:3px solid transparent;transition:background .2s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='#fff'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">PyME / Empresa</span></div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:300;color:var(--ink);margin-bottom:.5rem;line-height:1.2;">¿Tu empresa depende demasiado de ti?</h3>
+        <p style="font-size:.84rem;color:var(--ink-muted);line-height:1.7;margin-bottom:1.25rem;">Identifica en qué áreas tienes los mayores cuellos de botella: ventas, operaciones o dirección. Resultado inmediato con recomendación concreta.</p>
+        <a href="/diagnostico/" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:var(--ink);color:var(--cream);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-decoration:none;">Diagnóstico empresarial &rarr;</a>
+      </div>
+      <div class="reveal" style="background:var(--ink);padding:2rem 1.75rem;border-top:3px solid var(--gold);transition:background .2s;" onmouseover="this.style.background='#1A1A1A'" onmouseout="this.style.background='var(--ink)'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">Retail Enterprise</span></div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:300;color:#EDE9E0;margin-bottom:.5rem;line-height:1.2;">¿Tu red comercial está lista para escalar?</h3>
+        <p style="font-size:.84rem;color:rgba(237,233,224,.6);line-height:1.7;margin-bottom:1.25rem;">Diagnóstico estratégico para directores de operaciones de retail. Revisamos KPIs, procesos y puntos de mejora en 45 minutos.</p>
+        <a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20el%20diagn%C3%B3stico%20estrat%C3%A9gico%20Enterprise." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:var(--gold);color:var(--ink);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-decoration:none;">Solicitar diagn&oacute;stico &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CRS START DESTACADO ══ -->
+<!-- ══ CRS START ══ -->
 <section style="background:var(--ink);padding:4rem 0;position:relative;overflow:hidden;">
-  <div class="mesh" style="width:480px;height:480px;background:rgba(184,134,11,0.09);top:-80px;right:-80px;"></div>
+  <div style="position:absolute;width:480px;height:480px;border-radius:50%;background:rgba(184,134,11,0.09);top:-80px;right:-80px;filter:blur(80px);pointer-events:none;"></div>
   <div class="container" style="position:relative;z-index:2;">
     <div class="grid-star reveal">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(184,134,11,0.14);border:1px solid rgba(184,134,11,0.3);padding:4px 12px 4px 8px;font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;">
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(184,134,11,.14);border:1px solid rgba(184,134,11,.3);padding:4px 12px 4px 8px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           CRS Start · Servicio de entrada
         </div>
-        <h2 class="font-display" style="font-size:clamp(1.6rem,3vw,2.5rem);font-weight:300;color:var(--on-dark-hi);margin-bottom:0.85rem;">
-          ¿Vas a crear tu empresa? <em style="color:var(--gold-lt);font-style:italic;">Nosotros lo gestionamos todo.</em>
-        </h2>
-        <p style="font-size:0.94rem;color:var(--on-dark-md);line-height:1.85;max-width:580px;font-weight:300;">Denominación, notaría, CIRCE, Hacienda, Registro Mercantil y certificado digital. Un solo interlocutor desde el día 1. Tú solo vas a firmar.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.1rem;">
-          <span style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:rgba(237,233,224,0.6);"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>Empresa lista en 15–45 días</span>
-          <span style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:rgba(237,233,224,0.6);"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>Capitalización del paro incluida</span>
-          <span style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:rgba(237,233,224,0.6);"><span style="width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>Sin sorpresas en el precio</span>
+        <h2 class="font-display" style="font-size:clamp(1.5rem,3vw,2.3rem);font-weight:300;color:var(--on-dark-hi);margin-bottom:.75rem;">¿Vas a crear tu empresa? <em style="color:var(--gold-lt);">Nosotros lo gestionamos todo.</em></h2>
+        <p style="font-size:.93rem;color:var(--on-dark-md);line-height:1.85;max-width:560px;font-weight:300;">Denominación, notaría, CIRCE, Hacienda, Registro Mercantil y certificado digital. Un solo interlocutor. Tú solo vas a firmar.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;">
+          <span style="font-size:.78rem;color:var(--on-dark-lo);display:flex;align-items:center;gap:5px;"><span style="color:var(--gold);">✦</span> Empresa lista en 15–45 días</span>
+          <span style="font-size:.78rem;color:var(--on-dark-lo);display:flex;align-items:center;gap:5px;"><span style="color:var(--gold);">✦</span> Capitalización del paro incluida</span>
+          <span style="font-size:.78rem;color:var(--on-dark-lo);display:flex;align-items:center;gap:5px;"><span style="color:var(--gold);">✦</span> Sin sorpresas en el precio</span>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-end;flex-shrink:0;">
-        <a href="/start/" class="btn-gold">Ver CRS Start <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="/diagnostico/" style="font-size:0.76rem;color:rgba(237,233,224,0.45);border-bottom:1px solid rgba(255,255,255,0.14);padding-bottom:1px;">o haz el diagnóstico gratuito →</a>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;flex-shrink:0;">
+        <a href="/start/diagnostico/" class="btn-gold">Diagnóstico CRS Start <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/constitucion/" style="font-size:.76rem;color:rgba(237,233,224,.4);border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:1px;text-decoration:none;">o ver el servicio completo →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SERVICIOS ══ -->
-<section id="servicios" class="section" style="background:var(--cream);">
+<!-- ══ SERVICIOS PYME ══ -->
+<section class="section" style="background:var(--cream);">
   <div class="container">
-    <div class="grid-2col reveal" style="margin-bottom:3.5rem;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;margin-bottom:3rem;" class="reveal">
       <div>
-        <div class="chip" style="margin-bottom:1rem;"><span class="chip-dot"></span>Servicios principales</div>
-        <h2 class="font-display section-title">Cinco sistemas que transforman <em>cómo funciona tu empresa</em></h2>
+        <div class="chip" style="margin-bottom:1rem;"><span class="chip-dot"></span>Para PyMEs</div>
+        <h2 class="font-display section-title">Sistemas que hacen que tu empresa funcione sin ti.</h2>
       </div>
-      <p style="color:var(--ink-soft);font-size:0.97rem;line-height:1.8;font-weight:300;">No entregamos informes. Construimos sistemas que tu empresa usa el día siguiente de entregados. Cada servicio resuelve un problema concreto y genera un impacto medible.</p>
+      <p style="color:var(--ink-soft);font-size:.97rem;line-height:1.85;font-weight:300;padding-top:.5rem;">Cinco servicios que resuelven el mismo problema desde ángulos distintos: la empresa depende demasiado del fundador. Cada servicio tiene un resultado medible y un plazo definido.</p>
     </div>
     <div class="service-grid stagger">
       <div class="service-card reveal">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-          <div class="service-num" style="margin-bottom:0;">01</div>
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);padding:3px 8px;">Ventas</span>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;"><div class="service-num" style="margin-bottom:0;">01</div><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);padding:3px 8px;">Ventas</span></div>
         <h3>CRS NEXUS</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Sistema Comercial</div>
-        <p>Tu equipo cierra sin depender de ti. Diseñamos el sistema de ventas completo: oferta, argumentario, CRM y métricas de cierre predecibles.</p>
+        <div class="service-tag" style="margin-bottom:.5rem;">Sistema Comercial</div>
+        <p>Tu equipo cierra sin depender de ti. CRM, argumentario, scripts y formación completa.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-light);font-size:.78rem;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;">Inversión a medida →</div>
       </div>
       <div class="service-card reveal">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-          <div class="service-num" style="margin-bottom:0;">02</div>
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);padding:3px 8px;">Operaciones</span>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;"><div class="service-num" style="margin-bottom:0;">02</div><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);padding:3px 8px;">Operaciones</span></div>
         <h3>CRS OPS</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Sistema Operativo</div>
-        <p>Tu empresa funciona sin que estés en todo. Procesos documentados, manuales operativos, KPIs y cuadro de mando. Tres módulos, un resultado.</p>
+        <div class="service-tag" style="margin-bottom:.5rem;">Sistema Operativo</div>
+        <p>Procesos documentados, manuales operativos y cuadro de mando. Tu empresa funciona sin que estés en todo.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-light);font-size:.78rem;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;">Inversión a medida →</div>
       </div>
       <div class="service-card reveal">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-          <div class="service-num" style="margin-bottom:0;">03</div>
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);padding:3px 8px;">Transformación</span>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;"><div class="service-num" style="margin-bottom:0;">03</div><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);padding:3px 8px;">Transformación</span></div>
         <h3>CRS BLUEPRINT</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Reestructuración Global</div>
-        <p>Cuando la empresa ha crecido pero la estructura no ha crecido con ella. Rediseño completo: modelo, comercial, operación y escalabilidad.</p>
+        <div class="service-tag" style="margin-bottom:.5rem;">Reestructuración Global</div>
+        <p>Modelo, comercial, operación y equipo. Para cuando la empresa ha crecido pero la estructura no.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-light);font-size:.78rem;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;">Inversión a medida →</div>
       </div>
       <div class="service-card reveal">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-          <div class="service-num" style="margin-bottom:0;">04</div>
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);padding:3px 8px;">Recurrente</span>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;"><div class="service-num" style="margin-bottom:0;">04</div><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);padding:3px 8px;">Recurrente</span></div>
         <h3>CRS CONTROL</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Mantenimiento Mensual</div>
-        <p>Lo que no se mide, se deteriora. Mantenemos el sistema activo mes a mes: KPIs, ajustes de proceso y reunión directiva mensual.</p>
+        <div class="service-tag" style="margin-bottom:.5rem;">Mantenimiento Mensual</div>
+        <p>KPIs, ajustes de proceso y reunión directiva mensual. El sistema que construiste no retrocede.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-light);font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--gold);">500€ – 2.000€/mes</div>
       </div>
       <div class="service-card reveal">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-          <div class="service-num" style="margin-bottom:0;">05</div>
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);padding:3px 8px;">Dirección</span>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;"><div class="service-num" style="margin-bottom:0;">05</div><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);padding:3px 8px;">Dirección</span></div>
         <h3>CRS RETAINER</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Dirección Externa</div>
-        <p>Dirección operativa o comercial externa sin el coste de un director interno. Para empresarios que necesitan un interlocutor estratégico de confianza.</p>
+        <div class="service-tag" style="margin-bottom:.5rem;">Dirección Externa</div>
+        <p>Criterio directivo de alto nivel sin el coste de un director interno. Plazas limitadas.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-light);font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--gold);">1.500€ – 4.000€/mes</div>
       </div>
       <div class="service-card reveal" style="background:var(--ink);cursor:pointer;" onclick="window.location='/paquetes/'">
-        <div style="margin-bottom:1.25rem;">
-          <span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,0.14);border:1px solid rgba(184,134,11,0.3);padding:3px 8px;">Paquetes</span>
-        </div>
+        <div style="margin-bottom:1rem;"><span style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(184,134,11,.14);border:1px solid rgba(184,134,11,.3);padding:3px 8px;">Paquetes</span></div>
         <h3 style="color:var(--on-dark-hi);">Starter · Growth · Enterprise</h3>
-        <div class="service-tag" style="margin-bottom:0.6rem;">Combinaciones cerradas</div>
-        <p style="color:var(--on-dark-md);">¿No sabes por dónde empezar? Tenemos tres paquetes que combinan servicios según el momento de tu empresa.</p>
-        <div style="margin-top:1.25rem;font-size:0.76rem;font-weight:700;color:var(--gold);letter-spacing:0.04em;">Ver paquetes →</div>
+        <div class="service-tag" style="margin-bottom:.5rem;">Combinaciones cerradas</div>
+        <p style="color:var(--on-dark-md);">¿No sabes por dónde empezar? Combinamos servicios según el momento de tu empresa.</p>
+        <div style="margin-top:1.25rem;font-size:.76rem;font-weight:700;color:var(--gold);letter-spacing:.04em;">Ver paquetes →</div>
       </div>
     </div>
     <div style="text-align:center;margin-top:2rem;" class="reveal">
@@ -167,83 +199,80 @@
   </div>
 </section>
 
-<!-- ══ METODOLOGÍA ══ -->
-<section id="metodologia" class="section" style="background:var(--ink-2);position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-100px;right:-100px;width:450px;height:450px;border-radius:50%;background:rgba(184,134,11,0.1);filter:blur(70px);pointer-events:none;"></div>
+<!-- ══ ENTERPRISE STRIP ══ -->
+<section style="background:var(--ink-2);padding:3.5rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(184,134,11,.07);filter:blur(60px);pointer-events:none;"></div>
   <div class="container" style="position:relative;z-index:2;">
+    <div class="grid-star reveal">
+      <div>
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;">Para cadenas de retail</div>
+        <h2 class="font-display" style="font-size:clamp(1.5rem,3vw,2.3rem);font-weight:300;color:#EDE9E0;margin-bottom:.75rem;line-height:1.1;">
+          Arquitectura operativa para retail.<br><em style="color:var(--gold-lt);">KPIs, procesos y rentabilidad a escala.</em>
+        </h2>
+        <p style="font-size:.93rem;color:rgba(237,233,224,.6);line-height:1.8;max-width:540px;font-weight:300;">Centralizamos UPT, tasa de conversión, ticket medio y mermas operativas. Estandarizamos los procesos de la red. Escalamos la rentabilidad sin añadir caos.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:2rem;margin-top:1.25rem;">
+          <span style="font-size:.76rem;color:var(--on-dark-lo);">✦ Sin precio fijo — inversión a medida</span>
+          <span style="font-size:.76rem;color:var(--on-dark-lo);">✦ SOPs certificados propios</span>
+          <span style="font-size:.76rem;color:var(--on-dark-lo);">✦ 4 fases metodología propia</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;flex-shrink:0;">
+        <a href="/enterprise/" style="display:inline-flex;align-items:center;gap:6px;padding:11px 22px;background:var(--gold);color:var(--ink);font-size:.78rem;font-weight:700;letter-spacing:.05em;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='var(--gold-lt)'" onmouseout="this.style.background='var(--gold)'">
+          Ver modelo Enterprise <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20el%20modelo%20Enterprise%20para%20retail." target="_blank" rel="noopener" style="font-size:.76rem;color:rgba(237,233,224,.35);border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:1px;text-decoration:none;">o contactar directamente →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METODOLOGÍA ══ -->
+<section class="section" style="background:var(--cream-2);">
+  <div class="container">
     <div class="grid-2col-lg">
       <div class="reveal-left">
         <div class="chip" style="margin-bottom:1.25rem;"><span class="chip-dot"></span>Cómo trabajamos</div>
-        <h2 class="font-display" style="font-size:clamp(1.9rem,3.5vw,3rem);font-weight:300;color:#EDE9E0;line-height:1.08;margin-bottom:1.1rem;">Un proceso que genera <em style="color:var(--gold-lt);font-style:italic;">resultados reales</em></h2>
-        <p style="color:rgba(237,233,224,0.65);line-height:1.85;font-size:0.97rem;margin-bottom:2rem;font-weight:300;">No trabajamos con informes que se archivan. Construimos sistemas que el equipo usa el día siguiente de entregados. Sin teoría. Con implantación.</p>
+        <h2 class="font-display" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:var(--ink);margin-bottom:1rem;line-height:1.08;">Un proceso que genera <em style="color:var(--gold);">resultados reales.</em></h2>
+        <p style="color:var(--ink-soft);line-height:1.85;font-size:.97rem;margin-bottom:1.75rem;font-weight:300;">No trabajamos con informes que se archivan. Construimos sistemas que el equipo usa desde el primer día. Sin teoría. Con implantación real.</p>
         <a href="/diagnostico/" class="btn-gold">Empezar diagnóstico gratuito <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <div style="margin-top:2.5rem;border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;">
-          <div class="meto-step"><div class="meto-num">01</div><div><div class="meto-title">Diagnóstico <span class="meto-badge">48–72h</span></div><div class="meto-desc">Estado real sin filtros. Procesos, equipo y ventas bajo lupa.</div></div></div>
-          <div class="meto-step"><div class="meto-num">02</div><div><div class="meto-title">Diseño <span class="meto-badge">1–2 sem</span></div><div class="meto-desc">Sistema a medida validado antes de implantar. No plantillas.</div></div></div>
-          <div class="meto-step"><div class="meto-num">03</div><div><div class="meto-title">Implantación <span class="meto-badge">4–12 sem</span></div><div class="meto-desc">Contigo, no para ti. Formamos al equipo hasta que funciona solo.</div></div></div>
-          <div class="meto-step"><div class="meto-num">04</div><div><div class="meto-title">Control <span class="meto-badge">Continuo</span></div><div class="meto-desc">KPIs y seguimiento mensual para que el sistema no se deteriore.</div></div></div>
+        <div style="margin-top:2rem;border-top:1px solid var(--rule-light);padding-top:1.75rem;">
+          <div class="meto-step"><div class="meto-num" style="background:rgba(28,26,23,.05);border-color:rgba(28,26,23,.15);color:var(--ink-muted);">01</div><div><div class="meto-title" style="color:var(--ink);">Diagnóstico <span class="meto-badge">48–72h</span></div><div class="meto-desc" style="color:var(--ink-muted);">Estado real sin filtros. Procesos, equipo y ventas bajo lupa.</div></div></div>
+          <div class="meto-step" style="border-color:var(--rule-light);"><div class="meto-num" style="background:rgba(28,26,23,.05);border-color:rgba(28,26,23,.15);color:var(--ink-muted);">02</div><div><div class="meto-title" style="color:var(--ink);">Diseño <span class="meto-badge">1–2 sem</span></div><div class="meto-desc" style="color:var(--ink-muted);">Sistema a medida validado antes de implantar. No plantillas.</div></div></div>
+          <div class="meto-step" style="border-color:var(--rule-light);"><div class="meto-num" style="background:rgba(28,26,23,.05);border-color:rgba(28,26,23,.15);color:var(--ink-muted);">03</div><div><div class="meto-title" style="color:var(--ink);">Implantación <span class="meto-badge">4–12 sem</span></div><div class="meto-desc" style="color:var(--ink-muted);">Contigo, no para ti. Formamos al equipo hasta que funciona solo.</div></div></div>
+          <div class="meto-step" style="border-color:transparent;"><div class="meto-num" style="background:rgba(28,26,23,.05);border-color:rgba(28,26,23,.15);color:var(--ink-muted);">04</div><div><div class="meto-title" style="color:var(--ink);">Control <span class="meto-badge">Continuo</span></div><div class="meto-desc" style="color:var(--ink-muted);">KPIs y seguimiento mensual para que el sistema no se deteriore.</div></div></div>
         </div>
       </div>
       <div class="reveal-right">
-        <div style="background:rgba(250,248,244,0.05);border:1px solid rgba(184,134,11,0.22);padding:2rem;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,0.08);">
-            <div style="width:36px;height:36px;border-radius:6px;background:rgba(184,134,11,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-            </div>
-            <div style="flex:1;"><div style="font-size:0.82rem;font-weight:600;color:#EDE9E0;">Sistema operativo activo</div><div style="font-size:0.72rem;color:rgba(237,233,224,0.5);">Cliente CRS OPS · Madrid</div></div>
-            <span style="font-size:0.65rem;background:rgba(22,163,74,0.18);color:#4ade80;border:1px solid rgba(74,222,128,0.25);padding:3px 10px;font-weight:700;letter-spacing:0.05em;">ACTIVO</span>
-          </div>
+        <div style="background:var(--ink);padding:2rem;">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Antes vs. ahora</div>
           <div style="display:flex;flex-direction:column;gap:1.25rem;">
-            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;"><span style="font-size:0.78rem;color:rgba(237,233,224,0.75);">Procesos documentados</span><span style="font-size:0.82rem;color:var(--gold);font-weight:700;">92%</span></div><div style="height:6px;background:rgba(255,255,255,0.08);overflow:hidden;"><div style="height:100%;width:92%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;"><span style="font-size:0.78rem;color:rgba(237,233,224,0.75);">Equipo autónomo</span><span style="font-size:0.82rem;color:var(--gold);font-weight:700;">78%</span></div><div style="height:6px;background:rgba(255,255,255,0.08);overflow:hidden;"><div style="height:100%;width:78%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;"><span style="font-size:0.78rem;color:rgba(237,233,224,0.75);">Ventas sistematizadas</span><span style="font-size:0.82rem;color:var(--gold);font-weight:700;">85%</span></div><div style="height:6px;background:rgba(255,255,255,0.08);overflow:hidden;"><div style="height:100%;width:85%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.78rem;color:rgba(237,233,224,.7);">Ratio de cierre comercial</span><span style="font-size:.84rem;color:var(--gold);font-weight:700;">×3 mejora</span></div><div style="height:5px;background:rgba(255,255,255,.07);overflow:hidden;"><div style="height:100%;width:75%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.78rem;color:rgba(237,233,224,.7);">Tiempo del dueño en operativas</span><span style="font-size:.84rem;color:var(--gold);font-weight:700;">–60%</span></div><div style="height:5px;background:rgba(255,255,255,.07);overflow:hidden;"><div style="height:100%;width:60%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.78rem;color:rgba(237,233,224,.7);">Estandarización de procesos</span><span style="font-size:.84rem;color:var(--gold);font-weight:700;">0% → 92%</span></div><div style="height:5px;background:rgba(255,255,255,.07);overflow:hidden;"><div style="height:100%;width:92%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));"></div></div></div>
           </div>
-          <div style="margin-top:1.75rem;padding:1.25rem;background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.2);">
-            <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Antes vs. ahora</div>
-            <div style="display:flex;flex-direction:column;gap:0.6rem;">
-              <div style="display:flex;justify-content:space-between;font-size:0.78rem;"><span style="color:rgba(237,233,224,0.5);">Tiempo en operativas</span><span style="color:#EDE9E0;font-weight:600;">–60%</span></div>
-              <div style="display:flex;justify-content:space-between;font-size:0.78rem;"><span style="color:rgba(237,233,224,0.5);">Ratio de cierre</span><span style="color:#EDE9E0;font-weight:600;">18% → 52%</span></div>
-              <div style="display:flex;justify-content:space-between;font-size:0.78rem;"><span style="color:rgba(237,233,224,0.5);">Onboarding improvisado</span><span style="color:#EDE9E0;font-weight:600;">Eliminado</span></div>
-            </div>
+          <div style="margin-top:1.5rem;padding:1.1rem;background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.2);">
+            <div style="font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Garantía</div>
+            <p style="font-size:.82rem;color:rgba(237,233,224,.65);line-height:1.6;margin:0;">30 días post-entrega en cada proyecto. Si algo no funciona como acordamos, volvemos y lo ajustamos.</p>
           </div>
-          <a href="/diagnostico/" style="display:block;text-align:center;margin-top:1.25rem;padding:0.9rem;background:var(--gold);color:var(--ink);font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#D4A017'" onmouseout="this.style.background='var(--gold)'">
-            Empezar diagnóstico gratuito →
-          </a>
+          <a href="/diagnostico/" style="display:block;text-align:center;margin-top:1.25rem;padding:.9rem;background:var(--gold);color:var(--ink);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#D4A017'" onmouseout="this.style.background='var(--gold)'">Empezar diagnóstico gratuito →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ RESULTADOS ══ -->
-<section id="resultados" class="section" style="background:var(--cream-2);">
+<!-- ══ KPIs ══ -->
+<section class="section" style="background:var(--cream);">
   <div class="container">
-    <div class="reveal text-center" style="max-width:520px;margin:0 auto 3.5rem;">
-      <div class="chip" style="margin-bottom:1rem;display:inline-flex;"><span class="chip-dot"></span>Resultados reales</div>
-      <h2 class="font-display section-title">Impacto medible, <em>no promesas</em></h2>
+    <div class="reveal text-center" style="max-width:480px;margin:0 auto 3rem;">
+      <div class="chip" style="margin-bottom:1rem;display:inline-flex;"><span class="chip-dot"></span>Resultados medibles</div>
+      <h2 class="font-display section-title">Impacto real. <em>No promesas.</em></h2>
     </div>
     <div class="kpi-strip">
-      <div class="kpi-block reveal"><div class="kpi-num">3×</div><p>Mejora media en ratio<br>de cierre comercial</p></div>
-      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">–60%</div><p>Tiempo del dueño<br>en tareas operativas</p></div>
-      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">0h</div><p>Onboarding improvisado<br>tras sistema de procesos</p></div>
-      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">30d</div><p>Garantía post-entrega<br>en cada proyecto</p></div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
-      <div class="testi-card reveal">
-        <div class="testi-quote">"</div>
-        <blockquote>Antes el negocio dependía completamente de mí. Hoy tengo un equipo que ejecuta sin que yo esté presente. El sistema operativo fue el punto de inflexión.</blockquote>
-        <div class="testi-author"><div class="testi-avatar">DG</div><div><div class="testi-name">Director General</div><div class="testi-role">PYME sector servicios · Madrid</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-quote">"</div>
-        <blockquote>En 8 semanas pasamos de improvisar cada venta a tener un sistema que cualquier comercial puede seguir. El ratio de cierre subió del 18% al 52%.</blockquote>
-        <div class="testi-author"><div class="testi-avatar">CE</div><div><div class="testi-name">CEO</div><div class="testi-role">Empresa B2B · Barcelona</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-quote">"</div>
-        <blockquote>CRS no entregó un informe. Construyó los procesos con nosotros y se quedó hasta que el equipo los usaba de forma natural. Eso marca la diferencia.</blockquote>
-        <div class="testi-author"><div class="testi-avatar">FU</div><div><div class="testi-name">Fundador</div><div class="testi-role">Empresa en crecimiento · Valencia</div></div></div>
-      </div>
+      <div class="kpi-block reveal"><div class="kpi-num">3×</div><p>Mejora media en ratio de cierre comercial</p></div>
+      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">–60%</div><p>Tiempo del dueño en tareas operativas</p></div>
+      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">0h</div><p>Onboarding improvisado tras sistema de procesos</p></div>
+      <div class="kpi-block reveal" style="border-top-color:transparent;"><div class="kpi-num">30d</div><p>Garantía post-entrega en cada proyecto</p></div>
     </div>
   </div>
 </section>
@@ -253,15 +282,14 @@
   <div class="container reveal text-center">
     <div class="chip" style="margin-bottom:1.5rem;display:inline-flex;"><span class="chip-dot"></span>Sin compromiso · Respuesta en 24h</div>
     <h2 class="font-display">¿Listo para construir<br><em style="color:var(--gold);">una empresa que funciona sola?</em></h2>
-    <p style="margin:1rem auto 2.5rem;max-width:520px;">Empieza con el diagnóstico gratuito. 10 minutos, resultado inmediato. Te contactamos en menos de 24h para revisar juntos los resultados.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;">
+    <p style="margin:1rem auto 2.5rem;max-width:500px;color:var(--on-dark-md);font-size:.97rem;line-height:1.85;">Empieza con el diagnóstico gratuito. 10 minutos, resultado inmediato. Te contactamos en menos de 24h.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center;">
       <a href="/diagnostico/" class="btn-gold">Diagnóstico gratuito <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20CRS%20Growth." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:#25D366;color:#fff;font-size:0.78rem;font-weight:700;letter-spacing:0.04em;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#1fbe5a'" onmouseout="this.style.background='#25D366'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52zM12 22a9.94 9.94 0 0 1-5.07-1.38l-.36-.22-3.76 1 1.01-3.65-.24-.38A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+      <a href="https://wa.me/34697293677" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:#25D366;color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#1fbe5a'" onmouseout="this.style.background='#25D366'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.07L0 24l6.09-1.6A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.93 11.93 0 0 0-3.48-8.52z"/></svg>
         WhatsApp
       </a>
     </div>
-    <p style="margin-top:1.5rem;font-size:0.76rem;color:rgba(237,233,224,0.35);">Sin compromiso · Primera sesión gratuita · Respuesta en menos de 24h</p>
   </div>
 </section>
 

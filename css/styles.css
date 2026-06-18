@@ -348,3 +348,16 @@ ul { list-style:none; }
   .kpi-strip { grid-template-columns:1fr; }
   .trust-items { flex-direction:column; align-items:flex-start; gap:0.75rem; }
 }
+
+/* ── SPLIT ROUTES (home hero) ── */
+@media (max-width: 640px) {
+  .split-routes { grid-template-columns: 1fr !important; }
+}
+
+/* ── ENTERPRISE PAGE FONT IMPORT (already in main CSS) ── */
+/* All enterprise styles are scoped to .ent-* classes */
+
+/* ── DIAG GRID RESPONSIVE ── */
+@media (max-width: 768px) {
+  .diag-grid-3 { grid-template-columns: 1fr !important; }
+}
