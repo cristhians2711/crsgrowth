@@ -361,3 +361,184 @@ ul { list-style:none; }
 @media (max-width: 768px) {
   .diag-grid-3 { grid-template-columns: 1fr !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE FIXES — comprehensive responsive overrides
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── General inline grids (used heavily with style="display:grid") ── */
+@media (max-width: 768px) {
+
+  /* Hero section */
+  section[style*="min-height:100vh"] .container > div[style*="max-width:640px"] {
+    text-align: left !important;
+  }
+
+  /* Any inline 2-col grid becomes 1-col */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns:1fr 2fr"],
+  [style*="grid-template-columns:2fr 1fr"],
+  [style*="grid-template-columns:1fr auto"],
+  [style*="grid-template-columns:auto 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* 3-col grids become 1-col */
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns:1fr 1px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4-col grids become 2-col */
+  [style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+
+  /* Servicios inline grid */
+  [style*="grid-template-columns:1fr 2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Escalera table in paquetes */
+  [style*="grid-template-columns:80px"] {
+    grid-template-columns: 48px 1fr !important;
+  }
+
+  /* Buttons that use flex align right */
+  [style*="align-items:flex-end"] {
+    align-items: flex-start !important;
+  }
+
+  /* CRS Start hero grid */
+  .grid-star {
+    text-align: left;
+  }
+
+  /* Nosotros metrics grid */
+  [style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Nosotros cases 2-col */
+  [style*="grid-template-columns:1fr 1fr"][style*="gap:1px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Servicios page — service rows */
+  [style*="grid-template-columns:1fr 2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="grid-template-columns:1fr 2fr 1fr"] > div:last-child {
+    text-align: left !important;
+  }
+
+  /* Hide divider line in VS section */
+  [style*="background:rgba(184,134,11,0.15)"][style*="width:1px"],
+  [style*="background:rgba(184,134,11,0.15)"][style*="1px"] {
+    display: none !important;
+  }
+
+  /* Enterprise KPI grid */
+  .ent-kpi-grid {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+  .ent-diff-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ent-proof-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ent-commitment {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Ticker — reduce font size */
+  .ticker-inner {
+    font-size: 0.6rem !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Page hero h1 */
+  .page-hero h1 {
+    font-size: clamp(1.8rem, 6vw, 2.8rem) !important;
+  }
+
+  /* Pack cards right-align price → left */
+  .pack-price { font-size: 1.4rem !important; }
+
+  /* Footer bottom */
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  /* Diagnósticos strip 3 cards */
+  [style*="grid-template-columns:repeat(3,1fr)"][style*="gap:1px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* 2-col grids → 1-col on very small screens */
+  [style*="grid-template-columns:repeat(2,1fr)"],
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4-col → 1-col */
+  [style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Nosotros metrics → 1-col */
+  [style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Enterprise KPI → 1-col */
+  .ent-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Hero stats row */
+  [style*="justify-content:center"][style*="gap:3rem"] {
+    gap: 1.5rem !important;
+    flex-wrap: wrap;
+    justify-content: space-around !important;
+  }
+
+  /* CTA buttons stack */
+  [style*="display:flex"][style*="flex-wrap:wrap"][style*="gap:0.85rem"],
+  [style*="display:flex"][style*="flex-wrap:wrap"][style*="gap:.85rem"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* Diagnóstico result CTAs */
+  .ds-result-ctas {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Diagnóstico form shell */
+  .ds-shell {
+    padding: 1.25rem !important;
+  }
+
+  /* Section padding reduce */
+  .section, .ent-section, .ent-section-alt {
+    padding: 48px 0 !important;
+  }
+
+  /* Dark CTA */
+  .dark-cta {
+    padding: 3rem 0 !important;
+  }
+
+  /* Font size h1 enterprise */
+  .ent-h1 {
+    font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+  }
+}
