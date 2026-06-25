@@ -24145,7 +24145,7 @@ async function getLogoRun(type, maxW, maxH) {
     if (h > maxH) { h = maxH; w = Math.round(maxH * ratio); }
     var resp = await fetch(src);
     var buf = await (await resp.blob()).arrayBuffer();
-    return { run: new docx.ImageRun({ data: buf, transformation: { width: w, height: h }, type: ext }), w: w, h: h };
+    return { buf:buf, ext:ext, w:w, h:h };
   } catch(e) { return null; }
 }
 
@@ -24387,10 +24387,10 @@ function makeH(docxLib) {
   var C = { gold:'B8860B', dark:'1A1A1A', ink:'0D0D0D', mid:'666666', light:'999999', border:'DDDDDD', alt:'F7F7F7' };
   var tb = { style:BS.SINGLE, size:1, color:C.border };
   var cB = { top:tb, bottom:tb, left:tb, right:tb };
-  var nB = { style:BS.NONE, size:0, color:'FFFFFF' };
-  var nBs = { top:nB, bottom:nB, left:nB, right:nB };
+  var noBorder = { style:BS.NONE, size:0, color:'FFFFFF' };
+  var nBs = { top:noBorder, bottom:noBorder, left:noBorder, right:noBorder };
 
-  function sp(b,a) { return new D.Paragraph({ spacing:{ before:b||80, after:a||80 }, children:[] }); }
+  function sp(b, a) { return new D.Paragraph({ spacing:{ before:b||80, after:a||80 }, children:[] }); }
   function pb() { return new D.Paragraph({ children:[new D.PageBreak()] }); }
   function tx(txt, o) {
     o = o||{};
@@ -24437,40 +24437,39 @@ function makeH(docxLib) {
   }
   function sigTable(sigA, sigB, nameA, repA, cargoA, nameB, repB, cargoB) {
     // Clean 2-column signature block — no borders, no boxes
-    var noBorder = { style:h.BS.NONE, size:0, color:'FFFFFF' };
-    var noBorders = { top:noBorder, bottom:noBorder, left:noBorder, right:noBorder };
-    var signLine = { bottom:{ style:h.BS.SINGLE, size:6, color:h.C.border, space:4 } };
+    // Uses local vars D, C, BS, WT, AT — NOT h.*
+    var signLine = { bottom:{ style:BS.SINGLE, size:6, color:C.border, space:4 } };
+    var noB = { style:BS.NONE, size:0, color:'FFFFFF' };
+    var noBS = { top:noB, bottom:noB, left:noB, right:noB };
 
     function sigCol(sig, name, rep, cargo) {
       var children = [
-        // Signature label
-        new D.Paragraph({ spacing:{before:0,after:200}, children:[h.tx(sig, {bold:true, size:18, color:h.C.dark})] }),
-        // Blank space for handwritten signature
+        new D.Paragraph({ spacing:{before:0,after:200}, children:[tx(sig, {bold:true, size:18, color:C.dark})] }),
         new D.Paragraph({ spacing:{before:0,after:0}, border:signLine, children:[] }),
-        new D.Paragraph({ spacing:{before:100,after:30}, children:[h.tx(rep||'', {size:17, color:h.C.mid})] }),
+        new D.Paragraph({ spacing:{before:100,after:30}, children:[tx(rep||'', {size:17, color:C.mid})] }),
       ];
-      if (cargo) children.push(new D.Paragraph({ spacing:{before:0,after:30}, children:[h.tx(cargo, {size:16, color:h.C.light, italics:true})] }));
-      children.push(new D.Paragraph({ spacing:{before:0,after:0}, children:[h.tx(name||'', {size:17, color:h.C.mid})] }));
+      if (cargo) children.push(new D.Paragraph({ spacing:{before:0,after:30}, children:[tx(cargo, {size:16, color:C.light, italics:true})] }));
+      children.push(new D.Paragraph({ spacing:{before:0,after:0}, children:[tx(name||'', {size:17, color:C.mid})] }));
       return new D.TableCell({
-        borders: noBorders,
-        width: { size:4313, type:h.WT.DXA },
+        borders: noBS,
+        width: { size:4313, type:WT.DXA },
         margins: { top:80, bottom:80, left:80, right:80 },
         children: children
       });
     }
 
     return new D.Table({
-      width: { size:9026, type:h.WT.DXA },
+      width: { size:9026, type:WT.DXA },
       columnWidths: [4313, 400, 4313],
-      borders: { top:noBorder, bottom:noBorder, left:noBorder, right:noBorder, insideH:noBorder, insideV:noBorder },
+      borders: { top:noB, bottom:noB, left:noB, right:noB, insideH:noB, insideV:noB },
       rows: [new D.TableRow({ children:[
         sigCol(sigA, nameA, repA, cargoA),
-        // Spacer column
-        new D.TableCell({ borders:noBorders, width:{size:400,type:h.WT.DXA}, children:[new D.Paragraph({children:[]})] }),
+        new D.TableCell({ borders:noBS, width:{size:400,type:WT.DXA}, children:[new D.Paragraph({children:[]})] }),
         sigCol(sigB, nameB, repB, cargoB),
       ]})]
     });
   }
+
   return { D:D, C:C, cB:cB, nBs:nBs, AT:AT, WT:WT, ST:ST, BS:BS, sp:sp, pb:pb, tx:tx, par:par, bul:bul, H1:H1, HR:HR, trow:trow, clSection:clSection, sigTable:sigTable };
 }
 
@@ -24517,7 +24516,7 @@ async function buildNdaDoc() {
   var codeA = g('na_pais');
   var codeB = g('nb_pais');
   var logoData = await getLogoRun('nda', 140, 50);
-  var logoRun = logoData ? logoData.run : null;
+  var logoRun = logoData ? new docx.ImageRun({data:logoData.buf,transformation:{width:logoData.w,height:logoData.h},type:logoData.ext}) : null;
 
   function makeSection(L, lang) {
     var nA = partyName('a'), nB = partyName('b');
@@ -24592,7 +24591,7 @@ async function buildNdaDoc() {
 
   var pageProps = { page:{ size:{width:11906,height:16838}, margin:{top:1100,right:1200,bottom:1100,left:1200} } };
   var coverProps = { page:{ size:{width:11906,height:16838}, margin:{top:1440,right:1440,bottom:1440,left:1440} } };
-  var hdrRun = logoData ? new D.ImageRun({data:logoData.run._data,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:LOGO.nda?(LOGO.nda.mtype.includes('png')?'png':'jpg'):'png'}) : null;
+  var hdrRun = logoData ? new D.ImageRun({data:logoData.buf,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:logoData.ext}) : null;
 
   var sections = [];
   if (DOC_LANG === 'bi') {
@@ -24638,7 +24637,7 @@ async function buildWordDoc() {
   var L = DOC_LANG === 'en' ? EN : ES;
   var lang = DOC_LANG === 'en' ? 'en' : 'es';
   var logoData = await getLogoRun('word', 140, 50);
-  var logoRun = logoData ? logoData.run : null;
+  var logoRun = logoData ? new docx.ImageRun({data:logoData.buf,transformation:{width:logoData.w,height:logoData.h},type:logoData.ext}) : null;
   var sub = wordServices.reduce(function(s,x){return s+(x.price||0);},0);
   var iva = sub*0.21;
   var fmt = function(v){return v.toFixed(2).replace('.',',')+' €';};
@@ -24646,7 +24645,7 @@ async function buildWordDoc() {
   var durText = durVal==='obra'?(lang==='en'?'Project-based':'Por obra y servicio'):durVal==='indefinido'?(lang==='en'?'Open-ended':'Sin fecha límite'):(g('p_dur_val')||durVal);
 
   function makeHdr() {
-    var hdrRun = logoData ? new D.ImageRun({data:logoData.run._data,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:LOGO.word?(LOGO.word.mtype.includes('png')?'png':'jpg'):'png'}) : null;
+    var hdrRun = logoData ? new D.ImageRun({data:logoData.buf,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:logoData.ext}) : null;
     return new D.Header({ children:[
       new D.Paragraph({ alignment:h.AT.LEFT, spacing:{before:0,after:50}, children: hdrRun ? [hdrRun] : [h.tx(g('e_nombre')||'CRS Consulting',{bold:true,size:16,color:h.C.gold})] }),
       new D.Paragraph({ spacing:{before:0,after:0}, border:{bottom:{style:h.BS.SINGLE,size:4,color:h.C.gold,space:1}}, children:[] }),
