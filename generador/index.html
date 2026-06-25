@@ -23176,12 +23176,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fld textarea{resize:vertical;min-height:76px;line-height:1.5}
 .fld .hint{font-size:11px;color:var(--faint);margin-top:1px}
 
-/* AI BUTTON */
-.ai-field{position:relative}
-.ai-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--ink);color:var(--gold);border:none;border-radius:6px;padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;z-index:2;transition:all .15s}
-.ai-btn:active{background:#333}
-.ai-btn.loading{opacity:.6;pointer-events:none}
-.ai-field input,.ai-field textarea{padding-right:80px}
+
 
 /* LOGO UPLOAD */
 .logo-zone{border:2px dashed var(--border2);border-radius:var(--r);padding:20px 14px;text-align:center;cursor:pointer;position:relative;overflow:hidden;min-height:84px;transition:all .15s}
@@ -23475,10 +23470,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fld"><label data-es="Referencia" data-en="Reference">Referencia</label><input id="n_ref"></div>
         <div class="fld" style="grid-column:span 2">
           <label data-es="Objeto del acuerdo" data-en="Purpose of agreement">Objeto <span class="req">*</span></label>
-          <div class="ai-field">
-            <textarea id="n_objeto" placeholder="Exploración de una posible relación comercial, intercambio de información técnica y estratégica..."></textarea>
-            <button class="ai-btn" id="ai-n_objeto" onclick="aiImprove('n_objeto',this)">✨ IA</button>
-          </div>
+          <textarea id="n_objeto" placeholder="Exploración de una posible relación comercial, intercambio de información técnica y estratégica..."></textarea>
         </div>
       </div>
     </div>
@@ -23561,10 +23553,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fld"><label data-es="Válida hasta" data-en="Valid until">Válida hasta</label><input id="p_validez" type="date"></div>
         <div class="fld" style="grid-column:span 2">
           <label data-es="Contexto / necesidad del cliente" data-en="Client need / context">Contexto del cliente</label>
-          <div class="ai-field">
-            <textarea id="c_contexto" placeholder="Describe el reto o necesidad que esta propuesta resuelve..."></textarea>
-            <button class="ai-btn" id="ai-c_contexto" onclick="aiImprove('c_contexto',this)">✨ IA</button>
-          </div>
+          <textarea id="c_contexto" placeholder="Describe el reto o necesidad que esta propuesta resuelve..."></textarea>
         </div>
       </div>
     </div>
@@ -23749,10 +23738,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="card-body">
         <div class="fld">
           <label data-es="Texto de introducción (slide 2)" data-en="Introduction text (slide 2)">Introducción <span class="req">*</span></label>
-          <div class="ai-field">
-            <textarea id="pp_intro" placeholder="Gracias por confiar en nosotros. Hemos preparado esta propuesta específicamente para resolver los retos de su empresa..."></textarea>
-            <button class="ai-btn" id="ai-pp_intro" onclick="aiImprove('pp_intro',this)">✨ IA</button>
-          </div>
+          <textarea id="pp_intro" placeholder="Gracias por confiar en nosotros. Hemos preparado esta propuesta específicamente para resolver los retos de su empresa..."></textarea>
         </div>
       </div>
     </div>
@@ -23785,10 +23771,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="dur-custom" id="pp_dur_custom"><input id="pp_dur_val" placeholder="Ej: 3 semanas…"></div>
         </div>
         <div class="fld" style="grid-column:span 2"><label data-es="Próximos pasos / CTA" data-en="Next steps / CTA">Próximos pasos</label>
-          <div class="ai-field">
-            <textarea id="pp_cta" placeholder="Para arrancar el proyecto necesitamos tu confirmación y el primer pago. Te enviamos contrato en 24h…"></textarea>
-            <button class="ai-btn" id="ai-pp_cta" onclick="aiImprove('pp_cta',this)">✨ IA</button>
-          </div>
+          <textarea id="pp_cta" placeholder="Para arrancar el proyecto necesitamos tu confirmación y el primer pago. Te enviamos contrato en 24h…"></textarea>
         </div>
       </div>
     </div>
@@ -24166,36 +24149,6 @@ async function getLogoRun(type, maxW, maxH) {
   } catch(e) { return null; }
 }
 
-// ═══════════════════════════════════════════════
-// AI IMPROVE
-// ═══════════════════════════════════════════════
-async function aiImprove(fieldId, btn) {
-  var el = document.getElementById(fieldId);
-  if (!el || !el.value.trim()) { alert(UI_LANG === 'es' ? 'Escribe algo primero para que la IA pueda mejorarlo.' : 'Write something first for the AI to improve.'); return; }
-  btn.textContent = '⏳';
-  btn.className = 'ai-btn loading';
-  try {
-    var context = DOC_TYPE === 'nda' ? 'acuerdo de confidencialidad empresarial' : 'propuesta comercial profesional';
-    var prompt = UI_LANG === 'es'
-      ? 'Mejora el siguiente texto para un ' + context + '. Hazlo más profesional, directo y persuasivo. Mantén el mismo idioma y longitud aproximada. Devuelve solo el texto mejorado, sin explicaciones:\n\n' + el.value
-      : 'Improve the following text for a professional ' + context + '. Make it more professional, direct and persuasive. Keep the same language and approximate length. Return only the improved text, no explanations:\n\n' + el.value;
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': 'API_KEY_PLACEHOLDER', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
-    });
-    var data = await resp.json();
-    if (data.content && data.content[0]) {
-      el.value = data.content[0].text.trim();
-      el.classList.add('highlight');
-      setTimeout(function() { el.classList.remove('highlight'); }, 1500);
-    }
-  } catch(e) {
-    alert(UI_LANG === 'es' ? 'No se pudo conectar con la IA. Comprueba tu conexión.' : 'Could not connect to AI. Check your connection.');
-  }
-  btn.textContent = '✨ IA';
-  btn.className = 'ai-btn';
-}
 
 // ═══════════════════════════════════════════════
 // NDA NAV
@@ -24296,8 +24249,7 @@ function renderWordServices() {
       '<div class="fld"><label>' + (UI_LANG==='es'?'Nombre del servicio / paquete':'Service / package name') + ' <span class="req">*</span></label>' +
       '<input value="' + (s.name||'') + '" oninput="wordServices[' + i + '].name=this.value" placeholder="' + (UI_LANG==='es'?'Ej: CRS Blueprint — Sistema Completo de Empresa':'E.g. CRS Blueprint — Complete Business System') + '"></div>' +
       '<div class="fld"><label>' + (UI_LANG==='es'?'Descripción / contenido del paquete':'Package description / content') + '</label>' +
-      '<div class="ai-field"><textarea oninput="wordServices[' + i + '].desc=this.value" placeholder="' + (UI_LANG==='es'?'Describe qué incluye este paquete o servicio...':'Describe what this package or service includes...') + '">' + (s.desc||'') + '</textarea>' +
-      '<button class="ai-btn" onclick="aiImproveService(this,' + i + ',\'word\')">✨ IA</button></div></div>' +
+      '<textarea oninput="wordServices[' + i + '].desc=this.value" placeholder="' + (UI_LANG==='es'?'Describe qué incluye este paquete o servicio...':'Describe what this package or service includes...') + '">' + (s.desc||'') + '</textarea></div>' +
       '<div class="fld"><label>' + (UI_LANG==='es'?'Precio € (sin IVA)':'Price € (ex. VAT)') + ' <span class="req">*</span></label>' +
       '<input type="number" inputmode="decimal" min="0" step="0.01" value="' + (s.price||'') + '" oninput="wordServices[' + i + '].price=parseFloat(this.value)||0;recalcWord()" placeholder="0.00"></div>' +
       '</div></div>';
@@ -24328,8 +24280,7 @@ function renderPptxServices() {
       '<div class="fld"><label>' + (UI_LANG==='es'?'Nombre del servicio / paquete':'Service / package name') + ' <span class="req">*</span></label>' +
       '<input value="' + (s.name||'') + '" oninput="pptxServices[' + i + '].name=this.value" placeholder="Ej: CRS OPS"></div>' +
       '<div class="fld"><label>' + (UI_LANG==='es'?'Descripción (aparece en slide)':'Description (appears on slide)') + '</label>' +
-      '<div class="ai-field"><textarea oninput="pptxServices[' + i + '].desc=this.value" placeholder="' + (UI_LANG==='es'?'Qué incluye y qué resuelve...':'What it includes and solves...') + '">' + (s.desc||'') + '</textarea>' +
-      '<button class="ai-btn" onclick="aiImproveService(this,' + i + ',\'pptx\')">✨ IA</button></div></div>' +
+      '<textarea oninput="pptxServices[' + i + '].desc=this.value" placeholder="' + (UI_LANG==='es'?'Qué incluye y qué resuelve...':'What it includes and solves...') + '">' + (s.desc||'') + '</textarea></div>' +
       '</div></div>';
   }).join('');
   if (pptxServices.length < 6) {
@@ -24340,27 +24291,6 @@ function renderPptxServices() {
 function addPptxService() { pptxServices.push({name:'',desc:''}); renderPptxServices(); }
 function removePptxService(i) { pptxServices.splice(i,1); renderPptxServices(); }
 
-async function aiImproveService(btn, idx, type) {
-  var arr = type === 'word' ? wordServices : pptxServices;
-  if (!arr[idx].desc.trim()) { alert(UI_LANG==='es'?'Escribe algo primero.':'Write something first.'); return; }
-  btn.textContent = '⏳'; btn.className = 'ai-btn loading';
-  try {
-    var prompt = UI_LANG==='es'
-      ? 'Mejora esta descripción de servicio para una propuesta comercial premium. Hazla más atractiva y orientada al resultado para el cliente. Solo el texto mejorado:\n\n' + arr[idx].desc
-      : 'Improve this service description for a premium commercial proposal. Make it more compelling and result-oriented. Only the improved text:\n\n' + arr[idx].desc;
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': 'API_KEY_PLACEHOLDER', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 300, messages: [{ role: 'user', content: prompt }] })
-    });
-    var data = await resp.json();
-    if (data.content && data.content[0]) {
-      arr[idx].desc = data.content[0].text.trim();
-      if (type === 'word') renderWordServices(); else renderPptxServices();
-    }
-  } catch(e) { alert('Error IA'); }
-  btn.textContent = '✨ IA'; btn.className = 'ai-btn';
-}
 
 // ═══════════════════════════════════════════════
 // PREVIEWS
@@ -24884,184 +24814,332 @@ function buildPptxDoc() {
   var T = THEMES[CURRENT_THEME] || THEMES.dark;
   var BG = T.bg, ACC = T.accent, TXT = T.text, DIM = T.textDim;
   var SURF = T.surface, SURF2 = T.surfaceAlt;
+  var isDark = T.isDark;
 
-  // Accent line color as hex string with #
-  var accLine = { color: ACC, pt: 1.5 };
+  var W = 13.33, H = 7.5; // LAYOUT_WIDE dimensions
 
-  function addSlide() {
-    var slide = prs.addSlide();
+  // ── HELPERS ──
+  function slide() {
+    var s = prs.addSlide();
     // Full background
-    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:'100%', fill:{ color:BG } });
-    // Top accent bar
-    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:0.07, fill:{ color:ACC } });
-    // Bottom accent bar
-    slide.addShape(prs.ShapeType.rect, { x:0, y:7.43, w:'100%', h:0.07, fill:{ color:ACC } });
-    // Company watermark bottom left
-    slide.addText(g('pp_empresa'), {
-      x:0.3, y:7.18, w:5, h:0.22,
+    s.addShape(prs.ShapeType.rect, { x:0, y:0, w:W, h:H, fill:{ color:BG } });
+    return s;
+  }
+
+  function addTopBar(s, full) {
+    // Full-width accent top bar
+    s.addShape(prs.ShapeType.rect, { x:0, y:0, w:W, h:full?0.18:0.1, fill:{ color:ACC } });
+  }
+
+  function addBottomBar(s) {
+    s.addShape(prs.ShapeType.rect, { x:0, y:H-0.1, w:W, h:0.1, fill:{ color:ACC } });
+    // Company name
+    s.addText(g('pp_empresa'), {
+      x:0.35, y:H-0.38, w:4, h:0.25,
       fontSize:8, color:DIM, fontFace:'Arial', italic:true
     });
-    return slide;
+    // Page indicator right
+    s.addText(g('pp_ref')||'', {
+      x:W-3, y:H-0.38, w:2.9, h:0.25,
+      fontSize:8, color:DIM, fontFace:'Arial', align:'right'
+    });
   }
 
-  // ── SLIDE 1: PORTADA ──
-  var s1 = addSlide();
-  // Left accent bar
-  s1.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
-  // Horizontal divider
-  s1.addShape(prs.ShapeType.rect, { x:0.3, y:3.1, w:12.1, h:0.04, fill:{ color:ACC } });
-  s1.addText(g('pp_empresa'), {
-    x:0.3, y:1.0, w:12, h:0.9,
-    fontSize:32, bold:true, color:T.titleColor, fontFace:'Arial', align:'center'
+  function addSideAccent(s, w) {
+    s.addShape(prs.ShapeType.rect, { x:0, y:0.1, w:w||0.08, h:H-0.2, fill:{ color:ACC } });
+  }
+
+  function addSlideTitle(s, title, x, y, w) {
+    s.addText(title, {
+      x: x||0.4, y: y||0.22, w: w||12,
+      fontSize:13, bold:true, color:ACC, fontFace:'Arial',
+      charSpacing:3, underline:false
+    });
+    s.addShape(prs.ShapeType.rect, {
+      x:x||0.4, y:(y||0.22)+0.42, w:w||12, h:0.025, fill:{ color:ACC }
+    });
+  }
+
+  var svcs = pptxServices.filter(function(s){return s.name;});
+  var precio = parseFloat(g('pp_precio')||0);
+  var fmt = function(v){ return v.toFixed(2).replace('.',',')+' €'; };
+
+  // ════════════════════════════════════════
+  // SLIDE 1 — PORTADA
+  // ════════════════════════════════════════
+  var s1 = slide();
+  // Left thick accent panel
+  s1.addShape(prs.ShapeType.rect, { x:0, y:0, w:4.2, h:H, fill:{ color:ACC } });
+  // Left panel — company name vertical center
+  s1.addText(g('pp_empresa').toUpperCase(), {
+    x:0.2, y:1.8, w:3.7, h:1.2,
+    fontSize:26, bold:true, color:isDark?'0D0D0D':'FFFFFF',
+    fontFace:'Arial', align:'center', wrap:true, lineSpacingMultiple:1.1
+  });
+  s1.addShape(prs.ShapeType.rect, {
+    x:0.5, y:3.2, w:3.1, h:0.04,
+    fill:{ color: isDark?'0D0D0D':'FFFFFF' }
   });
   s1.addText('PROPUESTA COMERCIAL', {
-    x:0.3, y:2.0, w:12, h:0.6,
-    fontSize:20, bold:true, color:ACC, fontFace:'Arial', align:'center', charSpacing:3
+    x:0.2, y:3.35, w:3.7, h:0.55,
+    fontSize:11, bold:true, color:isDark?'0D0D0D':'FFFFFF',
+    fontFace:'Arial', align:'center', charSpacing:2
   });
-  s1.addText(g('pp_cliente'), {
-    x:0.3, y:3.3, w:12, h:0.5,
-    fontSize:18, color:T.subtitleColor, fontFace:'Arial', align:'center'
+
+  // Right panel — client info
+  s1.addText(g('pp_cliente').toUpperCase(), {
+    x:4.6, y:1.4, w:8.4, h:1.4,
+    fontSize:36, bold:true, color:TXT,
+    fontFace:'Arial', wrap:true, lineSpacingMultiple:1.05
   });
+  s1.addShape(prs.ShapeType.rect, { x:4.6, y:3.0, w:8.4, h:0.04, fill:{ color:ACC } });
   s1.addText(dateToLong(g('pp_fecha'), UI_LANG==='en'?'en':'es'), {
-    x:0.3, y:3.95, w:12, h:0.38,
-    fontSize:13, color:DIM, fontFace:'Arial', align:'center'
+    x:4.6, y:3.2, w:8.4, h:0.38,
+    fontSize:13, color:DIM, fontFace:'Arial'
   });
+  if (g('pp_contacto')) {
+    s1.addText((UI_LANG==='en'?'Att: ':'Att: ') + g('pp_contacto'), {
+      x:4.6, y:3.65, w:8.4, h:0.35,
+      fontSize:12, color:DIM, fontFace:'Arial'
+    });
+  }
   if (g('pp_ref')) {
     s1.addText('Ref: ' + g('pp_ref'), {
-      x:0.3, y:4.45, w:12, h:0.32,
-      fontSize:11, color:ACC, fontFace:'Arial', align:'center'
+      x:4.6, y:4.1, w:8.4, h:0.32,
+      fontSize:11, color:ACC, fontFace:'Arial'
     });
   }
-  s1.addText(
-    g('pp_rep') + (g('pp_cargo') ? '  ·  ' + g('pp_cargo') : '') + (g('pp_email') ? '  ·  ' + g('pp_email') : ''),
-    { x:0.3, y:6.8, w:12, h:0.32, fontSize:10, color:DIM, fontFace:'Arial', align:'center' }
-  );
-
-  // ── SLIDE 2: INTRODUCCIÓN ──
-  var s2 = addSlide();
-  s2.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
-  s2.addText(UI_LANG==='en' ? 'INTRODUCTION' : 'INTRODUCCIÓN', {
-    x:0.3, y:0.35, w:12, h:0.5,
-    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
+  // Contact bottom right
+  var contactStr = [g('pp_rep'), g('pp_cargo'), g('pp_email'), g('pp_tel')].filter(Boolean).join('  ·  ');
+  s1.addText(contactStr, {
+    x:4.6, y:H-0.75, w:8.5, h:0.45,
+    fontSize:10, color:DIM, fontFace:'Arial'
   });
-  s2.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+  // Bottom accent bar
+  s1.addShape(prs.ShapeType.rect, { x:0, y:H-0.08, w:W, h:0.08, fill:{ color:ACC } });
+
+  // ════════════════════════════════════════
+  // SLIDE 2 — INTRODUCCIÓN
+  // ════════════════════════════════════════
+  var s2 = slide();
+  addTopBar(s2);
+  addBottomBar(s2);
+  addSideAccent(s2);
+
+  addSlideTitle(s2, UI_LANG==='en'?'INTRODUCTION':'INTRODUCCIÓN');
+
   if (g('pp_intro')) {
-    s2.addText(g('pp_intro'), {
-      x:0.3, y:1.15, w:12, h:5.8,
-      fontSize:14, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.3
-    });
+    // Split into two visual zones if text is long enough
+    var intro = g('pp_intro');
+    var half = Math.floor(intro.length / 2);
+    var split = intro.indexOf(' ', half);
+    var part1 = split > 0 ? intro.substring(0,split) : intro;
+    var part2 = split > 0 ? intro.substring(split+1) : '';
+
+    if (part2 && intro.length > 200) {
+      // Two column layout
+      s2.addShape(prs.ShapeType.rect, {
+        x:0.4, y:0.9, w:5.9, h:6.0,
+        fill:{ color:SURF }, rectRadius:0.06
+      });
+      s2.addText(part1, {
+        x:0.6, y:1.0, w:5.6, h:5.8,
+        fontSize:13, color:TXT, fontFace:'Arial',
+        valign:'top', wrap:true, lineSpacingMultiple:1.45
+      });
+      s2.addText(part2, {
+        x:6.6, y:0.9, w:6.4, h:6.0,
+        fontSize:13, color:TXT, fontFace:'Arial',
+        valign:'top', wrap:true, lineSpacingMultiple:1.45
+      });
+    } else {
+      // Single zone with large text
+      s2.addShape(prs.ShapeType.rect, {
+        x:0.4, y:0.9, w:W-0.8, h:5.8,
+        fill:{ color:SURF }, rectRadius:0.06
+      });
+      s2.addText(intro, {
+        x:0.7, y:1.1, w:W-1.4, h:5.4,
+        fontSize:15, color:TXT, fontFace:'Arial',
+        valign:'middle', wrap:true, lineSpacingMultiple:1.5
+      });
+    }
   }
 
-  // ── SLIDES: SERVICIOS ──
-  var svcs = pptxServices.filter(function(s){return s.name;});
+  // ════════════════════════════════════════
+  // SLIDES — SERVICIOS
+  // ════════════════════════════════════════
   svcs.forEach(function(svc, idx) {
-    var sn = addSlide();
-    sn.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
-    // Service number badge
-    sn.addShape(prs.ShapeType.rect, {
-      x:0.3, y:0.3, w:1.6, h:1.6,
-      fill:{ color:SURF }, line:{ color:ACC, pt:1.5 },
-      rectRadius:0.05
+    var ss = slide();
+    addTopBar(ss);
+    addBottomBar(ss);
+
+    // Left block — number + name
+    ss.addShape(prs.ShapeType.rect, {
+      x:0, y:0.1, w:4.0, h:H-0.2,
+      fill:{ color:SURF }
     });
-    sn.addText(String(idx + 1).padStart(2, '0'), {
-      x:0.3, y:0.45, w:1.6, h:0.9,
-      fontSize:44, bold:true, color:ACC, fontFace:'Arial', align:'center'
+    // Accent vertical line inside left block
+    ss.addShape(prs.ShapeType.rect, {
+      x:0, y:0.1, w:0.08, h:H-0.2,
+      fill:{ color:ACC }
     });
-    // Service name
-    sn.addText(svc.name, {
-      x:2.1, y:0.3, w:10.3, h:0.9,
-      fontSize:22, bold:true, color:T.titleColor, fontFace:'Arial', valign:'middle', wrap:true
+
+    // Big number
+    ss.addText(String(idx+1).padStart(2,'0'), {
+      x:0.15, y:0.5, w:3.7, h:2.2,
+      fontSize:110, bold:true, color:ACC,
+      fontFace:'Arial', align:'center'
     });
-    sn.addShape(prs.ShapeType.rect, { x:2.1, y:1.35, w:10.3, h:0.03, fill:{ color:ACC } });
-    // Description
+
+    // Divider
+    ss.addShape(prs.ShapeType.rect, {
+      x:0.3, y:2.9, w:3.3, h:0.04, fill:{ color:ACC }
+    });
+
+    // Service name left block
+    ss.addText(svc.name.toUpperCase(), {
+      x:0.15, y:3.05, w:3.7, h:1.8,
+      fontSize:14, bold:true, color:TXT,
+      fontFace:'Arial', align:'center', wrap:true, lineSpacingMultiple:1.2
+    });
+
+    // Right zone — description
+    ss.addText(UI_LANG==='en'?'SCOPE OF SERVICE':'ALCANCE DEL SERVICIO', {
+      x:4.3, y:0.25, w:8.7, h:0.38,
+      fontSize:11, bold:true, color:ACC,
+      fontFace:'Arial', charSpacing:2
+    });
+    ss.addShape(prs.ShapeType.rect, {
+      x:4.3, y:0.7, w:8.7, h:0.025, fill:{ color:ACC }
+    });
+
     if (svc.desc) {
-      sn.addText(svc.desc, {
-        x:2.1, y:1.55, w:10.3, h:5.4,
-        fontSize:13, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.35
+      ss.addText(svc.desc, {
+        x:4.3, y:0.85, w:8.7, h:5.9,
+        fontSize:14, color:TXT, fontFace:'Arial',
+        valign:'top', wrap:true, lineSpacingMultiple:1.5
+      });
+    } else {
+      ss.addText(UI_LANG==='en'?'Details to be discussed.':'Detalles a concretar con el cliente.', {
+        x:4.3, y:2.5, w:8.7, h:1.0,
+        fontSize:14, color:DIM, fontFace:'Arial',
+        align:'center', italic:true
       });
     }
   });
 
-  // ── SLIDE: INVERSIÓN ──
-  var si = addSlide();
-  var precio = parseFloat(g('pp_precio')||0);
-  var ivaAmt = precio * 0.21;
-  var fmt = function(v) { return v.toFixed(2).replace('.', ',') + ' €'; };
-  var durVal = g('pp_dur');
-  var durTxt = durVal==='obra' ? (UI_LANG==='en'?'Project-based':'Por obra y servicio')
-    : durVal==='indefinido' ? (UI_LANG==='en'?'Open-ended':'Sin fecha límite')
-    : (g('pp_dur_val') || durVal);
+  // ════════════════════════════════════════
+  // SLIDE — INVERSIÓN
+  // ════════════════════════════════════════
+  var si = slide();
+  addTopBar(si);
+  addBottomBar(si);
+  addSideAccent(si);
 
-  si.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
-  si.addText(UI_LANG==='en' ? 'INVESTMENT' : 'INVERSIÓN', {
-    x:0.3, y:0.35, w:12, h:0.5,
-    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
-  });
-  si.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+  addSlideTitle(si, UI_LANG==='en'?'INVESTMENT':'INVERSIÓN');
 
-  // Price box left
+  // Central price hero
   si.addShape(prs.ShapeType.rect, {
-    x:0.3, y:1.2, w:5.8, h:3.8,
-    fill:{ color:SURF }, line:{ color:ACC, pt:1.5 }, rectRadius:0.05
+    x:0.4, y:1.0, w:6.0, h:4.8,
+    fill:{ color:SURF }, rectRadius:0.08
   });
-  si.addText(UI_LANG==='en'?'Base (ex. VAT)':'Base (sin IVA)', {
-    x:0.3, y:1.4, w:5.8, h:0.4,
+  si.addShape(prs.ShapeType.rect, {
+    x:0.4, y:1.0, w:6.0, h:0.12, fill:{ color:ACC }
+  });
+
+  si.addText(UI_LANG==='en'?'Base investment':'Inversión base', {
+    x:0.4, y:1.3, w:6.0, h:0.4,
     fontSize:11, color:DIM, fontFace:'Arial', align:'center'
   });
   si.addText(fmt(precio), {
-    x:0.3, y:1.85, w:5.8, h:0.9,
-    fontSize:30, bold:true, color:ACC, fontFace:'Arial', align:'center'
+    x:0.4, y:1.8, w:6.0, h:1.2,
+    fontSize:48, bold:true, color:ACC, fontFace:'Arial', align:'center'
   });
-  si.addShape(prs.ShapeType.rect, { x:0.7, y:2.85, w:5.0, h:0.02, fill:{ color:ACC } });
-  si.addText('IVA 21%:  ' + fmt(ivaAmt), {
-    x:0.3, y:2.95, w:5.8, h:0.38,
+  si.addShape(prs.ShapeType.rect, {
+    x:0.8, y:3.15, w:5.2, h:0.025, fill:{ color:isDark?'333333':'CCCCCC' }
+  });
+  si.addText('IVA (21%):  ' + fmt(precio*0.21), {
+    x:0.4, y:3.3, w:6.0, h:0.45,
     fontSize:13, color:DIM, fontFace:'Arial', align:'center'
   });
-  si.addText('TOTAL:  ' + fmt(precio + ivaAmt), {
-    x:0.3, y:3.4, w:5.8, h:0.5,
-    fontSize:17, bold:true, color:TXT, fontFace:'Arial', align:'center'
+  si.addShape(prs.ShapeType.rect, {
+    x:0.8, y:3.85, w:5.2, h:0.04, fill:{ color:ACC }
+  });
+  si.addText('TOTAL:  ' + fmt(precio*1.21), {
+    x:0.4, y:4.0, w:6.0, h:0.65,
+    fontSize:22, bold:true, color:TXT, fontFace:'Arial', align:'center'
   });
 
-  // Conditions right
-  var condY = 1.2;
-  var condItems = [
-    { label: UI_LANG==='en'?'Payment terms:':'Modalidad de pago:', val: g('pp_pago') },
-    { label: UI_LANG==='en'?'Duration:':'Duración estimada:', val: durTxt },
-  ];
-  condItems.forEach(function(item) {
-    if (!item.val) return;
-    si.addText(item.label, {
-      x:6.5, y:condY, w:6, h:0.32,
-      fontSize:10, bold:true, color:ACC, fontFace:'Arial'
+  // Right conditions panel
+  si.addShape(prs.ShapeType.rect, {
+    x:6.8, y:1.0, w:6.2, h:4.8,
+    fill:{ color:SURF }, rectRadius:0.08
+  });
+  si.addShape(prs.ShapeType.rect, {
+    x:6.8, y:1.0, w:6.2, h:0.12, fill:{ color:ACC }
+  });
+
+  var condY = 1.3;
+  var durVal = g('pp_dur');
+  var durTxt = durVal==='obra'?(UI_LANG==='en'?'Project-based':'Por obra y servicio')
+    : durVal==='indefinido'?(UI_LANG==='en'?'Open-ended':'Sin fecha límite')
+    : (g('pp_dur_val')||durVal);
+
+  var conditions = [
+    { label: UI_LANG==='en'?'Payment terms':'Modalidad de pago', val: g('pp_pago') },
+    { label: UI_LANG==='en'?'Estimated duration':'Duración estimada', val: durTxt },
+    { label: UI_LANG==='en'?'Valid until':'Válida hasta', val: g('p_validez')||'' },
+  ].filter(function(c){ return c.val; });
+
+  conditions.forEach(function(c) {
+    si.addText(c.label.toUpperCase(), {
+      x:7.1, y:condY, w:5.7, h:0.3,
+      fontSize:9, bold:true, color:ACC, fontFace:'Arial', charSpacing:1
     });
     condY += 0.32;
-    si.addText(item.val, {
-      x:6.5, y:condY, w:6, h:0.38,
-      fontSize:13, color:TXT, fontFace:'Arial'
+    si.addText(c.val, {
+      x:7.1, y:condY, w:5.7, h:0.55,
+      fontSize:14, color:TXT, fontFace:'Arial'
     });
-    condY += 0.55;
+    condY += 0.7;
+    si.addShape(prs.ShapeType.rect, {
+      x:7.1, y:condY-0.1, w:5.7, h:0.02, fill:{ color:isDark?'333333':'E0E0E0' }
+    });
   });
 
-  // ── SLIDE: PRÓXIMOS PASOS ──
-  var sp2 = addSlide();
-  sp2.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
-  sp2.addText(UI_LANG==='en' ? 'NEXT STEPS' : 'PRÓXIMOS PASOS', {
-    x:0.3, y:0.35, w:12, h:0.5,
-    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
-  });
-  sp2.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+  // ════════════════════════════════════════
+  // SLIDE — PRÓXIMOS PASOS
+  // ════════════════════════════════════════
+  var sp = slide();
+  addTopBar(sp, true);
+  addBottomBar(sp);
+  addSideAccent(sp);
+
+  addSlideTitle(sp, UI_LANG==='en'?'NEXT STEPS':'PRÓXIMOS PASOS');
+
   if (g('pp_cta')) {
-    sp2.addText(g('pp_cta'), {
-      x:0.3, y:1.15, w:12, h:4.5,
-      fontSize:14, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.35
+    sp.addShape(prs.ShapeType.rect, {
+      x:0.4, y:1.0, w:W-0.8, h:4.8,
+      fill:{ color:SURF }, rectRadius:0.08
+    });
+    sp.addText(g('pp_cta'), {
+      x:0.7, y:1.2, w:W-1.4, h:4.4,
+      fontSize:16, color:TXT, fontFace:'Arial',
+      valign:'middle', wrap:true, lineSpacingMultiple:1.5, align:'center'
     });
   }
-  // Contact block bottom
-  sp2.addShape(prs.ShapeType.rect, { x:0.3, y:5.9, w:12, h:0.03, fill:{ color:ACC } });
-  var contactParts = [g('pp_rep'), g('pp_cargo'), g('pp_email'), g('pp_tel')].filter(Boolean);
-  sp2.addText(contactParts.join('  ·  '), {
-    x:0.3, y:6.0, w:12, h:0.5,
-    fontSize:12, color:ACC, fontFace:'Arial', align:'center', bold:true
+
+  // Contact footer band
+  sp.addShape(prs.ShapeType.rect, {
+    x:0.4, y:6.15, w:W-0.8, h:0.7,
+    fill:{ color:ACC }, rectRadius:0.06
+  });
+  var cStr = [g('pp_rep'), g('pp_cargo'), g('pp_email'), g('pp_tel')].filter(Boolean).join('  ·  ');
+  sp.addText(cStr, {
+    x:0.5, y:6.2, w:W-1.0, h:0.6,
+    fontSize:12, bold:true, color:isDark?'0D0D0D':'FFFFFF',
+    fontFace:'Arial', align:'center', valign:'middle'
   });
 
   return prs;
