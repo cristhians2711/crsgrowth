@@ -23244,6 +23244,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .p-title{font-size:11px;color:#777;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .preview-body{background:#fff;padding:18px 20px;max-height:280px;overflow-y:auto;font-family:Georgia,serif;font-size:12px;line-height:1.8;-webkit-overflow-scrolling:touch}
 .preview-body .pv-logo{text-align:center;margin-bottom:10px}
+/* DOC TITLE BAND */
+.doc-title-band{display:none;background:var(--ink);border-bottom:2px solid var(--gold);padding:10px 16px;position:sticky;top:52px;z-index:99;align-items:center;gap:12px}
+.doc-title-band.show{display:flex}
+.dtb-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+.dtb-title{font-size:13px;font-weight:700;color:#fff;flex:1}
+.dtb-lang{font-size:11px;color:var(--gold);font-weight:600;white-space:nowrap}
+.dtb-back{background:transparent;border:1px solid #555;color:#999;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;min-height:32px}
+.dtb-back:active{border-color:var(--gold);color:var(--gold)}
+
+/* PREVIEW IMPROVED */
+.pv-section{margin-bottom:14px}
+.pv-section-title{font-family:Arial,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gold);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid #F0F0F0}
+.pv-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #F8F8F8;font-size:12px;font-family:Arial,sans-serif}
+.pv-key{color:#777;font-weight:600;width:38%}
+.pv-val{color:#1A1A1A;width:60%;text-align:right}
+.pv-svc{padding:5px 0;border-bottom:1px solid #F8F8F8;font-size:12px;font-family:Arial,sans-serif}
+.pv-svc-name{font-weight:600;color:#1A1A1A}
+.pv-svc-desc{color:#888;font-size:11px;margin-top:1px}
+.pv-svc-price{color:var(--gold);font-weight:700;font-size:11px;text-align:right}
+.pv-total{display:flex;justify-content:space-between;padding:8px 0;font-family:Arial,sans-serif}
+.pv-total-label{font-weight:700;font-size:14px}
+.pv-total-val{font-weight:700;font-size:16px;color:var(--gold)}
+.pv-clause{font-size:11px;font-family:Arial,sans-serif;color:#555;line-height:1.5;margin-bottom:6px}
+.pv-clause strong{display:block;color:#B8860B;font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+
+/* CLEAN DOC CARDS */
+.doc-card{min-height:90px}
+.dc-title{font-size:13px}
+
+/* CLEAN NDA TYPES */
+.nda-type{font-size:12px;font-weight:600;min-height:48px}
+
+/* REMOVE PREVIEW BAR DOTS */
+.preview-bar{padding:8px 14px}
+
 .preview-body .pv-title{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;font-family:Arial,sans-serif;color:#1A1A1A;border-bottom:2px solid #B8860B;padding-bottom:8px}
 .preview-body table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px;font-family:Arial,sans-serif}
 .preview-body td{padding:5px 8px;border-bottom:1px solid #F0F0F0}
@@ -23272,6 +23307,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div id="doc-title-band" class="doc-title-band">
+  <div>
+    <div class="dtb-label" id="dtb-label">Creando</div>
+    <div class="dtb-title" id="dtb-title">—</div>
+  </div>
+  <div class="dtb-lang" id="dtb-lang"></div>
+  <button class="dtb-back" onclick="backToSelector()">← Cambiar</button>
+</div>
+
 <div class="wrap">
 
 <!-- ERROR BANNER -->
@@ -23288,17 +23332,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="doc-selector">
     <div class="doc-card" id="dc-nda" onclick="selectDoc('nda')">
       <div class="dc-check">✓</div>
-      <div class="dc-icon">🔒</div>
+      
       <div class="dc-title" data-es="Acuerdo de Confidencialidad" data-en="Non-Disclosure Agreement">Acuerdo de Confidencialidad</div>
     </div>
     <div class="doc-card" id="dc-word" onclick="selectDoc('word')">
       <div class="dc-check">✓</div>
-      <div class="dc-icon">📄</div>
+      
       <div class="dc-title" data-es="Propuesta Comercial" data-en="Commercial Proposal">Propuesta Comercial</div>
     </div>
     <div class="doc-card" id="dc-pptx" onclick="selectDoc('pptx')">
       <div class="dc-check">✓</div>
-      <div class="dc-icon">📊</div>
+      
       <div class="dc-title" data-es="Presentación Comercial" data-en="Commercial Presentation">Presentación Comercial</div>
     </div>
   </div>
@@ -23334,7 +23378,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="card-head"><h2 data-es="Logo (opcional)" data-en="Logo (optional)">Logo (opcional)</h2></div>
       <div class="card-body">
         <div class="logo-zone"><input type="file" id="nda-logo-input" accept="image/*" onchange="handleLogo(this,'nda')">
-          <div class="lz-icon">🖼️</div>
           <div class="lz-text" data-es="Toca para subir tu logo" data-en="Tap to upload your logo">Toca para subir tu logo</div>
           <div class="lz-hint" data-es="PNG o JPG · máx 2MB · Sustituye al logo CRS en el documento" data-en="PNG or JPG · max 2MB · Replaces CRS logo in document">PNG o JPG · máx 2MB · Sustituye al logo CRS en el documento</div>
         </div>
@@ -23350,9 +23393,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="card-head"><h2 data-es="Tipo de acuerdo" data-en="Agreement type">Tipo de acuerdo</h2><span class="badge-req">Requerido</span></div>
       <div class="card-body">
         <div class="nda-types">
-          <div class="nda-type selected" id="ntype-ee" onclick="setNdaType('ee')"><span class="nt-icon">🏢🏢</span><span data-es="Empresa · Empresa" data-en="Company · Company">Empresa · Empresa</span></div>
-          <div class="nda-type" id="ntype-ep" onclick="setNdaType('ep')"><span class="nt-icon">🏢👤</span><span data-es="Empresa · Persona" data-en="Company · Person">Empresa · Persona</span></div>
-          <div class="nda-type" id="ntype-pp" onclick="setNdaType('pp')"><span class="nt-icon">👤👤</span><span data-es="Persona · Persona" data-en="Person · Person">Persona · Persona</span></div>
+          <div class="nda-type selected" id="ntype-ee" onclick="setNdaType('ee')"><span data-es="Empresa · Empresa" data-en="Company · Company">Empresa · Empresa</span></div>
+          <div class="nda-type" id="ntype-ep" onclick="setNdaType('ep')"><span data-es="Empresa · Persona" data-en="Company · Person">Empresa · Persona</span></div>
+          <div class="nda-type" id="ntype-pp" onclick="setNdaType('pp')"><span data-es="Persona · Persona" data-en="Person · Person">Persona · Persona</span></div>
         </div>
       </div>
     </div>
@@ -23407,8 +23450,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <option value="3m" data-es="3 meses" data-en="3 months">3 meses</option>
             <option value="6m" data-es="6 meses" data-en="6 months">6 meses</option>
             <option value="1" data-es="1 año" data-en="1 year">1 año</option>
-            <option value="2" selected data-es="2 años" data-en="2 years">2 años</option>
-            <option value="3" data-es="3 años" data-en="3 years">3 años</option>
+            <option value="2" data-es="2 años" data-en="2 years">2 años</option>
+            <option value="3" selected data-es="3 años" data-en="3 years">3 años</option>
             <option value="5" data-es="5 años" data-en="5 years">5 años</option>
             <option value="obra" data-es="Por obra y servicio (duración del proyecto)" data-en="Project-based (duration of project)">Por obra y servicio</option>
             <option value="indefinida" data-es="Indefinida" data-en="Indefinite">Indefinida</option>
@@ -23465,7 +23508,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="card-head"><h2 data-es="Logo (opcional)" data-en="Logo (optional)">Logo (opcional)</h2></div>
       <div class="card-body">
         <div class="logo-zone"><input type="file" id="word-logo-input" accept="image/*" onchange="handleLogo(this,'word')">
-          <div class="lz-icon">🖼️</div>
           <div class="lz-text" data-es="Toca para subir tu logo" data-en="Tap to upload your logo">Toca para subir tu logo</div>
           <div class="lz-hint" data-es="PNG o JPG · máx 2MB" data-en="PNG or JPG · max 2MB">PNG o JPG · máx 2MB</div>
         </div>
@@ -23599,7 +23641,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="card-head"><h2 data-es="Logo para la presentación (opcional)" data-en="Presentation logo (optional)">Logo para la presentación (opcional)</h2></div>
       <div class="card-body">
         <div class="logo-zone"><input type="file" id="pptx-logo-input" accept="image/*" onchange="handleLogo(this,'pptx')">
-          <div class="lz-icon">🖼️</div>
           <div class="lz-text" data-es="Toca para subir tu logo" data-en="Tap to upload your logo">Toca para subir tu logo</div>
           <div class="lz-hint" data-es="PNG o JPG · máx 2MB" data-en="PNG or JPG · max 2MB">PNG o JPG · máx 2MB</div>
         </div>
@@ -23923,7 +23964,14 @@ function setDocLang(dl) {
   ['es','en','bi'].forEach(function(x) {
     document.getElementById('dl-' + x).className = 'lang-pill' + (x === dl ? ' selected' : '');
   });
+  if (DOC_TYPE) updateDocBand();
 }
+
+var DOC_NAMES = {
+  es: { nda:'Acuerdo de Confidencialidad', word:'Propuesta Comercial', pptx:'Presentación Comercial' },
+  en: { nda:'Non-Disclosure Agreement', word:'Commercial Proposal', pptx:'Commercial Presentation' }
+};
+var LANG_LABELS = { es:'Español', en:'English', bi:'Bilingüe ES+EN' };
 
 function selectDoc(type) {
   DOC_TYPE = type;
@@ -23932,7 +23980,20 @@ function selectDoc(type) {
     document.getElementById('flow-' + t).style.display = t === type ? 'block' : 'none';
   });
   document.getElementById('zone-selector').style.display = 'none';
+  updateDocBand();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateDocBand() {
+  if (!DOC_TYPE) {
+    document.getElementById('doc-title-band').className = 'doc-title-band';
+    return;
+  }
+  var names = DOC_NAMES[UI_LANG] || DOC_NAMES.es;
+  document.getElementById('dtb-title').textContent = names[DOC_TYPE] || DOC_TYPE;
+  document.getElementById('dtb-lang').textContent = LANG_LABELS[DOC_LANG] || DOC_LANG;
+  document.getElementById('dtb-label').textContent = UI_LANG === 'en' ? 'Creating' : 'Creando';
+  document.getElementById('doc-title-band').className = 'doc-title-band show';
 }
 
 function backToSelector() {
@@ -23941,8 +24002,10 @@ function backToSelector() {
     document.getElementById('dc-' + t).className = 'doc-card';
     document.getElementById('flow-' + t).style.display = 'none';
   });
+  document.getElementById('doc-title-band').className = 'doc-title-band';
   DOC_TYPE = null;
   showError(null);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setNdaType(t) {
@@ -24249,7 +24312,7 @@ function buildNdaPreview() {
   var nA = partyName('a'), nB = partyName('b');
   document.getElementById('nda-preview-zone').innerHTML =
     '<div class="preview-wrap">' +
-    '<div class="preview-bar"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div class="p-title">' + L.ndaTitle + (DOC_LANG==='bi'?' · ES+EN':'') + '</div></div>' +
+    '<div class="preview-bar"><div class="p-title">' + L.ndaTitle + (DOC_LANG==='bi'?' · ES+EN':'') + '</div></div>' +
     '<div class="preview-body">' +
     '<div class="pv-logo"><img src="data:image/png;base64,' + CRS_LOGO_B64 + '" style="max-height:36px;object-fit:contain"></div>' +
     '<div class="pv-title">' + L.ndaTitle + '</div>' +
@@ -24268,7 +24331,7 @@ function buildWordPreview() {
   var fmt = function(v) { return v.toFixed(2).replace('.',',') + ' €'; };
   document.getElementById('word-preview-zone').innerHTML =
     '<div class="preview-wrap">' +
-    '<div class="preview-bar"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div class="p-title">' + L.propTitle + '</div></div>' +
+    '<div class="preview-bar"><div class="p-title">' + L.propTitle + '</div></div>' +
     '<div class="preview-body">' +
     '<div class="pv-logo"><img src="data:image/png;base64,' + CRS_LOGO_B64 + '" style="max-height:36px;object-fit:contain"></div>' +
     '<div class="pv-title">' + L.propTitle + '</div>' +
@@ -24285,19 +24348,46 @@ function buildWordPreview() {
 function buildPptxPreview() {
   var fmt = function(v) { return parseFloat(v||0).toFixed(2).replace('.',',') + ' €'; };
   var precio = parseFloat(g('pp_precio')||0);
+  var lang = UI_LANG === 'en' ? 'en' : 'es';
+  var durVal = g('pp_dur'), durTxt = durVal==='obra'?'Por obra y servicio':durVal==='indefinido'?'Sin fecha límite':(g('pp_dur_val')||durVal);
+  var svcs = pptxServices.filter(function(s){return s.name;});
+  var totalSlides = 3 + svcs.length + 1;
+  
+  var html = '<div class="preview-body" style="font-family:Arial,sans-serif">';
+  html += '<div style="text-align:center;margin-bottom:12px"><div style="font-size:13px;font-weight:700;color:#0D0D0D;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #B8860B;padding-bottom:8px">' + (lang==='en'?'COMMERCIAL PRESENTATION':'PRESENTACIÓN COMERCIAL') + '</div></div>';
+  
+  html += '<div class="pv-section"><div class="pv-section-title">' + (lang==='en'?'Presentation details':'Datos de la presentación') + '</div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Company':'Empresa') + '</span><span class="pv-val">' + (g('pp_empresa')||'—') + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Client':'Cliente') + '</span><span class="pv-val">' + (g('pp_cliente')||'—') + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Contact':'Contacto') + '</span><span class="pv-val">' + (g('pp_contacto')||'—') + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Date':'Fecha') + '</span><span class="pv-val">' + dateToLong(g('pp_fecha'), lang) + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Slides':'Diapositivas') + '</span><span class="pv-val">' + totalSlides + '</span></div>';
+  html += '</div>';
+  
+  html += '<div class="pv-section"><div class="pv-section-title">' + (lang==='en'?'Slide structure':'Estructura de slides') + '</div>';
+  var slideList = [lang==='en'?'1. Cover':'1. Portada', lang==='en'?'2. Introduction':'2. Introducción'];
+  svcs.forEach(function(s,i){ slideList.push((i+3)+'. '+s.name); });
+  slideList.push((svcs.length+3)+'. '+(lang==='en'?'Investment':'Inversión'));
+  slideList.push((svcs.length+4)+'. '+(lang==='en'?'Next steps':'Próximos pasos'));
+  slideList.forEach(function(s){ html += '<div style="font-size:11px;color:#555;padding:3px 0;border-bottom:1px solid #F8F8F8">' + s + '</div>'; });
+  html += '</div>';
+  
+  if (svcs.length > 0) {
+    html += '<div class="pv-section"><div class="pv-section-title">' + (lang==='en'?'Services':'Servicios') + '</div>';
+    svcs.forEach(function(s){ html += '<div class="pv-svc"><div class="pv-svc-name">' + s.name + '</div>' + (s.desc?'<div class="pv-svc-desc">'+s.desc.substring(0,100)+(s.desc.length>100?'…':'')+'</div>':'') + '</div>'; });
+    html += '</div>';
+  }
+  
+  html += '<div class="pv-section"><div class="pv-section-title">' + (lang==='en'?'Investment':'Inversión') + '</div>';
+  html += '<div class="pv-row"><span class="pv-key">Base (s/IVA)</span><span class="pv-val">' + fmt(precio) + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">IVA (21%)</span><span class="pv-val">' + fmt(precio*0.21) + '</span></div>';
+  html += '<div class="pv-total"><span class="pv-total-label">TOTAL</span><span class="pv-total-val">' + fmt(precio*1.21) + '</span></div>';
+  html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Payment':'Pago') + '</span><span class="pv-val">' + g('pp_pago') + '</span></div>';
+  if (durTxt) html += '<div class="pv-row"><span class="pv-key">' + (lang==='en'?'Duration':'Duración') + '</span><span class="pv-val">' + durTxt + '</span></div>';
+  html += '</div></div>';
+  
   document.getElementById('pptx-preview-zone').innerHTML =
-    '<div class="preview-wrap">' +
-    '<div class="preview-bar"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div class="p-title">📊 ' + (UI_LANG==='es'?'PRESENTACIÓN COMERCIAL':'COMMERCIAL PRESENTATION') + '</div></div>' +
-    '<div class="preview-body">' +
-    '<div class="pv-logo"><img src="data:image/png;base64,' + CRS_LOGO_B64 + '" style="max-height:36px;object-fit:contain"></div>' +
-    '<div class="pv-title">' + g('pp_empresa') + ' → ' + g('pp_cliente') + '</div>' +
-    '<table><tr><td class="k">' + (UI_LANG==='es'?'Fecha':'Date') + '</td><td class="v">' + dateToLong(g('pp_fecha'), UI_LANG) + '</td></tr>' +
-    '<tr><td class="k">' + (UI_LANG==='es'?'Inversión':'Investment') + '</td><td class="v">' + fmt(precio) + ' + IVA</td></tr>' +
-    '<tr><td class="k">' + (UI_LANG==='es'?'Slides':'Slides') + '</td><td class="v">' + (4 + pptxServices.length) + ' diapositivas</td></tr></table>' +
-    pptxServices.filter(function(s) { return s.name; }).map(function(s) {
-      return '<div class="cl"><strong>' + s.name + '</strong><p>' + (s.desc ? s.desc.substring(0,80) + '…' : '') + '</p></div>';
-    }).join('') +
-    '</div></div>';
+    '<div class="preview-wrap"><div class="preview-bar"><div class="p-title">' + (UI_LANG==='es'?'Vista previa de la presentación':'Presentation preview') + '</div></div>' + html + '</div>';
 }
 
 // ═══════════════════════════════════════════════
