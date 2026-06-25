@@ -23244,6 +23244,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .p-title{font-size:11px;color:#777;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .preview-body{background:#fff;padding:18px 20px;max-height:280px;overflow-y:auto;font-family:Georgia,serif;font-size:12px;line-height:1.8;-webkit-overflow-scrolling:touch}
 .preview-body .pv-logo{text-align:center;margin-bottom:10px}
+
+/* THEME SELECTOR */
+.theme-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.theme-card{cursor:pointer;text-align:center;border-radius:var(--r);border:2px solid var(--border);transition:all .15s;overflow:hidden;background:var(--surface)}
+.theme-card:active{transform:scale(.96)}
+.theme-card.selected{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,134,11,.2)}
+.theme-preview{height:44px;padding:7px 7px 5px;margin:0}
+.theme-name{font-size:10px;font-weight:600;color:var(--muted);line-height:1.3;padding:5px 3px 6px;display:block}
+.theme-card.selected .theme-name{color:var(--gold)}
+@media(max-width:480px){.theme-grid{grid-template-columns:repeat(3,1fr)}}
+
 /* DOC TITLE BAND */
 .doc-title-band{display:none;background:var(--ink);border-bottom:2px solid var(--gold);padding:10px 16px;position:sticky;top:52px;z-index:99;align-items:center;gap:12px}
 .doc-title-band.show{display:flex}
@@ -23686,6 +23697,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- PPTX PASO 3 -->
   <div class="section" id="pp3">
+    <div class="card">
+      <div class="card-head"><h2 data-es="Tema visual" data-en="Visual theme">Tema visual</h2></div>
+      <div class="card-body">
+        <div class="theme-grid">
+          <div class="theme-card selected" id="theme-dark" onclick="selectTheme('dark')">
+            <div class="theme-preview" style="background:#0D0D0D;border-radius:6px">
+              <div style="height:5px;background:#B8860B;border-radius:2px;margin-bottom:3px"></div>
+              <div style="height:3px;background:#333;border-radius:2px;margin-bottom:2px;width:70%"></div>
+              <div style="height:3px;background:#2A2A2A;border-radius:2px;width:50%"></div>
+            </div>
+            <div class="theme-name" data-es="Oscuro Premium" data-en="Dark Premium">Oscuro Premium</div>
+          </div>
+          <div class="theme-card" id="theme-white" onclick="selectTheme('white')">
+            <div class="theme-preview" style="background:#FFFFFF;border:1px solid #E8E8E8;border-radius:6px">
+              <div style="height:5px;background:#B8860B;border-radius:2px;margin-bottom:3px"></div>
+              <div style="height:3px;background:#CCC;border-radius:2px;margin-bottom:2px;width:70%"></div>
+              <div style="height:3px;background:#DDD;border-radius:2px;width:50%"></div>
+            </div>
+            <div class="theme-name" data-es="Blanco Corporativo" data-en="Corporate White">Blanco Corporativo</div>
+          </div>
+          <div class="theme-card" id="theme-navy" onclick="selectTheme('navy')">
+            <div class="theme-preview" style="background:#1B2A4A;border-radius:6px">
+              <div style="height:5px;background:#D4AF37;border-radius:2px;margin-bottom:3px"></div>
+              <div style="height:3px;background:#2D3F66;border-radius:2px;margin-bottom:2px;width:70%"></div>
+              <div style="height:3px;background:#253353;border-radius:2px;width:50%"></div>
+            </div>
+            <div class="theme-name" data-es="Azul Ejecutivo" data-en="Executive Blue">Azul Ejecutivo</div>
+          </div>
+          <div class="theme-card" id="theme-gray" onclick="selectTheme('gray')">
+            <div class="theme-preview" style="background:#F2F2F2;border:1px solid #E0E0E0;border-radius:6px">
+              <div style="height:5px;background:#8A6F3E;border-radius:2px;margin-bottom:3px"></div>
+              <div style="height:3px;background:#CCC;border-radius:2px;margin-bottom:2px;width:70%"></div>
+              <div style="height:3px;background:#DDD;border-radius:2px;width:50%"></div>
+            </div>
+            <div class="theme-name" data-es="Gris Minimalista" data-en="Minimalist Gray">Gris Minimalista</div>
+          </div>
+          <div class="theme-card" id="theme-green" onclick="selectTheme('green')">
+            <div class="theme-preview" style="background:#1A3A2A;border-radius:6px">
+              <div style="height:5px;background:#C8A96E;border-radius:2px;margin-bottom:3px"></div>
+              <div style="height:3px;background:#2A4A38;border-radius:2px;margin-bottom:2px;width:70%"></div>
+              <div style="height:3px;background:#1F3F30;border-radius:2px;width:50%"></div>
+            </div>
+            <div class="theme-name" data-es="Verde Institucional" data-en="Institutional Green">Verde Institucional</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <div class="card-head"><h2 data-es="Mensaje de apertura" data-en="Opening message">Mensaje de apertura</h2></div>
       <div class="card-body">
@@ -24448,22 +24506,39 @@ function makeH(docxLib) {
     return [new D.Paragraph({ spacing:{before:220,after:80}, children:[tx(num + '. – ' + title.toUpperCase(), {bold:true,size:20,color:C.dark})] })].concat(paras);
   }
   function sigTable(sigA, sigB, nameA, repA, cargoA, nameB, repB, cargoB) {
-    function sigCell(sig, name, rep, cargo) {
-      var rows = [
-        new D.Paragraph({ alignment:AT.CENTER, children:[tx(sig,{bold:true,size:20})] }),
-        sp(240),
-        new D.Paragraph({ alignment:AT.CENTER, border:{bottom:{style:BS.SINGLE,size:4,color:C.border}}, children:[] }),
-        sp(50),
-        new D.Paragraph({ alignment:AT.CENTER, children:[tx(rep,{size:18,color:C.light})] }),
+    // Clean 2-column signature block — no borders, no boxes
+    var noBorder = { style:h.BS.NONE, size:0, color:'FFFFFF' };
+    var noBorders = { top:noBorder, bottom:noBorder, left:noBorder, right:noBorder };
+    var signLine = { bottom:{ style:h.BS.SINGLE, size:6, color:h.C.border, space:4 } };
+
+    function sigCol(sig, name, rep, cargo) {
+      var children = [
+        // Signature label
+        new D.Paragraph({ spacing:{before:0,after:200}, children:[h.tx(sig, {bold:true, size:18, color:h.C.dark})] }),
+        // Blank space for handwritten signature
+        new D.Paragraph({ spacing:{before:0,after:0}, border:signLine, children:[] }),
+        new D.Paragraph({ spacing:{before:100,after:30}, children:[h.tx(rep||'', {size:17, color:h.C.mid})] }),
       ];
-      if (cargo) rows.push(new D.Paragraph({ alignment:AT.CENTER, children:[tx(cargo,{size:18,color:C.light})] }));
-      rows.push(new D.Paragraph({ alignment:AT.CENTER, children:[tx(name,{size:18,color:C.light})] }));
-      return new D.TableCell({ borders:nBs, width:{size:4313,type:WT.DXA}, margins:{top:80,bottom:80,left:80,right:80}, children:rows });
+      if (cargo) children.push(new D.Paragraph({ spacing:{before:0,after:30}, children:[h.tx(cargo, {size:16, color:h.C.light, italics:true})] }));
+      children.push(new D.Paragraph({ spacing:{before:0,after:0}, children:[h.tx(name||'', {size:17, color:h.C.mid})] }));
+      return new D.TableCell({
+        borders: noBorders,
+        width: { size:4313, type:h.WT.DXA },
+        margins: { top:80, bottom:80, left:80, right:80 },
+        children: children
+      });
     }
+
     return new D.Table({
-      width: { size:9026, type:WT.DXA },
-      columnWidths: [4313,4313],
-      rows: [new D.TableRow({ children:[sigCell(sigA,nameA,repA,cargoA), sigCell(sigB,nameB,repB,cargoB)] })]
+      width: { size:9026, type:h.WT.DXA },
+      columnWidths: [4313, 400, 4313],
+      borders: { top:noBorder, bottom:noBorder, left:noBorder, right:noBorder, insideH:noBorder, insideV:noBorder },
+      rows: [new D.TableRow({ children:[
+        sigCol(sigA, nameA, repA, cargoA),
+        // Spacer column
+        new D.TableCell({ borders:noBorders, width:{size:400,type:h.WT.DXA}, children:[new D.Paragraph({children:[]})] }),
+        sigCol(sigB, nameB, repB, cargoB),
+      ]})]
     });
   }
   return { D:D, C:C, cB:cB, nBs:nBs, AT:AT, WT:WT, ST:ST, BS:BS, sp:sp, pb:pb, tx:tx, par:par, bul:bul, H1:H1, HR:HR, trow:trow, clSection:clSection, sigTable:sigTable };
@@ -24669,9 +24744,9 @@ async function buildWordDoc() {
 
   var portada = [
     h.sp(280),
-    logoRun ? new D.Paragraph({alignment:h.AT.CENTER,children:[logoRun]}) : h.par(g('e_nombre'),{center:true,bold:true,size:24,color:h.C.gold}),
+    logoRun ? new D.Paragraph({alignment:h.AT.CENTER,children:[logoRun]}) : h.par(g('e_nombre'),{center:true,bold:true,size:26,color:'1A1A1A'}),
     h.sp(140),
-    new D.Paragraph({alignment:h.AT.CENTER,spacing:{before:0,after:50},children:[h.tx(L.propTitle,{bold:true,size:28,color:h.C.ink})]}),
+    new D.Paragraph({alignment:h.AT.CENTER,spacing:{before:0,after:50},children:[h.tx(L.propTitle,{bold:true,size:28,color:'1A1A1A'})]}),
     new D.Paragraph({alignment:h.AT.CENTER,spacing:{before:0,after:140},children:[h.tx(L.propSub,{size:18,color:h.C.mid})]}),
     h.HR(h.C.gold,6), h.sp(100),
     new D.Table({width:{size:9026,type:h.WT.DXA},columnWidths:[3000,6026],rows:coverRows}),
@@ -24680,10 +24755,10 @@ async function buildWordDoc() {
 
   var priceRows = [
     new D.TableRow({tableHeader:true,children:[
-      new D.TableCell({borders:h.cB,width:{size:5226,type:h.WT.DXA},shading:{fill:h.C.ink,type:h.ST.CLEAR},margins:{top:80,bottom:80,left:120,right:80},children:[new D.Paragraph({children:[h.tx(L.service||'Servicio',{bold:true,size:18,color:'FFFFFF'})]})]}),
-      new D.TableCell({borders:h.cB,width:{size:1300,type:h.WT.DXA},shading:{fill:h.C.ink,type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('Base',{bold:true,size:18,color:'FFFFFF'})]})]}),
-      new D.TableCell({borders:h.cB,width:{size:1200,type:h.WT.DXA},shading:{fill:h.C.ink,type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('IVA',{bold:true,size:18,color:'FFFFFF'})]})]}),
-      new D.TableCell({borders:h.cB,width:{size:1300,type:h.WT.DXA},shading:{fill:h.C.ink,type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('Total',{bold:true,size:18,color:'FFFFFF'})]})]}),
+      new D.TableCell({borders:h.cB,width:{size:5226,type:h.WT.DXA},shading:{fill:'2C2C2C',type:h.ST.CLEAR},margins:{top:80,bottom:80,left:120,right:80},children:[new D.Paragraph({children:[h.tx(L.service||'Servicio',{bold:true,size:18,color:'FFFFFF'})]})]}),
+      new D.TableCell({borders:h.cB,width:{size:1300,type:h.WT.DXA},shading:{fill:'2C2C2C',type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('Base',{bold:true,size:18,color:'FFFFFF'})]})]}),
+      new D.TableCell({borders:h.cB,width:{size:1200,type:h.WT.DXA},shading:{fill:'2C2C2C',type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('IVA',{bold:true,size:18,color:'FFFFFF'})]})]}),
+      new D.TableCell({borders:h.cB,width:{size:1300,type:h.WT.DXA},shading:{fill:'2C2C2C',type:h.ST.CLEAR},margins:{top:80,bottom:80,left:80,right:80},children:[new D.Paragraph({alignment:h.AT.RIGHT,children:[h.tx('Total',{bold:true,size:18,color:'FFFFFF'})]})]}),
     ]}),
   ].concat(
     wordServices.filter(function(s){return s.name;}).map(function(s,idx){
@@ -24739,6 +24814,52 @@ async function buildWordDoc() {
 // ═══════════════════════════════════════════════
 // GENERATE PPTX
 // ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+// THEMES
+// ═══════════════════════════════════════════════
+var CURRENT_THEME = 'dark';
+
+var THEMES = {
+  dark: {
+    bg: '0D0D0D', accent: 'B8860B', text: 'FFFFFF',
+    textDim: 'AAAAAA', surface: '1A1A1A', surfaceAlt: '111111',
+    titleColor: 'FFFFFF', subtitleColor: 'CCCCCC',
+    isDark: true
+  },
+  white: {
+    bg: 'FFFFFF', accent: 'B8860B', text: '1A1A1A',
+    textDim: '666666', surface: 'F8F8F8', surfaceAlt: 'F0F0F0',
+    titleColor: '0D0D0D', subtitleColor: '555555',
+    isDark: false
+  },
+  navy: {
+    bg: '1B2A4A', accent: 'D4AF37', text: 'FFFFFF',
+    textDim: 'B0C0D8', surface: '253353', surfaceAlt: '1E2C48',
+    titleColor: 'FFFFFF', subtitleColor: 'B0C0D8',
+    isDark: true
+  },
+  gray: {
+    bg: 'F2F2F2', accent: '8A6F3E', text: '1A1A1A',
+    textDim: '666666', surface: 'E8E8E8', surfaceAlt: 'DEDEDE',
+    titleColor: '0D0D0D', subtitleColor: '444444',
+    isDark: false
+  },
+  green: {
+    bg: '1A3A2A', accent: 'C8A96E', text: 'FFFFFF',
+    textDim: 'A0C0A8', surface: '2A4A38', surfaceAlt: '1F3F30',
+    titleColor: 'FFFFFF', subtitleColor: 'A0C0A8',
+    isDark: true
+  }
+};
+
+function selectTheme(name) {
+  CURRENT_THEME = name;
+  ['dark','white','navy','gray','green'].forEach(function(t) {
+    var el = document.getElementById('theme-' + t);
+    if (el) el.className = 'theme-card' + (t === name ? ' selected' : '');
+  });
+}
+
 async function generatePptx() {
   var btn = document.getElementById('btn-gen-pptx');
   document.getElementById('bgp-txt').style.display = 'none';
@@ -24760,91 +24881,187 @@ function buildPptxDoc() {
   prs.author = g('pp_empresa');
   prs.subject = 'Propuesta Comercial – ' + g('pp_cliente');
 
-  var GOLD = 'B8860B';
-  var INK = '0D0D0D';
-  var WHITE = 'FFFFFF';
-  var LIGHT = 'CCCCCC';
-  var DGRAY = '333333';
+  var T = THEMES[CURRENT_THEME] || THEMES.dark;
+  var BG = T.bg, ACC = T.accent, TXT = T.text, DIM = T.textDim;
+  var SURF = T.surface, SURF2 = T.surfaceAlt;
 
-  function addSlide(title, fn) {
+  // Accent line color as hex string with #
+  var accLine = { color: ACC, pt: 1.5 };
+
+  function addSlide() {
     var slide = prs.addSlide();
-    // Background
-    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:'100%', fill:{color:INK} });
-    // Gold top bar
-    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:0.08, fill:{color:GOLD} });
-    // Gold bottom bar
-    slide.addShape(prs.ShapeType.rect, { x:0, y:7.42, w:'100%', h:0.08, fill:{color:GOLD} });
-    // Company name bottom left
-    slide.addText(g('pp_empresa'), { x:0.3, y:7.15, w:4, h:0.25, fontSize:9, color:LIGHT, fontFace:'Arial' });
-    // Slide number bottom right
-    fn(slide);
+    // Full background
+    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:'100%', fill:{ color:BG } });
+    // Top accent bar
+    slide.addShape(prs.ShapeType.rect, { x:0, y:0, w:'100%', h:0.07, fill:{ color:ACC } });
+    // Bottom accent bar
+    slide.addShape(prs.ShapeType.rect, { x:0, y:7.43, w:'100%', h:0.07, fill:{ color:ACC } });
+    // Company watermark bottom left
+    slide.addText(g('pp_empresa'), {
+      x:0.3, y:7.18, w:5, h:0.22,
+      fontSize:8, color:DIM, fontFace:'Arial', italic:true
+    });
     return slide;
   }
 
-  // SLIDE 1: PORTADA
-  addSlide('portada', function(s) {
-    s.addShape(prs.ShapeType.rect, { x:0, y:2.8, w:'100%', h:0.04, fill:{color:GOLD} });
-    s.addText(g('pp_empresa'), { x:1, y:1.2, w:11, h:0.8, fontSize:28, bold:true, color:WHITE, fontFace:'Arial', align:'center' });
-    s.addText('PROPUESTA COMERCIAL', { x:1, y:2.1, w:11, h:0.6, fontSize:22, bold:true, color:GOLD, fontFace:'Arial', align:'center' });
-    s.addText(g('pp_cliente'), { x:1, y:3, w:11, h:0.5, fontSize:18, color:LIGHT, fontFace:'Arial', align:'center' });
-    s.addText(dateToLong(g('pp_fecha'), UI_LANG==='en'?'en':'es'), { x:1, y:3.6, w:11, h:0.4, fontSize:13, color:LIGHT, fontFace:'Arial', align:'center' });
-    if (g('pp_ref')) s.addText('Ref: ' + g('pp_ref'), { x:1, y:4.1, w:11, h:0.35, fontSize:12, color:GOLD, fontFace:'Arial', align:'center' });
-    s.addText(g('pp_rep') + (g('pp_cargo') ? ' · ' + g('pp_cargo') : '') + (g('pp_email') ? ' · ' + g('pp_email') : ''), { x:1, y:6.7, w:11, h:0.35, fontSize:11, color:LIGHT, fontFace:'Arial', align:'center' });
+  // ── SLIDE 1: PORTADA ──
+  var s1 = addSlide();
+  // Left accent bar
+  s1.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
+  // Horizontal divider
+  s1.addShape(prs.ShapeType.rect, { x:0.3, y:3.1, w:12.1, h:0.04, fill:{ color:ACC } });
+  s1.addText(g('pp_empresa'), {
+    x:0.3, y:1.0, w:12, h:0.9,
+    fontSize:32, bold:true, color:T.titleColor, fontFace:'Arial', align:'center'
   });
-
-  // SLIDE 2: INTRODUCCIÓN
-  addSlide('intro', function(s) {
-    s.addShape(prs.ShapeType.rect, { x:0, y:0, w:0.06, h:'100%', fill:{color:GOLD} });
-    s.addText('INTRODUCCIÓN', { x:0.4, y:0.4, w:12, h:0.5, fontSize:20, bold:true, color:GOLD, fontFace:'Arial' });
-    s.addShape(prs.ShapeType.rect, { x:0.4, y:1, w:11.5, h:0.03, fill:{color:GOLD} });
-    s.addText(g('pp_intro'), { x:0.4, y:1.2, w:11.5, h:5.5, fontSize:14, color:WHITE, fontFace:'Arial', valign:'top', wrap:true });
+  s1.addText('PROPUESTA COMERCIAL', {
+    x:0.3, y:2.0, w:12, h:0.6,
+    fontSize:20, bold:true, color:ACC, fontFace:'Arial', align:'center', charSpacing:3
   });
-
-  // SLIDES 3+: SERVICIOS (uno por servicio)
-  pptxServices.filter(function(s){return s.name;}).forEach(function(svc, idx) {
-    addSlide('svc'+idx, function(s) {
-      s.addShape(prs.ShapeType.rect, { x:0, y:0, w:0.06, h:'100%', fill:{color:GOLD} });
-      s.addShape(prs.ShapeType.rect, { x:0.4, y:0.35, w:4, h:4, fill:{color:'111111'}, line:{color:GOLD,pt:1} });
-      s.addText(String(idx+1).padStart(2,'0'), { x:0.4, y:0.5, w:4, h:1.2, fontSize:56, bold:true, color:GOLD, fontFace:'Arial', align:'center' });
-      s.addText(svc.name, { x:0.4, y:1.9, w:4, h:1, fontSize:16, bold:true, color:WHITE, fontFace:'Arial', align:'center', wrap:true });
-      if (svc.desc) s.addText(svc.desc, { x:4.7, y:0.35, w:7.5, h:5.8, fontSize:13, color:WHITE, fontFace:'Arial', valign:'top', wrap:true });
+  s1.addText(g('pp_cliente'), {
+    x:0.3, y:3.3, w:12, h:0.5,
+    fontSize:18, color:T.subtitleColor, fontFace:'Arial', align:'center'
+  });
+  s1.addText(dateToLong(g('pp_fecha'), UI_LANG==='en'?'en':'es'), {
+    x:0.3, y:3.95, w:12, h:0.38,
+    fontSize:13, color:DIM, fontFace:'Arial', align:'center'
+  });
+  if (g('pp_ref')) {
+    s1.addText('Ref: ' + g('pp_ref'), {
+      x:0.3, y:4.45, w:12, h:0.32,
+      fontSize:11, color:ACC, fontFace:'Arial', align:'center'
     });
-  });
+  }
+  s1.addText(
+    g('pp_rep') + (g('pp_cargo') ? '  ·  ' + g('pp_cargo') : '') + (g('pp_email') ? '  ·  ' + g('pp_email') : ''),
+    { x:0.3, y:6.8, w:12, h:0.32, fontSize:10, color:DIM, fontFace:'Arial', align:'center' }
+  );
 
-  // SLIDE: INVERSIÓN
-  addSlide('inversion', function(s) {
-    var precio = parseFloat(g('pp_precio')||0);
-    var ivaAmt = precio*0.21;
-    var fmt = function(v){return v.toFixed(2).replace('.',',')+' €';};
-    s.addShape(prs.ShapeType.rect, { x:0, y:0, w:0.06, h:'100%', fill:{color:GOLD} });
-    s.addText('INVERSIÓN', { x:0.4, y:0.4, w:12, h:0.5, fontSize:20, bold:true, color:GOLD, fontFace:'Arial' });
-    s.addShape(prs.ShapeType.rect, { x:0.4, y:1, w:11.5, h:0.03, fill:{color:GOLD} });
-    // Price box
-    s.addShape(prs.ShapeType.rect, { x:0.4, y:1.2, w:5.5, h:3.2, fill:{color:'111111'}, line:{color:GOLD,pt:1} });
-    s.addText('Base (s/IVA)', { x:0.4, y:1.4, w:5.5, h:0.4, fontSize:12, color:LIGHT, fontFace:'Arial', align:'center' });
-    s.addText(fmt(precio), { x:0.4, y:1.9, w:5.5, h:0.8, fontSize:26, bold:true, color:GOLD, fontFace:'Arial', align:'center' });
-    s.addText('IVA (21%): '+fmt(ivaAmt), { x:0.4, y:2.8, w:5.5, h:0.35, fontSize:13, color:LIGHT, fontFace:'Arial', align:'center' });
-    s.addText('TOTAL: '+fmt(precio+ivaAmt), { x:0.4, y:3.2, w:5.5, h:0.5, fontSize:18, bold:true, color:WHITE, fontFace:'Arial', align:'center' });
-    // Conditions
-    s.addText('Modalidad de pago:', { x:6.3, y:1.2, w:5.5, h:0.35, fontSize:12, bold:true, color:GOLD, fontFace:'Arial' });
-    s.addText(g('pp_pago'), { x:6.3, y:1.6, w:5.5, h:0.35, fontSize:13, color:WHITE, fontFace:'Arial' });
-    var durVal = g('pp_dur'), durCustom = g('pp_dur_val');
-    var durTxt = durVal==='obra'?'Por obra y servicio':durVal==='indefinido'?'Sin fecha límite':(g('pp_dur_val')||durVal);
-    s.addText('Duración estimada:', { x:6.3, y:2.2, w:5.5, h:0.35, fontSize:12, bold:true, color:GOLD, fontFace:'Arial' });
-    s.addText(durTxt, { x:6.3, y:2.6, w:5.5, h:0.35, fontSize:13, color:WHITE, fontFace:'Arial' });
+  // ── SLIDE 2: INTRODUCCIÓN ──
+  var s2 = addSlide();
+  s2.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
+  s2.addText(UI_LANG==='en' ? 'INTRODUCTION' : 'INTRODUCCIÓN', {
+    x:0.3, y:0.35, w:12, h:0.5,
+    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
   });
+  s2.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+  if (g('pp_intro')) {
+    s2.addText(g('pp_intro'), {
+      x:0.3, y:1.15, w:12, h:5.8,
+      fontSize:14, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.3
+    });
+  }
 
-  // SLIDE: PRÓXIMOS PASOS
-  addSlide('nextsteps', function(s) {
-    s.addShape(prs.ShapeType.rect, { x:0, y:0, w:0.06, h:'100%', fill:{color:GOLD} });
-    s.addText('PRÓXIMOS PASOS', { x:0.4, y:0.4, w:12, h:0.5, fontSize:20, bold:true, color:GOLD, fontFace:'Arial' });
-    s.addShape(prs.ShapeType.rect, { x:0.4, y:1, w:11.5, h:0.03, fill:{color:GOLD} });
-    if (g('pp_cta')) {
-      s.addText(g('pp_cta'), { x:0.4, y:1.2, w:11.5, h:4, fontSize:14, color:WHITE, fontFace:'Arial', valign:'top', wrap:true });
+  // ── SLIDES: SERVICIOS ──
+  var svcs = pptxServices.filter(function(s){return s.name;});
+  svcs.forEach(function(svc, idx) {
+    var sn = addSlide();
+    sn.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
+    // Service number badge
+    sn.addShape(prs.ShapeType.rect, {
+      x:0.3, y:0.3, w:1.6, h:1.6,
+      fill:{ color:SURF }, line:{ color:ACC, pt:1.5 },
+      rectRadius:0.05
+    });
+    sn.addText(String(idx + 1).padStart(2, '0'), {
+      x:0.3, y:0.45, w:1.6, h:0.9,
+      fontSize:44, bold:true, color:ACC, fontFace:'Arial', align:'center'
+    });
+    // Service name
+    sn.addText(svc.name, {
+      x:2.1, y:0.3, w:10.3, h:0.9,
+      fontSize:22, bold:true, color:T.titleColor, fontFace:'Arial', valign:'middle', wrap:true
+    });
+    sn.addShape(prs.ShapeType.rect, { x:2.1, y:1.35, w:10.3, h:0.03, fill:{ color:ACC } });
+    // Description
+    if (svc.desc) {
+      sn.addText(svc.desc, {
+        x:2.1, y:1.55, w:10.3, h:5.4,
+        fontSize:13, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.35
+      });
     }
-    s.addText(g('pp_rep') + (g('pp_cargo')?'\n'+g('pp_cargo'):'') + (g('pp_email')?'\n'+g('pp_email'):'') + (g('pp_tel')?'\n'+g('pp_tel'):''), {
-      x:0.4, y:5.5, w:11.5, h:1.5, fontSize:13, color:GOLD, fontFace:'Arial', align:'center', valign:'bottom'
+  });
+
+  // ── SLIDE: INVERSIÓN ──
+  var si = addSlide();
+  var precio = parseFloat(g('pp_precio')||0);
+  var ivaAmt = precio * 0.21;
+  var fmt = function(v) { return v.toFixed(2).replace('.', ',') + ' €'; };
+  var durVal = g('pp_dur');
+  var durTxt = durVal==='obra' ? (UI_LANG==='en'?'Project-based':'Por obra y servicio')
+    : durVal==='indefinido' ? (UI_LANG==='en'?'Open-ended':'Sin fecha límite')
+    : (g('pp_dur_val') || durVal);
+
+  si.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
+  si.addText(UI_LANG==='en' ? 'INVESTMENT' : 'INVERSIÓN', {
+    x:0.3, y:0.35, w:12, h:0.5,
+    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
+  });
+  si.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+
+  // Price box left
+  si.addShape(prs.ShapeType.rect, {
+    x:0.3, y:1.2, w:5.8, h:3.8,
+    fill:{ color:SURF }, line:{ color:ACC, pt:1.5 }, rectRadius:0.05
+  });
+  si.addText(UI_LANG==='en'?'Base (ex. VAT)':'Base (sin IVA)', {
+    x:0.3, y:1.4, w:5.8, h:0.4,
+    fontSize:11, color:DIM, fontFace:'Arial', align:'center'
+  });
+  si.addText(fmt(precio), {
+    x:0.3, y:1.85, w:5.8, h:0.9,
+    fontSize:30, bold:true, color:ACC, fontFace:'Arial', align:'center'
+  });
+  si.addShape(prs.ShapeType.rect, { x:0.7, y:2.85, w:5.0, h:0.02, fill:{ color:ACC } });
+  si.addText('IVA 21%:  ' + fmt(ivaAmt), {
+    x:0.3, y:2.95, w:5.8, h:0.38,
+    fontSize:13, color:DIM, fontFace:'Arial', align:'center'
+  });
+  si.addText('TOTAL:  ' + fmt(precio + ivaAmt), {
+    x:0.3, y:3.4, w:5.8, h:0.5,
+    fontSize:17, bold:true, color:TXT, fontFace:'Arial', align:'center'
+  });
+
+  // Conditions right
+  var condY = 1.2;
+  var condItems = [
+    { label: UI_LANG==='en'?'Payment terms:':'Modalidad de pago:', val: g('pp_pago') },
+    { label: UI_LANG==='en'?'Duration:':'Duración estimada:', val: durTxt },
+  ];
+  condItems.forEach(function(item) {
+    if (!item.val) return;
+    si.addText(item.label, {
+      x:6.5, y:condY, w:6, h:0.32,
+      fontSize:10, bold:true, color:ACC, fontFace:'Arial'
     });
+    condY += 0.32;
+    si.addText(item.val, {
+      x:6.5, y:condY, w:6, h:0.38,
+      fontSize:13, color:TXT, fontFace:'Arial'
+    });
+    condY += 0.55;
+  });
+
+  // ── SLIDE: PRÓXIMOS PASOS ──
+  var sp2 = addSlide();
+  sp2.addShape(prs.ShapeType.rect, { x:0, y:0.07, w:0.07, h:7.36, fill:{ color:ACC } });
+  sp2.addText(UI_LANG==='en' ? 'NEXT STEPS' : 'PRÓXIMOS PASOS', {
+    x:0.3, y:0.35, w:12, h:0.5,
+    fontSize:18, bold:true, color:ACC, fontFace:'Arial', charSpacing:2
+  });
+  sp2.addShape(prs.ShapeType.rect, { x:0.3, y:0.95, w:12, h:0.03, fill:{ color:ACC } });
+  if (g('pp_cta')) {
+    sp2.addText(g('pp_cta'), {
+      x:0.3, y:1.15, w:12, h:4.5,
+      fontSize:14, color:TXT, fontFace:'Arial', valign:'top', wrap:true, lineSpacingMultiple:1.35
+    });
+  }
+  // Contact block bottom
+  sp2.addShape(prs.ShapeType.rect, { x:0.3, y:5.9, w:12, h:0.03, fill:{ color:ACC } });
+  var contactParts = [g('pp_rep'), g('pp_cargo'), g('pp_email'), g('pp_tel')].filter(Boolean);
+  sp2.addText(contactParts.join('  ·  '), {
+    x:0.3, y:6.0, w:12, h:0.5,
+    fontSize:12, color:ACC, fontFace:'Arial', align:'center', bold:true
   });
 
   return prs;
