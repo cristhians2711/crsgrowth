@@ -24898,7 +24898,7 @@ var CRS_LOGO_B64 = 'iVBORw0KGgoAAAANSUhEUgAAAQEAAAEsCAYAAADD3gYVAAEAAElEQVR42ux9
 // crsgrowth.com/lab
 // ═══════════════════════════════════════════════════════
 
-var ANTHROPIC_KEY = 'REEMPLAZAR_CON_NUEVA_API_KEY'; // Obtener en console.anthropic.com
+// IA gestionada via Google Apps Script — key no expuesta en cliente
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbxyg6pRPNQ0oLnHHg4PV4ZWq8y8W-pOpC7owHek-UOUCT1_gx-SdJRdzExucoUVPV62/exec';
 var CALENDLY = 'https://calendly.com/cristhiam-silva-crsgrowth/30min';
 var CRS_WEB = 'https://crsgrowth.com';
@@ -25298,22 +25298,16 @@ async function runAuditAI() {
   AUDIT_SCORES = calcScore();
 
   try {
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+    var resp = await fetch(GAS_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1200,
-        messages: [{ role: 'user', content: buildAuditPrompt(AUDIT_SCORES) }]
+        tipo: 'crslab_ai_audit',
+        prompt: buildAuditPrompt(AUDIT_SCORES)
       })
     });
     var data = await resp.json();
-    var text = data.content && data.content[0] ? data.content[0].text : '';
+    var text = data && data.result ? data.result : '';
     var m = text.match(/\{[\s\S]*\}/);
     if (m) AUDIT_AI = JSON.parse(m[0]);
   } catch(e) {
@@ -25459,23 +25453,21 @@ async function runDnaAI() {
   _dnaShowStep(3); // loading
   var result = null;
   try {
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+    var resp = await fetch(GAS_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: buildDnaPrompt() }]
+        tipo: 'crslab_ai',
+        modulo: 'dna',
+        prompt: buildDnaPrompt()
       })
     });
-    var data = await resp.json();
-    var text = data.content && data.content[0] ? data.content[0].text : '';
-    var m = text.match(/\{[\s\S]*\}/); if (m) result = JSON.parse(m[0]);
+    try {
+      var data = await resp.json();
+      var text = data && data.result ? data.result : '';
+      var m = text.match(/\{[\s\S]*\}/); if (m) result = JSON.parse(m[0]);
+    } catch(e) { result = null; }
   } catch(e) { console.error('DNA AI:', e); }
 
   await saveLead({
