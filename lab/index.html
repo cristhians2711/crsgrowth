@@ -24776,52 +24776,63 @@ function renderCtForm() {
   var isRGPD = CT_TYPE === 'rgpd';
   var isNDA = CT_TYPE === 'nda';
   var ct = CT_NAMES[CT_TYPE] || 'Contrato';
-
   var today = new Date().toISOString().split('T')[0];
+
+  function sectionLabel(txt) {
+    return '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)">' + txt + '</div>';
+  }
+
   var html = '<div class="card"><div class="card-head"><h2>' + ct + '</h2></div><div class="card-body">';
 
-  html += '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;margin-top:2px">' + (isNDA ? 'Parte A — Divulgante' : isRGPD ? 'Responsable del Tratamiento' : 'Parte A — Prestador') + '</div>';
-  html += '<div class="fgrid" style="margin-bottom:0">';
+  // ── PARTE A ──
+  html += sectionLabel(isNDA ? 'Parte A — Divulgante' : isRGPD ? 'Responsable del Tratamiento' : 'Parte A — Prestador');
+  html += '<div class="fgrid">';
   html += '<div class="fld" style="grid-column:span 2"><label>Razón social <span class="req">*</span></label><input id="cta-nombre" placeholder="Empresa Alpha, S.L."></div>';
   html += '<div class="fld"><label>CIF/NIF</label><input id="cta-cif" placeholder="B12345678"></div>';
-  html += '<div class="fld"><label>Domicilio</label><input id="cta-dom" placeholder="Calle Mayor 1, 28001 Madrid"></div>';
-  html += '<div class="fld"><label>Representante <span class="req">*</span></label><input id="cta-rep" placeholder="María García López"></div>';
-  html += '<div class="fld"><label>Cargo representante</label><input id="cta-cargo" placeholder="Administradora Única"></div>';
-  html += '<div class="fld"><label>Email</label><input id="cta-email" type="email" placeholder="contacto@empresa.com"></div>';
+  html += '<div class="fld"><label>Domicilio social</label><input id="cta-dom" placeholder="Calle Mayor 1, 28001 Madrid"></div>';
+  html += '<div class="fld"><label>Representante legal <span class="req">*</span></label><input id="cta-rep" placeholder="María García López"></div>';
+  html += '<div class="fld"><label>Cargo</label><input id="cta-cargo" placeholder="Administradora Única"></div>';
+  html += '<div class="fld"><label>Email <span class="req">*</span></label><input id="cta-email" type="email" placeholder="contacto@empresa.com"></div>';
+  html += '<div class="fld"><label>Teléfono <span class="req">*</span></label><input id="cta-tel" type="tel" placeholder="+34 600 000 000"></div>';
   html += '</div>';
 
-  html += '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;margin-top:20px">' + (isNDA ? 'Parte B — Receptora' : isRGPD ? 'Encargado del Tratamiento' : 'Parte B — Cliente') + '</div>';
-  html += '<div class="fgrid" style="margin-bottom:0">';
+  // ── PARTE B ──
+  html += sectionLabel(isNDA ? 'Parte B — Receptora' : isRGPD ? 'Encargado del Tratamiento' : 'Parte B — Cliente');
+  html += '<div class="fgrid">';
   html += '<div class="fld" style="grid-column:span 2"><label>Razón social <span class="req">*</span></label><input id="ctb-nombre" placeholder="Empresa Beta, S.A."></div>';
   html += '<div class="fld"><label>CIF/NIF</label><input id="ctb-cif" placeholder="A98765432"></div>';
-  html += '<div class="fld"><label>Domicilio</label><input id="ctb-dom" placeholder="Av. Central 5, 08001 Barcelona"></div>';
-  html += '<div class="fld"><label>Representante <span class="req">*</span></label><input id="ctb-rep" placeholder="Carlos Ruiz Martínez"></div>';
-  html += '<div class="fld"><label>Cargo representante</label><input id="ctb-cargo" placeholder="Director General"></div>';
-  html += '<div class="fld"><label>Email</label><input id="ctb-email" type="email" placeholder="contacto@cliente.com"></div>';
+  html += '<div class="fld"><label>Domicilio social</label><input id="ctb-dom" placeholder="Av. Central 5, 08001 Barcelona"></div>';
+  html += '<div class="fld"><label>Representante legal <span class="req">*</span></label><input id="ctb-rep" placeholder="Carlos Ruiz Martínez"></div>';
+  html += '<div class="fld"><label>Cargo</label><input id="ctb-cargo" placeholder="Director General"></div>';
+  html += '<div class="fld"><label>Email <span class="req">*</span></label><input id="ctb-email" type="email" placeholder="contacto@cliente.com"></div>';
+  html += '<div class="fld"><label>Teléfono <span class="req">*</span></label><input id="ctb-tel" type="tel" placeholder="+34 600 000 000"></div>';
   html += '</div>';
 
-  html += '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;margin-top:20px">Detalles del contrato</div>';
-  html += '<div class="fgrid" style="margin-bottom:0">';
+  // ── DETALLES ──
+  html += sectionLabel('Detalles del contrato');
+  html += '<div class="fgrid">';
   html += '<div class="fld"><label>Fecha de firma <span class="req">*</span></label><input id="ct-fecha" type="date" value="' + today + '"></div>';
   html += '<div class="fld"><label>Lugar de firma</label><input id="ct-lugar" value="Madrid" placeholder="Madrid"></div>';
-  html += '<div class="fld"><label>Referencia</label><input id="ct-ref" placeholder="CONT-2026-001" value="CONT-' + new Date().getFullYear() + '-001"></div>';
+  html += '<div class="fld"><label>Referencia</label><input id="ct-ref" value="CONT-' + new Date().getFullYear() + '-001"></div>';
   html += '<div class="fld"><label>Jurisdicción</label><select id="ct-jur"><option>Madrid</option><option>Barcelona</option><option>Valencia</option><option>Sevilla</option><option>Bilbao</option></select></div>';
 
   if (isNDA) {
     html += '<div class="fld" style="grid-column:span 2"><label>Duración de confidencialidad</label><select id="ct-dur"><option value="2">2 años</option><option value="3" selected>3 años</option><option value="5">5 años</option><option value="indefinida">Indefinida</option></select></div>';
   } else {
-    html += '<div class="fld"><label>' + (needsPrice ? 'Precio / Honorarios' : 'Duración del encargo') + '</label><input id="ct-precio" placeholder="' + (needsPrice ? '5.000 €' : 'Indefinido') + '"></div>';
     if (needsPrice) {
+      html += '<div class="fld"><label>Precio / Honorarios</label><input id="ct-precio" placeholder="5.000 €"></div>';
       html += '<div class="fld"><label>Forma de pago</label><input id="ct-pago" placeholder="50% inicio · 50% entrega"></div>';
-      html += '<div class="fld" style="grid-column:span 2"><label>Duración</label><select id="ct-dur"><option value="obra" selected>Por obra y servicio</option><option value="1m">1 mes</option><option value="3m">3 meses</option><option value="6m">6 meses</option><option value="1">1 año</option><option value="indefinido">Indefinido</option></select></div>';
+    }
+    html += '<div class="fld" style="grid-column:span 2"><label>Duración</label><select id="ct-dur"><option value="obra" selected>Por obra y servicio</option><option value="1m">1 mes</option><option value="3m">3 meses</option><option value="6m">6 meses</option><option value="1">1 año</option><option value="indefinido">Indefinido</option></select></div>';
+    if (isRGPD) {
+      html += '<div class="fld" style="grid-column:span 2"><label>Finalidad del tratamiento</label><textarea id="ct-objeto" placeholder="Gestión del servicio contratado, comunicaciones comerciales..."></textarea></div>';
     }
   }
+  if (!isRGPD) {
+    html += '<div class="fld" style="grid-column:span 2"><label>Objeto / Descripción de servicios</label><textarea id="ct-objeto" placeholder="Describe el objeto o los servicios incluidos en el contrato..."></textarea></div>';
+  }
+  html += '</div></div></div>';
 
-  html += '<div class="fld" style="grid-column:span 2"><label>' + (isRGPD ? 'Finalidad del tratamiento' : 'Objeto / Descripción de servicios') + '</label>';
-  html += '<textarea id="ct-objeto" placeholder="' + (isRGPD ? 'Gestión del servicio contratado, comunicaciones comerciales...' : 'Describe el objeto o los servicios incluidos...') + '"></textarea></div>';
-  html += '</div>';
-
-  html += '</div></div>';
   var wrap = document.getElementById('ct-form-wrap');
   if (wrap) wrap.innerHTML = html;
 }
@@ -25537,7 +25548,9 @@ function ctStep(from, to) {
   } else if (from === 3 && to === 4) {
     if (!validate([
       {id:'cta-nombre',label:'Nombre Parte A'},{id:'cta-rep',label:'Representante A'},
+      {id:'cta-email',label:'Email Parte A'},{id:'cta-tel',label:'Teléfono Parte A'},
       {id:'ctb-nombre',label:'Nombre Parte B'},{id:'ctb-rep',label:'Representante B'},
+      {id:'ctb-email',label:'Email Parte B'},{id:'ctb-tel',label:'Teléfono Parte B'},
       {id:'ct-fecha',label:'Fecha'}
     ], 'ct-err3')) return;
     if (!USER.email) {
@@ -25693,207 +25706,321 @@ async function downloadContract() {
 
 async function buildGenericContract() {
   var h = makeH(docx);
-  var D = h.D; var C = h.C; var BS = h.BS; var AT = h.AT; var WT = h.WT; var ST = h.ST;
+  var D = h.D; var C = h.C; var BS = h.BS; var AT = h.AT; var WT = h.WT;
   var sp = h.sp; var tx = h.tx; var par = h.par; var H1 = h.H1; var HR = h.HR;
 
   var isNDA = CT_TYPE === 'nda'; var isRGPD = CT_TYPE === 'rgpd';
   var needsPrice = !isNDA && !isRGPD;
   var ct = CT_NAMES[CT_TYPE] || 'Contrato';
+  var isEN = CT_LANG === 'en';
 
-  var lang = CT_LANG;
-  var isEN = lang === 'en';
-  var L = {
-    parties: isEN ? 'PARTIES' : 'PARTES',
-    clauses: isEN ? 'CLAUSES' : 'CLÁUSULAS',
-    sign:    isEN ? 'SIGNATURES' : 'FIRMAS',
-    first:   isEN ? 'FIRST'  : 'PRIMERA',
-    second:  isEN ? 'SECOND' : 'SEGUNDA',
-    third:   isEN ? 'THIRD'  : 'TERCERA',
-    fourth:  isEN ? 'FOURTH' : 'CUARTA',
-    fifth:   isEN ? 'FIFTH'  : 'QUINTA',
-    sixth:   isEN ? 'SIXTH'  : 'SEXTA',
-    confid:  isEN ? 'CONFIDENTIAL — exclusive use of signing parties' : 'CONFIDENCIAL — uso exclusivo de las partes firmantes',
-  };
-
-  var aName = gv('cta-nombre')||'—'; var aRep = gv('cta-rep')||'—';
-  var aCif = gv('cta-cif'); var aDom = gv('cta-dom'); var aCargo = gv('cta-cargo');
-  var bName = gv('ctb-nombre')||'—'; var bRep = gv('ctb-rep')||'—';
-  var bCif = gv('ctb-cif'); var bDom = gv('ctb-dom'); var bCargo = gv('ctb-cargo');
-  var fecha = gv('ct-fecha'); var lugar = gv('ct-lugar')||'Madrid';
-  var obj = gv('ct-objeto')||''; var precio = gv('ct-precio');
-  var pago = gv('ct-pago')||'50% inicio · 50% a la entrega';
+  // Field values
+  var aName  = gv('cta-nombre')||'—'; var aRep   = gv('cta-rep')||'—';
+  var aCif   = gv('cta-cif');         var aDom   = gv('cta-dom');
+  var aCargo = gv('cta-cargo');       var aEmail = gv('cta-email');
+  var aTel   = gv('cta-tel');
+  var bName  = gv('ctb-nombre')||'—'; var bRep   = gv('ctb-rep')||'—';
+  var bCif   = gv('ctb-cif');         var bDom   = gv('ctb-dom');
+  var bCargo = gv('ctb-cargo');       var bEmail = gv('ctb-email');
+  var bTel   = gv('ctb-tel');
+  var fecha  = gv('ct-fecha'); var lugar = gv('ct-lugar')||'Madrid';
+  var obj    = gv('ct-objeto')||''; var precio = gv('ct-precio');
+  var pago   = gv('ct-pago')||'50% a la firma · 50% a la entrega';
   var durSel = gv('ct-dur')||'obra'; var ref = gv('ct-ref'); var jur = gv('ct-jur')||'Madrid';
-  var durMap = {'1m':'1 mes','3m':'3 meses','6m':'6 meses','1':'1 año','2':'2 años','3':'3 años','obra':'la duración del proyecto','indefinido':'tiempo indefinido','indefinida':'tiempo indefinido'};
+  var durMap = {'1m':'1 mes','3m':'3 meses','6m':'6 meses','1':'1 año','2':'2 años','3':'3 años',
+    'obra':'la duración del proyecto','indefinido':'tiempo indefinido','indefinida':'tiempo indefinido'};
   var durText = durMap[durSel]||durSel;
 
-  var parteA = aName + (aCif?', CIF '+aCif:'') + (aDom?', domicilio en '+aDom:'') +
-    ', representada por ' + aRep + (aCargo?', en calidad de '+aCargo:'') + '; en adelante «Parte A».';
-  var parteB = bName + (bCif?', CIF '+bCif:'') + (bDom?', domicilio en '+bDom:'') +
-    ', representada por ' + bRep + (bCargo?', en calidad de '+bCargo:'') + '; en adelante «Parte B».';
-
-  // Clauses per type
-  var cláusulas = [];
-  var cl = function(n, title, body) {
-    return [
-      new D.Paragraph({spacing:{before:220,after:70}, children:[tx(n + '. — ' + title.toUpperCase(), {bold:true,size:20,color:C.dark})]}),
-      par(body)
-    ];
-  };
-
-  if (CT_TYPE === 'servicios' || CT_TYPE === 'consultoria') {
-    cláusulas = [
-      cl(L.first, isEN?'Object':'Objeto', obj||'La Parte A prestará a la Parte B los servicios profesionales descritos en este contrato conforme a los estándares de calidad acordados entre ambas partes.'),
-      cl(L.second, isEN?'Price':'Precio', precio?'El precio pactado es '+precio+'. Forma de pago: '+pago+'.':'Las partes acuerdan el precio y forma de pago mediante acuerdo escrito.'),
-      cl(L.third, isEN?'Duration':'Duración', 'El presente contrato tendrá una duración de '+durText+'. Cualquiera de las partes podrá resolverlo con preaviso de 30 días mediante comunicación escrita.'),
-      cl(L.fourth, isEN?'Intellectual property':'Propiedad intelectual', 'Los entregables desarrollados serán propiedad de la Parte B una vez satisfecho íntegramente el pago. La Parte A podrá incluirlos en su portfolio con autorización expresa.'),
-      cl(L.fifth, isEN?'Confidentiality':'Confidencialidad', 'Ambas partes se comprometen a mantener la más estricta confidencialidad sobre la información a la que accedan con motivo de este contrato, durante su vigencia y durante 3 años tras su terminación.'),
-      cl(L.sixth, isEN?'Jurisdiction':'Ley aplicable', 'Este contrato se rige por la legislación española. Las partes se someten a los Juzgados y Tribunales de '+jur+'.'),
-    ];
-  } else if (CT_TYPE === 'marketing') {
-    cláusulas = [
-      cl(L.first, 'Objeto', obj||'La Parte A prestará a la Parte B servicios de marketing digital, incluyendo gestión de redes sociales, campañas de publicidad y estrategia de contenidos según se acuerde.'),
-      cl(L.second, 'Honorarios', precio?'Los honorarios mensuales son '+precio+'. Forma de pago: '+pago+'.':'Las partes acuerdan los honorarios mediante documento adjunto.'),
-      cl(L.third, 'Duración', 'El contrato tendrá una duración de '+durText+' con posibilidad de prórroga tácita mensual salvo preaviso de 30 días.'),
-      cl(L.fourth, 'Propiedad de los activos', 'Los contenidos, copys, diseños y creatividades desarrolladas serán propiedad de la Parte B. Las cuentas y perfiles gestionados pertenecen en todo momento a la Parte B.'),
-      cl(L.fifth, 'Confidencialidad y datos', 'La Parte A tratará los datos de la Parte B conforme al RGPD y mantendrá confidencialidad sobre toda información relativa al negocio del cliente.'),
-      cl(L.sixth, 'Jurisdicción', 'Este contrato se rige por la legislación española y se somete a los Tribunales de '+jur+'.'),
-    ];
-  } else if (CT_TYPE === 'desarrollo') {
-    cláusulas = [
-      cl(L.first, 'Objeto', obj||'La Parte A realizará el diseño, desarrollo e implementación del proyecto web descrito en el briefing acordado entre las partes.'),
-      cl(L.second, 'Precio y pagos', precio?'El precio total del proyecto es '+precio+'. Forma de pago: '+pago+'.':'Las partes acuerdan el precio en documento de proyecto adjunto.'),
-      cl(L.third, 'Plazos y revisiones', 'El proyecto se desarrollará conforme al calendario acordado. Se incluyen hasta 2 rondas de revisiones sobre cada entregable. Las solicitudes adicionales se presupuestarán aparte.'),
-      cl(L.fourth, 'Propiedad intelectual', 'Una vez abonado el importe total, la Parte B adquiere la propiedad plena del código, diseños y recursos desarrollados. Las licencias de terceros quedan sujetas a sus propias condiciones.'),
-      cl(L.fifth, 'Confidencialidad', 'Ambas partes se obligan a la confidencialidad sobre información técnica y comercial intercambiada durante el proyecto.'),
-      cl(L.sixth, 'Jurisdicción', 'Este contrato se rige por la legislación española y se somete a los Tribunales de '+jur+'.'),
-    ];
-  } else if (CT_TYPE === 'colaboracion') {
-    cláusulas = [
-      cl(L.first, 'Objeto', obj||'Las partes acuerdan colaborar comercialmente para la captación y desarrollo de clientes comunes o la distribución de productos y servicios en los términos establecidos.'),
-      cl(L.second, 'Obligaciones', 'Cada parte aportará sus recursos, contactos y capacidades para el logro del objetivo común. Las obligaciones específicas se detallarán en anexo.'),
-      cl(L.third, 'Retribución', precio?'La retribución acordada es: '+precio+'. Liquidación: '+pago+'.':'Las partes acuerdan el sistema de comisiones mediante acuerdo escrito.'),
-      cl(L.fourth, 'Duración', 'Esta colaboración tendrá una duración de '+durText+'. Salvo pacto expreso, no implica exclusividad.'),
-      cl(L.fifth, 'Confidencialidad', 'Ambas partes guardarán confidencialidad sobre la información intercambiada durante y tras la vigencia del acuerdo.'),
-      cl(L.sixth, 'Jurisdicción', 'El presente acuerdo se rige por la legislación española y se somete a los Tribunales de '+jur+'.'),
-    ];
-  } else if (CT_TYPE === 'compraventa') {
-    cláusulas = [
-      cl(L.first, 'Objeto de la compraventa', obj||'La Parte A (vendedor) transmite a la Parte B (comprador) la plena propiedad del bien o activo descrito en el presente contrato, libre de cargas y gravámenes.'),
-      cl(L.second, 'Precio y pago', 'El precio de compraventa es '+precio+'. Forma de pago: '+pago+'. El pago íntegro constituye condición resolutoria.'),
-      cl(L.third, 'Entrega', 'La entrega del bien se producirá en el momento del pago íntegro del precio, salvo pacto expreso en contrario.'),
-      cl(L.fourth, 'Garantías', 'La Parte A garantiza la titularidad del bien y la ausencia de cargas no comunicadas. La Parte B lo acepta en su estado actual tras haberlo examinado.'),
-      cl(L.fifth, 'Vicios ocultos', 'La Parte A responderá de los vicios ocultos que existiesen al tiempo de la venta conforme a la legislación vigente.'),
-      cl(L.sixth, 'Jurisdicción', 'Esta compraventa se rige por la legislación española y se somete a los Tribunales de '+jur+'.'),
-    ];
-  } else if (CT_TYPE === 'rgpd') {
-    cláusulas = [
-      cl(L.first, 'Objeto del encargo', 'La Parte B (Encargado) tratará los datos cuya responsabilidad corresponde a la Parte A (Responsable) exclusivamente para la finalidad: ' + (gv('ct-objeto')||'prestación de los servicios contratados') + '.'),
-      cl(L.second, 'Categorías de datos', 'Se tratarán datos identificativos (nombre, email, teléfono) y en su caso datos de carácter económico o profesional, conforme a las instrucciones del Responsable.'),
-      cl(L.third, 'Obligaciones del Encargado', 'El Encargado se compromete a: (i) tratar los datos solo conforme a instrucciones del Responsable; (ii) garantizar la confidencialidad del personal autorizado; (iii) implementar las medidas técnicas del art. 32 RGPD; (iv) no subcontratar sin autorización previa; (v) asistir en el ejercicio de derechos ARCO; (vi) suprimir o devolver los datos al término del encargo.'),
-      cl(L.fourth, 'Subencargados', 'El Encargado no podrá contratar subencargados sin autorización previa y escrita del Responsable. El subencargado quedará vinculado por obligaciones equivalentes.'),
-      cl(L.fifth, 'Auditorías', 'El Responsable podrá realizar auditorías para verificar el cumplimiento, notificándolo con 15 días de antelación.'),
-      cl(L.sixth, 'Duración y devolución', 'El encargo tendrá una duración de '+durText+'. A su término, el Encargado devolverá o destruirá los datos según instrucciones. Este acuerdo se rige por el RGPD, la LOPDGDD y se somete a los Tribunales de '+jur+'.'),
-    ];
-  } else {
-    cláusulas = [cl(L.first, 'Objeto', obj||'Las partes acuerdan lo establecido en el presente contrato.')];
+  function parteStr(name, cif, dom, rep, cargo, email, tel, alias) {
+    var s = name;
+    if (cif) s += ', con CIF/NIF ' + cif;
+    if (dom) s += ', con domicilio social en ' + dom;
+    s += ', representada en este acto por D./Dña. ' + rep;
+    if (cargo) s += ', en calidad de ' + cargo;
+    if (email) s += ', email: ' + email;
+    if (tel) s += ', tel.: ' + tel;
+    s += '; en adelante denominada «' + alias + '».';
+    return s;
   }
+  var parteA = parteStr(aName, aCif, aDom, aRep, aCargo, aEmail, aTel, isNDA?'Parte Divulgante':isRGPD?'Responsable':'Parte A');
+  var parteB = parteStr(bName, bCif, bDom, bRep, bCargo, bEmail, bTel, isNDA?'Parte Receptora':isRGPD?'Encargado':'Parte B');
 
-  // Build doc
-  var nB = {style:BS.NONE,size:0,color:'FFFFFF'};
+  // Helpers
+  var nB  = {style:BS.NONE,size:0,color:'FFFFFF'};
   var nBs = {top:nB,bottom:nB,left:nB,right:nB};
   var signLine = {bottom:{style:BS.SINGLE,size:6,color:C.border,space:4}};
 
   var logoData = await getLogoRun('nda', 140, 50);
-  var logoRun = logoData ? new D.ImageRun({data:logoData.buf,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:logoData.ext}) : null;
+  var logoRun  = logoData ? new D.ImageRun({data:logoData.buf,
+    transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},
+    type:logoData.ext}) : null;
 
-  // Cover
+  function cl(num, title, paras) {
+    var rows = [new D.Paragraph({spacing:{before:240,after:80},
+      children:[tx(num + '. — ' + title.toUpperCase(), {bold:true,size:21,color:C.dark})]})];
+    if (typeof paras === 'string') rows.push(par(paras));
+    else if (Array.isArray(paras)) paras.forEach(function(p){ rows.push(typeof p==='string'?par(p):p); });
+    return rows;
+  }
+  function sub(letter, txt) {
+    return new D.Paragraph({spacing:{before:60,after:40},indent:{left:480},
+      children:[tx(letter + ') ', {bold:true,size:19}), tx(txt, {size:19})]});
+  }
+
+  // ── CLÁUSULAS POR TIPO ──
+  var clausulas = [];
+
+  if (CT_TYPE === 'nda') {
+    clausulas = [
+      cl('PRIMERA', isEN?'Object and purpose':'Objeto y finalidad',
+        'Las partes, que mantienen o pretenden mantener relaciones de colaboración o negocio, van a intercambiar información de carácter confidencial relacionada con sus respectivas actividades. Mediante el presente Acuerdo establecen las condiciones bajo las cuales dicha información podrá ser comunicada, utilizada y protegida.'),
+      cl('SEGUNDA', 'Definición de información confidencial', [
+        'A efectos del presente Acuerdo, se considerará «Información Confidencial» toda aquella información, datos, documentos, know-how, técnicas, procesos, estrategias comerciales, listas de clientes, proyecciones financieras, software, código fuente o cualquier otro material que una parte revele a la otra, ya sea de forma oral, escrita, electrónica o en cualquier otro soporte, y que esté identificada como confidencial o que por su naturaleza deba razonablemente entenderse como tal.',
+        sub('a', 'Quedan excluidas de la definición anterior: (i) información que sea o llegue a ser de dominio público sin culpa de la Parte Receptora; (ii) información que la Parte Receptora pueda demostrar que conocía con anterioridad a su revelación; (iii) información recibida legítimamente de un tercero sin restricción de divulgación; (iv) información desarrollada de forma independiente por la Parte Receptora.')
+      ]),
+      cl('TERCERA', 'Obligaciones de confidencialidad', [
+        'La Parte Receptora se compromete a:',
+        sub('a', 'Mantener la más estricta confidencialidad sobre la Información Confidencial recibida y no divulgarla a terceros sin el consentimiento previo y por escrito de la Parte Divulgante.'),
+        sub('b', 'Utilizar la Información Confidencial exclusivamente para la finalidad establecida en la CLÁUSULA PRIMERA y no para ningún otro propósito.'),
+        sub('c', 'Adoptar las mismas medidas de seguridad y diligencia que aplica para proteger su propia información confidencial, y en todo caso medidas no inferiores a las razonablemente adecuadas.'),
+        sub('d', 'Limitar el acceso a la Información Confidencial a sus empleados, directivos, asesores o colaboradores que tengan estricta necesidad de conocerla, quienes deberán estar sujetos a obligaciones de confidencialidad equivalentes.'),
+        sub('e', 'Notificar de inmediato a la Parte Divulgante en caso de que tenga conocimiento de cualquier divulgación no autorizada o uso indebido de la Información Confidencial.'),
+      ]),
+      cl('CUARTA', 'Duración', 'El presente Acuerdo tendrá una vigencia de ' + (durMap[durSel]||durSel) + ' desde la fecha de su firma. No obstante, las obligaciones de confidencialidad sobre información especialmente sensible (secretos comerciales, datos personales, código fuente) subsistirán por tiempo indefinido o hasta que dicha información pierda su carácter confidencial por causas ajenas a la Parte Receptora.'),
+      cl('QUINTA', 'Devolución o destrucción de información', 'A requerimiento de la Parte Divulgante, o en todo caso a la finalización del presente Acuerdo, la Parte Receptora devolverá o destruirá, a elección de la Parte Divulgante, toda la Información Confidencial recibida y las copias de la misma, ya sea en soporte físico o digital, dejando constancia escrita de dicha destrucción si así se solicitara.'),
+      cl('SEXTA', 'Propiedad intelectual e industrial', 'El presente Acuerdo no implica la cesión de ningún derecho de propiedad intelectual o industrial sobre la Información Confidencial. La Parte Divulgante conserva en todo momento la titularidad de sus derechos sobre dicha información.'),
+      cl('SÉPTIMA', 'Indemnización', 'El incumplimiento de las obligaciones establecidas en el presente Acuerdo dará derecho a la Parte perjudicada a exigir indemnización por daños y perjuicios, sin perjuicio de las medidas cautelares o acciones legales que pudieran corresponder.'),
+      cl('OCTAVA', 'Ley aplicable y jurisdicción', 'El presente Acuerdo se rige por la legislación española. Para la resolución de cualquier controversia derivada de su interpretación o cumplimiento, las partes se someten expresamente a la jurisdicción de los Juzgados y Tribunales de ' + jur + ', con renuncia al fuero propio que pudiera corresponderles.'),
+    ];
+  } else if (CT_TYPE === 'servicios' || CT_TYPE === 'consultoria') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto del contrato',
+        'La Parte A se obliga a prestar a la Parte B los siguientes servicios profesionales: ' + (obj||'los detallados en el Anexo I que forma parte del presente contrato') + '. La Parte A ejecutará los servicios con plena autonomía técnica y organizativa, sin que exista relación laboral alguna entre las partes.'),
+      cl('SEGUNDA', 'Precio y facturación', [
+        precio ? 'Los honorarios pactados son de ' + precio + ' (IVA no incluido). ' : 'Los honorarios se establecerán en el Anexo económico adjunto. ',
+        'La forma de pago será: ' + pago + '. El pago se realizará mediante transferencia bancaria a la cuenta que la Parte A indique en sus facturas, en el plazo de 30 días desde la fecha de factura, salvo pacto en contrario.',
+        sub('a', 'La Parte A emitirá factura conforme a la normativa fiscal vigente. El retraso en el pago devengará automáticamente el interés de demora previsto en la Ley 3/2004, de 29 de diciembre, de medidas de lucha contra la morosidad en operaciones comerciales.')
+      ]),
+      cl('TERCERA', 'Duración y rescisión', [
+        'El presente contrato tendrá una duración de ' + durText + '. Cualquiera de las partes podrá resolverlo anticipadamente mediante preaviso escrito con al menos 30 días de antelación.',
+        sub('a', 'La resolución anticipada por causa imputable a una parte dará derecho a la otra a reclamar los daños y perjuicios que le hubiera ocasionado dicho incumplimiento.'),
+        sub('b', 'En caso de resolución anticipada por voluntad de la Parte B, ésta abonará los servicios ya prestados hasta la fecha de resolución efectiva.')
+      ]),
+      cl('CUARTA', 'Propiedad intelectual', 'Los trabajos, informes, documentos, metodologías y entregables desarrollados específicamente para la Parte B en el marco de este contrato serán propiedad de la Parte B una vez satisfecho íntegramente el precio pactado. La Parte A conservará la propiedad de sus metodologías, herramientas y know-how previos, y podrá utilizarlos en otros proyectos sin restricción. La Parte A podrá hacer referencia a este proyecto en su portfolio con autorización expresa de la Parte B.'),
+      cl('QUINTA', 'Confidencialidad y protección de datos', [
+        'Las partes se obligan a mantener la más estricta confidencialidad sobre toda información a la que accedan con motivo de este contrato, durante su vigencia y durante 3 años tras su terminación.',
+        sub('a', 'Cada parte cumplirá con la normativa aplicable en materia de protección de datos personales (RGPD y LOPDGDD). Si en el desarrollo del contrato la Parte A tuviera acceso a datos personales de los que la Parte B es responsable, las partes suscribirán el correspondiente acuerdo de encargo de tratamiento.')
+      ]),
+      cl('SEXTA', 'Independencia y no exclusividad', 'La Parte A actúa como prestador independiente de servicios. Este contrato no establece relación laboral, de agencia ni de exclusividad entre las partes, salvo pacto expreso y escrito en contrario.'),
+      cl('SÉPTIMA', 'Ley aplicable y jurisdicción', 'El presente contrato se rige por el Código Civil y la legislación española aplicable. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales de ' + jur + ', con renuncia expresa al fuero que pudiera corresponderles.'),
+    ];
+  } else if (CT_TYPE === 'marketing') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto', 'La Parte A prestará a la Parte B servicios de marketing digital que comprenden: ' + (obj||'gestión de redes sociales, planificación y ejecución de campañas de publicidad digital, estrategia de contenidos, análisis de métricas y cualquier otra acción digital acordada entre las partes') + '. El alcance específico de los servicios podrá detallarse en un Anexo de servicios.'),
+      cl('SEGUNDA', 'Honorarios y condiciones económicas', [
+        precio ? 'Los honorarios mensuales son de ' + precio + ' (IVA no incluido). ' + 'Forma de pago: ' + pago + '.' : 'Los honorarios y condiciones económicas se detallan en el Anexo económico adjunto.',
+        sub('a', 'Los presupuestos para campañas de pago (Meta Ads, Google Ads, etc.) son independientes de los honorarios de gestión y serán sufragados directamente por la Parte B, salvo acuerdo en contrario.'),
+        sub('b', 'El impago de facturas en plazo facultará a la Parte A a suspender los servicios previa notificación, sin perjuicio de la reclamación de la deuda y los intereses de demora.')
+      ]),
+      cl('TERCERA', 'Duración y rescisión', 'El contrato tendrá una duración de ' + durText + ' con renovación tácita mensual, salvo preaviso de 30 días por escrito. La rescisión anticipada por voluntad de la Parte B durante los primeros 3 meses comportará el abono de los honorarios pendientes hasta completar dicho período mínimo, salvo causa imputable a la Parte A.'),
+      cl('CUARTA', 'Propiedad de activos digitales', [
+        'Todos los activos digitales creados específicamente para la Parte B (contenidos, diseños, copys, creatividades) serán propiedad de la Parte B una vez abonados íntegramente.',
+        sub('a', 'Las cuentas y perfiles en redes sociales pertenecen en todo momento a la Parte B. La Parte A recibirá los accesos necesarios para la gestión y los devolverá a la finalización del contrato.'),
+        sub('b', 'Las herramientas, plantillas y recursos propios de la Parte A que no hayan sido facturados específicamente continuarán siendo propiedad de ésta.')
+      ]),
+      cl('QUINTA', 'Confidencialidad y RGPD', 'La Parte A mantendrá confidencialidad sobre toda información comercial, estratégica y de audiencias de la Parte B. El tratamiento de datos personales de terceros que la Parte A realice por cuenta de la Parte B quedará regulado por el correspondiente acuerdo de encargo de tratamiento conforme al RGPD.'),
+      cl('SEXTA', 'Responsabilidad y aprobación de contenidos', 'La Parte B deberá aprobar expresamente los contenidos antes de su publicación cuando así se establezca en el flujo de trabajo acordado. La Parte A no será responsable de los perjuicios derivados de contenidos aprobados por la Parte B o de decisiones estratégicas adoptadas por ésta.'),
+      cl('SÉPTIMA', 'Ley aplicable y jurisdicción', 'El presente contrato se rige por la legislación española. Las partes se someten a los Juzgados y Tribunales de ' + jur + '.'),
+    ];
+  } else if (CT_TYPE === 'desarrollo') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto', 'La Parte A se compromete a realizar el diseño, desarrollo e implementación del proyecto web/digital descrito en el Briefing Técnico acordado entre las partes, que se incorpora como Anexo I al presente contrato. El proyecto incluye: ' + (obj||'los entregables especificados en el Anexo I') + '.'),
+      cl('SEGUNDA', 'Precio, pagos y condiciones económicas', [
+        precio ? 'El precio total del proyecto es de ' + precio + ' (IVA no incluido). Forma de pago: ' + pago + '.' : 'El precio se detalla en el presupuesto adjunto, aceptado por ambas partes.',
+        sub('a', 'El pago del primer hito es condición necesaria para el inicio del proyecto. La Parte A podrá suspender los trabajos en caso de impago de cualquier hito vencido, previa notificación con 5 días de antelación.'),
+        sub('b', 'Los servicios adicionales no contemplados en el alcance inicial (funcionalidades nuevas, cambios de especificaciones) serán presupuestados y aceptados por escrito antes de su ejecución.')
+      ]),
+      cl('TERCERA', 'Plazos y metodología', [
+        'El proyecto se desarrollará conforme al calendario y metodología acordados en el Anexo I.',
+        sub('a', 'La Parte B se compromete a proporcionar la información, contenidos, credenciales de acceso y aprobaciones necesarias en los plazos establecidos. Los retrasos imputables a la Parte B no serán responsabilidad de la Parte A y podrán implicar la revisión del calendario.'),
+        sub('b', 'Se incluyen hasta dos (2) rondas de revisiones por entregable. Las revisiones adicionales o los cambios de alcance serán facturados al precio hora vigente de la Parte A.')
+      ]),
+      cl('CUARTA', 'Propiedad intelectual y licencias', [
+        'Una vez abonado íntegramente el precio pactado, la Parte B adquirirá la plena propiedad del código fuente, diseños y demás creaciones originales desarrolladas específicamente para este proyecto.',
+        sub('a', 'Las licencias de software de terceros (frameworks, plugins, librerías) utilizadas en el proyecto están sujetas a sus propias condiciones de uso, que la Parte B deberá respetar.'),
+        sub('b', 'La Parte A conserva la propiedad de sus herramientas propias, componentes reutilizables y know-how previo, y podrá utilizarlos en otros proyectos.')
+      ]),
+      cl('QUINTA', 'Garantía y mantenimiento', 'La Parte A garantizará el correcto funcionamiento del proyecto durante 30 días desde su entrega y aprobación, comprometiéndose a corregir sin coste adicional los errores que sean consecuencia directa del desarrollo. Quedan excluidos de la garantía los problemas derivados de modificaciones realizadas por la Parte B o terceros, cambios en servicios de terceros o causas de fuerza mayor.'),
+      cl('SEXTA', 'Confidencialidad y protección de datos', 'Las partes se obligan a la confidencialidad mutua sobre información técnica, comercial y estratégica intercambiada durante el proyecto. La Parte A adoptará las medidas técnicas y organizativas necesarias para proteger los datos a los que acceda.'),
+      cl('SÉPTIMA', 'Ley aplicable y jurisdicción', 'Este contrato se rige por la legislación española, en particular la Ley de Propiedad Intelectual (RDL 1/1996) y el Código Civil. Las partes se someten a los Juzgados y Tribunales de ' + jur + '.'),
+    ];
+  } else if (CT_TYPE === 'colaboracion') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto', 'Las partes acuerdan establecer una relación de colaboración comercial para: ' + (obj||'la captación conjunta de clientes, el desarrollo de proyectos comunes o la distribución cruzada de productos y servicios, en los términos y condiciones que se establecen a continuación') + '.'),
+      cl('SEGUNDA', 'Obligaciones de las partes', [
+        'Cada parte aportará a la colaboración sus recursos, conocimientos, contactos y capacidades según el ámbito de su actividad.',
+        sub('a', 'La Parte A se compromete a: (i) presentar los productos/servicios de la Parte B a su red de contactos; (ii) respetar las condiciones comerciales establecidas por la Parte B; (iii) no actuar en nombre de la Parte B sin autorización expresa.'),
+        sub('b', 'La Parte B se compromete a: (i) proporcionar a la Parte A la información y materiales necesarios; (ii) tramitar con diligencia las oportunidades aportadas; (iii) abonar las comisiones pactadas en plazo.')
+      ]),
+      cl('TERCERA', 'Retribución y comisiones', precio ? 'La retribución por la colaboración será: ' + precio + '. Liquidación: ' + pago + '. Las comisiones se abonarán en el plazo de 30 días desde el cobro efectivo al cliente final.' : 'El sistema de retribución y comisiones se detalla en el Anexo económico adjunto, que forma parte del presente acuerdo.'),
+      cl('CUARTA', 'Duración y exclusividad', 'El presente acuerdo tendrá una duración de ' + durText + ', prorrogable tácitamente por períodos iguales salvo denuncia con 30 días de preaviso. Salvo pacto expreso y escrito en contrario, este acuerdo no implica exclusividad territorial, de producto ni de canal para ninguna de las partes.'),
+      cl('QUINTA', 'Confidencialidad', 'Las partes se obligan a mantener confidencialidad sobre toda información comercial, de clientes y estratégica intercambiada durante la colaboración y durante los 2 años siguientes a su finalización.'),
+      cl('SEXTA', 'Independencia de las partes', 'La colaboración regulada por el presente acuerdo no crea relación laboral, societaria, de agencia mercantil ni de representación entre las partes. Cada parte actúa en nombre propio y asume sus propias responsabilidades fiscales y legales.'),
+      cl('SÉPTIMA', 'Ley aplicable y jurisdicción', 'El presente acuerdo se rige por la legislación española, en particular la Ley del Contrato de Agencia (Ley 12/1992) en lo que resulte de aplicación. Las partes se someten a los Juzgados y Tribunales de ' + jur + '.'),
+    ];
+  } else if (CT_TYPE === 'compraventa') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto de la compraventa', 'La Parte A (en adelante, «Vendedor»), en virtud del presente contrato, transmite a la Parte B (en adelante, «Comprador») la plena propiedad, posesión y titularidad del siguiente bien: ' + (obj||'el bien descrito en el Anexo I adjunto') + '. El Vendedor declara ser el titular legítimo del bien y que éste se encuentra libre de cargas, gravámenes, arrendamientos o cualquier otro derecho real o personal que limite o afecte a su libre disposición.'),
+      cl('SEGUNDA', 'Precio y condiciones de pago', [
+        'El precio de compraventa es de ' + (precio||'el acordado por las partes en documento adjunto') + '. Forma de pago: ' + pago + '.',
+        sub('a', 'El pago íntegro del precio pactado es condición necesaria para la transmisión efectiva de la propiedad del bien. Hasta dicho pago, el Vendedor conservará la reserva de dominio sobre el bien.'),
+        sub('b', 'Los gastos notariales, registrales, fiscales (ITP, IVA si procede) y de cualquier otra índole derivados de la compraventa serán satisfechos por la parte que corresponda conforme a la legislación aplicable, salvo acuerdo expreso en contrario.')
+      ]),
+      cl('TERCERA', 'Entrega y transmisión del riesgo', 'La entrega del bien se producirá en el plazo y lugar acordados entre las partes, una vez producido el pago íntegro del precio. Desde el momento de la entrega, el riesgo de pérdida o deterioro del bien se transmitirá al Comprador.'),
+      cl('CUARTA', 'Declaraciones y garantías del vendedor', [
+        'El Vendedor declara y garantiza que: (i) es el legítimo propietario del bien; (ii) tiene plena capacidad y facultad para celebrar esta compraventa; (iii) el bien está libre de cargas y gravámenes; (iv) no existe ningún litigio o reclamación pendiente sobre el bien.',
+        sub('a', 'El Comprador declara haber examinado el bien y conocer su estado actual, aceptándolo en dicho estado.')
+      ]),
+      cl('QUINTA', 'Vicios ocultos y saneamiento', 'El Vendedor responderá de los vicios o defectos ocultos que tuviera el bien en el momento de la venta y que lo hicieran impropio para el uso al que se destina o que disminuyeran de tal modo su utilidad que el Comprador no lo habría adquirido de haberlos conocido, conforme a los artículos 1484 y siguientes del Código Civil.'),
+      cl('SEXTA', 'Ley aplicable y jurisdicción', 'El presente contrato se rige por los artículos 1445 y siguientes del Código Civil español. Para cualquier controversia, las partes se someten a la jurisdicción de los Juzgados y Tribunales de ' + jur + '.'),
+    ];
+  } else if (CT_TYPE === 'rgpd') {
+    clausulas = [
+      cl('PRIMERA', 'Objeto y naturaleza del encargo', 'En virtud del contrato principal de prestación de servicios suscrito entre las partes, el Encargado necesita tratar datos personales por cuenta del Responsable. El presente Acuerdo regula dicho tratamiento de conformidad con el artículo 28 del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).'),
+      cl('SEGUNDA', 'Identificación del tratamiento', [
+        sub('a', 'Finalidad del tratamiento: ' + (gv('ct-objeto')||'la necesaria para la prestación de los servicios contratados')),
+        sub('b', 'Categorías de datos: datos identificativos (nombre, apellidos, DNI/NIF, email, teléfono), datos de contacto y, en su caso, datos económicos o profesionales.'),
+        sub('c', 'Categorías de interesados: clientes, proveedores, empleados y/o contactos comerciales de la Parte A (Responsable).'),
+        sub('d', 'Duración del tratamiento: la vigencia del contrato principal de servicios.')
+      ]),
+      cl('TERCERA', 'Obligaciones del Encargado del Tratamiento', [
+        'El Encargado se compromete a:',
+        sub('a', 'Tratar los datos personales únicamente conforme a las instrucciones documentadas del Responsable, sin destinarlos a fines distintos de los pactados. Si el Encargado considerara que alguna instrucción infringe la normativa de protección de datos, lo comunicará de inmediato al Responsable.'),
+        sub('b', 'Garantizar que las personas autorizadas para tratar los datos personales se hayan comprometido a respetar la confidencialidad o estén sujetas a una obligación legal de confidencialidad.'),
+        sub('c', 'Implementar las medidas técnicas y organizativas apropiadas exigidas por el artículo 32 RGPD para garantizar un nivel de seguridad adecuado al riesgo.'),
+        sub('d', 'No contratar subencargados sin autorización previa y por escrito del Responsable. En caso de subcontratación autorizada, el Encargado impondrá al subencargado las mismas obligaciones de protección de datos establecidas en el presente acuerdo.'),
+        sub('e', 'Asistir al Responsable, en la medida de lo posible, para dar cumplimiento a las solicitudes de ejercicio de los derechos ARCO+ (acceso, rectificación, supresión, oposición, limitación, portabilidad) de los interesados.'),
+        sub('f', 'Asistir al Responsable para garantizar el cumplimiento de las obligaciones previstas en los artículos 32 a 36 RGPD, teniendo en cuenta la naturaleza del tratamiento y la información disponible.'),
+        sub('g', 'Notificar al Responsable, sin dilación indebida, las posibles violaciones de seguridad de los datos personales de las que tenga conocimiento, incluyendo toda la información necesaria para que el Responsable pueda cumplir su obligación de notificación.'),
+        sub('h', 'A elección del Responsable, suprimir o devolver todos los datos personales una vez finalice el contrato principal, y suprimir las copias existentes salvo que sea obligatorio conservarlos conforme al Derecho de la Unión Europea o de los Estados Miembros.')
+      ]),
+      cl('CUARTA', 'Subencargados del tratamiento', 'El Encargado no podrá contratar servicios con otros encargados que impliquen el tratamiento de datos personales sin autorización previa y por escrito del Responsable. Si el Responsable autoriza la subcontratación, el subencargado deberá ofrecer garantías suficientes de conformidad con el RGPD, y el Encargado responderá frente al Responsable del cumplimiento de las obligaciones del subencargado.'),
+      cl('QUINTA', 'Derechos de auditoría e inspección', 'El Responsable tendrá derecho a auditar o inspeccionar las actividades de tratamiento realizadas por el Encargado, por sí mismo o a través de un auditor designado al efecto, con un preaviso mínimo de 15 días hábiles. El Encargado cooperará en dichas auditorías y facilitará el acceso a toda la documentación pertinente.'),
+      cl('SEXTA', 'Responsabilidad', 'El Encargado responderá de los daños y perjuicios causados por el tratamiento si no ha cumplido las obligaciones del RGPD que le son directamente aplicables o si ha actuado al margen de las instrucciones del Responsable. El Responsable quedará exento de responsabilidad si demuestra que no es en modo alguno responsable del hecho que causó los daños.'),
+      cl('SÉPTIMA', 'Ley aplicable', 'El presente acuerdo se rige por el Reglamento (UE) 2016/679 (RGPD), la Ley Orgánica 3/2018 (LOPDGDD) y demás normativa española de protección de datos. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales de ' + jur + '.'),
+    ];
+  } else {
+    clausulas = [cl('PRIMERA', 'Objeto', obj||'Las partes acuerdan lo establecido en el presente contrato.')];
+  }
+
+  // ── PORTADA ──
   var portada = [
     sp(300),
     logoRun
-      ? new D.Paragraph({alignment:AT.CENTER,children:[logoRun]})
-      : par('CRS Growth',{center:true,bold:true,size:22,color:C.gold}),
+      ? new D.Paragraph({alignment:AT.CENTER, children:[logoRun]})
+      : par('CRS Growth', {center:true, bold:true, size:22, color:C.gold}),
     sp(120),
-    new D.Paragraph({alignment:AT.CENTER,spacing:{before:0,after:40},children:[tx(ct.toUpperCase(),{bold:true,size:26,color:C.ink})]}),
-    sp(80), HR(C.gold,5), sp(80),
+    new D.Paragraph({alignment:AT.CENTER, spacing:{before:0,after:40},
+      children:[tx(ct.toUpperCase(), {bold:true, size:26, color:C.ink})]}),
+    sp(80), HR(C.gold, 5), sp(80),
     new D.Table({width:{size:9026,type:WT.DXA},columnWidths:[2800,6226],
       rows:[
-        h.trow(isEN?'Date':'Fecha', fecha, false),
-        h.trow(isEN?'Place':'Lugar', lugar, true),
-        ...(ref ? [h.trow(isEN?'Reference':'Referencia', ref, false)] : []),
+        h.trow('Fecha', fecha, false),
+        h.trow('Lugar', lugar, true),
+        ...(ref ? [h.trow('Referencia', ref, false)] : []),
         h.trow('Parte A', aName, true),
         h.trow('Parte B', bName, false),
-        ...(precio ? [h.trow(isEN?'Price':'Precio', precio, true)] : []),
+        ...(precio ? [h.trow('Precio', precio, true)] : []),
       ]}),
-    sp(180), new D.Paragraph({children:[new D.PageBreak()]}),
+    sp(200),
+    new D.Paragraph({children:[new D.PageBreak()]}),
   ];
 
-  // Body
+  // ── CUERPO ──
   var body = [
     H1(ct), HR(C.gold, 3), sp(80),
-    par('En ' + lugar + ', a ' + fecha + ', se reúnen:'),
-    sp(60),
-    par('De una parte: ' + parteA),
-    sp(50),
-    par('De otra parte: ' + parteB),
-    sp(90),
-    par('Ambas partes se reconocen con capacidad legal suficiente y de mutuo acuerdo suscriben las siguientes:'),
+    par('En ' + lugar + ', a ' + fecha + ', de una parte:'),
+    sp(60), par(parteA),
+    sp(60), par('Y de otra parte:'),
+    sp(60), par(parteB),
+    sp(80),
+    par('Ambas partes se reconocen mutuamente la capacidad jurídica y de obrar necesaria para suscribir el presente contrato y, libre y voluntariamente, ACUERDAN las siguientes:'),
     sp(40), HR(C.border, 2), sp(40),
-    new D.Paragraph({alignment:AT.CENTER,spacing:{before:40,after:40},children:[tx(L.clauses,{bold:true,size:22,color:C.gold})]}),
-    HR(C.border, 2),
+    new D.Paragraph({alignment:AT.CENTER, spacing:{before:50,after:50},
+      children:[tx('CLÁUSULAS', {bold:true, size:22, color:C.gold})]}),
+    HR(C.border, 2), sp(20),
   ];
 
-  cláusulas.forEach(function(cl) { cl.forEach(function(p) { body.push(p); }); });
+  clausulas.forEach(function(cl) { cl.forEach(function(p) { body.push(p); }); });
 
-  // Signatures
-  function sigCol(label, rep, cargo, name) {
+  // ── FIRMAS ──
+  function sigCol(label, rep, cargo, name, email, tel) {
     var children = [
-      new D.Paragraph({spacing:{before:0,after:160},children:[tx(label,{bold:true,size:18,color:C.dark})]}),
-      new D.Paragraph({spacing:{before:0,after:0},border:signLine,children:[]}),
+      new D.Paragraph({spacing:{before:0,after:120}, children:[tx(label, {bold:true, size:18, color:C.dark})]}),
+      new D.Paragraph({spacing:{before:0,after:0}, border:signLine, children:[]}),
       sp(40),
-      new D.Paragraph({children:[tx(rep,{size:18,color:'888888'})]}),
+      new D.Paragraph({children:[tx(rep||'', {size:18, color:'555555'})]}),
     ];
-    if (cargo) children.push(new D.Paragraph({children:[tx(cargo,{size:16,color:'AAAAAA',italics:true})]}));
-    children.push(new D.Paragraph({children:[tx(name,{size:17,color:'888888'})]}));
-    return new D.TableCell({borders:nBs,width:{size:4313,type:WT.DXA},margins:{top:80,bottom:80,left:80,right:80},children:children});
+    if (cargo) children.push(new D.Paragraph({children:[tx(cargo, {size:16, color:'888888', italics:true})]}));
+    children.push(new D.Paragraph({children:[tx(name||'', {size:17, color:'555555'})]}));
+    if (email) children.push(new D.Paragraph({children:[tx(email, {size:16, color:'888888'})]}));
+    if (tel)   children.push(new D.Paragraph({children:[tx(tel,   {size:16, color:'888888'})]}));
+    return new D.TableCell({borders:nBs, width:{size:4313,type:WT.DXA},
+      margins:{top:80,bottom:80,left:80,right:80}, children:children});
   }
 
   body = body.concat([
-    sp(160), HR(C.border,2), sp(100),
-    par('Y en prueba de conformidad, ambas partes suscriben el presente contrato en ' + lugar + ', a ' + fecha + '.'),
+    sp(160), HR(C.border, 2), sp(100),
+    par('Y en prueba de conformidad con todo lo expuesto, ambas partes suscriben el presente contrato en ' + lugar + ', a ' + fecha + ', en dos ejemplares de igual contenido y valor.'),
     sp(180),
     new D.Table({
-      width:{size:9026,type:WT.DXA},
-      columnWidths:[4313,400,4313],
+      width:{size:9026,type:WT.DXA}, columnWidths:[4313,400,4313],
       borders:{top:nB,bottom:nB,left:nB,right:nB,insideH:nB,insideV:nB},
       rows:[new D.TableRow({children:[
-        sigCol('PARTE A', aRep, aCargo, aName),
-        new D.TableCell({borders:nBs,width:{size:400,type:WT.DXA},children:[new D.Paragraph({children:[]})]}),
-        sigCol('PARTE B', bRep, bCargo, bName),
+        sigCol('PARTE A', aRep, aCargo, aName, aEmail, aTel),
+        new D.TableCell({borders:nBs, width:{size:400,type:WT.DXA}, children:[new D.Paragraph({children:[]})]}),
+        sigCol('PARTE B', bRep, bCargo, bName, bEmail, bTel),
       ]})]
     })
   ]);
 
-  // Header/Footer
-  var hdrLogoRun = logoData ? new D.ImageRun({data:logoData.buf,transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},type:logoData.ext}) : null;
+  // ── HEADER / FOOTER ──
+  var hdrLogoRun = logoData ? new D.ImageRun({data:logoData.buf,
+    transformation:{width:Math.round(logoData.w*0.75),height:Math.round(logoData.h*0.75)},
+    type:logoData.ext}) : null;
   var hdr = new D.Header({children:[
-    new D.Paragraph({alignment:AT.LEFT,spacing:{before:0,after:50},children:hdrLogoRun?[hdrLogoRun]:[tx('CRS Growth',{bold:true,size:16,color:C.gold})]}),
-    new D.Paragraph({spacing:{before:0,after:0},border:{bottom:{style:BS.SINGLE,size:4,color:C.gold,space:1}},children:[]}),
+    new D.Paragraph({alignment:AT.LEFT, spacing:{before:0,after:50},
+      children: hdrLogoRun ? [hdrLogoRun] : [tx('CRS Growth', {bold:true, size:16, color:C.gold})]}),
+    new D.Paragraph({spacing:{before:0,after:0},
+      border:{bottom:{style:BS.SINGLE,size:4,color:C.gold,space:1}}, children:[]}),
   ]});
   var ftr = new D.Footer({children:[
-    new D.Paragraph({spacing:{before:0,after:0},border:{top:{style:BS.SINGLE,size:4,color:'DDDDDD',space:1}},children:[]}),
-    new D.Paragraph({spacing:{before:70,after:0},tabStops:[{type:D.TabStopType.CENTER,position:Math.round(D.TabStopPosition.MAX/2)},{type:D.TabStopType.RIGHT,position:D.TabStopPosition.MAX}],children:[
-      tx(L.confid,{size:14,color:'AAAAAA'}),
-      new D.TextRun({text:'\t',size:14}),new D.TextRun({text:'\t',size:14}),
-      new D.TextRun({children:[D.PageNumber.CURRENT],size:14,font:'Arial',color:'AAAAAA'}),
-    ]}),
+    new D.Paragraph({spacing:{before:0,after:0},
+      border:{top:{style:BS.SINGLE,size:4,color:'DDDDDD',space:1}}, children:[]}),
+    new D.Paragraph({spacing:{before:60,after:0},
+      tabStops:[{type:D.TabStopType.CENTER,position:Math.round(D.TabStopPosition.MAX/2)},
+                {type:D.TabStopType.RIGHT, position:D.TabStopPosition.MAX}],
+      children:[
+        tx('CONFIDENCIAL — uso exclusivo de las partes firmantes', {size:14,color:'AAAAAA'}),
+        new D.TextRun({text:'\t',size:14}), new D.TextRun({text:'\t',size:14}),
+        new D.TextRun({children:[D.PageNumber.CURRENT], size:14, font:'Arial', color:'AAAAAA'}),
+      ]}),
   ]});
 
   return new D.Document({
-    numbering:{config:[{reference:'bul',levels:[{level:0,format:D.LevelFormat.BULLET,text:'•',alignment:AT.LEFT,style:{paragraph:{indent:{left:480,hanging:240}}}}]}]},
-    styles:{default:{document:{run:{font:'Arial',size:20,color:C.dark}}},paragraphStyles:[{id:'Heading1',name:'Heading 1',basedOn:'Normal',next:'Normal',quickFormat:true,run:{size:22,bold:true,font:'Arial',color:C.gold},paragraph:{spacing:{before:220,after:80},outlineLevel:0}}]},
+    numbering:{config:[{reference:'bul',levels:[{level:0,format:D.LevelFormat.BULLET,text:'•',
+      alignment:AT.LEFT,style:{paragraph:{indent:{left:480,hanging:240}}}}]}]},
+    styles:{
+      default:{document:{run:{font:'Arial',size:20,color:C.dark}}},
+      paragraphStyles:[{id:'Heading1',name:'Heading 1',basedOn:'Normal',next:'Normal',
+        quickFormat:true,run:{size:22,bold:true,font:'Arial',color:C.gold},
+        paragraph:{spacing:{before:220,after:80},outlineLevel:0}}]
+    },
     sections:[
-      {properties:{page:{size:{width:11906,height:16838},margin:{top:1440,right:1440,bottom:1440,left:1440}}},children:portada},
-      {properties:{page:{size:{width:11906,height:16838},margin:{top:1100,right:1200,bottom:1100,left:1200}}},headers:{default:hdr},footers:{default:ftr},children:body},
+      {properties:{page:{size:{width:11906,height:16838},margin:{top:1440,right:1440,bottom:1440,left:1440}}},
+       children:portada},
+      {properties:{page:{size:{width:11906,height:16838},margin:{top:1100,right:1200,bottom:1100,left:1200}}},
+       headers:{default:hdr}, footers:{default:ftr}, children:body},
     ],
   });
 }
