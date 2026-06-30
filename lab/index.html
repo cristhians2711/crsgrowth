@@ -24929,6 +24929,7 @@ var AUDIT_AREA_IDX = 0;
 var AUDIT_SCORES = null;
 var AUDIT_AI = null;
 var DNA_DATA = {};
+var DNA_LAST_ERROR = '';
 var GATE_CB = null;
 var LOGO = { nda: null, word: null };
 
@@ -25537,14 +25538,18 @@ async function runDnaAI() {
         prompt: buildDnaPrompt()
       })
     });
-    if (!resp.ok) errInfo = 'HTTP ' + resp.status;
+    if (!resp.ok) errInfo = 'HTTP ' + resp.status + ' al llamar al Apps Script';
     var data = await resp.json();
+    // El GAS devuelve { ok:false, error:"mensaje real" } cuando algo falla del lado servidor
+    if (data && data.ok === false) {
+      errInfo = data.error || 'El servidor devolvió ok:false sin detalle de error';
+    }
     var text = data && data.result ? data.result : '';
-    if (!text) errInfo = errInfo || 'Respuesta vacía del servidor';
+    if (!text && !errInfo) errInfo = 'Respuesta vacía del servidor (revisa que el GAS esté desplegado con la última versión)';
     var m = text.match(/\{[\s\S]*\}/);
     if (m) {
       result = JSON.parse(m[0]);
-    } else if (text) {
+    } else if (text && !errInfo) {
       errInfo = 'La IA no devolvió un JSON válido';
     }
   } catch(e) {
@@ -25552,7 +25557,10 @@ async function runDnaAI() {
     errInfo = e.message || 'Error de conexión';
   }
 
-  if (!result) console.warn('DNA AI failed:', errInfo);
+  if (!result) {
+    console.warn('DNA AI failed — DIAGNÓSTICO:', errInfo);
+    DNA_LAST_ERROR = errInfo;
+  }
 
   await saveLead({
     resultado_ia: JSON.stringify(result),
@@ -25569,6 +25577,7 @@ function renderDnaResult(r) {
   if (!r) {
     body.innerHTML = '<div style="padding:24px;text-align:center">'
       + '<p style="color:var(--muted);margin-bottom:16px;line-height:1.6">No hemos podido generar tu análisis en este momento. Puede deberse a una conexión inestable.</p>'
+      + (DNA_LAST_ERROR ? '<p style="font-size:11px;color:var(--faint);font-family:monospace;background:var(--cream);padding:10px 12px;border-radius:4px;margin-bottom:16px;text-align:left;word-break:break-word">Detalle técnico: ' + DNA_LAST_ERROR + '</p>' : '')
       + '<button class="btn btn-gold" onclick="runDnaAI()">↻ Reintentar</button>'
       + '</div>';
     return;
