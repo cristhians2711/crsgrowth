@@ -74,6 +74,23 @@ nav{position:absolute;z-index:4;top:0;left:0;right:0;padding:24px 0}nav .wrap{di
 .form .btn{margin-top:6px;width:100%}
 .form .fine{font-size:11.5px;color:#857e73}
 
+
+/* MailerLite integrado */
+.form .ml-form-formContent{display:grid;gap:14px}
+.form label.field{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.form .form-control{width:100%;font:inherit;font-size:16px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.consents{display:grid;gap:10px}
+.ml-error .form-control{border-color:#c0392b}
+.consent-msg{font-size:13px;color:#a8321e;font-weight:600}
+.ml-form-embedSubmit{display:grid}
+.ml-form-embedSubmit .btn{width:100%;background:var(--ink);color:var(--bone)}
+.ml-form-embedSubmit .btn.primary:hover{background:var(--rust)}
+.ml-form-embedSubmitLoad{display:inline-block;width:18px;height:18px;border-radius:50%;border:3px solid var(--bone);border-right-color:transparent;animation:mlspin 1s linear infinite}
+@keyframes mlspin{to{transform:rotate(360deg)}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.success-title{font-size:28px;margin-bottom:10px}
+.row-success p{color:#4d4941}
+
 /* FAQ */
 .faq{padding:120px 0;background:var(--cream)}
 .faq-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:80px}
@@ -149,21 +166,49 @@ footer{background:var(--ink);color:#918a7f;padding:28px 0;font-size:12px}footer 
 
 <section class="join" id="apuntarme"><div class="wrap join-shell">
   <div><span class="kicker" style="color:#f5d8ca">Plazas limitadas por edición</span><h2>Empieza tu reto.</h2><p>Te mando el kit al momento. Es gratis: lo único que te pido es que lo uses de verdad y que al final me cuentes cómo te ha ido.</p></div>
-  <!-- ============================================================
-       SUSTITUIR este formulario por el código de inserción de MailerLite
-       (Formularios > Insertado > HTML). Mantén estas mismas casillas
-       como campos obligatorios en MailerLite.
-       ============================================================ -->
-  <form class="form" action="#" method="post">
-    <label class="field">Nombre<input type="text" name="name" autocomplete="given-name" required></label>
-    <label class="field">Email<input type="email" name="email" autocomplete="email" required></label>
-    <label class="check"><input type="checkbox" required><span>Tengo 18 años o más.</span></label>
-    <label class="check"><input type="checkbox" required><span>No tengo ni he tenido un trastorno de la conducta alimentaria, no estoy embarazada ni en lactancia y no sigo una dieta pautada por motivos médicos.</span></label>
-    <label class="check"><input type="checkbox" required><span>Entiendo que el reto es informativo y no sustituye el consejo de un médico ni de un dietista-nutricionista.</span></label>
-    <label class="check"><input type="checkbox" required><span>Acepto la <a href="#">política de privacidad</a> y recibir los emails del reto. Me puedo dar de baja cuando quiera.</span></label>
-    <button class="btn primary" type="submit">Mandarme el kit</button>
-    <p class="fine">Solo guardo tu nombre y tu email. Tus comidas, tu peso y tus fotos se quedan en tu propia cuenta de Claude.</p>
-  </form>
+  <!-- Formulario MailerLite (grupo Reto 21 días) integrado con el estilo de la página -->
+  <div id="mlb2-47158221" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47158221">
+    <div class="ml-form-embedWrapper embedForm">
+      <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+        <form class="ml-block-form form" id="reto-form" action="https://assets.mailerlite.com/jsonp/2713697/forms/201347227023574023/subscribe" data-code="" method="post" target="_blank">
+          <div class="ml-form-formContent">
+            <div class="ml-form-fieldRow">
+              <div class="ml-field-group ml-field-name ml-validate-required">
+                <label class="field" for="ml-name">Nombre</label>
+                <input id="ml-name" aria-label="name" aria-required="true" type="text" class="form-control" data-inputmask="" name="fields[name]" autocomplete="given-name">
+              </div>
+            </div>
+            <div class="ml-form-fieldRow ml-last-item">
+              <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                <label class="field" for="ml-email">Email</label>
+                <input id="ml-email" aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" autocomplete="email">
+              </div>
+            </div>
+          </div>
+          <div class="consents">
+            <label class="check"><input type="checkbox" class="consent" required><span>Tengo 18 años o más.</span></label>
+            <label class="check"><input type="checkbox" class="consent" required><span>No tengo ni he tenido un trastorno de la conducta alimentaria, no estoy embarazada ni en lactancia y no sigo una dieta pautada por motivos médicos.</span></label>
+            <label class="check"><input type="checkbox" class="consent" required><span>Entiendo que el reto es informativo y no sustituye el consejo de un médico ni de un dietista-nutricionista.</span></label>
+            <label class="check"><input type="checkbox" class="consent" required><span>Acepto la <a href="#">política de privacidad</a> y recibir los emails del reto. Me puedo dar de baja cuando quiera.</span></label>
+          </div>
+          <p class="consent-msg" id="consent-msg" role="alert" hidden>Marca las cuatro casillas para recibir el kit.</p>
+          <input type="hidden" name="ml-submit" value="1">
+          <div class="ml-form-embedSubmit">
+            <button type="submit" class="primary btn">Envíame el kit</button>
+            <button disabled="disabled" style="display: none;" type="button" class="loading btn"><span class="ml-form-embedSubmitLoad"></span><span class="sr-only">Enviando…</span></button>
+          </div>
+          <input type="hidden" name="anticsrf" value="true">
+          <p class="fine">Solo guardo tu nombre y tu email. Tus comidas, tu peso y tus fotos se quedan en tu propia cuenta de Claude.</p>
+        </form>
+      </div>
+      <div class="ml-form-successBody row-success form" style="display: none">
+        <div class="ml-form-successContent">
+          <h3 class="success-title">¡Hecho!</h3>
+          <p>Te acabo de mandar el kit al email. Si no lo ves en unos minutos, mira en la carpeta de spam o promociones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div></section>
 
 <section class="faq"><div class="wrap faq-grid">
@@ -186,4 +231,18 @@ footer{background:var(--ink);color:#918a7f;padding:28px 0;font-size:12px}footer 
 
 <p class="legal">Contenido informativo basado en mi experiencia personal. No constituye consejo médico ni dietético. Los resultados dependen de cada persona. Ante cualquier duda sobre tu salud, consulta con un profesional sanitario.</p>
 <footer><div class="wrap"><span>© 2026 Cristhiam Silva</span><span>Reto 21 días</span></div></footer>
+
+<script>
+function ml_webform_success_47158221(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-47158221 .row-success').show();$('.ml-subscribe-form-47158221 .row-form').hide();}
+// Bloquea el envío si falta alguna casilla (se ejecuta antes que el script de MailerLite)
+document.addEventListener('submit',function(e){
+  var f=e.target; if(!f||f.id!=='reto-form')return;
+  var ok=Array.prototype.every.call(f.querySelectorAll('.consent'),function(c){return c.checked;});
+  var msg=document.getElementById('consent-msg');
+  if(!ok){e.preventDefault();e.stopImmediatePropagation();msg.hidden=false;}else{msg.hidden=true;}
+},true);
+document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('consent')){var all=Array.prototype.every.call(document.querySelectorAll('#reto-form .consent'),function(c){return c.checked;});if(all)document.getElementById('consent-msg').hidden=true;}});
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>fetch("https://assets.mailerlite.com/jsonp/2713697/forms/201347227023574023/takel")</script>
 </body></html>
