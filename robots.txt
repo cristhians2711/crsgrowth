@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /components/
+Disallow: /tarjeta/
+Disallow: /firma.html
 
 Sitemap: https://www.crsgrowth.com/sitemap.xml
