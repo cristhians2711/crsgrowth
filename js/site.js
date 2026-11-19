@@ -1,86 +1,53 @@
-/* CRS Growth — site.js v4 */
+/* CRS Growth v6 */
 (function () {
-  // Menú móvil
-  var toggle = document.querySelector('.nav-toggle');
-  var links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', function () {
-      var abierto = links.classList.toggle('abierto');
-      toggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-    });
-    links.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') { links.classList.remove('abierto'); toggle.setAttribute('aria-expanded', 'false'); }
+  var nav = document.querySelector('.nav');
+  var menu = document.querySelector('.nav-menu');
+  if (nav && menu) {
+    menu.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.textContent = open ? 'Cerrar' : 'Menú';
     });
   }
 
-  // Diagrama: antes (todo pasa por ti) → después (la empresa fluye, tú diriges)
-  var flujo = document.querySelector('.flujo');
-  if (flujo) {
-    var boton = flujo.querySelector('[data-alternar]');
-    var estado = flujo.querySelector('[data-estado]');
-    var textos = {
-      antes: '<strong>Antes:</strong> todo pasa por ti',
-      despues: '<strong>Después:</strong> la empresa fluye, tú diriges'
-    };
-    var poner = function (ordenado) {
-      flujo.classList.toggle('ordenado', ordenado);
-      estado.innerHTML = ordenado ? textos.despues : textos.antes;
-      boton.textContent = ordenado ? 'Ver el antes' : 'Ver el después';
-    };
-    var reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducido) { poner(true); }
-    else {
-      poner(false);
-      var arrancar = function () { setTimeout(function () { poner(true); }, 1600); };
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entradas) {
-          if (entradas[0].isIntersecting) { arrancar(); io.disconnect(); }
-        }, { threshold: 0.4 });
-        io.observe(flujo);
-      } else { arrancar(); }
-    }
-    boton.addEventListener('click', function () { poner(!flujo.classList.contains('ordenado')); });
+  // La hoja de ruta se rellena una vez: empieza en "Hoy" y, al verla, pasa a "Con CRS" y se sella.
+  // Sin script o con movimiento reducido se muestra directamente el estado final.
+  var route = document.querySelector('.route[data-play]');
+  if (route && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var hoy = route.querySelector('.hoy-input');
+    var go = route.querySelector('.go');
+    var touched = false;
+    route.addEventListener('pointerdown', function () { touched = true; });
+    route.addEventListener('keydown', function () { touched = true; });
+    hoy.checked = true;
+    var play = function () { setTimeout(function () { if (!touched) go.checked = true; }, 1800); };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { play(); io.disconnect(); } }, { threshold: 0.3 });
+      io.observe(route);
+    } else { play(); }
   }
 
-  // Formularios → Web3Forms (llegan por email)
-  document.querySelectorAll('form[data-web3]').forEach(function (form) {
+  // Formularios: envío real a Web3Forms
+  document.querySelectorAll('form[data-endpoint]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var caja = form.closest('.formulario');
-      var estadoEl = form.querySelector('.estado');
+      var box = form.closest('.form');
+      var status = form.querySelector('.status');
       var btn = form.querySelector('[type=submit]');
-      var original = btn.textContent;
-      estadoEl.textContent = '';
-      btn.disabled = true; btn.textContent = 'Enviando…';
-
-      var datos = new FormData(form);
-      var payload = {};
-      datos.forEach(function (valor, clave) {
-        payload[clave] = payload[clave] ? payload[clave] + ' · ' + valor : valor;
-      });
-      var etapa = form.querySelector('input[name="momento"]:checked');
-      if (etapa && etapa.dataset.clasificacion) {
-        payload.clasificacion_lead = etapa.dataset.clasificacion;
-      }
-      if (form.dataset.asunto) {
-        payload.subject = form.dataset.asunto + ' — ' + (payload.nombre || 'Sin nombre') +
-          (payload.clasificacion_lead ? ' [' + payload.clasificacion_lead + ']' : '');
-      }
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-        .then(function (res) {
-          if (!res.ok || !res.j.success) throw new Error(res.j.message || 'Error');
-          caja.classList.add('enviado');
-          caja.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        })
+      var label = btn.textContent;
+      status.textContent = '';
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Enviando';
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = data[k] ? data[k] + ', ' + v : v; });
+      var stage = form.querySelector('input[name="momento"]:checked');
+      if (stage && stage.dataset.tipo) data.clasificacion_lead = stage.dataset.tipo;
+      data.subject = (form.dataset.subject || 'Web') + ': ' + (data.nombre || 'sin nombre') + (data.clasificacion_lead ? ' [' + data.clasificacion_lead + ']' : '');
+      fetch(form.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.success) throw new Error(j.message); }); })
+        .then(function () { box.classList.add('sent'); box.querySelector('.done').focus(); })
         .catch(function () {
-          estadoEl.textContent = 'No se ha podido enviar. Revisa tu conexión e inténtalo de nuevo, o escríbenos por WhatsApp.';
-          btn.disabled = false; btn.textContent = original;
+          status.textContent = 'No se ha podido enviar. Inténtalo de nuevo o escríbenos por WhatsApp.';
+          btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = label;
         });
     });
   });

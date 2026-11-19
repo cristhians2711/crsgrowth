@@ -3,109 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contacto — CRS Growth</title>
+<title>Contacto, CRS Growth</title>
 <meta name="description" content="Reserva una llamada o escríbenos. Respondemos en menos de 24 horas laborables.">
-
 <link rel="canonical" href="https://www.crsgrowth.com/contacto/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contacto — CRS Growth">
+<meta property="og:title" content="Contacto, CRS Growth">
 <meta property="og:description" content="Reserva una llamada o escríbenos. Respondemos en menos de 24 horas laborables.">
 <meta property="og:url" content="https://www.crsgrowth.com/contacto/">
 <meta property="og:image" content="https://www.crsgrowth.com/img/icono-512.png">
-<meta name="theme-color" content="#16171B">
+<meta name="theme-color" content="#EEE9E4">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="">
-<a class="sr-only" href="#contenido">Saltar al contenido</a>
+<a class="skip" href="#main">Saltar al contenido</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="prensa" x="-10%" y="-20%" width="120%" height="140%">
+<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/>
+<feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.5 1.45" result="m"/>
+<feComposite in="SourceGraphic" in2="m" operator="in"/></filter></svg>
 <header class="nav">
-  <div class="wrap">
-    <a class="marca" href="/" aria-label="CRS Growth, inicio"><img src="/img/crs-escudo.png" alt="" width="34" height="33">CRS <span>Growth</span></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
-    </button>
-    <ul class="nav-links" id="menu"><li><a href="/#que-hacemos">Qué hacemos</a></li><li><a href="/#como-trabajamos">Cómo trabajamos</a></li><li><a href="/constitucion/">Constitución</a></li><li><a href="/cristhiamsilva/">Cristhiam Silva</a></li><li><a class="btn btn-oro" href="/contacto/">Hablemos</a></li></ul>
+  <div class="container">
+    <a class="mark" href="/">CRS <span>Growth</span></a>
+    <div class="nav-links">
+      <ul>
+        <li><a href="/#que-llevamos">Qué llevamos</a></li>
+        <li><a href="/constitucion/">Constitución</a></li>
+        <li><a href="/cristhiamsilva/">Cristhiam Silva</a></li>
+        <li><a href="/contacto/" aria-current="page">Contacto</a></li>
+      </ul>
+      <a class="btn btn--ink btn--small" href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar llamada</a>
+      <button class="btn btn--card btn--small nav-menu" type="button" aria-expanded="false">Menú</button>
+    </div>
   </div>
 </header>
-<main id="contenido">
+<main id="main">
 
-<section class="pagina-hero oscuro">
-  <div class="wrap">
+<section class="page-hero desk">
+  <div class="container">
     <h1>Hablemos de tu empresa.</h1>
-    <p class="lead">Reserva una llamada de 30 minutos o cuéntanos tu situación. Respondemos en menos de 24 horas laborables.</p>
+    <p class="lead">Reserva una llamada o cuéntanos tu situación por escrito.</p>
+    <div class="actions"><a class="btn btn--ink" href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar una llamada</a><a class="btn btn--card" href="https://wa.me/34697293677" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
   </div>
 </section>
-<section class="seccion">
-  <div class="wrap dos-col">
-    <div>
-      <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem)">La forma más rápida</h2>
-      <div class="botones" style="flex-direction:column;align-items:flex-start">
-        <a class="btn btn-oro" href="https://calendly.com/cristhiam-silva-crsgrowth/30min" target="_blank" rel="noopener">Reservar una llamada</a>
-        <a class="btn btn-linea" href="https://wa.me/34697293677?text=Hola%2C%20me%20interesa%20hablar%20con%20CRS%20Growth." target="_blank" rel="noopener">Escribir por WhatsApp</a>
-      </div>
-      <ul class="checks" style="margin-top:40px">
-        <li><a href="mailto:cristhiam.silva@crsgrowth.com">cristhiam.silva@crsgrowth.com</a></li>
-        <li><a href="tel:+34697293677">+34 697 293 677</a></li>
-        <li>Sevilla, España. Trabajamos también en remoto.</li>
-      </ul>
-    </div>
-    <div class="formulario">
-      <form data-web3 data-asunto="Contacto web">
-        <input type="hidden" name="access_key" value="3a2696c7-20c0-42bf-ba11-cfabf5933296"><input type="hidden" name="from_name" value="Web CRS Growth"><input type="checkbox" name="botcheck" class="trampa" tabindex="-1" autocomplete="off">
-        <div class="campo"><label for="k-nombre">Nombre</label><input id="k-nombre" name="nombre" autocomplete="name" required></div>
-        <div class="campo"><label for="k-empresa">Empresa <span class="ayuda">Opcional</span></label><input id="k-empresa" name="empresa" autocomplete="organization"></div>
-        <div class="campo"><label for="k-email">Email</label><input id="k-email" name="email" type="email" autocomplete="email" required></div>
-        <div class="campo"><label for="k-tel">Teléfono <span class="ayuda">Opcional</span></label><input id="k-tel" name="telefono" type="tel" autocomplete="tel"></div>
-        <div class="campo"><label for="k-motivo">¿Sobre qué quieres hablar?</label>
-          <select id="k-motivo" name="motivo" required>
-            <option value="">Elige una opción</option>
-            <option>Dirección y gestión de mi empresa</option>
-            <option>Constituir una empresa</option>
-            <option>Acompañamiento personal con Cristhiam</option>
-            <option>Otro tema</option>
-          </select></div>
-        <div class="campo"><label for="k-msg">Cuéntanos tu situación</label><textarea id="k-msg" name="mensaje" required></textarea></div>
-        <button class="btn btn-tinta" type="submit" style="width:100%">Enviar mensaje</button>
-        <p class="estado" role="status"></p>
-        <p class="legal-form">Usamos tus datos solo para responderte. Más información en la <a href="/privacidad/">política de privacidad</a>.</p>
+<section class="section plain">
+  <div class="container split">
+    <div><h2>O escríbenos</h2>
+      <ul class="checklist plain after"><li><a class="link" href="mailto:cristhiam.silva@crsgrowth.com">cristhiam.silva@crsgrowth.com</a></li><li><a class="link" href="tel:+34697293677">+34 697 293 677</a></li><li>Sevilla, y en remoto</li></ul></div>
+    <div class="stock form">
+      <form data-endpoint="https://api.web3forms.com/submit" data-subject="Contacto web">
+        <input type="hidden" name="access_key" value="3a2696c7-20c0-42bf-ba11-cfabf5933296"><input type="hidden" name="from_name" value="Web CRS Growth"><input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="k-n">Nombre</label><input id="k-n" name="nombre" autocomplete="name" required></div>
+        <div class="field"><label for="k-c">Empresa <span class="hint">Opcional</span></label><input id="k-c" name="empresa" autocomplete="organization"></div>
+        <div class="field"><label for="k-e">Email</label><input id="k-e" name="email" type="email" autocomplete="email" required></div>
+        <fieldset><legend>¿Sobre qué?</legend><div class="chips">
+          <input type="radio" name="motivo" id="k1" value="Dirección y gestión" required><label for="k1">Dirección y gestión</label>
+          <input type="radio" name="motivo" id="k2" value="Constitución"><label for="k2">Constitución</label>
+          <input type="radio" name="motivo" id="k3" value="Acompañamiento personal"><label for="k3">Acompañamiento personal</label>
+          <input type="radio" name="motivo" id="k4" value="Otro"><label for="k4">Otro</label>
+        </div></fieldset>
+        <div class="field"><label for="k-m">Tu situación</label><textarea id="k-m" name="mensaje" required></textarea></div>
+        <button class="btn btn--ink" type="submit">Enviar mensaje</button>
+        <p class="status" role="status"></p>
+        <p class="note">Usamos tus datos solo para responderte. <a class="link" href="/privacidad/">Privacidad</a>.</p>
       </form>
-      <div class="gracias"><h3>Mensaje enviado.</h3><p>Te respondemos en menos de 24 horas laborables.</p></div>
+      <div class="done" tabindex="-1"><h2>Mensaje enviado.</h2><p>Te respondemos en menos de 24 horas laborables.</p><p class="stamp" aria-hidden="true">Recibido</p></div>
     </div>
   </div>
 </section>
 </main>
-<footer class="pie">
-  <div class="wrap">
-    <div class="pie-grid">
-      <div>
-        <a class="marca" href="/"><img src="/img/crs-escudo.png" alt="" width="34" height="33">CRS <span>Growth</span></a>
-        <p style="margin-top:16px">Dirección y gestión de empresas. Ordenamos cómo funciona tu empresa para que deje de depender de ti.</p>
-      </div>
-      <div>
-        <h4>Sitio</h4>
-        <ul>
-          <li><a href="/#que-hacemos">Qué hacemos</a></li>
-          <li><a href="/constitucion/">Constitución de empresas</a></li>
-          <li><a href="/cristhiamsilva/">Acompañamiento personal</a></li>
-          <li><a href="/contacto/">Contacto</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="mailto:cristhiam.silva@crsgrowth.com">cristhiam.silva@crsgrowth.com</a></li>
-          <li><a href="https://wa.me/34697293677" target="_blank" rel="noopener">WhatsApp +34 697 293 677</a></li>
-          <li><a href="https://www.linkedin.com/company/crsgrowth" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li>Sevilla, España · también en remoto</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pie-legal">
-      <p>© 2026 CRS Growth es una marca comercial de Novaryn OÜ (Estonia, código de registro 17556049).</p>
-      <p><a href="/aviso-legal/">Aviso legal</a> &nbsp; <a href="/privacidad/">Privacidad</a> &nbsp; <a href="/cookies/">Cookies</a></p>
-    </div>
+<footer class="foot">
+  <div class="container">
+    <a class="mark" href="/">CRS <span>Growth</span></a>
+    <nav aria-label="Pie"><ul>
+      <li><a href="/#que-llevamos">Qué llevamos</a></li>
+      <li><a href="/constitucion/">Constitución de empresas</a></li>
+      <li><a href="/cristhiamsilva/">Acompañamiento personal</a></li>
+      <li><a href="/contacto/">Contacto</a></li>
+      <li><a href="https://wa.me/34697293677" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul></nav>
+    <p class="fine">Marca de Novaryn OÜ, Estonia, registro 17556049. <a class="link" href="/aviso-legal/">Aviso legal</a>, <a class="link" href="/privacidad/">privacidad</a>, <a class="link" href="/cookies/">cookies</a>.</p>
   </div>
 </footer>
 <script src="/js/site.js"></script>
